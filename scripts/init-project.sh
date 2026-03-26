@@ -1,0 +1,57 @@
+#!/bin/bash
+# Initialize a new vibe project with this orchestrator template
+
+set -e
+
+echo "🚀 Vibe Agent Orchestrator - Project Initialization"
+echo "===================================================="
+echo ""
+
+PROJECT_ROOT="$(pwd)"
+PROJECT_NAME="${1:-My Vibe Project}"
+
+echo "📦 Project: $PROJECT_NAME"
+echo "📍 Location: $PROJECT_ROOT"
+echo ""
+
+# Initialize git if needed
+if [ ! -d .git ]; then
+  echo "🔧 Initializing git repository..."
+  git init
+  git config user.email "ai@vibe.local"
+  git config user.name "Vibe Agent"
+fi
+
+# Initialize manifests
+echo "📋 Initializing requirement manifest..."
+cat > .requirement-manifest.json << 'JSON'
+{
+  "version": "1.0",
+  "projectName": "PROJECT_PLACEHOLDER",
+  "requirements": []
+}
+JSON
+
+sed -i.bak "s/PROJECT_PLACEHOLDER/$PROJECT_NAME/g" .requirement-manifest.json
+rm -f .requirement-manifest.json.bak
+
+echo "📋 Initializing worktree manifest..."
+cat > .worktree-manifest.json << 'JSON'
+{
+  "version": "1.0",
+  "worktrees": []
+}
+JSON
+
+# Make scripts executable
+chmod +x scripts/*.sh
+
+# Create initial commit
+echo "✅ Initialization complete!"
+echo ""
+echo "Next steps:"
+echo "  1. Create your first requirement: /add-requirement \"Feature\" \"Description\""
+echo "  2. Check status: /status"
+echo "  3. Start work: /start-work REQ-XXXXX"
+echo ""
+echo "Configuration complete. Open in VS Code to begin!"
