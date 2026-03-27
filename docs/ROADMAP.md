@@ -8,6 +8,7 @@ Timeline view of all requirements organized by status and priority.
 
 ## Medium Priority
 * [DEPLOYED] REQ-1774628144: Review follow-up: align slash commands with actual skill invocations
-* [CODE_REVIEW] REQ-1774630000: Update README for Vibe Master upgrade migration
+* [MERGED] REQ-1774630000: Update README for Vibe Master upgrade migration
 
 ## Low Priority
+* [PROPOSED] REQ-1774632175: Review follow-up: polish upgrade guide in README

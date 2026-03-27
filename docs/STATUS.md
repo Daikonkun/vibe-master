@@ -2,19 +2,21 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (0)
+## PROPOSED (1)
 
+* REQ-1774632175: Review follow-up: polish upgrade guide in README (priority: LOW)
+  - Worktree: none
 
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
+
+
+## MERGED (1)
 
 * REQ-1774630000: Update README for Vibe Master upgrade migration (priority: MEDIUM)
   - Worktree: feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration
-
-## MERGED (0)
-
 
 ## DEPLOYED (1)
 
@@ -31,7 +33,7 @@ Kanban-style view of all requirements and their current state.
 
 
 ## Stats
-- Total Requirements: 2
-- Deployed: 1 (50%)
+- Total Requirements: 3
+- Deployed: 1 (33%)
 - In Progress: 0
 - Blocked: 0

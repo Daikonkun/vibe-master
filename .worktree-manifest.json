@@ -31,7 +31,9 @@
           },
           "requirementIds": {
             "type": "array",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "description": "List of requirement IDs this worktree implements"
           },
           "createdAt": {
@@ -45,15 +47,30 @@
           },
           "status": {
             "type": "string",
-            "enum": ["ACTIVE", "MERGED", "ABANDONED"],
+            "enum": [
+              "ACTIVE",
+              "MERGED",
+              "ABANDONED"
+            ],
             "description": "Current worktree status"
           }
         },
-        "required": ["id", "path", "branch", "baseBranch", "requirementIds", "createdAt", "status"]
+        "required": [
+          "id",
+          "path",
+          "branch",
+          "baseBranch",
+          "requirementIds",
+          "createdAt",
+          "status"
+        ]
       }
     }
   },
-  "required": ["version", "worktrees"],
+  "required": [
+    "version",
+    "worktrees"
+  ],
   "worktrees": [
     {
       "id": "feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations",
@@ -76,7 +93,8 @@
         "REQ-1774630000"
       ],
       "createdAt": "2026-03-27T16:35:41Z",
-      "status": "ACTIVE"
+      "status": "MERGED",
+      "mergedAt": "2026-03-27T17:24:03Z"
     }
   ]
 }
