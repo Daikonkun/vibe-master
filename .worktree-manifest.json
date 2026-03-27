@@ -107,6 +107,17 @@
       "createdAt": "2026-03-27T17:24:30Z",
       "status": "MERGED",
       "mergedAt": "2026-03-27T17:27:01Z"
+    },
+    {
+      "id": "feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed",
+      "branch": "feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1774636689"
+      ],
+      "createdAt": "2026-03-27T18:39:13Z",
+      "status": "ACTIVE"
     }
   ]
 }
