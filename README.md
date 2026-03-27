@@ -66,6 +66,7 @@ cd ../upgrade/vibe-master-latest
 
 3. Fetch the latest Vibe Master template and compare before replacing files.
 ```bash
+# Replace <org> with the GitHub org or user hosting your Vibe Master template
 git clone --depth 1 https://github.com/<org>/vibe-master.git .upgrade-template/latest
 # Compare template against your current project:
 diff -ruN --exclude='.git' --exclude='.upgrade-template' .upgrade-template/latest . | less
