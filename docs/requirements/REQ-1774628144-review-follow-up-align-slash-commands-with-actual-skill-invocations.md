@@ -7,11 +7,11 @@
 
 ## Description
 
-Source: code-review. Severity: MEDIUM. Evidence: New skill docs advertise additional slash commands (/debug-repro, /debug-root-cause, /debug-validate, /manual-audit, /manual-changelog, /code-review-req, /code-review-create-threads) that are not implemented as standalone prompts/skills, which can mislead users. Required outcome: either implement these commands as actual prompts/agents or reword docs to describe them as workflow phases under /debug, /update-manual, and /code-review.
+Source: code-review. Severity: MEDIUM. Evidence: New skill docs advertise additional slash commands (/debug-repro, /debug-root-cause, /debug-validate, /manual-audit, /manual-changelog, /code-review-req, /code-review-create-threads) that are not implemented as standalone prompts/skills, which can mislead users. Required outcome: either implement these commands as actual prompts/agents or reword docs to describe them as workflow phases under /bug-fix, /update-manual, and /code-review.
 
 ## Success Criteria
 
-- [x] Reworded pseudo slash commands in `debug` skill into workflow phases under `/debug`
+- [x] Reworded pseudo slash commands in `debug` skill into workflow phases under `/bug-fix`
 - [x] Reworded pseudo slash commands in `update-manual` skill into optional outputs of `/update-manual`
 - [x] Reworded pseudo slash commands in `code-review` skill into workflow actions under `/code-review`
 

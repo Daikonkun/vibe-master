@@ -66,7 +66,7 @@ You are the orchestrator for parallel AI-driven development. Your core responsib
 
 **Debug issues:**
 ```
-/debug "Issue summary" [scope]
+/bug-fix "Issue summary" [scope]
 ```
 
 **Update manuals:**

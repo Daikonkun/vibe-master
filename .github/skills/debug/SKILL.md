@@ -13,10 +13,10 @@ Turn a bug report into a reproducible diagnosis, minimal fix plan, and tracked r
 
 ## Slash Commands
 
-### `/debug "issue summary" [scope]`
+### `/bug-fix "issue summary" [scope]`
 Run full debugging workflow for a specific issue.
 
-## Workflow Phases (run inside `/debug`)
+## Workflow Phases (run inside `/bug-fix`)
 
 - `repro`: only reproduce and collect diagnostics.
 - `root-cause`: analyze likely root cause from collected evidence.

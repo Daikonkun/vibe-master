@@ -1,5 +1,5 @@
 ---
-name: "debug"
+name: "bug-fix"
 description: "Wrapper for the debug skill workflow. Use when: reproducing issues, finding root cause, validating fixes, and producing a debug report."
 argument-hint: "\"issue summary\" [scope]"
 agent: "Vibe Agent Orchestrator"

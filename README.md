@@ -312,7 +312,7 @@ Graph showing which requirements depend on others
 
 ## 🛠 Key Slash Commands
 
-Slash commands only show up in chat when they are backed by a prompt file or by a valid skill definition. This template now ships prompt files for `/add-requirement`, `/list-requirements`, `/start-work`, `/show-requirement`, `/status`, `/worktree-list`, `/worktree-merge`, `/dependency-graph`, `/roadmap`, `/regen-docs`, `/debug`, `/update-manual`, and `/code-review`, and loads workflow skills through valid lowercase-hyphenated skill names.
+Slash commands only show up in chat when they are backed by a prompt file or by a valid skill definition. This template now ships prompt files for `/add-requirement`, `/list-requirements`, `/start-work`, `/show-requirement`, `/status`, `/worktree-list`, `/worktree-merge`, `/dependency-graph`, `/roadmap`, `/regen-docs`, `/bug-fix`, `/update-manual`, and `/code-review`, and loads workflow skills through valid lowercase-hyphenated skill names.
 
 | Command | Purpose |
 |---------|---------|
@@ -326,7 +326,7 @@ Slash commands only show up in chat when they are backed by a prompt file or by 
 | `/dependency-graph` | Visualize dependencies |
 | `/roadmap` | Show timeline |
 | `/regen-docs` | Force doc regeneration |
-| `/debug "issue summary" [scope]` | Run structured debug workflow |
+| `/bug-fix "issue summary" [scope]` | Run structured debug workflow |
 | `/update-manual [scope]` | Generate/update user manual content |
 | `/code-review [scope]` | Review code and generate REQ follow-up threads |
 
