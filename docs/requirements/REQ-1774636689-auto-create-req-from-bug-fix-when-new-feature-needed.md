@@ -1,7 +1,7 @@
 # Auto-create REQ from bug-fix when new feature needed
 
 **ID**: REQ-1774636689  
-**Status**: IN_PROGRESS  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-03-27T18:38:09Z  
 
@@ -31,5 +31,5 @@ feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed
 
 * **Linked Worktree**: feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed
 * **Branch**: feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed
-* **Merged**: No
-* **Deployed**: No
+* **Merged**: Yes
+* **Deployed**: Yes
