@@ -53,9 +53,8 @@ Use this when your repo already uses an older Vibe Master layout and you want th
 
 ### Safe Upgrade Workflow
 
-1. Create a safety point before changes.
+1. Tag the current state as a safety point.
 ```bash
-git checkout -b chore/upgrade-vibe-master-$(date +%Y%m%d)
 git tag "pre-vibe-upgrade-$(date +%Y%m%d-%H%M)"
 ```
 
@@ -65,10 +64,10 @@ git worktree add ../upgrade/vibe-master-latest -b chore/vibe-master-upgrade
 cd ../upgrade/vibe-master-latest
 ```
 
-3. Copy in the latest template snapshot to a temp folder and compare before replacing files.
+3. Fetch the latest Vibe Master template and compare before replacing files.
 ```bash
-mkdir -p .upgrade-template
-# Place latest template files under .upgrade-template/latest, then compare:
+git clone --depth 1 https://github.com/<org>/vibe-master.git .upgrade-template/latest
+# Compare template against your current project:
 diff -ruN --exclude='.git' --exclude='.upgrade-template' .upgrade-template/latest . | less
 ```
 
@@ -90,6 +89,11 @@ Then run these in Copilot Chat:
 ```
 /status
 /code-review README.md
+```
+
+7. Clean up the temporary template folder.
+```bash
+rm -rf .upgrade-template
 ```
 
 ### Replace vs Merge Guide
