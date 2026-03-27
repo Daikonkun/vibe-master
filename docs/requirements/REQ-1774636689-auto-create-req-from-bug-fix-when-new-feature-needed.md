@@ -1,7 +1,7 @@
 # Auto-create REQ from bug-fix when new feature needed
 
 **ID**: REQ-1774636689  
-**Status**: PROPOSED  
+**Status**: IN_PROGRESS  
 **Priority**: MEDIUM  
 **Created**: 2026-03-27T18:38:09Z  
 
@@ -11,9 +11,9 @@ During a /bug-fix session, if the bug fix requires implementing a new function o
 
 ## Success Criteria
 
-- [ ] Debug skill SKILL.md includes a "Feature Escalation" section describing when and how to create a new REQ during a bug fix
-- [ ] Instructions specify using `create-requirement.sh` with appropriate name/description/priority
-- [ ] Instructions specify linking the new REQ as a dependency in the original bug-fix REQ
+- [x] Debug skill SKILL.md includes a "Feature Escalation" section describing when and how to create a new REQ during a bug fix
+- [x] Instructions specify using `create-requirement.sh` with appropriate name/description/priority
+- [x] Instructions specify linking the new REQ as a dependency in the original bug-fix REQ
 
 ## Technical Notes
 
@@ -21,15 +21,15 @@ Implementation is documentation-only: add a new workflow section to the debug SK
 
 ## Dependencies
 
-(List other requirement IDs if applicable, e.g., REQ-XXX, REQ-YYY)
+(none)
 
 ## Worktree
 
-(Will be populated when work starts: feature/REQ-ID-slug)
+feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
+* **Linked Worktree**: feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed
+* **Branch**: feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed
 * **Merged**: No
 * **Deployed**: No
