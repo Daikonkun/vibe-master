@@ -75,6 +75,31 @@ If no requirement exists for the bug, create one:
 
 Then continue implementation in a dedicated worktree.
 
+## Feature Escalation
+
+During a `/bug-fix` session, if the fix requires implementing a **new function or feature** that does not yet exist in the project, do not silently build it inline. Instead, escalate it to a tracked requirement:
+
+1. **Detect the need** — While proposing or applying a fix, recognise when the solution depends on functionality that is outside the scope of the current bug (e.g., a missing utility, a new API endpoint, or an unbuilt UI component).
+
+2. **Create a new REQ** — Run the create-requirement script to track the new work:
+
+   ```bash
+   ./scripts/create-requirement.sh \
+     "<short feature title>" \
+     "Needed to complete bug fix <current-REQ-ID>: <why this feature is required and what it should do>" \
+     <priority>
+   ```
+
+   Choose a priority appropriate to the blocking impact (typically `HIGH` if it blocks the bug fix).
+
+3. **Link as dependency** — Add the new REQ ID to the **Dependencies** section of the current bug-fix requirement spec so the relationship is tracked.
+
+4. **Decide how to proceed** — Two options:
+   - **Continue in the same worktree** if the feature is small and tightly coupled to the fix.
+   - **Pause the bug fix** and recommend `/start-work <new-REQ-ID>` for a separate worktree if the feature is large or independently useful.
+
+5. **Regenerate docs** — Run `./scripts/regenerate-docs.sh` after creating the new REQ to keep dashboards and dependency graphs current.
+
 ## Best Practices
 
 1. Reproduce before editing code.
@@ -82,3 +107,4 @@ Then continue implementation in a dedicated worktree.
 3. Write a failing test first when practical.
 4. Keep fixes minimal and traceable to evidence.
 5. Record debug outcomes in requirement notes or spec files.
+6. Escalate new feature needs to tracked REQs rather than building them silently.
