@@ -64,6 +64,11 @@ After any state change, regenerate:
 | `/review-requirement <req-id>` | Move to CODE_REVIEW state |
 | `/dependency-graph` | Visualize requirement dependencies |
 | `/roadmap` | Show timeline view of all requirements |
+| `/debug "issue summary" [scope]` | Run structured debugging workflow and root-cause analysis |
+| `/update-manual [scope]` | Generate and refresh user manual content |
+| `/code-review [scope]` | Review code and create REQ follow-up threads for unresolved findings |
+
+Slash commands appear in chat only when they are backed by prompt files or valid skill definitions. `/add-requirement`, `/list-requirements`, `/start-work`, `/show-requirement`, `/status`, `/worktree-list`, `/worktree-merge`, `/dependency-graph`, `/roadmap`, `/regen-docs`, `/debug`, `/update-manual`, and `/code-review` are implemented by prompt files in `.github/prompts/`; skill files must keep lowercase hyphenated `name` values that match their folder names.
 
 ## Git Worktree Convention
 ```

@@ -48,7 +48,12 @@
           },
           "priority": {
             "type": "string",
-            "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"],
+            "enum": [
+              "CRITICAL",
+              "HIGH",
+              "MEDIUM",
+              "LOW"
+            ],
             "description": "Priority level"
           },
           "worktreeId": {
@@ -57,7 +62,9 @@
           },
           "dependsOn": {
             "type": "array",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "description": "List of requirement IDs this depends on"
           },
           "createdAt": {
@@ -80,9 +87,53 @@
             "description": "Additional notes or context"
           }
         },
-        "required": ["id", "name", "description", "status", "priority", "createdAt", "updatedAt"]
+        "required": [
+          "id",
+          "name",
+          "description",
+          "status",
+          "priority",
+          "createdAt",
+          "updatedAt"
+        ]
       }
     }
   },
-  "required": ["version", "projectName", "requirements"]
+  "required": [
+    "version",
+    "projectName",
+    "requirements"
+  ],
+  "requirements": [
+    {
+      "id": "REQ-1774628144",
+      "name": "Review follow-up: align slash commands with actual skill invocations",
+      "description": "Source: code-review. Severity: MEDIUM. Evidence: New skill docs advertise additional slash commands (/debug-repro, /debug-root-cause, /debug-validate, /manual-audit, /manual-changelog, /code-review-req, /code-review-create-threads) that are not implemented as standalone prompts/skills, which can mislead users. Required outcome: either implement these commands as actual prompts/agents or reword docs to describe them as workflow phases under /debug, /update-manual, and /code-review.",
+      "status": "DEPLOYED",
+      "priority": "MEDIUM",
+      "createdAt": "2026-03-27T16:15:44Z",
+      "updatedAt": "2026-03-28T00:20:00Z",
+      "worktreeId": "feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations",
+      "deployedAt": "2026-03-28T00:20:00Z"
+    },
+    {
+      "id": "REQ-1774630000",
+      "name": "Update README for Vibe Master upgrade migration",
+      "description": "Update README so agents and users understand how to upgrade Vibe Master in an existing project that was built with an older Vibe Master version.",
+      "status": "CODE_REVIEW",
+      "priority": "MEDIUM",
+      "createdAt": "2026-03-28T00:30:00Z",
+      "updatedAt": "2026-03-27T17:12:44Z",
+      "worktreeId": "feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration"
+    },
+    {
+      "id": "REQ-1774632175",
+      "name": "Review follow-up: polish upgrade guide in README",
+      "description": "Source: code-review of REQ-1774630000. Severity: LOW. Evidence: (1) Step 3 of the upgrade workflow tells users to place template files but gives no concrete command to fetch/clone them — users won't know how to obtain the latest template. (2) Step 1 creates a branch via checkout -b that is never used because Step 2 immediately creates a worktree with a different branch name. Required outcome: add a concrete fetch/clone example in Step 3, and simplify Step 1 to only create the safety tag (drop the unused branch).",
+      "status": "PROPOSED",
+      "priority": "LOW",
+      "createdAt": "2026-03-27T17:22:55Z",
+      "updatedAt": "2026-03-27T17:22:55Z"
+    }
+  ]
 }

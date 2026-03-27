@@ -1,5 +1,5 @@
 ---
-name: Requirement Tracker
+name: requirement-tracker
 description: "Manages product requirements lifecycle, tracking, and documentation. Use when: adding new requirements, updating requirement status, viewing requirement details, generating reports, or managing requirement dependencies."
 ---
 
@@ -11,7 +11,9 @@ Comprehensive management of product requirements with automatic documentation ge
 
 ### 1. Add New Requirement
 
-**Slash command**: `/add-requirement "Name" "Description" [priority]`
+**Dedicated prompt**: `/add-requirement "Name" "Description" [priority]`
+
+**Skill invocation**: `/requirement-tracker`
 
 **Process**:
 1. Validate input (non-empty name, description)
@@ -231,6 +233,8 @@ REQ-005 (Dashboard)
 ---
 
 ## Slash Commands
+
+Use `/requirement-tracker` to load this skill directly. Specific commands such as `/add-requirement` need their own prompt files to appear after typing `/` in chat.
 
 ### `/add-requirement "Name" "Description" [priority]`
 Submit a new product requirement

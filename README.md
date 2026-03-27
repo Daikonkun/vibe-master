@@ -20,6 +20,8 @@ Open the project in VS Code. The orchestrator agent will auto-load from `.github
 /add-requirement "User Authentication" "Implement email/password authentication system"
 ```
 
+This slash command is provided by `.github/prompts/add-requirement.prompt.md`.
+
 The agent will:
 - Create requirement record (unique ID: `REQ-{timestamp}`)
 - Create detailed spec file (`docs/requirements/REQ-XXX-user-authentication.md`)
@@ -52,9 +54,26 @@ Shows current dashboard with all requirements, worktrees, and progress.
 ├── .github/
 │   ├── agents/
 │   │   └── orchestrator.agent.md          # Main orchestrator agent
+│   ├── prompts/
+│   │   ├── add-requirement.prompt.md      # Slash command for requirement creation
+│   │   ├── debug.prompt.md                # Wrapper prompt for debug workflow skill
+│   │   ├── list-requirements.prompt.md    # Slash command for requirement listings
+│   │   ├── start-work.prompt.md           # Slash command for worktree start
+│   │   ├── show-requirement.prompt.md     # Slash command for requirement details
+│   │   ├── status.prompt.md               # Slash command for status dashboard
+│   │   ├── worktree-list.prompt.md        # Slash command for active worktrees
+│   │   ├── worktree-merge.prompt.md       # Slash command for merge and cleanup
+│   │   ├── dependency-graph.prompt.md     # Slash command for dependency visualization
+│   │   ├── roadmap.prompt.md              # Slash command for roadmap view
+│   │   ├── regen-docs.prompt.md           # Slash command for manual doc regeneration
+│   │   ├── update-manual.prompt.md        # Wrapper prompt for manual update skill
+│   │   └── code-review.prompt.md          # Wrapper prompt for review skill
 │   ├── instructions/
 │   ├── skills/
 │   │   ├── worktree-manager/SKILL.md      # Git worktree management
+│   │   ├── debug/SKILL.md                  # Structured debugging workflow
+│   │   ├── update-manual/SKILL.md          # User manual generation/refresh
+│   │   ├── code-review/SKILL.md            # Code review + REQ thread creation
 │   │   └── requirement-tracker/SKILL.md   # Requirement lifecycle
 │   
 ├── copilot-instructions.md                 # Global agent instructions
@@ -71,6 +90,14 @@ Shows current dashboard with all requirements, worktrees, and progress.
 │
 └── scripts/
     ├── create-requirement.sh               # CLI: create new requirement
+  ├── list-requirements.sh                # CLI: list requirements by optional status
+  ├── start-work.sh                        # CLI: create worktree + set IN_PROGRESS
+  ├── show-requirement.sh                  # CLI: display requirement details
+  ├── status.sh                            # CLI: regenerate + show status summary
+  ├── worktree-list.sh                     # CLI: list active worktrees from manifest
+  ├── worktree-merge.sh                    # CLI: merge branch + clean worktree
+  ├── dependency-graph.sh                  # CLI: regenerate + show dependency graph
+  ├── roadmap.sh                           # CLI: regenerate + show roadmap
     └── regenerate-docs.sh                  # CLI: regenerate all docs
 ```
 
@@ -202,6 +229,8 @@ Graph showing which requirements depend on others
 
 ## 🛠 Key Slash Commands
 
+Slash commands only show up in chat when they are backed by a prompt file or by a valid skill definition. This template now ships prompt files for `/add-requirement`, `/list-requirements`, `/start-work`, `/show-requirement`, `/status`, `/worktree-list`, `/worktree-merge`, `/dependency-graph`, `/roadmap`, `/regen-docs`, `/debug`, `/update-manual`, and `/code-review`, and loads workflow skills through valid lowercase-hyphenated skill names.
+
 | Command | Purpose |
 |---------|---------|
 | `/add-requirement` | Submit new requirement |
@@ -214,6 +243,9 @@ Graph showing which requirements depend on others
 | `/dependency-graph` | Visualize dependencies |
 | `/roadmap` | Show timeline |
 | `/regen-docs` | Force doc regeneration |
+| `/debug "issue summary" [scope]` | Run structured debug workflow |
+| `/update-manual [scope]` | Generate/update user manual content |
+| `/code-review [scope]` | Review code and generate REQ follow-up threads |
 
 ---
 
@@ -312,6 +344,7 @@ Edit:
 
 **Agent not responding to `/` commands?**
 - Check that `copilot-instructions.md` is loaded (should be auto-loaded)
+- Confirm the command has a backing prompt or skill file; command prompts live in `.github/prompts/`
 - Ensure agent contextis fresh (close/reopen chat)
 
 **Worktree creation failed?**
@@ -334,6 +367,9 @@ Edit:
 - Agent docs: `.github/agents/orchestrator.agent.md`
 - Requirement skill: `.github/skills/requirement-tracker/SKILL.md`
 - Worktree skill: `.github/skills/worktree-manager/SKILL.md`
+- Debug skill: `.github/skills/debug/SKILL.md`
+- Manual updater skill: `.github/skills/update-manual/SKILL.md`
+- Code review skill: `.github/skills/code-review/SKILL.md`
 - Global instructions: `copilot-instructions.md`
 
 ---

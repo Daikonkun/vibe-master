@@ -1,5 +1,5 @@
 ---
-name: Worktree Manager
+name: worktree-manager
 description: "Manages git worktrees for parallel development. Use when: creating worktrees for requirements, managing multiple features, pruning abandoned worktrees, checking worktree status, or orchestrating merges."
 ---
 

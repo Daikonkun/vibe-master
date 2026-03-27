@@ -71,7 +71,11 @@ echo "📊 Generating docs/STATUS.md..."
   
   TOTAL=$(jq '.requirements | length' "$REQ_MANIFEST")
   DEPLOYED=$(jq '[.requirements[] | select(.status == "DEPLOYED")] | length' "$REQ_MANIFEST")
-  PCT=$((DEPLOYED * 100 / TOTAL))
+  if [ "$TOTAL" -eq 0 ]; then
+    PCT=0
+  else
+    PCT=$((DEPLOYED * 100 / TOTAL))
+  fi
   
   echo "## Stats"
   echo "- Total Requirements: $TOTAL"
@@ -109,7 +113,7 @@ echo "🔗 Generating docs/DEPENDENCIES.md..."
   echo ""
   jq -r '.requirements[] | 
     if .dependsOn and (.dependsOn | length) > 0 then
-      "\(.id): \(.name)\n  └─ Depends on: \(.dependsOn | join(\", \"))\n"
+      "\(.id): \(.name)\n  └─ Depends on: \(.dependsOn | join(", "))\n"
     else
       "\(.id): \(.name) (no dependencies)\n"
     end' "$REQ_MANIFEST"

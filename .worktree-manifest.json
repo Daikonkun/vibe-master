@@ -53,5 +53,30 @@
       }
     }
   },
-  "required": ["version", "worktrees"]
+  "required": ["version", "worktrees"],
+  "worktrees": [
+    {
+      "id": "feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations",
+      "branch": "feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1774628144"
+      ],
+      "createdAt": "2026-03-27T16:18:00Z",
+      "mergedAt": "2026-03-28T00:10:00Z",
+      "status": "MERGED"
+    },
+    {
+      "id": "feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration",
+      "branch": "feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1774630000"
+      ],
+      "createdAt": "2026-03-27T16:35:41Z",
+      "status": "ACTIVE"
+    }
+  ]
 }

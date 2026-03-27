@@ -64,6 +64,21 @@ You are the orchestrator for parallel AI-driven development. Your core responsib
 /worktree-prune
 ```
 
+**Debug issues:**
+```
+/debug "Issue summary" [scope]
+```
+
+**Update manuals:**
+```
+/update-manual [scope]
+```
+
+**Review code and create REQ threads:**
+```
+/code-review [scope]
+```
+
 ---
 
 ## Implementation Notes
