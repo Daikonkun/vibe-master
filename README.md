@@ -47,6 +47,84 @@ Shows current dashboard with all requirements, worktrees, and progress.
 
 ---
 
+## 🔄 Upgrading Existing Projects
+
+Use this when your repo already uses an older Vibe Master layout and you want the latest agents/skills/workflows without losing requirement history.
+
+### Safe Upgrade Workflow
+
+1. Create a safety point before changes.
+```bash
+git checkout -b chore/upgrade-vibe-master-$(date +%Y%m%d)
+git tag "pre-vibe-upgrade-$(date +%Y%m%d-%H%M)"
+```
+
+2. Create an isolated worktree for the migration.
+```bash
+git worktree add ../upgrade/vibe-master-latest -b chore/vibe-master-upgrade
+cd ../upgrade/vibe-master-latest
+```
+
+3. Copy in the latest template snapshot to a temp folder and compare before replacing files.
+```bash
+mkdir -p .upgrade-template
+# Place latest template files under .upgrade-template/latest, then compare:
+diff -ruN --exclude='.git' --exclude='.upgrade-template' .upgrade-template/latest . | less
+```
+
+4. Merge files by category (replace vs merge) using the table below.
+
+5. Validate manifests and regenerate docs.
+```bash
+jq . .requirement-manifest.json >/dev/null
+jq . .worktree-manifest.json >/dev/null
+bash scripts/regenerate-docs.sh
+```
+
+6. Run a quick behavior check and review.
+```bash
+git status --short
+```
+
+Then run these in Copilot Chat:
+```
+/status
+/code-review README.md
+```
+
+### Replace vs Merge Guide
+
+| Path | Recommended Action | Why |
+|---|---|---|
+| `.github/agents/orchestrator.agent.md` | Replace, then re-apply local custom prompts | Agent mode and orchestration behavior changes most often here |
+| `.github/prompts/` | Replace prompt files from latest template, then keep local custom prompts with unique names | Slash commands appear in chat only when backed by prompt files |
+| `.github/skills/` | Replace skill folders from latest template | Keeps slash-command workflows and guidance current |
+| `copilot-instructions.md` | Merge carefully (do not blindly replace) | Local policy/tool constraints are often customized |
+| `scripts/regenerate-docs.sh` | Replace with latest, then verify project-specific edits | Fixes to generation logic accumulate over time |
+| `scripts/create-requirement.sh` | Replace with latest, then confirm ID format expectations | Prevents manifest drift caused by old creation logic |
+| `.requirement-manifest.json` | Merge data only; never replace with template stub | This file contains your real requirement history |
+| `.worktree-manifest.json` | Merge data only; keep active worktree entries | Replacing can orphan valid worktrees |
+| `README.md` | Merge sections selectively | Keep project-specific onboarding while adding new workflows |
+| `docs/` generated files | Regenerate, do not hand-copy from template | Generated docs should reflect your local manifests |
+
+### Compatibility Notes
+
+- Old repos may lack newer status values or fields (for example `worktreeId`, `dependsOn`, `deployedAt`); add missing fields incrementally rather than rewriting history.
+- Slash command behavior is driven by agent + skill files. If commands behave differently after upgrade, check `.github/agents/` and `.github/skills/` first.
+- If your project uses `develop` instead of `main`, update base-branch references in agent/instruction docs after template updates.
+- If your team added custom skills, move them back after template refresh and verify command names do not conflict.
+- Always run `bash scripts/regenerate-docs.sh` after manifest or workflow file changes so `REQUIREMENTS.md` and `docs/*.md` stay aligned.
+
+### Post-upgrade Verification Checklist
+
+- `git diff --name-only` shows expected workflow files only (`.github/agents`, `.github/prompts`, `.github/skills`, `copilot-instructions.md`, `scripts/*`).
+- All required slash command prompt files exist under `.github/prompts/` for the commands your team expects.
+- `jq . .requirement-manifest.json` and `jq . .worktree-manifest.json` both pass.
+- `bash scripts/regenerate-docs.sh` completes successfully without jq parse errors.
+- `/status`, `/show-requirement <req-id>`, and `/worktree-list` return expected output after refresh.
+
+---
+
 ## 📁 Project Structure
 
 ```
