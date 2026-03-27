@@ -140,10 +140,10 @@
       "id": "REQ-1774636689",
       "name": "Auto-create REQ from bug-fix when new feature needed",
       "description": "During a /bug-fix session, if the bug fix requires implementing a new function or feature of the vibe project to complete, the debug skill should automatically create a new REQ to track that work and link it as a dependency.",
-      "status": "IN_PROGRESS",
+      "status": "MERGED",
       "priority": "MEDIUM",
       "createdAt": "2026-03-27T18:38:09Z",
-      "updatedAt": "2026-03-27T18:39:13Z",
+      "updatedAt": "2026-03-27T18:46:27Z",
       "worktreeId": "feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed"
     }
   ]

@@ -5,20 +5,20 @@ Kanban-style view of all requirements and their current state.
 ## PROPOSED (0)
 
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
 
-* REQ-1774636689: Auto-create REQ from bug-fix when new feature needed (priority: MEDIUM)
-  - Worktree: feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed
 
 ## CODE_REVIEW (0)
 
 
-## MERGED (2)
+## MERGED (3)
 
 * REQ-1774630000: Update README for Vibe Master upgrade migration (priority: MEDIUM)
   - Worktree: feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration
 * REQ-1774632175: Review follow-up: polish upgrade guide in README (priority: LOW)
   - Worktree: feature/REQ-1774632175-review-follow-up-polish-upgrade-guide-in-readme
+* REQ-1774636689: Auto-create REQ from bug-fix when new feature needed (priority: MEDIUM)
+  - Worktree: feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed
 
 ## DEPLOYED (1)
 
@@ -37,5 +37,5 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 4
 - Deployed: 1 (25%)
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0
