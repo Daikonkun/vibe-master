@@ -1,7 +1,7 @@
 # Review follow-up: polish upgrade guide in README
 
 **ID**: REQ-1774632175  
-**Status**: PROPOSED  
+**Status**: CODE_REVIEW  
 **Priority**: LOW  
 **Created**: 2026-03-27T17:22:55Z  
 
@@ -11,9 +11,9 @@ Source: code-review of REQ-1774630000. Severity: LOW. Evidence: (1) Step 3 of th
 
 ## Success Criteria
 
-- [ ] Step 3 includes a concrete command (clone/curl) to fetch the latest Vibe Master template
-- [ ] Step 1 no longer creates an unused branch; only the safety tag remains
-- [ ] Optional: add a cleanup step for `.upgrade-template/` after migration
+- [x] Step 3 includes a concrete command (clone/curl) to fetch the latest Vibe Master template
+- [x] Step 1 no longer creates an unused branch; only the safety tag remains
+- [x] Optional: add a cleanup step for `.upgrade-template/` after migration
 
 ## Technical Notes
 

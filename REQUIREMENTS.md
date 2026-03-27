@@ -6,12 +6,12 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 |---|---|---|---|---|---|---|
 | REQ-1774628144 | Review follow-up: align slash commands with actual skill invocations | DEPLOYED | MEDIUM | feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations | 2026-03-27 | 2026-03-28 |
 | REQ-1774630000 | Update README for Vibe Master upgrade migration | MERGED | MEDIUM | feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration | 2026-03-28 | 2026-03-27 |
-| REQ-1774632175 | Review follow-up: polish upgrade guide in README | PROPOSED | LOW | — | 2026-03-27 | 2026-03-27 |
+| REQ-1774632175 | Review follow-up: polish upgrade guide in README | CODE_REVIEW | LOW | feature/REQ-1774632175-review-follow-up-polish-upgrade-guide-in-readme | 2026-03-27 | 2026-03-28 |
 
 ## Status Breakdown
-- **Proposed**: 1
+- **Proposed**: 0
 - **In Progress**: 0
-- **Code Review**: 0
+- **Code Review**: 1
 - **Merged**: 1
 - **Deployed**: 1
 - **Blocked**: 0
@@ -23,6 +23,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-03-27T17:24:04Z
+* Last updated: 2026-03-27T17:25:44Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

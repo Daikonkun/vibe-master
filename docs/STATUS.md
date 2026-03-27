@@ -2,16 +2,16 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (1)
+## PROPOSED (0)
 
-* REQ-1774632175: Review follow-up: polish upgrade guide in README (priority: LOW)
-  - Worktree: none
 
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (0)
+## CODE_REVIEW (1)
 
+* REQ-1774632175: Review follow-up: polish upgrade guide in README (priority: LOW)
+  - Worktree: feature/REQ-1774632175-review-follow-up-polish-upgrade-guide-in-readme
 
 ## MERGED (1)
 
