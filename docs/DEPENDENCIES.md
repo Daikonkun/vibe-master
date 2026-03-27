@@ -10,3 +10,5 @@ REQ-1774632175: Review follow-up: polish upgrade guide in README (no dependencie
 
 REQ-1774636689: Auto-create REQ from bug-fix when new feature needed (no dependencies)
 
+REQ-1774639240: Add-requirement: populate spec sections after creation (no dependencies)
+

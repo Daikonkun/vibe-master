@@ -5,6 +5,7 @@ Timeline view of all requirements organized by status and priority.
 ## Critical Items
 
 ## High Priority
+* [MERGED] REQ-1774639240: Add-requirement: populate spec sections after creation
 
 ## Medium Priority
 * [DEPLOYED] REQ-1774628144: Review follow-up: align slash commands with actual skill invocations

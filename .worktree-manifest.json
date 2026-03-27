@@ -119,6 +119,17 @@
       "createdAt": "2026-03-27T18:39:13Z",
       "status": "MERGED",
       "mergedAt": "2026-03-27T18:46:27Z"
+    },
+    {
+      "id": "feature/REQ-1774639240-add-requirement-populate-spec-sections-after-creation",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1774639240-add-requirement-populate-spec-sections-after-creation",
+      "branch": "feature/REQ-1774639240-add-requirement-populate-spec-sections-after-creation",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1774639240"
+      ],
+      "createdAt": "2026-03-27T19:24:58Z",
+      "status": "ACTIVE"
     }
   ]
 }

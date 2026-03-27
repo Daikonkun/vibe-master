@@ -11,12 +11,14 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (2)
+## MERGED (3)
 
 * REQ-1774630000: Update README for Vibe Master upgrade migration (priority: MEDIUM)
   - Worktree: feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration
 * REQ-1774632175: Review follow-up: polish upgrade guide in README (priority: LOW)
   - Worktree: feature/REQ-1774632175-review-follow-up-polish-upgrade-guide-in-readme
+* REQ-1774639240: Add-requirement: populate spec sections after creation (priority: HIGH)
+  - Worktree: feature/REQ-1774639240-add-requirement-populate-spec-sections-after-creation
 
 ## DEPLOYED (2)
 
@@ -35,7 +37,7 @@ Kanban-style view of all requirements and their current state.
 
 
 ## Stats
-- Total Requirements: 4
-- Deployed: 2 (50%)
+- Total Requirements: 5
+- Deployed: 2 (40%)
 - In Progress: 0
 - Blocked: 0

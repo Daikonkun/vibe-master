@@ -145,6 +145,17 @@
       "createdAt": "2026-03-27T18:38:09Z",
       "updatedAt": "2026-03-27T18:47:35Z",
       "worktreeId": "feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed"
+    },
+    {
+      "id": "REQ-1774639240",
+      "name": "Add-requirement: populate spec sections after creation",
+      "description": "Source: code-review. Severity: HIGH. Evidence: add-requirement.prompt.md defines 5 workflow steps but none instruct the agent to populate spec file sections. create-requirement.sh writes static placeholders for Success Criteria, Technical Notes, Dependencies, and Worktree. Required outcome: add a prompt workflow step to derive success criteria, generate technical notes, link dependencies, and populate the manifest notes field after the script creates the spec file.",
+      "notes": "Fix is a prompt workflow change in add-requirement.prompt.md — add step 4 to enrich the spec file post-creation. Shell script stays as-is (scaffolding only).",
+      "status": "MERGED",
+      "priority": "HIGH",
+      "createdAt": "2026-03-27T19:20:40Z",
+      "updatedAt": "2026-03-28T00:00:00Z",
+      "worktreeId": "feature/REQ-1774639240-add-requirement-populate-spec-sections-after-creation"
     }
   ]
 }
