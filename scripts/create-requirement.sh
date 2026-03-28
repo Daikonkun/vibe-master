@@ -87,6 +87,16 @@ $REQ_DESCRIPTION
 * **Deployed**: No
 EOF
 
+git -C "$PROJECT_ROOT" add \
+  .requirement-manifest.json \
+  REQUIREMENTS.md \
+  docs/STATUS.md \
+  docs/ROADMAP.md \
+  docs/DEPENDENCIES.md \
+  docs/requirements/ 2>/dev/null || true
+
+git -C "$PROJECT_ROOT" commit -m "chore: create requirement $REQ_ID" --no-verify 2>/dev/null || true
+
 echo "✅ Requirement created: $REQ_ID"
 echo "📄 Spec: docs/requirements/${REQ_ID}-${SLUG}.md"
 echo ""

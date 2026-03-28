@@ -169,6 +169,16 @@ if [ "$REFRESH_DOCS" = "true" ]; then
   "$PROJECT_ROOT/scripts/regenerate-docs.sh" >/dev/null
 fi
 
+git -C "$PROJECT_ROOT" add \
+  .requirement-manifest.json \
+  REQUIREMENTS.md \
+  docs/STATUS.md \
+  docs/ROADMAP.md \
+  docs/DEPENDENCIES.md \
+  docs/requirements/ 2>/dev/null || true
+
+git -C "$PROJECT_ROOT" commit -m "chore: update $REQ_ID status to $NEW_STATUS" --no-verify 2>/dev/null || true
+
 echo "✅ Updated $REQ_ID"
 echo "   $CURRENT_STATUS -> $NEW_STATUS"
 if [ "$REFRESH_DOCS" = "true" ]; then

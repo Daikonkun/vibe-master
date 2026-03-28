@@ -79,6 +79,17 @@ fi
 
 "$PROJECT_ROOT/scripts/regenerate-docs.sh" >/dev/null
 
+git -C "$PROJECT_ROOT" add \
+  .requirement-manifest.json \
+  .worktree-manifest.json \
+  REQUIREMENTS.md \
+  docs/STATUS.md \
+  docs/ROADMAP.md \
+  docs/DEPENDENCIES.md \
+  docs/requirements/ 2>/dev/null || true
+
+git -C "$PROJECT_ROOT" commit -m "chore: update manifests and docs after merging $BRANCH" --no-verify 2>/dev/null || true
+
 echo "✅ Merged $BRANCH"
 if [ -n "$WORKTREE_PATH" ]; then
   echo "Removed worktree: $WORKTREE_PATH"

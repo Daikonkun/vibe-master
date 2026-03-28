@@ -109,6 +109,17 @@ jq --arg id "$BRANCH_ID" \
 # Generate/update Development Plan for idempotent execution context (REQ-1774681642)
 "$PROJECT_ROOT/scripts/generate-plan.sh" "$REQ_ID" || echo "Warning: Plan generation failed (non-fatal)"
 
+git -C "$PROJECT_ROOT" add \
+  .requirement-manifest.json \
+  .worktree-manifest.json \
+  REQUIREMENTS.md \
+  docs/STATUS.md \
+  docs/ROADMAP.md \
+  docs/DEPENDENCIES.md \
+  docs/requirements/ 2>/dev/null || true
+
+git -C "$PROJECT_ROOT" commit -m "chore: start work on $REQ_ID" --no-verify 2>/dev/null || true
+
 echo "✅ Work started for $REQ_ID"
 echo "Worktree ID: $BRANCH_ID"
 echo "Path: $WORKTREE_PATH"
