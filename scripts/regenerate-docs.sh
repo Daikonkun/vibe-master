@@ -16,6 +16,27 @@ mkdir -p "$PROJECT_ROOT/docs"
 
 echo "🔨 Regenerating documentation..."
 
+# Sync per-requirement spec status lines with manifest so detailed docs don't drift.
+echo "🧩 Syncing docs/requirements status fields..."
+while IFS=$'\t' read -r REQ_ID REQ_STATUS; do
+  [ -z "$REQ_ID" ] && continue
+
+  SPEC_FILE="$(find "$PROJECT_ROOT/docs/requirements" -maxdepth 1 -type f -name "${REQ_ID}-*.md" | head -1)"
+  [ -z "$SPEC_FILE" ] && continue
+
+  awk -v status="$REQ_STATUS" '
+    BEGIN { replaced = 0 }
+    {
+      if (!replaced && $0 ~ /^\*\*Status\*\*:/) {
+        print "**Status**: " status "  "
+        replaced = 1
+      } else {
+        print $0
+      }
+    }
+  ' "$SPEC_FILE" > "$SPEC_FILE.tmp" && mv "$SPEC_FILE.tmp" "$SPEC_FILE"
+done < <(jq -r '.requirements[] | [.id, .status] | @tsv' "$REQ_MANIFEST")
+
 # Generate REQUIREMENTS.md summary
 echo "📄 Generating REQUIREMENTS.md..."
 {

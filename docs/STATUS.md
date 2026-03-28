@@ -5,15 +5,13 @@ Kanban-style view of all requirements and their current state.
 ## PROPOSED (0)
 
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
 
-* REQ-1774685792: upgrade functions referring to obra's superpower agent (priority: MEDIUM)
-  - Worktree: feature/REQ-1774685792-upgrade-functions-referring-to-obra-s-superpower-agent
 
 ## CODE_REVIEW (0)
 
 
-## MERGED (4)
+## MERGED (5)
 
 * REQ-1774630000: Update README for Vibe Master upgrade migration (priority: MEDIUM)
   - Worktree: feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration
@@ -23,6 +21,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1774639240-add-requirement-populate-spec-sections-after-creation
 * REQ-1774681642: execution standard on working with a requirement (priority: MEDIUM)
   - Worktree: feature/REQ-1774681642-execution-standard-on-working-with-a-requirement
+* REQ-1774685792: upgrade functions referring to obra's superpower agent (priority: MEDIUM)
+  - Worktree: feature/REQ-1774685792-upgrade-functions-referring-to-obra-s-superpower-agent
 
 ## DEPLOYED (2)
 
@@ -43,5 +43,5 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 7
 - Deployed: 2 (28%)
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0

@@ -1,7 +1,7 @@
 # Review follow-up: polish upgrade guide in README
 
 **ID**: REQ-1774632175  
-**Status**: CODE_REVIEW  
+**Status**: MERGED  
 **Priority**: LOW  
 **Created**: 2026-03-27T17:22:55Z  
 

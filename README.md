@@ -149,6 +149,7 @@ rm -rf .upgrade-template
 │   │   ├── dependency-graph.prompt.md     # Slash command for dependency visualization
 │   │   ├── roadmap.prompt.md              # Slash command for roadmap view
 │   │   ├── regen-docs.prompt.md           # Slash command for manual doc regeneration
+│   │   ├── update-requirement.prompt.md   # Slash command for lifecycle status transitions
 │   │   ├── update-manual.prompt.md        # Wrapper prompt for manual update skill
 │   │   └── code-review.prompt.md          # Wrapper prompt for review skill
 │   ├── instructions/
@@ -176,6 +177,7 @@ rm -rf .upgrade-template
   ├── list-requirements.sh                # CLI: list requirements by optional status
   ├── start-work.sh                        # CLI: create worktree + set IN_PROGRESS
   ├── show-requirement.sh                  # CLI: display requirement details
+  ├── update-requirement-status.sh         # CLI: validate and update requirement status
   ├── status.sh                            # CLI: regenerate + show status summary
   ├── worktree-list.sh                     # CLI: list active worktrees from manifest
   ├── worktree-merge.sh                    # CLI: merge branch + clean worktree
@@ -312,11 +314,12 @@ Graph showing which requirements depend on others
 
 ## 🛠 Key Slash Commands
 
-Slash commands only show up in chat when they are backed by a prompt file or by a valid skill definition. This template now ships prompt files for `/add-requirement`, `/list-requirements`, `/start-work`, `/show-requirement`, `/status`, `/worktree-list`, `/worktree-merge`, `/dependency-graph`, `/roadmap`, `/regen-docs`, `/bug-fix`, `/update-manual`, and `/code-review`, and loads workflow skills through valid lowercase-hyphenated skill names.
+Slash commands only show up in chat when they are backed by a prompt file or by a valid skill definition. This template now ships prompt files for `/add-requirement`, `/list-requirements`, `/update-requirement`, `/start-work`, `/show-requirement`, `/status`, `/worktree-list`, `/worktree-merge`, `/dependency-graph`, `/roadmap`, `/regen-docs`, `/bug-fix`, `/update-manual`, and `/code-review`, and loads workflow skills through valid lowercase-hyphenated skill names.
 
 | Command | Purpose |
 |---------|---------|
 | `/add-requirement` | Submit new requirement |
+| `/update-requirement <req-id> <new-status> [--force] [--no-refresh]` | Update requirement lifecycle status with transition validation |
 | `/start-work <req-id>` | Begin work (create worktree) |
 | `/status` | Show current dashboard |
 | `/show-requirement <req-id>` | View requirement details |

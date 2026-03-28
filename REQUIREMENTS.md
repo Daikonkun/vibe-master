@@ -10,13 +10,13 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1774636689 | Auto-create REQ from bug-fix when new feature needed | DEPLOYED | MEDIUM | feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed | 2026-03-27 | 2026-03-27 |
 | REQ-1774639240 | Add-requirement: populate spec sections after creation | MERGED | HIGH | feature/REQ-1774639240-add-requirement-populate-spec-sections-after-creation | 2026-03-27 | 2026-03-28 |
 | REQ-1774681642 | execution standard on working with a requirement | MERGED | MEDIUM | feature/REQ-1774681642-execution-standard-on-working-with-a-requirement | 2026-03-28 | 2026-03-28 |
-| REQ-1774685792 | upgrade functions referring to obra's superpower agent | IN_PROGRESS | MEDIUM | feature/REQ-1774685792-upgrade-functions-referring-to-obra-s-superpower-agent | 2026-03-28 | 2026-03-28 |
+| REQ-1774685792 | upgrade functions referring to obra's superpower agent | MERGED | MEDIUM | feature/REQ-1774685792-upgrade-functions-referring-to-obra-s-superpower-agent | 2026-03-28 | 2026-03-28 |
 
 ## Status Breakdown
 - **Proposed**: 0
-- **In Progress**: 1
+- **In Progress**: 0
 - **Code Review**: 0
-- **Merged**: 4
+- **Merged**: 5
 - **Deployed**: 2
 - **Blocked**: 0
 - **Backlog**: 0
@@ -27,6 +27,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-03-28T08:33:30Z
+* Last updated: 2026-03-28T15:08:01Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`
