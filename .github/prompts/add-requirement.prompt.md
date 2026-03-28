@@ -27,3 +27,5 @@ Constraints:
 - Keep the final response concise and action-oriented.
 - Success criteria must be specific and testable, not generic placeholders.
 - Technical notes must reference concrete files, modules, or patterns when possible.
+
+**Superpowers Alignment** (REQ-1774685792): Compatible with `writing-plans` and `brainstorming` for the enrichment step (step 4). Keep workflow unchanged.

@@ -23,6 +23,8 @@ Comprehensive management of product requirements with automatic documentation ge
 5. Update root `REQUIREMENTS.md` summary
 6. Prompt user for worktree creation
 
+**Superpowers Alignment** (REQ-1774685792): Compatible with `brainstorming` and `writing-plans` skills for spec enrichment.
+
 **Implementation**:
 ```bash
 #!/bin/bash

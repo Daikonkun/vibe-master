@@ -23,22 +23,22 @@ if [ ! -f "$SPEC_FILE" ]; then
 fi
 
 # Read key sections from spec (dynamically used in plan) - improved parsing
-DESCRIPTION=$(awk '/^## Description/,/^## Success Criteria/{if(!/^## / && NF>0) print}' "$SPEC_FILE" | head -1 | sed 's/^[ \t]*//;s/[ \t]*$//' | cut -c1-80)
-SUCCESS=$(awk '/^## Success Criteria/,/^## Technical Notes/{if(!/^## / && NF>0) print}' "$SPEC_FILE" | head -2 | tr '\n' ' ' | sed 's/^[ \t]*//;s/[ \t]*$//' | cut -c1-100)
-TECH_NOTES=$(awk '/^## Technical Notes/,/^## Dependencies/{if(!/^## / && NF>0) print}' "$SPEC_FILE" | head -1 | sed 's/^[ \t]*//;s/[ \t]*$//' | cut -c1-100)
+DESCRIPTION=$(awk '/^## Description/,/^## Success Criteria/{if(!/^## / && NF>0) print}' "$SPEC_FILE" | head -1 | sed 's/^[ \t]*//;s/[ \t]*$//' | cut -c1-80 || echo "No description")
+SUCCESS=$(awk '/^## Success Criteria/,/^## Technical Notes/{if(!/^## / && NF>0) print}' "$SPEC_FILE" | head -2 | tr '\n' ' ' | sed 's/^[ \t]*//;s/[ \t]*$//' | cut -c1-100 || echo "No success criteria")
+TECH_NOTES=$(awk '/^## Technical Notes/,/^## Dependencies/{if(!/^## / && NF>0) print}' "$SPEC_FILE" | head -1 | sed 's/^[ \t]*//;s/[ \t]*$//' | cut -c1-100 || echo "No technical notes")
 
 # Use relative path for portability
 REL_SPEC="docs/requirements/$(basename "$SPEC_FILE")"
 
 PLAN_FILE=$(mktemp)
-cat > "$PLAN_FILE" << EOF
+cat > "$PLAN_FILE" << 'EOF'
 ## Development Plan
 
-1. Review Description ("$DESCRIPTION..."), Success Criteria, and Technical Notes in \`$REL_SPEC\`.
-2. Implement changes based on Success Criteria: $SUCCESS...
-3. Address Technical Notes: $TECH_NOTES... (focus on prompts, scripts, and manifests).
-4. Update manifests, regenerate docs with \`./scripts/regenerate-docs.sh\`, and test with \`/start-work $REQ_ID\` + \`/show-requirement $REQ_ID\`.
-5. Keep this plan current and update requirement status as work progresses.
+1. Review Description, Success Criteria, and Technical Notes in `$REL_SPEC`.
+2. Research https://github.com/obra/superpowers skills (brainstorming, writing-plans, using-git-worktrees, systematic-debugging, test-driven-development).
+3. Identify 3-5 compatible skills and update relevant files: .github/skills/agent-customization/SKILL.md, add-requirement.prompt.md, copilot-instructions.md.
+4. Update manifests and regenerate docs with `./scripts/regenerate-docs.sh`.
+5. Test with `/show-requirement $REQ_ID` and verify no workflow changes.
 
 **Last updated**: $(date -u +%Y-%m-%dT%H:%M:%SZ)
 EOF

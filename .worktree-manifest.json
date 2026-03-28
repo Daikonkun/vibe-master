@@ -140,6 +140,18 @@
         "REQ-1774681642"
       ],
       "createdAt": "2026-03-28T07:08:44Z",
+      "status": "MERGED",
+      "mergedAt": "2026-03-28T07:29:47Z"
+    },
+    {
+      "id": "feature/REQ-1774685792-upgrade-functions-referring-to-obra-s-superpower-agent",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1774685792-upgrade-functions-referring-to-obra-s-superpower-agent",
+      "branch": "feature/REQ-1774685792-upgrade-functions-referring-to-obra-s-superpower-agent",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1774685792"
+      ],
+      "createdAt": "2026-03-28T08:17:59Z",
       "status": "ACTIVE"
     }
   ]

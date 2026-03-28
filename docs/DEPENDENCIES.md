@@ -14,3 +14,5 @@ REQ-1774639240: Add-requirement: populate spec sections after creation (no depen
 
 REQ-1774681642: execution standard on working with a requirement (no dependencies)
 
+REQ-1774685792: upgrade functions referring to obra's superpower agent (no dependencies)
+

@@ -5,8 +5,10 @@ Kanban-style view of all requirements and their current state.
 ## PROPOSED (0)
 
 
-## IN_PROGRESS (0)
+## IN_PROGRESS (1)
 
+* REQ-1774685792: upgrade functions referring to obra's superpower agent (priority: MEDIUM)
+  - Worktree: feature/REQ-1774685792-upgrade-functions-referring-to-obra-s-superpower-agent
 
 ## CODE_REVIEW (0)
 
@@ -39,7 +41,7 @@ Kanban-style view of all requirements and their current state.
 
 
 ## Stats
-- Total Requirements: 6
-- Deployed: 2 (33%)
-- In Progress: 0
+- Total Requirements: 7
+- Deployed: 2 (28%)
+- In Progress: 1
 - Blocked: 0

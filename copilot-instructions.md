@@ -60,7 +60,7 @@ After any state change, regenerate:
 | `/worktree-list` | Show all active worktrees and their linked requirements |
 | `/worktree-create <req-id>` | Manually create a worktree for a requirement |
 | `/worktree-prune` | Remove orphaned worktrees |
-| `/merge-requirement <req-id>` | Merge associated worktree and update docs |
+| `/worktree-merge <branch>` | Merge associated worktree and update docs |
 | `/review-requirement <req-id>` | Move to CODE_REVIEW state |
 | `/dependency-graph` | Visualize requirement dependencies |
 | `/roadmap` | Show timeline view of all requirements |
@@ -69,6 +69,8 @@ After any state change, regenerate:
 | `/code-review [scope]` | Review code and create REQ follow-up threads for unresolved findings |
 
 Slash commands appear in chat only when they are backed by prompt files or valid skill definitions. `/add-requirement`, `/list-requirements`, `/start-work`, `/show-requirement`, `/status`, `/worktree-list`, `/worktree-merge`, `/dependency-graph`, `/roadmap`, `/regen-docs`, `/bug-fix`, `/update-manual`, and `/code-review` are implemented by prompt files in `.github/prompts/`; skill files must keep lowercase hyphenated `name` values that match their folder names.
+
+Note: Use `/worktree-merge <branch-name>` (not `/merge-requirement`) to complete a requirement.
 
 ## Git Worktree Convention
 ```
@@ -93,3 +95,15 @@ If multiple requirements:
 - No context switching between files and CLI — everything happens here
 - Clear requirement → worktree → code → merge pipeline
 - User reviews agent decisions; agent auto-executes approved work
+
+## Superpowers Alignment (REQ-1774685792)
+Compatible references (minimal, non-breaking):
+- `systematic-debugging` → aligns with `debug/SKILL.md` workflow
+- `using-git-worktrees` → aligns with `worktree-manager/SKILL.md` + `start-work.prompt.md`
+- `writing-plans` / `brainstorming` → aligns with requirement-tracker and `generate-plan.sh`
+- `test-driven-development` → aligns with code-review and execution standards
+- `agent-customization` skill now created (with matching prompt registration below) to handle prompt/SKILL.md updates
+
+These enhance documentation and consistency without changing slash commands, manifest logic, or orchestrator mode.
+
+**Slash command registry update**: `agent-customization` skill is now available via its SKILL.md (no dedicated prompt needed for single-file edits per its own guidelines).
