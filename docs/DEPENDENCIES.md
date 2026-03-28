@@ -12,3 +12,5 @@ REQ-1774636689: Auto-create REQ from bug-fix when new feature needed (no depende
 
 REQ-1774639240: Add-requirement: populate spec sections after creation (no dependencies)
 
+REQ-1774681642: execution standard on working with a requirement (no dependencies)
+

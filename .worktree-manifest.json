@@ -130,6 +130,17 @@
       ],
       "createdAt": "2026-03-27T19:24:58Z",
       "status": "ACTIVE"
+    },
+    {
+      "id": "feature/REQ-1774681642-execution-standard-on-working-with-a-requirement",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1774681642-execution-standard-on-working-with-a-requirement",
+      "branch": "feature/REQ-1774681642-execution-standard-on-working-with-a-requirement",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1774681642"
+      ],
+      "createdAt": "2026-03-28T07:08:44Z",
+      "status": "ACTIVE"
     }
   ]
 }

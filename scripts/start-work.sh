@@ -106,6 +106,9 @@ jq --arg id "$BRANCH_ID" \
 
 "$PROJECT_ROOT/scripts/regenerate-docs.sh" >/dev/null
 
+# Generate/update Development Plan for idempotent execution context (REQ-1774681642)
+"$PROJECT_ROOT/scripts/generate-plan.sh" "$REQ_ID" || echo "Warning: Plan generation failed (non-fatal)"
+
 echo "✅ Work started for $REQ_ID"
 echo "Worktree ID: $BRANCH_ID"
 echo "Path: $WORKTREE_PATH"
