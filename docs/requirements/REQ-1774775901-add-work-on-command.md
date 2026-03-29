@@ -1,7 +1,7 @@
 # add /work-on command
 
 **ID**: REQ-1774775901  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-03-29T09:18:21Z  
 
@@ -29,14 +29,11 @@ add a command to work on a specific REQ until next status
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1774775901-add-work-on-command.md`.
-   - **Summary**: add a command to work on a specific REQ until next status
-   - **Key criteria**: - [ ] A `/work-on <REQ-ID>` slash command exists and is backed by a prompt file at `.github/prompts/
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - **Prompt file**: Create `.github/prompts/work-on.prompt.md` following the existing pattern (see `s
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1774775901` and verify success criteria are met.
+1. **Create `.github/prompts/work-on.prompt.md`** — Write the prompt file with YAML frontmatter (`name`, `description`, `argument-hint`, `agent`) and a workflow that: validates the REQ-ID, reads the manifest for current status, determines next status via the lifecycle map, checks for an active worktree, reads the spec, drives iterative implementation, and advances status on completion.
+2. **Register `/work-on` in `copilot-instructions.md`** — Add a row to the slash-command table and include `work-on` in the prompt-file registry paragraph.
+3. **Validate lifecycle map coverage** — Confirm the prompt handles all non-terminal statuses (PROPOSED→IN_PROGRESS, IN_PROGRESS→CODE_REVIEW, CODE_REVIEW→MERGED, MERGED→DEPLOYED) and rejects terminal ones (DEPLOYED, CANCELLED) with a clear message.
+4. **Run `./scripts/regenerate-docs.sh`** — Ensure REQUIREMENTS.md and docs stay in sync after edits.
+5. **End-to-end verification** — Read back the prompt file and `copilot-instructions.md` to confirm all success criteria are met.
 
 **Last updated**: 2026-03-29T09:22:24Z
 
