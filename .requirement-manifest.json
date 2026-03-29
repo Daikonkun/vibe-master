@@ -1,109 +1,7 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Requirement Manifest",
-  "description": "Structured manifest of all product requirements for the vibe project",
-  "type": "object",
-  "properties": {
-    "version": {
-      "type": "string",
-      "description": "Schema version",
-      "default": "1.0"
-    },
-    "projectName": {
-      "type": "string",
-      "description": "Name of the project"
-    },
-    "requirements": {
-      "type": "array",
-      "description": "Array of all requirements",
-      "items": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "pattern": "^REQ-[0-9]{10,}$",
-            "description": "Unique requirement ID (REQ-{timestamp})"
-          },
-          "name": {
-            "type": "string",
-            "description": "Short name of the requirement"
-          },
-          "description": {
-            "type": "string",
-            "description": "Detailed description of what's needed"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "PROPOSED",
-              "IN_PROGRESS",
-              "CODE_REVIEW",
-              "MERGED",
-              "DEPLOYED",
-              "BLOCKED",
-              "BACKLOG",
-              "CANCELLED"
-            ],
-            "description": "Current lifecycle status"
-          },
-          "priority": {
-            "type": "string",
-            "enum": [
-              "CRITICAL",
-              "HIGH",
-              "MEDIUM",
-              "LOW"
-            ],
-            "description": "Priority level"
-          },
-          "worktreeId": {
-            "type": "string",
-            "description": "Associated worktree ID (if any)"
-          },
-          "dependsOn": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "List of requirement IDs this depends on"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "When the requirement was created"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "When the requirement was last updated"
-          },
-          "deployedAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "When deployed to production (if applicable)"
-          },
-          "notes": {
-            "type": "string",
-            "description": "Additional notes or context"
-          }
-        },
-        "required": [
-          "id",
-          "name",
-          "description",
-          "status",
-          "priority",
-          "createdAt",
-          "updatedAt"
-        ]
-      }
-    }
-  },
-  "required": [
-    "version",
-    "projectName",
-    "requirements"
-  ],
+  "$schema": ".requirement-manifest.schema.json",
+  "version": "1.0",
+  "projectName": "Vibe Project",
   "requirements": [
     {
       "id": "REQ-1774628144",
@@ -193,10 +91,10 @@
       "id": "REQ-1774770298",
       "name": "Review follow-up: separate manifest schema from data",
       "description": "Source: code-review. Severity: HIGH. Evidence: .requirement-manifest.json and .worktree-manifest.json both embed JSON Schema keywords (properties, type, title, description) alongside actual data arrays at the same level. This fails JSON Schema validation and causes semantic ambiguity with the required keyword. Required outcome: move schema definitions to separate .schema.json files referenced by a top-level dollar-schema key, keeping manifests as pure data files.",
-      "status": "IN_PROGRESS",
+      "status": "MERGED",
       "priority": "HIGH",
       "createdAt": "2026-03-29T07:44:58Z",
-      "updatedAt": "2026-03-29T07:59:00Z"
+      "updatedAt": "2026-03-29T08:00:40Z"
     },
     {
       "id": "REQ-1774770305",

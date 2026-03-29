@@ -2,10 +2,8 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (4)
+## PROPOSED (3)
 
-* REQ-1774770298: Review follow-up: separate manifest schema from data (priority: HIGH)
-  - Worktree: none
 * REQ-1774770305: Review follow-up: add missing prompt files for advertised slash commands (priority: HIGH)
   - Worktree: none
 * REQ-1774770314: Review follow-up: fix SKILL.md jq injection examples and stale status values (priority: MEDIUM)
@@ -19,7 +17,7 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (6)
+## MERGED (7)
 
 * REQ-1774630000: Update README for Vibe Master upgrade migration (priority: MEDIUM)
   - Worktree: feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration
@@ -33,6 +31,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1774685792-upgrade-functions-referring-to-obra-s-superpower-agent
 * REQ-1774770291: Review follow-up: fix generate-plan.sh triple bug (priority: HIGH)
   - Worktree: feature/REQ-1774770291-review-follow-up-fix-generate-plan-sh-triple-bug
+* REQ-1774770298: Review follow-up: separate manifest schema from data (priority: HIGH)
+  - Worktree: none
 
 ## DEPLOYED (2)
 

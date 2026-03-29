@@ -1,7 +1,7 @@
 # Review follow-up: separate manifest schema from data
 
 **ID**: REQ-1774770298  
-**Status**: PROPOSED  
+**Status**: MERGED  
 **Priority**: HIGH  
 **Created**: 2026-03-29T07:44:58Z  
 
@@ -11,14 +11,14 @@ Source: code-review. Severity: HIGH. Evidence: .requirement-manifest.json and .w
 
 ## Success Criteria
 
-- [ ] `.requirement-manifest.json` contains only data fields (`version`, `projectName`, `requirements` array) — no JSON Schema keywords (`$schema`, `title`, `description`, `type`, `properties`, `required` as schema directives)
-- [ ] `.worktree-manifest.json` contains only data fields (`version`, `worktrees` array) — no JSON Schema keywords
-- [ ] Both manifest files include a top-level `"$schema"` key pointing to the corresponding `.schema.json` file
-- [ ] `.requirement-manifest.schema.json` exists with the extracted JSON Schema definition
-- [ ] `.worktree-manifest.schema.json` exists with the extracted JSON Schema definition
-- [ ] All scripts that initialize empty manifests (`create-requirement.sh`, `start-work.sh`, `init-project.sh`) produce manifests with the `$schema` reference and no embedded schema keywords
-- [ ] `jq .` passes on both refactored manifest files
-- [ ] Existing jq queries in scripts (`regenerate-docs.sh`, `update-requirement-status.sh`, `worktree-merge.sh`, `start-work.sh`) continue to work unchanged
+- [x] `.requirement-manifest.json` contains only data fields (`version`, `projectName`, `requirements` array) — no JSON Schema keywords (`$schema`, `title`, `description`, `type`, `properties`, `required` as schema directives)
+- [x] `.worktree-manifest.json` contains only data fields (`version`, `worktrees` array) — no JSON Schema keywords
+- [x] Both manifest files include a top-level `"$schema"` key pointing to the corresponding `.schema.json` file
+- [x] `.requirement-manifest.schema.json` exists with the extracted JSON Schema definition
+- [x] `.worktree-manifest.schema.json` exists with the extracted JSON Schema definition
+- [x] All scripts that initialize empty manifests (`create-requirement.sh`, `start-work.sh`, `init-project.sh`) produce manifests with the `$schema` reference and no embedded schema keywords
+- [x] `jq .` passes on both refactored manifest files
+- [x] Existing jq queries in scripts (`regenerate-docs.sh`, `update-requirement-status.sh`, `worktree-merge.sh`, `start-work.sh`) continue to work unchanged
 
 ## Technical Notes
 
