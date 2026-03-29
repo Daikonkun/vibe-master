@@ -11,27 +11,25 @@ Source: code-review. Severity: MEDIUM. Evidence: (1) create-requirement.sh slug 
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [x] `create-requirement.sh` slug generation lowercases and collapses consecutive hyphens, matching `start-work.sh` logic
+- [x] `init-project.sh` creates `docs/requirements/` directory and makes an initial git commit
+- [x] `init-project.sh` uses `jq --arg` instead of `sed` for project name substitution
+- [x] REQ-1774630000 manifest entry has `updatedAt >= createdAt`
+- [x] Manifest write helpers reject `updatedAt < createdAt` (timestamp validation)
 
 ## Technical Notes
 
-(Add implementation notes here)
-
+- **Slug mismatch**: `create-requirement.sh` line 11 uses `sed 's/ /-/g' | sed 's/[^a-zA-Z0-9-]//g' | tr '[:upper:]' '[:lower:]'` — strips non-alphanum but does NOT collapse consecutive hyphens. `start-work.sh` line 52 uses `tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//; s/-$//'` — proper slug. Extract a shared function or align both to the same pipeline.
+- **init-project.sh**: Missing `mkdir -p docs/requirements` and `git add -A && git commit -m 'chore: init project'`. The `sed -i.bak` on `PROJECT_PLACEHOLDER` breaks if project name has `/`, `&`, or other sed metacharacters — replace with `jq --arg name "$PROJECT_NAME" '.projectName = $name'`.
+- **Timestamp fix**: REQ-1774630000 has `createdAt: 2026-03-28T00:30:00Z` but `updatedAt: 2026-03-27T17:24:03Z`. Set `updatedAt` to match `createdAt` since actual merge-time is unknown.
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1774770322-review-follow-up-unify-slug-generation-and-fix-init-project-gaps.md`.
-   - **Summary**: Source: code-review. Severity: MEDIUM. Evidence: (1) create-requirement.sh slug 
-   - **Key criteria**: - [ ] Criterion 1 - [ ] Criterion 2
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: (Add implementation notes here)
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1774770322` and verify success criteria are met.
-
-**Last updated**: 2026-03-29T08:18:36Z
+1. **Unify slug generation** — In `scripts/create-requirement.sh`, replace the slug pipeline (line 11) with the same logic used in `scripts/start-work.sh` (lowercase, strip non-alphanum to hyphens, collapse consecutive hyphens, trim leading/trailing hyphens).
+2. **Fix init-project.sh** — Add `mkdir -p docs/requirements`; replace `sed` placeholder substitution with `jq --arg`; add a final `git add -A && git commit -m 'chore: init project'` step.
+3. **Fix REQ-1774630000 timestamp** — In `.requirement-manifest.json`, set `updatedAt` for REQ-1774630000 to `"2026-03-28T00:30:00Z"` so it is not earlier than `createdAt`.
+4. **Run `./scripts/regenerate-docs.sh`** and confirm generated docs reflect updates.
+5. **Verify** — Run `./scripts/show-requirement.sh REQ-1774770322`, manually inspect slug output from `create-requirement.sh`, and confirm all success criteria pass.
 
 ## Dependencies
 

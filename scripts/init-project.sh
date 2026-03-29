@@ -28,13 +28,13 @@ cat > .requirement-manifest.json << 'JSON'
 {
   "$schema": ".requirement-manifest.schema.json",
   "version": "1.0",
-  "projectName": "PROJECT_PLACEHOLDER",
+  "projectName": "",
   "requirements": []
 }
 JSON
 
-sed -i.bak "s/PROJECT_PLACEHOLDER/$PROJECT_NAME/g" .requirement-manifest.json
-rm -f .requirement-manifest.json.bak
+jq --arg name "$PROJECT_NAME" '.projectName = $name' .requirement-manifest.json > .requirement-manifest.json.tmp && \
+  mv .requirement-manifest.json.tmp .requirement-manifest.json
 
 echo "📋 Initializing worktree manifest..."
 cat > .worktree-manifest.json << 'JSON'
@@ -48,7 +48,13 @@ JSON
 # Make scripts executable
 chmod +x scripts/*.sh
 
+# Create docs/requirements directory
+mkdir -p docs/requirements
+
 # Create initial commit
+git add -A
+git commit -m "chore: init project" --no-verify 2>/dev/null || true
+
 echo "✅ Initialization complete!"
 echo ""
 echo "Next steps:"

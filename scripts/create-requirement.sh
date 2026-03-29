@@ -9,7 +9,7 @@ REQ_PRIORITY="${3:-MEDIUM}"
 
 # Generate requirement ID
 REQ_ID="REQ-$(date +%s)"
-SLUG=$(echo "$REQ_NAME" | sed 's/ /-/g' | sed 's/[^a-zA-Z0-9-]//g' | tr '[:upper:]' '[:lower:]')
+SLUG=$(echo "$REQ_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//; s/-$//')
 
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
