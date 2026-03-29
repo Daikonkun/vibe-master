@@ -54,7 +54,7 @@ jq --arg id "$REQ_ID" \
   mv .requirement-manifest.json.tmp .requirement-manifest.json
 
 # Create spec file
-cat > "docs/requirements/${REQ_ID}-${SLUG}.md" << 'EOF'
+cat > "docs/requirements/${REQ_ID}-${SLUG}.md" << EOF
 # $NAME
 
 **ID**: $REQ_ID  
