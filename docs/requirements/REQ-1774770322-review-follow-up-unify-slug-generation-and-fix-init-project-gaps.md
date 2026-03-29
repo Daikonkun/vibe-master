@@ -1,7 +1,7 @@
 # Review follow-up: unify slug generation and fix init-project gaps
 
 **ID**: REQ-1774770322  
-**Status**: CODE_REVIEW  
+**Status**: MERGED  
 **Priority**: MEDIUM  
 **Created**: 2026-03-29T07:45:22Z  
 
