@@ -68,8 +68,9 @@ After any state change, regenerate:
 | `/bug-fix "issue summary" [scope]` | Run structured debugging workflow and root-cause analysis |
 | `/update-manual [scope]` | Generate and refresh user manual content |
 | `/code-review [scope]` | Review code and create REQ follow-up threads for unresolved findings |
+| `/work-on <req-id>` | Work on a requirement until it reaches its next lifecycle status |
 
-Slash commands appear in chat only when they are backed by prompt files or valid skill definitions. `/add-requirement`, `/list-requirements`, `/update-requirement`, `/start-work`, `/show-requirement`, `/status`, `/worktree-list`, `/worktree-create`, `/worktree-prune`, `/worktree-status`, `/worktree-merge`, `/dependency-graph`, `/roadmap`, `/regen-docs`, `/bug-fix`, `/update-manual`, and `/code-review` are implemented by prompt files in `.github/prompts/`; skill files must keep lowercase hyphenated `name` values that match their folder names.
+Slash commands appear in chat only when they are backed by prompt files or valid skill definitions. `/add-requirement`, `/list-requirements`, `/update-requirement`, `/start-work`, `/show-requirement`, `/status`, `/worktree-list`, `/worktree-create`, `/worktree-prune`, `/worktree-status`, `/worktree-merge`, `/dependency-graph`, `/roadmap`, `/regen-docs`, `/bug-fix`, `/update-manual`, `/code-review`, and `/work-on` are implemented by prompt files in `.github/prompts/`; skill files must keep lowercase hyphenated `name` values that match their folder names.
 
 Note: Use `/worktree-merge <branch-name>` (not `/merge-requirement`) to complete a requirement.
 

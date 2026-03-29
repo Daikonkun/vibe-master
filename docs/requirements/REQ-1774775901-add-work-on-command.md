@@ -47,7 +47,7 @@ None
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
+* **Linked Worktree**: feature/REQ-1774775901-add-work-on-command
+* **Branch**: feature/REQ-1774775901-add-work-on-command
 * **Merged**: No
 * **Deployed**: No
