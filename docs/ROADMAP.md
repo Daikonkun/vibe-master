@@ -21,7 +21,7 @@ Timeline view of all requirements organized by status and priority.
 * [CANCELLED] REQ-1774774129: Review follow-up: fix manifest inconsistencies and ghost command
 * [CANCELLED] REQ-1774774139: Review follow-up: fix manifest inconsistencies and ghost command
 * [CANCELLED] REQ-1774774145: Review follow-up: fix manifest inconsistencies and ghost command
-* [CODE_REVIEW] REQ-1774774148: Review follow-up: fix manifest inconsistencies and ghost command
+* [MERGED] REQ-1774774148: Review follow-up: fix manifest inconsistencies and ghost command
 
 ## Low Priority
 * [MERGED] REQ-1774632175: Review follow-up: polish upgrade guide in README
