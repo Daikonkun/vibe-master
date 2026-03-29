@@ -28,3 +28,11 @@ REQ-1774770322: Review follow-up: unify slug generation and fix init-project gap
 
 REQ-1774772256: Review follow-up: replace REVERTED with CANCELLED in orchestrator agent mode (no dependencies)
 
+REQ-1774774129: Review follow-up: fix manifest inconsistencies and ghost command (no dependencies)
+
+REQ-1774774139: Review follow-up: fix manifest inconsistencies and ghost command (no dependencies)
+
+REQ-1774774145: Review follow-up: fix manifest inconsistencies and ghost command (no dependencies)
+
+REQ-1774774148: Review follow-up: fix manifest inconsistencies and ghost command (no dependencies)
+

@@ -17,10 +17,14 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1774770314 | Review follow-up: fix SKILL.md jq injection examples and stale status values | MERGED | MEDIUM | feature/REQ-1774770314-review-follow-up-fix-skill-md-jq-injection-examples-and-stale-status-values | 2026-03-29 | 2026-03-29 |
 | REQ-1774770322 | Review follow-up: unify slug generation and fix init-project gaps | MERGED | MEDIUM | feature/REQ-1774770322-review-follow-up-unify-slug-generation-and-fix-init-project-gaps | 2026-03-29 | 2026-03-29 |
 | REQ-1774772256 | Review follow-up: replace REVERTED with CANCELLED in orchestrator agent mode | MERGED | LOW | feature/REQ-1774772256-review-follow-up-replace-reverted-with-cancelled-in-orchestrator-agent-mode | 2026-03-29 | 2026-03-29 |
+| REQ-1774774129 | Review follow-up: fix manifest inconsistencies and ghost command | PROPOSED | MEDIUM | — | 2026-03-29 | 2026-03-29 |
+| REQ-1774774139 | Review follow-up: fix manifest inconsistencies and ghost command | PROPOSED | MEDIUM | — | 2026-03-29 | 2026-03-29 |
+| REQ-1774774145 | Review follow-up: fix manifest inconsistencies and ghost command | PROPOSED | MEDIUM | — | 2026-03-29 | 2026-03-29 |
+| REQ-1774774148 | Review follow-up: fix manifest inconsistencies and ghost command | IN_PROGRESS | MEDIUM | feature/REQ-1774774148-review-follow-up-fix-manifest-inconsistencies-and-ghost-command | 2026-03-29 | 2026-03-29 |
 
 ## Status Breakdown
-- **Proposed**: 0
-- **In Progress**: 0
+- **Proposed**: 3
+- **In Progress**: 1
 - **Code Review**: 0
 - **Merged**: 11
 - **Deployed**: 2
@@ -33,6 +37,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-03-29T08:45:00Z
+* Last updated: 2026-03-29T09:09:19Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`
