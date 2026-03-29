@@ -2,10 +2,8 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (1)
+## PROPOSED (0)
 
-* REQ-1774774145: Review follow-up: fix manifest inconsistencies and ghost command (priority: MEDIUM)
-  - Worktree: none
 
 ## IN_PROGRESS (0)
 
@@ -53,11 +51,13 @@ Kanban-style view of all requirements and their current state.
 ## BACKLOG (0)
 
 
-## CANCELLED (2)
+## CANCELLED (3)
 
 * REQ-1774774129: Review follow-up: fix manifest inconsistencies and ghost command (priority: MEDIUM)
   - Worktree: none
 * REQ-1774774139: Review follow-up: fix manifest inconsistencies and ghost command (priority: MEDIUM)
+  - Worktree: none
+* REQ-1774774145: Review follow-up: fix manifest inconsistencies and ghost command (priority: MEDIUM)
   - Worktree: none
 
 ## Stats
