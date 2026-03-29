@@ -5,13 +5,13 @@ Kanban-style view of all requirements and their current state.
 ## PROPOSED (0)
 
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1774772256: Review follow-up: replace REVERTED with CANCELLED in orchestrator agent mode (priority: LOW)
   - Worktree: feature/REQ-1774772256-review-follow-up-replace-reverted-with-cancelled-in-orchestrator-agent-mode
-
-## CODE_REVIEW (0)
-
 
 ## MERGED (10)
 
@@ -55,5 +55,5 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 13
 - Deployed: 2 (15%)
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0

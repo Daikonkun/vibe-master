@@ -21,4 +21,4 @@ Timeline view of all requirements organized by status and priority.
 
 ## Low Priority
 * [MERGED] REQ-1774632175: Review follow-up: polish upgrade guide in README
-* [IN_PROGRESS] REQ-1774772256: Review follow-up: replace REVERTED with CANCELLED in orchestrator agent mode
+* [CODE_REVIEW] REQ-1774772256: Review follow-up: replace REVERTED with CANCELLED in orchestrator agent mode
