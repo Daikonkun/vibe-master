@@ -5,7 +5,7 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | ID | Name | Status | Priority | Worktree | Created | Updated |
 |---|---|---|---|---|---|---|
 | REQ-1774628144 | Review follow-up: align slash commands with actual skill invocations | DEPLOYED | MEDIUM | feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations | 2026-03-27 | 2026-03-28 |
-| REQ-1774630000 | Update README for Vibe Master upgrade migration | MERGED | MEDIUM | feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration | 2026-03-28 | 2026-03-27 |
+| REQ-1774630000 | Update README for Vibe Master upgrade migration | MERGED | MEDIUM | feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration | 2026-03-28 | 2026-03-28 |
 | REQ-1774632175 | Review follow-up: polish upgrade guide in README | MERGED | LOW | feature/REQ-1774632175-review-follow-up-polish-upgrade-guide-in-readme | 2026-03-27 | 2026-03-27 |
 | REQ-1774636689 | Auto-create REQ from bug-fix when new feature needed | DEPLOYED | MEDIUM | feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed | 2026-03-27 | 2026-03-27 |
 | REQ-1774639240 | Add-requirement: populate spec sections after creation | MERGED | HIGH | feature/REQ-1774639240-add-requirement-populate-spec-sections-after-creation | 2026-03-27 | 2026-03-28 |
@@ -15,13 +15,13 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1774770298 | Review follow-up: separate manifest schema from data | MERGED | HIGH | — | 2026-03-29 | 2026-03-29 |
 | REQ-1774770305 | Review follow-up: add missing prompt files for advertised slash commands | MERGED | HIGH | — | 2026-03-29 | 2026-03-29 |
 | REQ-1774770314 | Review follow-up: fix SKILL.md jq injection examples and stale status values | CODE_REVIEW | MEDIUM | feature/REQ-1774770314-review-follow-up-fix-skill-md-jq-injection-examples-and-stale-status-values | 2026-03-29 | 2026-03-29 |
-| REQ-1774770322 | Review follow-up: unify slug generation and fix init-project gaps | IN_PROGRESS | MEDIUM | feature/REQ-1774770322-review-follow-up-unify-slug-generation-and-fix-init-project-gaps | 2026-03-29 | 2026-03-29 |
+| REQ-1774770322 | Review follow-up: unify slug generation and fix init-project gaps | CODE_REVIEW | MEDIUM | feature/REQ-1774770322-review-follow-up-unify-slug-generation-and-fix-init-project-gaps | 2026-03-29 | 2026-03-29 |
 | REQ-1774772256 | Review follow-up: replace REVERTED with CANCELLED in orchestrator agent mode | PROPOSED | LOW | — | 2026-03-29 | 2026-03-29 |
 
 ## Status Breakdown
 - **Proposed**: 1
-- **In Progress**: 1
-- **Code Review**: 1
+- **In Progress**: 0
+- **Code Review**: 2
 - **Merged**: 8
 - **Deployed**: 2
 - **Blocked**: 0
@@ -33,6 +33,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-03-29T08:18:36Z
+* Last updated: 2026-03-29T08:23:12Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

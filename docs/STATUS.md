@@ -7,15 +7,15 @@ Kanban-style view of all requirements and their current state.
 * REQ-1774772256: Review follow-up: replace REVERTED with CANCELLED in orchestrator agent mode (priority: LOW)
   - Worktree: none
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
 
-* REQ-1774770322: Review follow-up: unify slug generation and fix init-project gaps (priority: MEDIUM)
-  - Worktree: feature/REQ-1774770322-review-follow-up-unify-slug-generation-and-fix-init-project-gaps
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (2)
 
 * REQ-1774770314: Review follow-up: fix SKILL.md jq injection examples and stale status values (priority: MEDIUM)
   - Worktree: feature/REQ-1774770314-review-follow-up-fix-skill-md-jq-injection-examples-and-stale-status-values
+* REQ-1774770322: Review follow-up: unify slug generation and fix init-project gaps (priority: MEDIUM)
+  - Worktree: feature/REQ-1774770322-review-follow-up-unify-slug-generation-and-fix-init-project-gaps
 
 ## MERGED (8)
 
@@ -55,5 +55,5 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 13
 - Deployed: 2 (15%)
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0
