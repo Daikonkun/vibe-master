@@ -13,13 +13,13 @@ Kanban-style view of all requirements and their current state.
 * REQ-1774770322: Review follow-up: unify slug generation and fix init-project gaps (priority: MEDIUM)
   - Worktree: none
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1774770291: Review follow-up: fix generate-plan.sh triple bug (priority: HIGH)
   - Worktree: feature/REQ-1774770291-review-follow-up-fix-generate-plan-sh-triple-bug
-
-## CODE_REVIEW (0)
-
 
 ## MERGED (5)
 
@@ -53,5 +53,5 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 12
 - Deployed: 2 (16%)
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0

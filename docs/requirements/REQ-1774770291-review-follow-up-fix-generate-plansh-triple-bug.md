@@ -1,7 +1,7 @@
 # Review follow-up: fix generate-plan.sh triple bug
 
 **ID**: REQ-1774770291  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-03-29T07:44:51Z  
 
