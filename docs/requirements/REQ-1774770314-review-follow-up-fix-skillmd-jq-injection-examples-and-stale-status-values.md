@@ -11,10 +11,10 @@ Source: code-review. Severity: MEDIUM. Evidence: (1) requirement-tracker/SKILL.m
 
 ## Success Criteria
 
-- [ ] All jq examples in `requirement-tracker/SKILL.md` use `--arg` parameterization instead of direct shell variable interpolation
-- [ ] All jq examples in `worktree-manager/SKILL.md` use `--arg` parameterization instead of direct shell variable interpolation
-- [ ] REVERTED is removed from `requirement-tracker/SKILL.md` valid transitions and replaced with CANCELLED
-- [ ] No remaining `\"$VAR\"` patterns inside jq program strings in either SKILL.md file
+- [x] All jq examples in `requirement-tracker/SKILL.md` use `--arg` parameterization instead of direct shell variable interpolation
+- [x] All jq examples in `worktree-manager/SKILL.md` use `--arg` parameterization instead of direct shell variable interpolation
+- [x] REVERTED is removed from `requirement-tracker/SKILL.md` valid transitions and replaced with CANCELLED
+- [x] No remaining `\"$VAR\"` patterns inside jq program strings in either SKILL.md file
 
 ## Technical Notes
 
