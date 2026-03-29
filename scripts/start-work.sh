@@ -77,6 +77,13 @@ if [ ! -f "$WORKTREE_MANIFEST" ]; then
 JSON
 fi
 
+# Validate updatedAt >= createdAt
+CREATED_AT="$(jq -r --arg reqId "$REQ_ID" '.requirements[] | select(.id == $reqId) | .createdAt' "$REQ_MANIFEST")"
+if [ -n "$CREATED_AT" ] && [ "$CREATED_AT" != "null" ] && [[ "$TIMESTAMP" < "$CREATED_AT" ]]; then
+  echo "Error: updatedAt ($TIMESTAMP) would be before createdAt ($CREATED_AT)" >&2
+  exit 1
+fi
+
 jq --arg reqId "$REQ_ID" \
    --arg branch "$BRANCH_ID" \
    --arg ts "$TIMESTAMP" \

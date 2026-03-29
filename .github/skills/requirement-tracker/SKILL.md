@@ -33,7 +33,7 @@ DESCRIPTION=$2
 PRIORITY=${3:-MEDIUM}
 
 REQ_ID="REQ-$(date +%s)"
-SLUG=$(echo "$NAME" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')
+SLUG=$(echo "$NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//; s/-$//')
 
 # Add to manifest
 jq ".requirements += [{
