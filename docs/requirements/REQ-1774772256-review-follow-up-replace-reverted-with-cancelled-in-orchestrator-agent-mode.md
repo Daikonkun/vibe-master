@@ -1,7 +1,7 @@
 # Review follow-up: replace REVERTED with CANCELLED in orchestrator agent mode
 
 **ID**: REQ-1774772256  
-**Status**: CODE_REVIEW  
+**Status**: MERGED  
 **Priority**: LOW  
 **Created**: 2026-03-29T08:17:36Z  
 

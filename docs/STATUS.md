@@ -8,12 +8,10 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
 
-* REQ-1774772256: Review follow-up: replace REVERTED with CANCELLED in orchestrator agent mode (priority: LOW)
-  - Worktree: feature/REQ-1774772256-review-follow-up-replace-reverted-with-cancelled-in-orchestrator-agent-mode
 
-## MERGED (10)
+## MERGED (11)
 
 * REQ-1774630000: Update README for Vibe Master upgrade migration (priority: MEDIUM)
   - Worktree: feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration
@@ -35,6 +33,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1774770314-review-follow-up-fix-skill-md-jq-injection-examples-and-stale-status-values
 * REQ-1774770322: Review follow-up: unify slug generation and fix init-project gaps (priority: MEDIUM)
   - Worktree: feature/REQ-1774770322-review-follow-up-unify-slug-generation-and-fix-init-project-gaps
+* REQ-1774772256: Review follow-up: replace REVERTED with CANCELLED in orchestrator agent mode (priority: LOW)
+  - Worktree: feature/REQ-1774772256-review-follow-up-replace-reverted-with-cancelled-in-orchestrator-agent-mode
 
 ## DEPLOYED (2)
 
