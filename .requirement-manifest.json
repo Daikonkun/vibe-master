@@ -123,6 +123,15 @@
       "priority": "MEDIUM",
       "createdAt": "2026-03-29T07:45:22Z",
       "updatedAt": "2026-03-29T07:45:22Z"
+    },
+    {
+      "id": "REQ-1774772256",
+      "name": "Review follow-up: replace REVERTED with CANCELLED in orchestrator agent mode",
+      "description": "Source: code-review of REQ-1774770314. Severity: LOW. Evidence: .github/agents/orchestrator.agent.md line 114 lists REVERTED as a valid state transition (MERGED → REVERTED), but REVERTED is not in the .requirement-manifest.schema.json enum or update-requirement-status.sh. Required outcome: replace REVERTED with CANCELLED in orchestrator.agent.md state transitions to align with the schema and scripts.",
+      "status": "PROPOSED",
+      "priority": "LOW",
+      "createdAt": "2026-03-29T08:17:36Z",
+      "updatedAt": "2026-03-29T08:17:36Z"
     }
   ]
 }
