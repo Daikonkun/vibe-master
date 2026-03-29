@@ -2,10 +2,8 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (3)
+## PROPOSED (2)
 
-* REQ-1774770305: Review follow-up: add missing prompt files for advertised slash commands (priority: HIGH)
-  - Worktree: none
 * REQ-1774770314: Review follow-up: fix SKILL.md jq injection examples and stale status values (priority: MEDIUM)
   - Worktree: none
 * REQ-1774770322: Review follow-up: unify slug generation and fix init-project gaps (priority: MEDIUM)
@@ -14,8 +12,10 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (0)
+## CODE_REVIEW (1)
 
+* REQ-1774770305: Review follow-up: add missing prompt files for advertised slash commands (priority: HIGH)
+  - Worktree: none
 
 ## MERGED (7)
 

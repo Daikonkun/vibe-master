@@ -100,10 +100,10 @@
       "id": "REQ-1774770305",
       "name": "Review follow-up: add missing prompt files for advertised slash commands",
       "description": "Source: code-review. Severity: HIGH. Evidence: copilot-instructions.md lists /worktree-create and /worktree-prune as available slash commands, and worktree-manager/SKILL.md advertises /worktree-status, but no corresponding .prompt.md files exist. REQ-1774628144 (DEPLOYED) was supposed to align commands but missed these three. Required outcome: either create worktree-create.prompt.md, worktree-prune.prompt.md, and worktree-status.prompt.md, or remove these commands from copilot-instructions.md and SKILL.md.",
-      "status": "PROPOSED",
+      "status": "CODE_REVIEW",
       "priority": "HIGH",
       "createdAt": "2026-03-29T07:45:05Z",
-      "updatedAt": "2026-03-29T07:45:05Z"
+      "updatedAt": "2026-03-29T08:02:28Z"
     },
     {
       "id": "REQ-1774770314",

@@ -1,7 +1,7 @@
 # Review follow-up: add missing prompt files for advertised slash commands
 
 **ID**: REQ-1774770305  
-**Status**: PROPOSED  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-03-29T07:45:05Z  
 
