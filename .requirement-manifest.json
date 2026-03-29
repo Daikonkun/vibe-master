@@ -187,6 +187,15 @@
       "priority": "HIGH",
       "createdAt": "2026-03-29T07:44:51Z",
       "updatedAt": "2026-03-29T07:44:51Z"
+    },
+    {
+      "id": "REQ-1774770298",
+      "name": "Review follow-up: separate manifest schema from data",
+      "description": "Source: code-review. Severity: HIGH. Evidence: .requirement-manifest.json and .worktree-manifest.json both embed JSON Schema keywords (properties, type, title, description) alongside actual data arrays at the same level. This fails JSON Schema validation and causes semantic ambiguity with the required keyword. Required outcome: move schema definitions to separate .schema.json files referenced by a top-level dollar-schema key, keeping manifests as pure data files.",
+      "status": "PROPOSED",
+      "priority": "HIGH",
+      "createdAt": "2026-03-29T07:44:58Z",
+      "updatedAt": "2026-03-29T07:44:58Z"
     }
   ]
 }
