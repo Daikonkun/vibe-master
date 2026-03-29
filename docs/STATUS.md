@@ -2,11 +2,21 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (0)
+## PROPOSED (4)
 
+* REQ-1774770298: Review follow-up: separate manifest schema from data (priority: HIGH)
+  - Worktree: none
+* REQ-1774770305: Review follow-up: add missing prompt files for advertised slash commands (priority: HIGH)
+  - Worktree: none
+* REQ-1774770314: Review follow-up: fix SKILL.md jq injection examples and stale status values (priority: MEDIUM)
+  - Worktree: none
+* REQ-1774770322: Review follow-up: unify slug generation and fix init-project gaps (priority: MEDIUM)
+  - Worktree: none
 
-## IN_PROGRESS (0)
+## IN_PROGRESS (1)
 
+* REQ-1774770291: Review follow-up: fix generate-plan.sh triple bug (priority: HIGH)
+  - Worktree: feature/REQ-1774770291-review-follow-up-fix-generate-plan-sh-triple-bug
 
 ## CODE_REVIEW (0)
 
@@ -41,7 +51,7 @@ Kanban-style view of all requirements and their current state.
 
 
 ## Stats
-- Total Requirements: 7
-- Deployed: 2 (28%)
-- In Progress: 0
+- Total Requirements: 12
+- Deployed: 2 (16%)
+- In Progress: 1
 - Blocked: 0

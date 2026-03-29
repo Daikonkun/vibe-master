@@ -16,3 +16,13 @@ REQ-1774681642: execution standard on working with a requirement (no dependencie
 
 REQ-1774685792: upgrade functions referring to obra's superpower agent (no dependencies)
 
+REQ-1774770291: Review follow-up: fix generate-plan.sh triple bug (no dependencies)
+
+REQ-1774770298: Review follow-up: separate manifest schema from data (no dependencies)
+
+REQ-1774770305: Review follow-up: add missing prompt files for advertised slash commands (no dependencies)
+
+REQ-1774770314: Review follow-up: fix SKILL.md jq injection examples and stale status values (no dependencies)
+
+REQ-1774770322: Review follow-up: unify slug generation and fix init-project gaps (no dependencies)
+
