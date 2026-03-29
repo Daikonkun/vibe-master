@@ -12,12 +12,10 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
 
-* REQ-1774770305: Review follow-up: add missing prompt files for advertised slash commands (priority: HIGH)
-  - Worktree: none
 
-## MERGED (7)
+## MERGED (8)
 
 * REQ-1774630000: Update README for Vibe Master upgrade migration (priority: MEDIUM)
   - Worktree: feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration
@@ -32,6 +30,8 @@ Kanban-style view of all requirements and their current state.
 * REQ-1774770291: Review follow-up: fix generate-plan.sh triple bug (priority: HIGH)
   - Worktree: feature/REQ-1774770291-review-follow-up-fix-generate-plan-sh-triple-bug
 * REQ-1774770298: Review follow-up: separate manifest schema from data (priority: HIGH)
+  - Worktree: none
+* REQ-1774770305: Review follow-up: add missing prompt files for advertised slash commands (priority: HIGH)
   - Worktree: none
 
 ## DEPLOYED (2)
