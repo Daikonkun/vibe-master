@@ -36,15 +36,21 @@ REQ_ID="REQ-$(date +%s)"
 SLUG=$(echo "$NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//; s/-$//')
 
 # Add to manifest
-jq ".requirements += [{
-  \"id\": \"$REQ_ID\",
-  \"name\": \"$NAME\",
-  \"description\": \"$DESCRIPTION\",
-  \"status\": \"PROPOSED\",
-  \"priority\": \"$PRIORITY\",
-  \"createdAt\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",
-  \"updatedAt\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"
-}]" .requirement-manifest.json > .requirement-manifest.json.tmp && \
+TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+jq --arg id "$REQ_ID" \
+   --arg name "$NAME" \
+   --arg desc "$DESCRIPTION" \
+   --arg priority "$PRIORITY" \
+   --arg ts "$TIMESTAMP" \
+   '.requirements += [{
+     id: $id,
+     name: $name,
+     description: $desc,
+     status: "PROPOSED",
+     priority: $priority,
+     createdAt: $ts,
+     updatedAt: $ts
+   }]' .requirement-manifest.json > .requirement-manifest.json.tmp && \
   mv .requirement-manifest.json.tmp .requirement-manifest.json
 
 # Create spec file
@@ -91,7 +97,7 @@ echo "Requirement $REQ_ID created"
 - PROPOSED → IN_PROGRESS, BACKLOG, CANCELLED
 - IN_PROGRESS → CODE_REVIEW, BLOCKED, BACKLOG
 - CODE_REVIEW → MERGED, BLOCKED
-- MERGED → DEPLOYED, REVERTED
+- MERGED → DEPLOYED, CANCELLED
 - Any → CANCELLED
 
 **Implementation**:
@@ -100,9 +106,13 @@ echo "Requirement $REQ_ID created"
 REQ_ID=$1
 NEW_STATUS=$2
 
-jq ".requirements[] |= if .id == \"$REQ_ID\" 
-  then .status = \"$NEW_STATUS\" | .updatedAt = \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\" 
-  else . end" .requirement-manifest.json > .requirement-manifest.json.tmp && \
+TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+jq --arg id "$REQ_ID" \
+   --arg status "$NEW_STATUS" \
+   --arg ts "$TIMESTAMP" \
+   '.requirements[] |= if .id == $id
+     then .status = $status | .updatedAt = $ts
+     else . end' .requirement-manifest.json > .requirement-manifest.json.tmp && \
   mv .requirement-manifest.json.tmp .requirement-manifest.json
 
 echo "Updated $REQ_ID to $NEW_STATUS"
@@ -119,7 +129,7 @@ echo "Updated $REQ_ID to $NEW_STATUS"
 REQ_ID=$1
 
 # Get from manifest
-REQ_DATA=$(jq ".requirements[] | select(.id == \"$REQ_ID\")" .requirement-manifest.json)
+REQ_DATA=$(jq --arg id "$REQ_ID" '.requirements[] | select(.id == $id)' .requirement-manifest.json)
 
 echo "=== Requirement $REQ_ID ==="
 echo "$REQ_DATA" | jq '.'

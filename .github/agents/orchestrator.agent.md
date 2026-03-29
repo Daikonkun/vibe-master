@@ -111,7 +111,6 @@ CODE_REVIEW → MERGED
             → BLOCKED
 
 MERGED → DEPLOYED
-       → REVERTED
 
 Any → BACKLOG (when deprioritized)
 Any → CANCELLED (when abandoned)

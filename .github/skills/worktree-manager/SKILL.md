@@ -69,15 +69,22 @@ WORKTREE_PATH="${PROJECT_ROOT}/../${BRANCH_NAME}"
 git worktree add "$WORKTREE_PATH" -b "$BRANCH_NAME" "$BASE_BRANCH"
 
 # Update manifest
-jq ".worktrees += [{
-  \"id\": \"$BRANCH_NAME\",
-  \"path\": \"$WORKTREE_PATH\",
-  \"branch\": \"$BRANCH_NAME\",
-  \"baseBranch\": \"$BASE_BRANCH\",
-  \"requirementIds\": [\"$REQ_ID\"],
-  \"createdAt\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",
-  \"status\": \"ACTIVE\"
-}]" .worktree-manifest.json > .worktree-manifest.json.tmp && \
+TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+jq --arg id "$BRANCH_NAME" \
+   --arg path "$WORKTREE_PATH" \
+   --arg branch "$BRANCH_NAME" \
+   --arg base "$BASE_BRANCH" \
+   --arg reqId "$REQ_ID" \
+   --arg ts "$TIMESTAMP" \
+   '.worktrees += [{
+     id: $id,
+     path: $path,
+     branch: $branch,
+     baseBranch: $base,
+     requirementIds: [$reqId],
+     createdAt: $ts,
+     status: "ACTIVE"
+   }]' .worktree-manifest.json > .worktree-manifest.json.tmp && \
   mv .worktree-manifest.json.tmp .worktree-manifest.json
 
 echo "Worktree created: $WORKTREE_PATH"
@@ -120,8 +127,8 @@ BASE_BRANCH=${2:-main}
 cd "$(git rev-parse --show-toplevel)"
 
 # Get worktree info
-WORKTREE_PATH=$(jq -r ".worktrees[] | select(.branch == \"$BRANCH\") | .path" .worktree-manifest.json)
-REQ_IDS=$(jq -r ".worktrees[] | select(.branch == \"$BRANCH\") | .requirementIds[]" .worktree-manifest.json)
+WORKTREE_PATH=$(jq -r --arg branch "$BRANCH" '.worktrees[] | select(.branch == $branch) | .path' .worktree-manifest.json)
+REQ_IDS=$(jq -r --arg branch "$BRANCH" '.worktrees[] | select(.branch == $branch) | .requirementIds[]' .worktree-manifest.json)
 
 # Merge
 git checkout $BASE_BRANCH
@@ -132,13 +139,16 @@ git worktree remove "$WORKTREE_PATH" 2>/dev/null || true
 git branch -d $BRANCH
 
 # Update manifests
-jq ".worktrees[] |= if .branch == \"$BRANCH\" then .status = \"MERGED\" | .mergedAt = \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\" else . end" \
+MERGE_TS=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+jq --arg branch "$BRANCH" --arg ts "$MERGE_TS" \
+   '.worktrees[] |= if .branch == $branch then .status = "MERGED" | .mergedAt = $ts else . end' \
   .worktree-manifest.json > .worktree-manifest.json.tmp && \
   mv .worktree-manifest.json.tmp .worktree-manifest.json
 
 # Update requirement status
 for REQ_ID in $REQ_IDS; do
-  jq ".requirements[] |= if .id == \"$REQ_ID\" then .status = \"MERGED\" | .updatedAt = \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\" else . end" \
+  jq --arg id "$REQ_ID" --arg ts "$MERGE_TS" \
+     '.requirements[] |= if .id == $id then .status = "MERGED" | .updatedAt = $ts else . end' \
     .requirement-manifest.json > .requirement-manifest.json.tmp && \
     mv .requirement-manifest.json.tmp .requirement-manifest.json
 done
@@ -155,8 +165,8 @@ Check if multiple requirements modify the same files:
 REQ_1=$1
 REQ_2=$2
 
-BRANCH_1=$(jq -r ".worktrees[] | select(.requirementIds[] == \"$REQ_1\") | .branch" .worktree-manifest.json)
-BRANCH_2=$(jq -r ".worktrees[] | select(.requirementIds[] == \"$REQ_2\") | .branch" .worktree-manifest.json)
+BRANCH_1=$(jq -r --arg id "$REQ_1" '.worktrees[] | select(.requirementIds[] == $id) | .branch' .worktree-manifest.json)
+BRANCH_2=$(jq -r --arg id "$REQ_2" '.worktrees[] | select(.requirementIds[] == $id) | .branch' .worktree-manifest.json)
 
 # Show conflicting files
 git diff --name-only $BRANCH_1..$BRANCH_2
