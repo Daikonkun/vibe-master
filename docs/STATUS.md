@@ -8,12 +8,10 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
 
-* REQ-1774775901: add /work-on command (priority: MEDIUM)
-  - Worktree: feature/REQ-1774775901-add-work-on-command
 
-## MERGED (12)
+## MERGED (13)
 
 * REQ-1774630000: Update README for Vibe Master upgrade migration (priority: MEDIUM)
   - Worktree: feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration
@@ -39,6 +37,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1774772256-review-follow-up-replace-reverted-with-cancelled-in-orchestrator-agent-mode
 * REQ-1774774148: Review follow-up: fix manifest inconsistencies and ghost command (priority: MEDIUM)
   - Worktree: feature/REQ-1774774148-review-follow-up-fix-manifest-inconsistencies-and-ghost-command
+* REQ-1774775901: add /work-on command (priority: MEDIUM)
+  - Worktree: feature/REQ-1774775901-add-work-on-command
 
 ## DEPLOYED (2)
 
