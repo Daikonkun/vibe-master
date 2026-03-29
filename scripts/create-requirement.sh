@@ -22,6 +22,7 @@ echo "   Priority: $REQ_PRIORITY"
 if [ ! -f "$PROJECT_ROOT/.requirement-manifest.json" ]; then
   cat > "$PROJECT_ROOT/.requirement-manifest.json" << 'JSON'
 {
+  "$schema": ".requirement-manifest.schema.json",
   "version": "1.0",
   "projectName": "Vibe Project",
   "requirements": []

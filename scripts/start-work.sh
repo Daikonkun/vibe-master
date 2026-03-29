@@ -70,6 +70,7 @@ fi
 if [ ! -f "$WORKTREE_MANIFEST" ]; then
   cat > "$WORKTREE_MANIFEST" << 'JSON'
 {
+  "$schema": ".worktree-manifest.schema.json",
   "version": "1.0",
   "worktrees": []
 }

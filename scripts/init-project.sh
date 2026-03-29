@@ -26,6 +26,7 @@ fi
 echo "📋 Initializing requirement manifest..."
 cat > .requirement-manifest.json << 'JSON'
 {
+  "$schema": ".requirement-manifest.schema.json",
   "version": "1.0",
   "projectName": "PROJECT_PLACEHOLDER",
   "requirements": []
@@ -38,6 +39,7 @@ rm -f .requirement-manifest.json.bak
 echo "📋 Initializing worktree manifest..."
 cat > .worktree-manifest.json << 'JSON'
 {
+  "$schema": ".worktree-manifest.schema.json",
   "version": "1.0",
   "worktrees": []
 }
