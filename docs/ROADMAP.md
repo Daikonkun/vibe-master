@@ -6,7 +6,7 @@ Timeline view of all requirements organized by status and priority.
 
 ## High Priority
 * [MERGED] REQ-1774639240: Add-requirement: populate spec sections after creation
-* [CODE_REVIEW] REQ-1774770291: Review follow-up: fix generate-plan.sh triple bug
+* [MERGED] REQ-1774770291: Review follow-up: fix generate-plan.sh triple bug
 * [PROPOSED] REQ-1774770298: Review follow-up: separate manifest schema from data
 * [PROPOSED] REQ-1774770305: Review follow-up: add missing prompt files for advertised slash commands
 

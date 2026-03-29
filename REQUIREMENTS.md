@@ -11,7 +11,7 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1774639240 | Add-requirement: populate spec sections after creation | MERGED | HIGH | feature/REQ-1774639240-add-requirement-populate-spec-sections-after-creation | 2026-03-27 | 2026-03-28 |
 | REQ-1774681642 | execution standard on working with a requirement | MERGED | MEDIUM | feature/REQ-1774681642-execution-standard-on-working-with-a-requirement | 2026-03-28 | 2026-03-28 |
 | REQ-1774685792 | upgrade functions referring to obra's superpower agent | MERGED | MEDIUM | feature/REQ-1774685792-upgrade-functions-referring-to-obra-s-superpower-agent | 2026-03-28 | 2026-03-28 |
-| REQ-1774770291 | Review follow-up: fix generate-plan.sh triple bug | CODE_REVIEW | HIGH | feature/REQ-1774770291-review-follow-up-fix-generate-plan-sh-triple-bug | 2026-03-29 | 2026-03-29 |
+| REQ-1774770291 | Review follow-up: fix generate-plan.sh triple bug | MERGED | HIGH | feature/REQ-1774770291-review-follow-up-fix-generate-plan-sh-triple-bug | 2026-03-29 | 2026-03-29 |
 | REQ-1774770298 | Review follow-up: separate manifest schema from data | PROPOSED | HIGH | — | 2026-03-29 | 2026-03-29 |
 | REQ-1774770305 | Review follow-up: add missing prompt files for advertised slash commands | PROPOSED | HIGH | — | 2026-03-29 | 2026-03-29 |
 | REQ-1774770314 | Review follow-up: fix SKILL.md jq injection examples and stale status values | PROPOSED | MEDIUM | — | 2026-03-29 | 2026-03-29 |
@@ -20,8 +20,8 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 ## Status Breakdown
 - **Proposed**: 4
 - **In Progress**: 0
-- **Code Review**: 1
-- **Merged**: 5
+- **Code Review**: 0
+- **Merged**: 6
 - **Deployed**: 2
 - **Blocked**: 0
 - **Backlog**: 0
@@ -32,6 +32,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-03-29T07:51:25Z
+* Last updated: 2026-03-29T07:55:16Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`
