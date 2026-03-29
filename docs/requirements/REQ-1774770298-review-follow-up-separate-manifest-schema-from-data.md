@@ -11,21 +11,45 @@ Source: code-review. Severity: HIGH. Evidence: .requirement-manifest.json and .w
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [ ] `.requirement-manifest.json` contains only data fields (`version`, `projectName`, `requirements` array) — no JSON Schema keywords (`$schema`, `title`, `description`, `type`, `properties`, `required` as schema directives)
+- [ ] `.worktree-manifest.json` contains only data fields (`version`, `worktrees` array) — no JSON Schema keywords
+- [ ] Both manifest files include a top-level `"$schema"` key pointing to the corresponding `.schema.json` file
+- [ ] `.requirement-manifest.schema.json` exists with the extracted JSON Schema definition
+- [ ] `.worktree-manifest.schema.json` exists with the extracted JSON Schema definition
+- [ ] All scripts that initialize empty manifests (`create-requirement.sh`, `start-work.sh`, `init-project.sh`) produce manifests with the `$schema` reference and no embedded schema keywords
+- [ ] `jq .` passes on both refactored manifest files
+- [ ] Existing jq queries in scripts (`regenerate-docs.sh`, `update-requirement-status.sh`, `worktree-merge.sh`, `start-work.sh`) continue to work unchanged
 
 ## Technical Notes
 
-(Add implementation notes here)
+Both manifest files currently embed JSON Schema keywords (`$schema`, `title`, `description`, `type`, `properties`, `required`) at the same level as actual data arrays. The `required` keyword is particularly ambiguous — it appears as both a schema directive listing required properties and could be confused with the `requirements` data array.
+
+**Approach**: Extract schema definitions into separate `.schema.json` files. Keep manifests as pure data with a `$schema` reference. Scripts already use `.requirements[]` and `.worktrees[]` jq patterns, so data access is unaffected — only init blocks that create empty manifests need a `$schema` key added.
+
+**Affected files**:
+- `.requirement-manifest.json` — remove schema keywords, add `$schema` ref
+- `.worktree-manifest.json` — remove schema keywords, add `$schema` ref
+- `scripts/create-requirement.sh` — add `$schema` to init block
+- `scripts/start-work.sh` — add `$schema` to worktree manifest init block
+- `scripts/init-project.sh` — add `$schema` to both init blocks
 
 ## Dependencies
 
-(List other requirement IDs if applicable, e.g., REQ-XXX, REQ-YYY)
+None
+
+## Development Plan
+
+1. **Create `.requirement-manifest.schema.json`** — Extract the JSON Schema from `.requirement-manifest.json` (properties, types, enums, required fields) into a standalone draft-07 schema file.
+2. **Create `.worktree-manifest.schema.json`** — Extract the JSON Schema from `.worktree-manifest.json` into a standalone draft-07 schema file.
+3. **Refactor `.requirement-manifest.json`** — Remove all schema keywords, keep only `$schema` reference + data (`version`, `projectName`, `requirements` array with actual entries).
+4. **Refactor `.worktree-manifest.json`** — Same extraction, keep only `$schema` reference + data.
+5. **Update script init blocks** — Add `"$schema"` key to the heredoc templates in `create-requirement.sh`, `start-work.sh`, and `init-project.sh`.
+6. **Validate** — Run `jq .` on both manifests and verify all scripts' jq queries still work.
+7. **Update REQ spec** — Mark success criteria, update status to MERGED, regenerate docs.
 
 ## Worktree
 
-(Will be populated when work starts: feature/REQ-ID-slug)
+(Working directly on main — self-contained structural change)
 
 ---
 
