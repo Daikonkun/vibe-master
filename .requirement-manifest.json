@@ -176,10 +176,12 @@
       "id": "REQ-1774775901",
       "name": "add /work-on command",
       "description": "add a command to work on a specific REQ until next status",
-      "status": "PROPOSED",
+      "status": "IN_PROGRESS",
       "priority": "MEDIUM",
       "createdAt": "2026-03-29T09:18:21Z",
-      "updatedAt": "2026-03-29T09:18:21Z"
+      "updatedAt": "2026-03-29T09:22:23Z",
+      "notes": "Add /work-on prompt file that loads a REQ spec, validates worktree, drives iterative implementation, and auto-advances status on completion.",
+      "worktreeId": "feature/REQ-1774775901-add-work-on-command"
     }
   ]
 }

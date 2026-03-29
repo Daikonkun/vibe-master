@@ -145,6 +145,17 @@
       "createdAt": "2026-03-29T09:09:19Z",
       "status": "MERGED",
       "mergedAt": "2026-03-29T09:16:52Z"
+    },
+    {
+      "id": "feature/REQ-1774775901-add-work-on-command",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1774775901-add-work-on-command",
+      "branch": "feature/REQ-1774775901-add-work-on-command",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1774775901"
+      ],
+      "createdAt": "2026-03-29T09:22:23Z",
+      "status": "ACTIVE"
     }
   ]
 }

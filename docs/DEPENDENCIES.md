@@ -36,3 +36,5 @@ REQ-1774774145: Review follow-up: fix manifest inconsistencies and ghost command
 
 REQ-1774774148: Review follow-up: fix manifest inconsistencies and ghost command (no dependencies)
 
+REQ-1774775901: add /work-on command (no dependencies)
+

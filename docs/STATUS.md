@@ -5,8 +5,10 @@ Kanban-style view of all requirements and their current state.
 ## PROPOSED (0)
 
 
-## IN_PROGRESS (0)
+## IN_PROGRESS (1)
 
+* REQ-1774775901: add /work-on command (priority: MEDIUM)
+  - Worktree: feature/REQ-1774775901-add-work-on-command
 
 ## CODE_REVIEW (0)
 
@@ -61,7 +63,7 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 
 ## Stats
-- Total Requirements: 17
+- Total Requirements: 18
 - Deployed: 2 (11%)
-- In Progress: 0
+- In Progress: 1
 - Blocked: 0
