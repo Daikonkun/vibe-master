@@ -1,7 +1,7 @@
 # Review follow-up: fix manifest inconsistencies and ghost command
 
 **ID**: REQ-1774774129  
-**Status**: PROPOSED  
+**Status**: CANCELLED  
 **Priority**: MEDIUM  
 **Created**: 2026-03-29T08:48:49Z  
 

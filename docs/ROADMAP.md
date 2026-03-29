@@ -18,7 +18,7 @@ Timeline view of all requirements organized by status and priority.
 * [MERGED] REQ-1774685792: upgrade functions referring to obra's superpower agent
 * [MERGED] REQ-1774770314: Review follow-up: fix SKILL.md jq injection examples and stale status values
 * [MERGED] REQ-1774770322: Review follow-up: unify slug generation and fix init-project gaps
-* [PROPOSED] REQ-1774774129: Review follow-up: fix manifest inconsistencies and ghost command
+* [CANCELLED] REQ-1774774129: Review follow-up: fix manifest inconsistencies and ghost command
 * [PROPOSED] REQ-1774774139: Review follow-up: fix manifest inconsistencies and ghost command
 * [PROPOSED] REQ-1774774145: Review follow-up: fix manifest inconsistencies and ghost command
 * [CODE_REVIEW] REQ-1774774148: Review follow-up: fix manifest inconsistencies and ghost command
