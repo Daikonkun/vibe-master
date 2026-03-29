@@ -2,15 +2,15 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (2)
+## PROPOSED (1)
 
-* REQ-1774770314: Review follow-up: fix SKILL.md jq injection examples and stale status values (priority: MEDIUM)
-  - Worktree: none
 * REQ-1774770322: Review follow-up: unify slug generation and fix init-project gaps (priority: MEDIUM)
   - Worktree: none
 
-## IN_PROGRESS (0)
+## IN_PROGRESS (1)
 
+* REQ-1774770314: Review follow-up: fix SKILL.md jq injection examples and stale status values (priority: MEDIUM)
+  - Worktree: feature/REQ-1774770314-review-follow-up-fix-skill-md-jq-injection-examples-and-stale-status-values
 
 ## CODE_REVIEW (0)
 
@@ -53,5 +53,5 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 12
 - Deployed: 2 (16%)
-- In Progress: 0
+- In Progress: 1
 - Blocked: 0
