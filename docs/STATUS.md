@@ -4,11 +4,13 @@ Kanban-style view of all requirements and their current state.
 
 ## PROPOSED (1)
 
-* REQ-1774770322: Review follow-up: unify slug generation and fix init-project gaps (priority: MEDIUM)
+* REQ-1774772256: Review follow-up: replace REVERTED with CANCELLED in orchestrator agent mode (priority: LOW)
   - Worktree: none
 
-## IN_PROGRESS (0)
+## IN_PROGRESS (1)
 
+* REQ-1774770322: Review follow-up: unify slug generation and fix init-project gaps (priority: MEDIUM)
+  - Worktree: feature/REQ-1774770322-review-follow-up-unify-slug-generation-and-fix-init-project-gaps
 
 ## CODE_REVIEW (1)
 
@@ -51,7 +53,7 @@ Kanban-style view of all requirements and their current state.
 
 
 ## Stats
-- Total Requirements: 12
-- Deployed: 2 (16%)
-- In Progress: 0
+- Total Requirements: 13
+- Deployed: 2 (15%)
+- In Progress: 1
 - Blocked: 0

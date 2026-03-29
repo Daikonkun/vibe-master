@@ -26,3 +26,5 @@ REQ-1774770314: Review follow-up: fix SKILL.md jq injection examples and stale s
 
 REQ-1774770322: Review follow-up: unify slug generation and fix init-project gaps (no dependencies)
 
+REQ-1774772256: Review follow-up: replace REVERTED with CANCELLED in orchestrator agent mode (no dependencies)
+
