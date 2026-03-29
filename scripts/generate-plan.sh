@@ -31,30 +31,33 @@ TECH_NOTES=$(awk '/^## Technical Notes/,/^## Dependencies/{if(!/^## / && NF>0) p
 REL_SPEC="docs/requirements/$(basename "$SPEC_FILE")"
 
 PLAN_FILE=$(mktemp)
-cat > "$PLAN_FILE" << 'EOF'
+cat > "$PLAN_FILE" << EOF
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `$REL_SPEC`.
-2. Research https://github.com/obra/superpowers skills (brainstorming, writing-plans, using-git-worktrees, systematic-debugging, test-driven-development).
-3. Identify 3-5 compatible skills and update relevant files: .github/skills/agent-customization/SKILL.md, add-requirement.prompt.md, copilot-instructions.md.
-4. Update manifests and regenerate docs with `./scripts/regenerate-docs.sh`.
-5. Test with `/show-requirement $REQ_ID` and verify no workflow changes.
+1. Review Description, Success Criteria, and Technical Notes in \`$REL_SPEC\`.
+   - **Summary**: $DESCRIPTION
+   - **Key criteria**: $SUCCESS
+2. Analyse Technical Notes and identify implementation approach.
+   - **Notes**: $TECH_NOTES
+3. Implement changes in the files/scripts referenced by the requirement spec.
+4. Run \`./scripts/regenerate-docs.sh\` to update manifests and generated docs.
+5. Validate with \`./scripts/show-requirement.sh $REQ_ID\` and verify success criteria are met.
 
 **Last updated**: $(date -u +%Y-%m-%dT%H:%M:%SZ)
 EOF
 
 # Replace existing Development Plan section or append before Dependencies
 if grep -q "^## Development Plan" "$SPEC_FILE"; then
-  awk '
+  awk -v planfile="$PLAN_FILE" '
     BEGIN { inplan=0 }
     /^## Development Plan/ { inplan=1; next }
-    /^## (Dependencies|Worktree)/ { if (inplan) { system("cat \"$PLAN_FILE\""); inplan=0 } }
+    /^## (Dependencies|Worktree)/ { if (inplan) { system("cat " planfile); inplan=0 } }
     !inplan { print }
-    END { if (inplan) system("cat \"$PLAN_FILE\"") }
+    END { if (inplan) system("cat " planfile) }
   ' "$SPEC_FILE" > "$SPEC_FILE.tmp" && mv "$SPEC_FILE.tmp" "$SPEC_FILE"
 else
-  awk '
-    /^## Dependencies/ { print ""; system("cat \"$PLAN_FILE\""); print "" }
+  awk -v planfile="$PLAN_FILE" '
+    /^## Dependencies/ { print ""; system("cat " planfile); print "" }
     { print }
   ' "$SPEC_FILE" > "$SPEC_FILE.tmp" && mv "$SPEC_FILE.tmp" "$SPEC_FILE"
 fi
@@ -62,4 +65,3 @@ fi
 rm -f "$PLAN_FILE"
 
 echo "✅ Development Plan updated in $SPEC_FILE"
-echo "Plan includes 5 actionable steps tied to repo files and commands."
