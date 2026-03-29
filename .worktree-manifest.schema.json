@@ -49,12 +49,18 @@
             "format": "date-time",
             "description": "When merged to base branch (if applicable)"
           },
+          "prunedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When pruned from disk (if applicable)"
+          },
           "status": {
             "type": "string",
             "enum": [
               "ACTIVE",
               "MERGED",
-              "ABANDONED"
+              "ABANDONED",
+              "PRUNED"
             ],
             "description": "Current worktree status"
           }
