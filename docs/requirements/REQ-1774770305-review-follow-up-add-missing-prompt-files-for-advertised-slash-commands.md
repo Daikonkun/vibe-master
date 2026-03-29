@@ -11,25 +11,33 @@ Source: code-review. Severity: HIGH. Evidence: copilot-instructions.md lists /wo
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [x] Every slash command in copilot-instructions.md table has a matching .prompt.md file
+- [x] worktree-create.prompt.md created with proper workflow and constraints
+- [x] worktree-prune.prompt.md created with proper workflow and constraints
+- [x] worktree-status.prompt.md created with proper workflow and constraints
+- [x] copilot-instructions.md prompt-backed commands paragraph updated to include all three
+- [x] /worktree-status added to copilot-instructions.md slash command table (was only in SKILL.md)
 
 ## Technical Notes
 
-(Add implementation notes here)
+**Approach**: Created all three missing prompt files rather than removing advertised commands, since each serves a distinct purpose:
+- `/worktree-create` — manual worktree creation without status change (unlike `/start-work` which also transitions to IN_PROGRESS)
+- `/worktree-prune` — cleanup orphaned worktrees and sync manifests
+- `/worktree-status` — comprehensive dashboard with cross-reference between filesystem and manifest
+
+**Out-of-scope finding**: `/review-requirement <req-id>` is also listed in the slash command table without a backing prompt file. It's effectively an alias for `/update-requirement <req-id> CODE_REVIEW`. Should be addressed in a separate follow-up.
 
 ## Dependencies
 
-(List other requirement IDs if applicable, e.g., REQ-XXX, REQ-YYY)
+REQ-1774628144 (DEPLOYED) — original alignment work that missed these three commands.
 
 ## Worktree
 
-(Will be populated when work starts: feature/REQ-ID-slug)
+N/A — changes applied directly to main (prompt files and copilot-instructions.md only).
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
+* **Linked Worktree**: None
+* **Branch**: main (direct)
+* **Merged**: Yes
 * **Deployed**: No

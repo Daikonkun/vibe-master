@@ -61,6 +61,7 @@ After any state change, regenerate:
 | `/worktree-list` | Show all active worktrees and their linked requirements |
 | `/worktree-create <req-id>` | Manually create a worktree for a requirement |
 | `/worktree-prune` | Remove orphaned worktrees |
+| `/worktree-status` | Show comprehensive worktree status dashboard |
 | `/worktree-merge <branch>` | Merge associated worktree and update docs |
 | `/review-requirement <req-id>` | Move to CODE_REVIEW state |
 | `/dependency-graph` | Visualize requirement dependencies |
@@ -69,7 +70,7 @@ After any state change, regenerate:
 | `/update-manual [scope]` | Generate and refresh user manual content |
 | `/code-review [scope]` | Review code and create REQ follow-up threads for unresolved findings |
 
-Slash commands appear in chat only when they are backed by prompt files or valid skill definitions. `/add-requirement`, `/list-requirements`, `/update-requirement`, `/start-work`, `/show-requirement`, `/status`, `/worktree-list`, `/worktree-merge`, `/dependency-graph`, `/roadmap`, `/regen-docs`, `/bug-fix`, `/update-manual`, and `/code-review` are implemented by prompt files in `.github/prompts/`; skill files must keep lowercase hyphenated `name` values that match their folder names.
+Slash commands appear in chat only when they are backed by prompt files or valid skill definitions. `/add-requirement`, `/list-requirements`, `/update-requirement`, `/start-work`, `/show-requirement`, `/status`, `/worktree-list`, `/worktree-create`, `/worktree-prune`, `/worktree-status`, `/worktree-merge`, `/dependency-graph`, `/roadmap`, `/regen-docs`, `/bug-fix`, `/update-manual`, and `/code-review` are implemented by prompt files in `.github/prompts/`; skill files must keep lowercase hyphenated `name` values that match their folder names.
 
 Note: Use `/worktree-merge <branch-name>` (not `/merge-requirement`) to complete a requirement.
 
