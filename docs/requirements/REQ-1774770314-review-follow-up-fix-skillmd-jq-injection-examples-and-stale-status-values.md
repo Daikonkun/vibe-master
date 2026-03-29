@@ -1,7 +1,7 @@
 # Review follow-up: fix SKILL.md jq injection examples and stale status values
 
 **ID**: REQ-1774770314  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-03-29T07:45:14Z  
 
@@ -11,25 +11,28 @@ Source: code-review. Severity: MEDIUM. Evidence: (1) requirement-tracker/SKILL.m
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [ ] All jq examples in `requirement-tracker/SKILL.md` use `--arg` parameterization instead of direct shell variable interpolation
+- [ ] All jq examples in `worktree-manager/SKILL.md` use `--arg` parameterization instead of direct shell variable interpolation
+- [ ] REVERTED is removed from `requirement-tracker/SKILL.md` valid transitions and replaced with CANCELLED
+- [ ] No remaining `\"$VAR\"` patterns inside jq program strings in either SKILL.md file
 
 ## Technical Notes
 
-(Add implementation notes here)
+**Files to modify:**
+- `.github/skills/requirement-tracker/SKILL.md` — 4 jq code blocks with injection + REVERTED status
+- `.github/skills/worktree-manager/SKILL.md` — 3 jq code blocks with injection
 
+**Pattern to fix:** Replace `jq "... \"$VAR\" ..."` with `jq --arg varName "$VAR" '... $varName ...'`
+
+**Status fix:** In requirement-tracker/SKILL.md section "Valid transitions", change `MERGED → DEPLOYED, REVERTED` to `MERGED → DEPLOYED, CANCELLED`. The schema enum in `.requirement-manifest.schema.json` and `update-requirement-status.sh` both use CANCELLED, not REVERTED.
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1774770314-review-follow-up-fix-skillmd-jq-injection-examples-and-stale-status-values.md`.
-   - **Summary**: Source: code-review. Severity: MEDIUM. Evidence: (1) requirement-tracker/SKILL.m
-   - **Key criteria**: - [ ] Criterion 1 - [ ] Criterion 2
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: (Add implementation notes here)
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1774770314` and verify success criteria are met.
+1. **Fix jq injection in `requirement-tracker/SKILL.md`** — Convert all 4 jq code blocks (Add Requirement, Update Status, Show Requirement, Update Requirement for docs) from `\"$VAR\"` interpolation to `--arg` parameterization.
+2. **Fix REVERTED → CANCELLED in `requirement-tracker/SKILL.md`** — In the "Valid transitions" list, replace `REVERTED` with `CANCELLED` to match the schema enum and `update-requirement-status.sh`.
+3. **Fix jq injection in `worktree-manager/SKILL.md`** — Convert all 3 jq code blocks (Create Worktree, Merge and Cleanup, Detect Conflicts) from `\"$VAR\"` interpolation to `--arg` parameterization.
+4. **Verify no remaining injection patterns** — Grep both files for `\"$` inside jq program strings to confirm zero matches.
+5. **Run `./scripts/regenerate-docs.sh`** and validate with `./scripts/show-requirement.sh REQ-1774770314`.
 
 **Last updated**: 2026-03-29T08:11:12Z
 

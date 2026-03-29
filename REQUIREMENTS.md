@@ -14,13 +14,13 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1774770291 | Review follow-up: fix generate-plan.sh triple bug | MERGED | HIGH | feature/REQ-1774770291-review-follow-up-fix-generate-plan-sh-triple-bug | 2026-03-29 | 2026-03-29 |
 | REQ-1774770298 | Review follow-up: separate manifest schema from data | MERGED | HIGH | — | 2026-03-29 | 2026-03-29 |
 | REQ-1774770305 | Review follow-up: add missing prompt files for advertised slash commands | MERGED | HIGH | — | 2026-03-29 | 2026-03-29 |
-| REQ-1774770314 | Review follow-up: fix SKILL.md jq injection examples and stale status values | IN_PROGRESS | MEDIUM | feature/REQ-1774770314-review-follow-up-fix-skill-md-jq-injection-examples-and-stale-status-values | 2026-03-29 | 2026-03-29 |
+| REQ-1774770314 | Review follow-up: fix SKILL.md jq injection examples and stale status values | CODE_REVIEW | MEDIUM | feature/REQ-1774770314-review-follow-up-fix-skill-md-jq-injection-examples-and-stale-status-values | 2026-03-29 | 2026-03-29 |
 | REQ-1774770322 | Review follow-up: unify slug generation and fix init-project gaps | PROPOSED | MEDIUM | — | 2026-03-29 | 2026-03-29 |
 
 ## Status Breakdown
 - **Proposed**: 1
-- **In Progress**: 1
-- **Code Review**: 0
+- **In Progress**: 0
+- **Code Review**: 1
 - **Merged**: 8
 - **Deployed**: 2
 - **Blocked**: 0
@@ -32,6 +32,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-03-29T08:11:12Z
+* Last updated: 2026-03-29T08:14:30Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`
