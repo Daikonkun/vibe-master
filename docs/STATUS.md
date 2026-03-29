@@ -11,13 +11,13 @@ Kanban-style view of all requirements and their current state.
 * REQ-1774774145: Review follow-up: fix manifest inconsistencies and ghost command (priority: MEDIUM)
   - Worktree: none
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1774774148: Review follow-up: fix manifest inconsistencies and ghost command (priority: MEDIUM)
   - Worktree: feature/REQ-1774774148-review-follow-up-fix-manifest-inconsistencies-and-ghost-command
-
-## CODE_REVIEW (0)
-
 
 ## MERGED (11)
 
@@ -63,5 +63,5 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 17
 - Deployed: 2 (11%)
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0

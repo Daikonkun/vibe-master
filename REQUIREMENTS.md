@@ -20,12 +20,12 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1774774129 | Review follow-up: fix manifest inconsistencies and ghost command | PROPOSED | MEDIUM | — | 2026-03-29 | 2026-03-29 |
 | REQ-1774774139 | Review follow-up: fix manifest inconsistencies and ghost command | PROPOSED | MEDIUM | — | 2026-03-29 | 2026-03-29 |
 | REQ-1774774145 | Review follow-up: fix manifest inconsistencies and ghost command | PROPOSED | MEDIUM | — | 2026-03-29 | 2026-03-29 |
-| REQ-1774774148 | Review follow-up: fix manifest inconsistencies and ghost command | IN_PROGRESS | MEDIUM | feature/REQ-1774774148-review-follow-up-fix-manifest-inconsistencies-and-ghost-command | 2026-03-29 | 2026-03-29 |
+| REQ-1774774148 | Review follow-up: fix manifest inconsistencies and ghost command | CODE_REVIEW | MEDIUM | feature/REQ-1774774148-review-follow-up-fix-manifest-inconsistencies-and-ghost-command | 2026-03-29 | 2026-03-29 |
 
 ## Status Breakdown
 - **Proposed**: 3
-- **In Progress**: 1
-- **Code Review**: 0
+- **In Progress**: 0
+- **Code Review**: 1
 - **Merged**: 11
 - **Deployed**: 2
 - **Blocked**: 0
@@ -37,6 +37,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-03-29T09:09:19Z
+* Last updated: 2026-03-29T09:13:54Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

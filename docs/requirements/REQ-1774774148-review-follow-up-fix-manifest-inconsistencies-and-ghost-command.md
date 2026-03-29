@@ -1,7 +1,7 @@
 # Review follow-up: fix manifest inconsistencies and ghost command
 
 **ID**: REQ-1774774148  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-03-29T08:49:08Z  
 
@@ -11,25 +11,25 @@ Source: code-review pass 2. Severity: MEDIUM. Fix: (1) two stale ACTIVE worktree
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [x] Worktree entries for REQ-1774639240 and REQ-1774770314 in `.worktree-manifest.json` have `status: "MERGED"` (not `ACTIVE`)
+- [x] Ghost `/review-requirement` row removed from `copilot-instructions.md` slash-command table
+- [x] `PRUNED` added to `.worktree-manifest.schema.json` status enum
+- [x] `requirement-tracker/SKILL.md` heredoc uses unquoted `EOF` so shell variables expand
 
 ## Technical Notes
 
-(Add implementation notes here)
-
+- **Issue 1 – Stale ACTIVE worktree entries**: `.worktree-manifest.json` has two entries still marked `ACTIVE` for requirements that are `MERGED`: `feature/REQ-1774639240-…` (line ~62) and `feature/REQ-1774770314-…` (line ~109). Set their `status` to `"MERGED"` and add `mergedAt` timestamps matching the requirement manifest `updatedAt`.
+- **Issue 2 – Ghost command**: `copilot-instructions.md` line 66 lists `/review-requirement <req-id>` but no `.github/prompts/review-requirement.prompt.md` file exists. Remove the row.
+- **Issue 3 – PRUNED not in schema**: `.worktree-manifest.schema.json` status enum is `["ACTIVE","MERGED","ABANDONED"]`. `worktree-prune.prompt.md` references `PRUNED`. Add `"PRUNED"` to the schema enum.
+- **Issue 4 – Heredoc quoting**: `.github/skills/requirement-tracker/SKILL.md` line 57 uses `<< 'EOF'` which suppresses variable expansion, but the body uses `$NAME`, `$REQ_ID`, etc. Change to `<< EOF`.
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1774774148-review-follow-up-fix-manifest-inconsistencies-and-ghost-command.md`.
-   - **Summary**: Source: code-review pass 2. Severity: MEDIUM. Fix: (1) two stale ACTIVE worktree
-   - **Key criteria**: - [ ] Criterion 1 - [ ] Criterion 2
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: (Add implementation notes here)
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1774774148` and verify success criteria are met.
+1. Fix stale worktree entries in `.worktree-manifest.json`: set REQ-1774639240 and REQ-1774770314 entries to `"MERGED"`, add `mergedAt`.
+2. Remove the `/review-requirement` row from `copilot-instructions.md`.
+3. Add `"PRUNED"` to the status enum in `.worktree-manifest.schema.json`.
+4. Change `<< 'EOF'` to `<< EOF` in `.github/skills/requirement-tracker/SKILL.md`.
+5. Run `./scripts/regenerate-docs.sh` and validate with `./scripts/show-requirement.sh REQ-1774774148`.
 
 **Last updated**: 2026-03-29T09:09:19Z
 
