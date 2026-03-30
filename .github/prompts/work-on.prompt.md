@@ -27,8 +27,8 @@ Workflow:
    - For each step, implement the required changes in the worktree.
    - After each step, check the Success Criteria — mark items done as they are satisfied.
    - Continue until all Success Criteria are met or the user intervenes.
-7. **Confirm before advancing**: Once all criteria appear met, ask the user whether to advance the status. Do not auto-advance without confirmation.
-8. **Advance status**: Run `scripts/update-requirement-status.sh <REQ-ID> <next-status>` to persist the transition.
+7. **Confirm before advancing**: Once all criteria appear met, ask the user **once** whether to advance the status to the next lifecycle state. If the user confirms (e.g. "yes", "go ahead", "do it"), proceed **immediately** to step 8 — do not re-ask or loop back.
+8. **Advance status**: Run `scripts/update-requirement-status.sh <REQ-ID> <next-status>` to persist the transition. This step must execute as soon as the user confirms in step 7.
 9. **Regenerate docs**: Run `scripts/regenerate-docs.sh` to keep REQUIREMENTS.md, STATUS.md, ROADMAP.md, and DEPENDENCIES.md in sync.
 10. Summarize what was done and the new status.
 
@@ -36,6 +36,6 @@ Constraints:
 - If the requirement does not exist in the manifest, report the error and stop.
 - If the requirement is in a terminal status (DEPLOYED, CANCELLED), explain that there is no next status and stop.
 - If there is no active worktree and the requirement is PROPOSED or BACKLOG, auto-invoke `/start-work` to bootstrap it. For other statuses without a worktree, suggest `/start-work` and stop.
-- Never skip the user confirmation step before advancing status.
+- Ask the user for confirmation exactly once before advancing status. After the user confirms, advance immediately without re-asking.
 - Surface any script failures exactly.
 - If the spec is too vague to determine completion, ask clarifying questions rather than guessing.
