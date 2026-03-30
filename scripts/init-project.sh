@@ -51,6 +51,26 @@ chmod +x scripts/*.sh
 # Create docs/requirements directory
 mkdir -p docs/requirements
 
+# Remove historical requirement files (preserve EXAMPLE-* files)
+echo "🧹 Cleaning up historical requirement files..."
+CLEANED=0
+for f in docs/requirements/REQ-*.md; do
+  [ -f "$f" ] || continue
+  rm "$f"
+  CLEANED=$((CLEANED + 1))
+done
+if [ "$CLEANED" -gt 0 ]; then
+  echo "   Removed $CLEANED historical REQ file(s)"
+else
+  echo "   No historical REQ files found"
+fi
+
+# Regenerate docs from the now-empty manifest
+if [ -f scripts/regenerate-docs.sh ]; then
+  echo "📄 Regenerating docs..."
+  bash scripts/regenerate-docs.sh
+fi
+
 # Create initial commit
 git add -A
 git commit -m "chore: init project" --no-verify 2>/dev/null || true

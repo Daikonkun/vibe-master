@@ -12,10 +12,20 @@ git remote remove origin  # Detach from template
 git remote add origin <your-new-repo>
 ```
 
-### 2. Initialize in VS Code
+### 2. Initialize Your Project
+Run the init script to reset manifests and remove Vibe Master's own requirement history:
+```bash
+bash scripts/init-project.sh "My Project Name"
+```
+This will:
+- Reset `.requirement-manifest.json` and `.worktree-manifest.json` to empty
+- Remove historical `REQ-*.md` files from `docs/requirements/` (example files are preserved)
+- Regenerate clean `REQUIREMENTS.md`, `STATUS.md`, `ROADMAP.md`, and `DEPENDENCIES.md`
+
+### 3. Open in VS Code
 Open the project in VS Code. The orchestrator agent will auto-load from `.github/agents/orchestrator.agent.md`.
 
-### 3. Submit Your First Requirement
+### 4. Submit Your First Requirement
 ```
 /add-requirement "User Authentication" "Implement email/password authentication system"
 ```
@@ -28,7 +38,7 @@ The agent will:
 - Update `REQUIREMENTS.md` summary
 - Suggest creating a git worktree
 
-### 4. Start Work
+### 5. Start Work
 ```
 /start-work REQ-001
 ```
@@ -38,7 +48,7 @@ The agent will:
 - Update requirement status to `IN_PROGRESS`
 - Provide context on what to build
 
-### 5. Check Status Anytime
+### 6. Check Status Anytime
 ```
 /status
 ```
