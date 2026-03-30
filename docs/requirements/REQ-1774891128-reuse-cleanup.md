@@ -1,7 +1,7 @@
 # reuse cleanup
 
 **ID**: REQ-1774891128  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-03-30T17:18:48Z  
 
@@ -29,16 +29,13 @@ for users who clone the repo to inititate their project, they may not wish to se
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1774891128-reuse-cleanup.md`.
-   - **Summary**: for users who clone the repo to inititate their project, they may not wish to se
-   - **Key criteria**: - [ ] After cloning/forking Vibe Master, a user or agent can run a single command (or documented ste
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - **Approach**: Two viable options — (A) enhance `scripts/init-project.sh` to also delete `docs/requ
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1774891128` and verify success criteria are met.
+1. **Add history cleanup to `scripts/init-project.sh`** — After the manifest reset, add a step that removes `docs/requirements/REQ-*.md` (preserving `EXAMPLE-REQ-*`), then calls `scripts/regenerate-docs.sh` to rebuild `REQUIREMENTS.md`, `docs/STATUS.md`, `docs/ROADMAP.md`, and `docs/DEPENDENCIES.md` from the now-empty manifest.
+2. **Update `README.md` Quick Start** — Insert a step between "Clone This Template" and "Initialize in VS Code" instructing users to run `bash scripts/init-project.sh "My Project"` to reset manifests and purge historical REQ files. Explain that this clears Vibe Master's own development history.
+3. **Preserve example files** — Verify the cleanup glob in `init-project.sh` explicitly excludes `EXAMPLE-REQ-*` and `EXAMPLE-STATUS.md`. Add a guard/test.
+4. **End-to-end validation** — In the worktree, simulate the user flow: run `init-project.sh`, confirm `docs/requirements/` contains only `EXAMPLE-*`, confirm `.requirement-manifest.json` has an empty `requirements` array, and confirm generated docs have no historical entries.
+5. **Commit and regenerate docs** — Run `scripts/regenerate-docs.sh`, commit changes, and verify with `scripts/show-requirement.sh REQ-1774891128`.
 
-**Last updated**: 2026-03-30T17:22:13Z
+**Last updated**: 2026-03-31T00:00:00Z
 
 ## Dependencies
 
