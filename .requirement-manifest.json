@@ -229,10 +229,10 @@
       "id": "REQ-1775141920",
       "name": "add /init command",
       "description": "the previous trial on assuming agents can automatically clear history of Vibe Agent REQs does not work out. add a /init command to let the agent clear Vibe Master related REQs in a new project. strictly limit the clear happens to Vibe-Master related REQs, do not clear any project-related REQs even /init is used in the middle of developing a project. do not clear this current master source of Vibe Master as well",
-      "status": "CODE_REVIEW",
+      "status": "MERGED",
       "priority": "MEDIUM",
       "createdAt": "2026-04-02T14:58:40Z",
-      "updatedAt": "2026-04-02T15:04:12Z",
+      "updatedAt": "2026-04-02T15:09:56Z",
       "notes": "Add /init prompt + update init-project.sh to selectively clear only Vibe-Master-origin REQs using an origin tag, preserving project REQs and refusing to run on the master source repo.",
       "worktreeId": "feature/REQ-1775141920-add-init-command",
       "origin": "vibe-master"
