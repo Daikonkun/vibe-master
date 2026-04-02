@@ -1,7 +1,7 @@
 # add /init command
 
 **ID**: REQ-1775141920  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-04-02T14:58:40Z  
 

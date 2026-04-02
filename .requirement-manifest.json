@@ -12,7 +12,8 @@
       "createdAt": "2026-03-27T16:15:44Z",
       "updatedAt": "2026-03-28T00:20:00Z",
       "worktreeId": "feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations",
-      "deployedAt": "2026-03-28T00:20:00Z"
+      "deployedAt": "2026-03-28T00:20:00Z",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774630000",
@@ -22,7 +23,8 @@
       "priority": "MEDIUM",
       "createdAt": "2026-03-28T00:30:00Z",
       "updatedAt": "2026-03-28T00:30:00Z",
-      "worktreeId": "feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration"
+      "worktreeId": "feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774632175",
@@ -32,7 +34,8 @@
       "priority": "LOW",
       "createdAt": "2026-03-27T17:22:55Z",
       "updatedAt": "2026-03-27T17:27:01Z",
-      "worktreeId": "feature/REQ-1774632175-review-follow-up-polish-upgrade-guide-in-readme"
+      "worktreeId": "feature/REQ-1774632175-review-follow-up-polish-upgrade-guide-in-readme",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774636689",
@@ -42,7 +45,8 @@
       "priority": "MEDIUM",
       "createdAt": "2026-03-27T18:38:09Z",
       "updatedAt": "2026-03-27T18:47:35Z",
-      "worktreeId": "feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed"
+      "worktreeId": "feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774639240",
@@ -53,7 +57,8 @@
       "priority": "HIGH",
       "createdAt": "2026-03-27T19:20:40Z",
       "updatedAt": "2026-03-28T00:00:00Z",
-      "worktreeId": "feature/REQ-1774639240-add-requirement-populate-spec-sections-after-creation"
+      "worktreeId": "feature/REQ-1774639240-add-requirement-populate-spec-sections-after-creation",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774681642",
@@ -64,7 +69,8 @@
       "priority": "MEDIUM",
       "createdAt": "2026-03-28T07:07:22Z",
       "updatedAt": "2026-03-28T07:29:47Z",
-      "worktreeId": "feature/REQ-1774681642-execution-standard-on-working-with-a-requirement"
+      "worktreeId": "feature/REQ-1774681642-execution-standard-on-working-with-a-requirement",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774685792",
@@ -75,7 +81,8 @@
       "createdAt": "2026-03-28T08:16:32Z",
       "updatedAt": "2026-03-28T08:47:37Z",
       "notes": "Research superpowers skills (brainstorming, writing-plans, using-git-worktrees, systematic-debugging) for minimal-alignment upgrades to Vibe skills and prompts.",
-      "worktreeId": "feature/REQ-1774685792-upgrade-functions-referring-to-obra-s-superpower-agent"
+      "worktreeId": "feature/REQ-1774685792-upgrade-functions-referring-to-obra-s-superpower-agent",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774770291",
@@ -85,7 +92,8 @@
       "priority": "HIGH",
       "createdAt": "2026-03-29T07:44:51Z",
       "updatedAt": "2026-03-29T07:55:15Z",
-      "worktreeId": "feature/REQ-1774770291-review-follow-up-fix-generate-plan-sh-triple-bug"
+      "worktreeId": "feature/REQ-1774770291-review-follow-up-fix-generate-plan-sh-triple-bug",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774770298",
@@ -94,7 +102,8 @@
       "status": "MERGED",
       "priority": "HIGH",
       "createdAt": "2026-03-29T07:44:58Z",
-      "updatedAt": "2026-03-29T08:00:40Z"
+      "updatedAt": "2026-03-29T08:00:40Z",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774770305",
@@ -103,7 +112,8 @@
       "status": "MERGED",
       "priority": "HIGH",
       "createdAt": "2026-03-29T07:45:05Z",
-      "updatedAt": "2026-03-29T08:08:03Z"
+      "updatedAt": "2026-03-29T08:08:03Z",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774770314",
@@ -113,7 +123,8 @@
       "priority": "MEDIUM",
       "createdAt": "2026-03-29T07:45:14Z",
       "updatedAt": "2026-03-29T08:39:38Z",
-      "worktreeId": "feature/REQ-1774770314-review-follow-up-fix-skill-md-jq-injection-examples-and-stale-status-values"
+      "worktreeId": "feature/REQ-1774770314-review-follow-up-fix-skill-md-jq-injection-examples-and-stale-status-values",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774770322",
@@ -123,7 +134,8 @@
       "priority": "MEDIUM",
       "createdAt": "2026-03-29T07:45:22Z",
       "updatedAt": "2026-03-29T08:29:07Z",
-      "worktreeId": "feature/REQ-1774770322-review-follow-up-unify-slug-generation-and-fix-init-project-gaps"
+      "worktreeId": "feature/REQ-1774770322-review-follow-up-unify-slug-generation-and-fix-init-project-gaps",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774772256",
@@ -133,7 +145,8 @@
       "priority": "LOW",
       "createdAt": "2026-03-29T08:17:36Z",
       "updatedAt": "2026-03-29T08:45:00Z",
-      "worktreeId": "feature/REQ-1774772256-review-follow-up-replace-reverted-with-cancelled-in-orchestrator-agent-mode"
+      "worktreeId": "feature/REQ-1774772256-review-follow-up-replace-reverted-with-cancelled-in-orchestrator-agent-mode",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774774129",
@@ -142,7 +155,8 @@
       "status": "CANCELLED",
       "priority": "MEDIUM",
       "createdAt": "2026-03-29T08:48:49Z",
-      "updatedAt": "2026-03-29T09:15:58Z"
+      "updatedAt": "2026-03-29T09:15:58Z",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774774139",
@@ -151,7 +165,8 @@
       "status": "CANCELLED",
       "priority": "MEDIUM",
       "createdAt": "2026-03-29T08:48:59Z",
-      "updatedAt": "2026-03-29T09:16:04Z"
+      "updatedAt": "2026-03-29T09:16:04Z",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774774145",
@@ -160,7 +175,8 @@
       "status": "CANCELLED",
       "priority": "MEDIUM",
       "createdAt": "2026-03-29T08:49:05Z",
-      "updatedAt": "2026-03-29T09:16:07Z"
+      "updatedAt": "2026-03-29T09:16:07Z",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774774148",
@@ -170,7 +186,8 @@
       "priority": "MEDIUM",
       "createdAt": "2026-03-29T08:49:08Z",
       "updatedAt": "2026-03-29T09:16:52Z",
-      "worktreeId": "feature/REQ-1774774148-review-follow-up-fix-manifest-inconsistencies-and-ghost-command"
+      "worktreeId": "feature/REQ-1774774148-review-follow-up-fix-manifest-inconsistencies-and-ghost-command",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774775901",
@@ -181,7 +198,8 @@
       "createdAt": "2026-03-29T09:18:21Z",
       "updatedAt": "2026-03-29T09:31:01Z",
       "notes": "Add /work-on prompt file that loads a REQ spec, validates worktree, drives iterative implementation, and auto-advances status on completion.",
-      "worktreeId": "feature/REQ-1774775901-add-work-on-command"
+      "worktreeId": "feature/REQ-1774775901-add-work-on-command",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1774891128",
@@ -192,7 +210,8 @@
       "createdAt": "2026-03-30T17:18:48Z",
       "updatedAt": "2026-03-30T17:30:30Z",
       "notes": "Enhance init-project.sh to purge historical REQ files and reset generated docs; update README Quick Start with cleanup step",
-      "worktreeId": "feature/REQ-1774891128-reuse-cleanup"
+      "worktreeId": "feature/REQ-1774891128-reuse-cleanup",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1775120162",
@@ -203,18 +222,20 @@
       "createdAt": "2026-04-02T08:56:02Z",
       "updatedAt": "2026-04-02T10:00:41Z",
       "notes": "Add /e2e-test prompt that inventories skills, orchestrates e2e test cycles when possible, and proposes new skill REQs when gaps are found.",
-      "worktreeId": "feature/REQ-1775120162-e2e-testing-command"
+      "worktreeId": "feature/REQ-1775120162-e2e-testing-command",
+      "origin": "vibe-master"
     },
     {
       "id": "REQ-1775141920",
       "name": "add /init command",
       "description": "the previous trial on assuming agents can automatically clear history of Vibe Agent REQs does not work out. add a /init command to let the agent clear Vibe Master related REQs in a new project. strictly limit the clear happens to Vibe-Master related REQs, do not clear any project-related REQs even /init is used in the middle of developing a project. do not clear this current master source of Vibe Master as well",
-      "status": "IN_PROGRESS",
+      "status": "CODE_REVIEW",
       "priority": "MEDIUM",
       "createdAt": "2026-04-02T14:58:40Z",
-      "updatedAt": "2026-04-02T15:00:35Z",
+      "updatedAt": "2026-04-02T15:04:12Z",
       "notes": "Add /init prompt + update init-project.sh to selectively clear only Vibe-Master-origin REQs using an origin tag, preserving project REQs and refusing to run on the master source repo.",
-      "worktreeId": "feature/REQ-1775141920-add-init-command"
+      "worktreeId": "feature/REQ-1775141920-add-init-command",
+      "origin": "vibe-master"
     }
   ]
 }

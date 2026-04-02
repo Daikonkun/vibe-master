@@ -5,13 +5,13 @@ Kanban-style view of all requirements and their current state.
 ## PROPOSED (0)
 
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1775141920: add /init command (priority: MEDIUM)
   - Worktree: feature/REQ-1775141920-add-init-command
-
-## CODE_REVIEW (0)
-
 
 ## MERGED (15)
 
@@ -71,5 +71,5 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 21
 - Deployed: 2 (9%)
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0
