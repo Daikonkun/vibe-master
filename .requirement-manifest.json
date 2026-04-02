@@ -198,10 +198,12 @@
       "id": "REQ-1775120162",
       "name": "e2e testing command",
       "description": "add a /e2e-test command to perform an end-to-end test for a project developed by vibe master. if existing skills are not enough to perform one, propose to the user that an additional skill for vibe master should be developed as a new REQ.",
-      "status": "PROPOSED",
+      "status": "IN_PROGRESS",
       "priority": "MEDIUM",
       "createdAt": "2026-04-02T08:56:02Z",
-      "updatedAt": "2026-04-02T08:56:02Z"
+      "updatedAt": "2026-04-02T08:57:15Z",
+      "notes": "Add /e2e-test prompt that inventories skills, orchestrates e2e test cycles when possible, and proposes new skill REQs when gaps are found.",
+      "worktreeId": "feature/REQ-1775120162-e2e-testing-command"
     }
   ]
 }

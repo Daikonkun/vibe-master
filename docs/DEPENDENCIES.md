@@ -40,3 +40,5 @@ REQ-1774775901: add /work-on command (no dependencies)
 
 REQ-1774891128: reuse cleanup (no dependencies)
 
+REQ-1775120162: e2e testing command (no dependencies)
+

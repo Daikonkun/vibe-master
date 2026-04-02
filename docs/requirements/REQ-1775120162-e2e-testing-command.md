@@ -1,7 +1,7 @@
 # e2e testing command
 
 **ID**: REQ-1775120162  
-**Status**: PROPOSED  
+**Status**: IN_PROGRESS  
 **Priority**: MEDIUM  
 **Created**: 2026-04-02T08:56:02Z  
 
@@ -11,17 +11,38 @@ add a /e2e-test command to perform an end-to-end test for a project developed by
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [ ] A `/e2e-test` slash command exists backed by a prompt file at `.github/prompts/e2e-test.prompt.md`
+- [ ] Running `/e2e-test [scope]` inventories the project's existing skills (`code-review`, `debug`, `worktree-manager`, `update-manual`, `requirement-tracker`, `agent-customization`) and evaluates whether they provide sufficient coverage to test the target scope end-to-end
+- [ ] When existing skills are sufficient, the command orchestrates a full end-to-end test cycle: build/lint → run tests → code-review → validate requirement criteria — and reports pass/fail with evidence
+- [ ] When existing skills are insufficient (e.g., no test runner skill, no integration-test skill), the command clearly identifies the gap, explains what capability is missing, and proposes creating a new REQ for the missing skill via `/add-requirement`
+- [ ] The command supports an optional `[scope]` argument to target a specific requirement ID, feature area, or the entire project
 
 ## Technical Notes
 
-(Add implementation notes here)
+- **Prompt file**: Create `.github/prompts/e2e-test.prompt.md` following the established pattern (see `start-work.prompt.md`, `work-on.prompt.md` for YAML frontmatter and workflow structure).
+- **Skill inventory**: The prompt should read the list of available skills from `.github/skills/*/SKILL.md` and map their capabilities against what an e2e test requires (build, lint, test execution, coverage analysis, etc.).
+- **Gap analysis**: Compare required testing capabilities against available skill descriptions. Current skills cover: code review, debugging, worktree management, manual updates, requirement tracking, and agent customization — none provide test execution or integration testing.
+- **Fallback to REQ creation**: When a gap is found, construct a concrete `/add-requirement` invocation with a name and description for the missing skill, presenting it to the user for approval.
+- **Affected files**: `.github/prompts/e2e-test.prompt.md` (new), `copilot-instructions.md` (add `/e2e-test` to the slash-command table and registry paragraph).
+- **Risk**: The definition of "end-to-end" varies by project — the prompt should ask the user to clarify scope if ambiguous rather than assuming a specific test strategy.
+
+
+## Development Plan
+
+1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1775120162-e2e-testing-command.md`.
+   - **Summary**: add a /e2e-test command to perform an end-to-end test for a project developed by
+   - **Key criteria**: - [ ] A `/e2e-test` slash command exists backed by a prompt file at `.github/prompts/e2e-test.prompt
+2. Analyse Technical Notes and identify implementation approach.
+   - **Notes**: - **Prompt file**: Create `.github/prompts/e2e-test.prompt.md` following the established pattern (se
+3. Implement changes in the files/scripts referenced by the requirement spec.
+4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
+5. Validate with `./scripts/show-requirement.sh REQ-1775120162` and verify success criteria are met.
+
+**Last updated**: 2026-04-02T08:57:16Z
 
 ## Dependencies
 
-(List other requirement IDs if applicable, e.g., REQ-XXX, REQ-YYY)
+None
 
 ## Worktree
 

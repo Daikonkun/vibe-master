@@ -23,10 +23,11 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1774774148 | Review follow-up: fix manifest inconsistencies and ghost command | MERGED | MEDIUM | feature/REQ-1774774148-review-follow-up-fix-manifest-inconsistencies-and-ghost-command | 2026-03-29 | 2026-03-29 |
 | REQ-1774775901 | add /work-on command | MERGED | MEDIUM | feature/REQ-1774775901-add-work-on-command | 2026-03-29 | 2026-03-29 |
 | REQ-1774891128 | reuse cleanup | MERGED | MEDIUM | feature/REQ-1774891128-reuse-cleanup | 2026-03-30 | 2026-03-30 |
+| REQ-1775120162 | e2e testing command | IN_PROGRESS | MEDIUM | feature/REQ-1775120162-e2e-testing-command | 2026-04-02 | 2026-04-02 |
 
 ## Status Breakdown
 - **Proposed**: 0
-- **In Progress**: 0
+- **In Progress**: 1
 - **Code Review**: 0
 - **Merged**: 14
 - **Deployed**: 2
@@ -39,6 +40,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-03-30T17:30:30Z
+* Last updated: 2026-04-02T08:57:16Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`
