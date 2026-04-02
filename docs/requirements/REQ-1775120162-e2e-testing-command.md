@@ -1,7 +1,7 @@
 # e2e testing command
 
 **ID**: REQ-1775120162  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-04-02T08:56:02Z  
 
@@ -29,14 +29,10 @@ add a /e2e-test command to perform an end-to-end test for a project developed by
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1775120162-e2e-testing-command.md`.
-   - **Summary**: add a /e2e-test command to perform an end-to-end test for a project developed by
-   - **Key criteria**: - [ ] A `/e2e-test` slash command exists backed by a prompt file at `.github/prompts/e2e-test.prompt
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - **Prompt file**: Create `.github/prompts/e2e-test.prompt.md` following the established pattern (se
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1775120162` and verify success criteria are met.
+1. **Create `.github/prompts/e2e-test.prompt.md`** — Write the prompt file with YAML frontmatter (`name`, `description`, `argument-hint`, `agent`) and a workflow that: parses optional `[scope]`, inventories skills from `.github/skills/*/SKILL.md`, maps capabilities to e2e testing needs, orchestrates test steps when skills suffice, and proposes `/add-requirement` for missing skills.
+2. **Register `/e2e-test` in `copilot-instructions.md`** — Add a row to the slash-command table and append to the prompt-file registry paragraph.
+3. **Run `./scripts/regenerate-docs.sh`** — Keep REQUIREMENTS.md and docs in sync.
+4. **Verify all success criteria** — Read back the prompt file and `copilot-instructions.md` to confirm all 5 acceptance criteria are met.
 
 **Last updated**: 2026-04-02T08:57:16Z
 
