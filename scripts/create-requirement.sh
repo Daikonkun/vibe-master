@@ -42,6 +42,7 @@ jq --arg id "$REQ_ID" \
      "description": $desc,
      "status": "PROPOSED",
      "priority": $priority,
+     "origin": "project",
      "createdAt": $ts,
      "updatedAt": $ts
    }]' \
