@@ -193,6 +193,15 @@
       "updatedAt": "2026-03-30T17:30:30Z",
       "notes": "Enhance init-project.sh to purge historical REQ files and reset generated docs; update README Quick Start with cleanup step",
       "worktreeId": "feature/REQ-1774891128-reuse-cleanup"
+    },
+    {
+      "id": "REQ-1775120162",
+      "name": "e2e testing command",
+      "description": "add a /e2e-test command to perform an end-to-end test for a project developed by vibe master. if existing skills are not enough to perform one, propose to the user that an additional skill for vibe master should be developed as a new REQ.",
+      "status": "PROPOSED",
+      "priority": "MEDIUM",
+      "createdAt": "2026-04-02T08:56:02Z",
+      "updatedAt": "2026-04-02T08:56:02Z"
     }
   ]
 }
