@@ -46,3 +46,6 @@ REQ-1775141920: add /init command (no dependencies)
 
 REQ-1775716475: instruction on deployment (no dependencies)
 
+REQ-1775718117: Review follow-up: update agent docs for deployment-conditional transitions
+  └─ Depends on: REQ-1775716475
+

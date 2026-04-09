@@ -26,9 +26,10 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1775120162 | e2e testing command | MERGED | MEDIUM | feature/REQ-1775120162-e2e-testing-command | 2026-04-02 | 2026-04-02 |
 | REQ-1775141920 | add /init command | MERGED | MEDIUM | feature/REQ-1775141920-add-init-command | 2026-04-02 | 2026-04-02 |
 | REQ-1775716475 | instruction on deployment | CODE_REVIEW | MEDIUM | feature/REQ-1775716475-instruction-on-deployment | 2026-04-09 | 2026-04-09 |
+| REQ-1775718117 | Review follow-up: update agent docs for deployment-conditional transitions | PROPOSED | MEDIUM | — | 2026-04-09 | 2026-04-09 |
 
 ## Status Breakdown
-- **Proposed**: 0
+- **Proposed**: 1
 - **In Progress**: 0
 - **Code Review**: 1
 - **Merged**: 16
@@ -42,6 +43,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-09T06:57:35Z
+* Last updated: 2026-04-09T07:02:27Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

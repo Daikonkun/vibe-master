@@ -2,8 +2,10 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (0)
+## PROPOSED (1)
 
+* REQ-1775718117: Review follow-up: update agent docs for deployment-conditional transitions (priority: MEDIUM)
+  - Worktree: none
 
 ## IN_PROGRESS (0)
 
@@ -71,8 +73,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 
 ## Stats
-- Total Requirements: 22
-- Deployed: 2 (9%)
+- Total Requirements: 23
+- Deployed: 2 (8%)
 - Merged (awaiting deploy): 16
 - In Progress: 0
 - Blocked: 0

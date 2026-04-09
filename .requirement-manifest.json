@@ -257,7 +257,11 @@
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-09T07:01:57Z",
-      "updatedAt": "2026-04-09T07:01:57Z"
+      "updatedAt": "2026-04-09T07:01:57Z",
+      "notes": "Doc-only: add deployment-conditional notes to work-on.prompt.md and orchestrator.agent.md",
+      "dependsOn": [
+        "REQ-1775716475"
+      ]
     }
   ],
   "requiresDeployment": true

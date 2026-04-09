@@ -11,17 +11,19 @@ Source: code-review of REQ-1775716475. Severity: MEDIUM. Evidence: (1) work-on.p
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [ ] `work-on.prompt.md` lifecycle map treats MERGED as terminal when `requiresDeployment=false` (reads flag from manifest before determining next status)
+- [ ] `orchestrator.agent.md` state transition diagram annotates `MERGED → DEPLOYED` as conditional on `requiresDeployment=true`
+- [ ] Both files remain accurate for the `requiresDeployment=true` (default) path
 
 ## Technical Notes
 
-(Add implementation notes here)
+- **`.github/prompts/work-on.prompt.md`**: Step 3 lifecycle map needs a conditional: when `requiresDeployment=false`, MERGED should be listed as a terminal state (same as DEPLOYED/CANCELLED).
+- **`.github/agents/orchestrator.agent.md`**: State transition block (line ~113) needs an annotation on `MERGED → DEPLOYED` noting it only applies when `requiresDeployment=true`.
+- Small, doc-only change — no script modifications needed.
 
 ## Dependencies
 
-(List other requirement IDs if applicable, e.g., REQ-XXX, REQ-YYY)
+REQ-1775716475
 
 ## Worktree
 
