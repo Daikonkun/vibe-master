@@ -281,6 +281,16 @@
       ],
       "worktreeId": "feature/REQ-1775718117-review-follow-up-update-agent-docs-for-deployment-conditional-transitions",
       "deployedAt": "2026-04-09T07:17:38Z"
+    },
+    {
+      "id": "REQ-1775721596",
+      "name": "rollback function",
+      "description": "add a rolling back command to allow users to restore the project code to the point where a REQ is not yet merged",
+      "status": "PROPOSED",
+      "priority": "MEDIUM",
+      "origin": "project",
+      "createdAt": "2026-04-09T07:59:56Z",
+      "updatedAt": "2026-04-09T07:59:56Z"
     }
   ],
   "requiresDeployment": true
