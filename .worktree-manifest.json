@@ -193,6 +193,17 @@
       "createdAt": "2026-04-02T15:00:35Z",
       "status": "MERGED",
       "mergedAt": "2026-04-02T15:09:56Z"
+    },
+    {
+      "id": "feature/REQ-1775716475-instruction-on-deployment",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1775716475-instruction-on-deployment",
+      "branch": "feature/REQ-1775716475-instruction-on-deployment",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1775716475"
+      ],
+      "createdAt": "2026-04-09T06:36:49Z",
+      "status": "ACTIVE"
     }
   ]
 }
