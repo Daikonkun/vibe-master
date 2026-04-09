@@ -5,13 +5,13 @@ Kanban-style view of all requirements and their current state.
 ## PROPOSED (0)
 
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1775716475: instruction on deployment (priority: MEDIUM)
   - Worktree: feature/REQ-1775716475-instruction-on-deployment
-
-## CODE_REVIEW (0)
-
 
 ## MERGED (16)
 
@@ -74,5 +74,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 22
 - Deployed: 2 (9%)
 - Merged (awaiting deploy): 16
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0

@@ -26,7 +26,7 @@ Timeline view of all requirements organized by status and priority.
 * [MERGED] REQ-1774891128: reuse cleanup
 * [MERGED] REQ-1775120162: e2e testing command
 * [MERGED] REQ-1775141920: add /init command
-* [IN_PROGRESS] REQ-1775716475: instruction on deployment
+* [CODE_REVIEW] REQ-1775716475: instruction on deployment
 
 ## Low Priority
 * [MERGED] REQ-1774632175: Review follow-up: polish upgrade guide in README

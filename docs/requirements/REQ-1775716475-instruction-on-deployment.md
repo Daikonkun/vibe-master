@@ -1,7 +1,7 @@
 # instruction on deployment
 
 **ID**: REQ-1775716475  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-04-09T06:34:35Z  
 
