@@ -149,26 +149,34 @@ rm -rf .upgrade-template
 │   │   └── orchestrator.agent.md          # Main orchestrator agent
 │   ├── prompts/
 │   │   ├── add-requirement.prompt.md      # Slash command for requirement creation
-│   │   ├── debug.prompt.md                # Wrapper prompt for debug workflow skill
+│   │   ├── bug-fix.prompt.md              # Wrapper prompt for debug workflow skill
+│   │   ├── code-review.prompt.md          # Wrapper prompt for review skill
+│   │   ├── dependency-graph.prompt.md     # Slash command for dependency visualization
+│   │   ├── e2e-test.prompt.md             # Slash command for end-to-end testing
+│   │   ├── init.prompt.md                 # Slash command for project initialization
 │   │   ├── list-requirements.prompt.md    # Slash command for requirement listings
-│   │   ├── start-work.prompt.md           # Slash command for worktree start
+│   │   ├── regen-docs.prompt.md           # Slash command for manual doc regeneration
+│   │   ├── roadmap.prompt.md              # Slash command for roadmap view
+│   │   ├── rollback.prompt.md             # Slash command for reverting a merged requirement
 │   │   ├── show-requirement.prompt.md     # Slash command for requirement details
+│   │   ├── start-work.prompt.md           # Slash command for worktree start
 │   │   ├── status.prompt.md               # Slash command for status dashboard
+│   │   ├── update-manual.prompt.md        # Wrapper prompt for manual update skill
+│   │   ├── update-requirement.prompt.md   # Slash command for lifecycle status transitions
+│   │   ├── work-on.prompt.md              # Slash command for iterative requirement work
+│   │   ├── worktree-create.prompt.md      # Slash command for manual worktree creation
 │   │   ├── worktree-list.prompt.md        # Slash command for active worktrees
 │   │   ├── worktree-merge.prompt.md       # Slash command for merge and cleanup
-│   │   ├── dependency-graph.prompt.md     # Slash command for dependency visualization
-│   │   ├── roadmap.prompt.md              # Slash command for roadmap view
-│   │   ├── regen-docs.prompt.md           # Slash command for manual doc regeneration
-│   │   ├── update-requirement.prompt.md   # Slash command for lifecycle status transitions
-│   │   ├── update-manual.prompt.md        # Wrapper prompt for manual update skill
-│   │   └── code-review.prompt.md          # Wrapper prompt for review skill
+│   │   ├── worktree-prune.prompt.md       # Slash command for orphan worktree cleanup
+│   │   └── worktree-status.prompt.md      # Slash command for worktree dashboard
 │   ├── instructions/
 │   ├── skills/
-│   │   ├── worktree-manager/SKILL.md      # Git worktree management
-│   │   ├── debug/SKILL.md                  # Structured debugging workflow
-│   │   ├── update-manual/SKILL.md          # User manual generation/refresh
+│   │   ├── agent-customization/SKILL.md    # Agent/prompt/skill file maintenance
 │   │   ├── code-review/SKILL.md            # Code review + REQ thread creation
-│   │   └── requirement-tracker/SKILL.md   # Requirement lifecycle
+│   │   ├── debug/SKILL.md                  # Structured debugging workflow
+│   │   ├── requirement-tracker/SKILL.md    # Requirement lifecycle
+│   │   ├── update-manual/SKILL.md          # User manual generation/refresh
+│   │   └── worktree-manager/SKILL.md       # Git worktree management
 │   
 ├── copilot-instructions.md                 # Global agent instructions
 │
@@ -184,16 +192,19 @@ rm -rf .upgrade-template
 │
 └── scripts/
     ├── create-requirement.sh               # CLI: create new requirement
-  ├── list-requirements.sh                # CLI: list requirements by optional status
-  ├── start-work.sh                        # CLI: create worktree + set IN_PROGRESS
-  ├── show-requirement.sh                  # CLI: display requirement details
-  ├── update-requirement-status.sh         # CLI: validate and update requirement status
-  ├── status.sh                            # CLI: regenerate + show status summary
-  ├── worktree-list.sh                     # CLI: list active worktrees from manifest
-  ├── worktree-merge.sh                    # CLI: merge branch + clean worktree
-  ├── dependency-graph.sh                  # CLI: regenerate + show dependency graph
-  ├── roadmap.sh                           # CLI: regenerate + show roadmap
-    └── regenerate-docs.sh                  # CLI: regenerate all docs
+    ├── dependency-graph.sh                 # CLI: regenerate + show dependency graph
+    ├── generate-plan.sh                    # CLI: generate/update Development Plan in a spec
+    ├── init-project.sh                     # CLI: initialize project from template
+    ├── list-requirements.sh                # CLI: list requirements by optional status
+    ├── regenerate-docs.sh                  # CLI: regenerate all docs
+    ├── roadmap.sh                          # CLI: regenerate + show roadmap
+    ├── rollback-requirement.sh             # CLI: revert a merged requirement
+    ├── show-requirement.sh                 # CLI: display requirement details
+    ├── start-work.sh                       # CLI: create worktree + set IN_PROGRESS
+    ├── status.sh                           # CLI: regenerate + show status summary
+    ├── update-requirement-status.sh        # CLI: validate and update requirement status
+    ├── worktree-list.sh                    # CLI: list active worktrees from manifest
+    └── worktree-merge.sh                   # CLI: merge branch + clean worktree
 ```
 
 ---
@@ -324,18 +335,25 @@ Graph showing which requirements depend on others
 
 ## 🛠 Key Slash Commands
 
-Slash commands only show up in chat when they are backed by a prompt file or by a valid skill definition. This template now ships prompt files for `/add-requirement`, `/list-requirements`, `/update-requirement`, `/start-work`, `/show-requirement`, `/status`, `/worktree-list`, `/worktree-merge`, `/dependency-graph`, `/roadmap`, `/regen-docs`, `/bug-fix`, `/update-manual`, and `/code-review`, and loads workflow skills through valid lowercase-hyphenated skill names.
+Slash commands only show up in chat when they are backed by a prompt file or by a valid skill definition. This template ships prompt files for every command listed below and loads workflow skills through valid lowercase-hyphenated skill names.
 
 | Command | Purpose |
 |---------|---------|
 | `/add-requirement` | Submit new requirement |
 | `/update-requirement <req-id> <new-status> [--force] [--no-refresh]` | Update requirement lifecycle status with transition validation |
-| `/start-work <req-id>` | Begin work (create worktree) |
+| `/start-work <req-id>` | Begin work (create worktree + set IN_PROGRESS) |
+| `/work-on <req-id> [target-status]` | Iteratively implement a requirement until next lifecycle status |
 | `/status` | Show current dashboard |
 | `/show-requirement <req-id>` | View requirement details |
 | `/list-requirements [status]` | List requirements by status |
+| `/init [project-name]` | Initialize a new project from the Vibe Master template |
+| `/rollback <req-id> [base-branch]` | Roll back a merged/deployed requirement by reverting its merge commit |
+| `/e2e-test [scope]` | Run end-to-end test; surfaces skill gaps as new REQs |
 | `/worktree-list` | Show all active worktrees |
 | `/worktree-merge <branch>` | Merge and cleanup |
+| `/worktree-create <req-id> [base-branch]` | Create a worktree without changing requirement status |
+| `/worktree-prune` | Remove orphaned worktrees and clean manifests |
+| `/worktree-status` | Show comprehensive worktree status dashboard |
 | `/dependency-graph` | Visualize dependencies |
 | `/roadmap` | Show timeline |
 | `/regen-docs` | Force doc regeneration |
@@ -350,11 +368,14 @@ Slash commands only show up in chat when they are backed by a prompt file or by 
 The orchestrator can:
 
 1. **Create & manage requirements** — record, track, update lifecycle
-2. **Create & manage git worktrees** — auto-create, detect conflicts, cleanup
+2. **Create & manage git worktrees** — auto-create, detect conflicts, prune, cleanup
 3. **Execute development workflows** — scaffold code, run tests, create PRs
-4. **Generate documentation** — auto-update dashboards, timelines, graphs
-5. **Detect conflicts** — warn if multiple requirements modify same files
-6. **Suggest sequencing** — recommend order for dependent requirements
+4. **Work on requirements iteratively** — implement a req end-to-end via `/work-on`
+5. **Run end-to-end tests** — validate features and surface missing skills via `/e2e-test`
+6. **Roll back changes** — revert merged requirements via `/rollback`
+7. **Generate documentation** — auto-update dashboards, timelines, graphs
+8. **Detect conflicts** — warn if multiple requirements modify same files
+9. **Suggest sequencing** — recommend order for dependent requirements
 
 ---
 
@@ -466,6 +487,7 @@ Edit:
 - Debug skill: `.github/skills/debug/SKILL.md`
 - Manual updater skill: `.github/skills/update-manual/SKILL.md`
 - Code review skill: `.github/skills/code-review/SKILL.md`
+- Agent customization skill: `.github/skills/agent-customization/SKILL.md`
 - Global instructions: `copilot-instructions.md`
 
 ---
