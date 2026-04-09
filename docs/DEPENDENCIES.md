@@ -44,3 +44,5 @@ REQ-1775120162: e2e testing command (no dependencies)
 
 REQ-1775141920: add /init command (no dependencies)
 
+REQ-1775716475: instruction on deployment (no dependencies)
+

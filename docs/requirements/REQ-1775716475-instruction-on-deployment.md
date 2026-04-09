@@ -11,17 +11,24 @@ correctly prompt users when a project does not require deployment, REQ threads a
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [ ] A project-level configuration flag (e.g., `requiresDeployment` in `.requirement-manifest.json`) controls whether deployment is part of the requirement lifecycle
+- [ ] When `requiresDeployment` is `false`, `/worktree-merge` automatically transitions linked requirements to their terminal state (DEPLOYED) so the REQ thread is fully closed at merge time
+- [ ] When `requiresDeployment` is `true`, `/worktree-merge` sets status to MERGED and prints a clear reminder that the requirement is not yet complete and deployment is still required
+- [ ] The `/status` command accurately reflects completion based on the deployment configuration (non-deployment projects treat MERGED as done)
+- [ ] Users receive clear, actionable messaging in both paths explaining what "done" means for their project
 
 ## Technical Notes
 
-(Add implementation notes here)
+- **`scripts/worktree-merge.sh`**: Currently hard-codes status to `MERGED` for all linked requirements. Needs to read the project-level deployment flag and conditionally set status to `DEPLOYED` (no-deploy projects) or `MERGED` with a user-facing reminder (deploy-required projects).
+- **`.requirement-manifest.json`**: Add a top-level `"requiresDeployment"` boolean field (default `true` for backward-compatibility). The `init-project.sh` script and manifest schema should be updated accordingly.
+- **`scripts/status.sh`**: Groups completed items as `MERGED + DEPLOYED`. For non-deployment projects, `MERGED` alone should count as complete; messaging should adjust.
+- **`scripts/update-requirement-status.sh`**: Valid transitions include `MERGED → DEPLOYED`. For non-deployment projects, this transition may be skipped entirely; guard logic may be needed.
+- **Agent mode (orchestrator)**: The state-transition documentation in the mode instructions references `MERGED → DEPLOYED`. Add a note that this step is conditional on deployment config.
+- **Risk**: Changing terminal-state semantics could affect downstream tooling (e.g., `regenerate-docs.sh` progress calculations). Audit all scripts that reference `DEPLOYED`.
 
 ## Dependencies
 
-(List other requirement IDs if applicable, e.g., REQ-XXX, REQ-YYY)
+None
 
 ## Worktree
 

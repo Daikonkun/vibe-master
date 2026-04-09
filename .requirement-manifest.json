@@ -245,7 +245,8 @@
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-09T06:34:35Z",
-      "updatedAt": "2026-04-09T06:34:35Z"
+      "updatedAt": "2026-04-09T06:34:35Z",
+      "notes": "Add requiresDeployment project flag; worktree-merge conditionally auto-completes or reminds about deployment"
     }
   ]
 }
