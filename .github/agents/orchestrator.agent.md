@@ -110,7 +110,8 @@ IN_PROGRESS → CODE_REVIEW
 CODE_REVIEW → MERGED
             → BLOCKED
 
-MERGED → DEPLOYED
+MERGED → DEPLOYED (only when requiresDeployment=true; default)
+         (MERGED is terminal when requiresDeployment=false)
 
 Any → BACKLOG (when deprioritized)
 Any → CANCELLED (when abandoned)

@@ -14,10 +14,11 @@ Workflow:
    - PROPOSED → IN_PROGRESS
    - IN_PROGRESS → CODE_REVIEW
    - CODE_REVIEW → MERGED
-   - MERGED → DEPLOYED
+   - MERGED → DEPLOYED *(only when `requiresDeployment` is `true` or unset in the manifest — this is the default)*
    - BLOCKED → IN_PROGRESS
    - BACKLOG → IN_PROGRESS
    If the current status is DEPLOYED or CANCELLED, report that the requirement is in a terminal state and stop.
+   If the current status is MERGED **and** the requirement's `requiresDeployment` flag is `false` in `.requirement-manifest.json`, treat MERGED as a terminal state (no further transition) and stop.
 4. **Check worktree**: Read `.worktree-manifest.json` and verify the requirement has an active worktree.
    - If the requirement is PROPOSED (or BACKLOG) and has no worktree, **auto-invoke `/start-work <REQ-ID>`** to create the worktree and advance to IN_PROGRESS, then continue from step 5.
    - If the requirement is in any other status and has no worktree, tell the user to run `/start-work <REQ-ID>` first and stop.
@@ -34,7 +35,7 @@ Workflow:
 
 Constraints:
 - If the requirement does not exist in the manifest, report the error and stop.
-- If the requirement is in a terminal status (DEPLOYED, CANCELLED), explain that there is no next status and stop.
+- If the requirement is in a terminal status (DEPLOYED, CANCELLED, or MERGED when `requiresDeployment=false`), explain that there is no next status and stop.
 - If there is no active worktree and the requirement is PROPOSED or BACKLOG, auto-invoke `/start-work` to bootstrap it. For other statuses without a worktree, suggest `/start-work` and stop.
 - Ask the user for confirmation exactly once before advancing status. After the user confirms, advance immediately without re-asking.
 - Surface any script failures exactly.

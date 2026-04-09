@@ -97,7 +97,7 @@ echo "Requirement $REQ_ID created"
 - PROPOSED → IN_PROGRESS, BACKLOG, CANCELLED
 - IN_PROGRESS → CODE_REVIEW, BLOCKED, BACKLOG
 - CODE_REVIEW → MERGED, BLOCKED
-- MERGED → DEPLOYED, CANCELLED
+- MERGED → DEPLOYED (when requiresDeployment=true; default), CANCELLED
 - Any → CANCELLED
 
 **Implementation**:
