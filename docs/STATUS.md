@@ -11,12 +11,10 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (1)
+## MERGED (0)
 
-* REQ-1775721596: rollback function (priority: MEDIUM)
-  - Worktree: feature/REQ-1775721596-rollback-function
 
-## DEPLOYED (20)
+## DEPLOYED (21)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -58,6 +56,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1775716475-instruction-on-deployment
 * REQ-1775718117: Review follow-up: update agent docs for deployment-conditional transitions (priority: MEDIUM)
   - Worktree: feature/REQ-1775718117-review-follow-up-update-agent-docs-for-deployment-conditional-transitions
+* REQ-1775721596: rollback function (priority: MEDIUM)
+  - Worktree: feature/REQ-1775721596-rollback-function
 
 ## BLOCKED (0)
 
@@ -76,7 +76,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 24
-- Deployed: 20 (83%)
-- Merged (awaiting deploy): 1
+- Deployed: 21 (87%)
+- Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0
