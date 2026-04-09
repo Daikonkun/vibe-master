@@ -19,12 +19,13 @@
       "id": "REQ-1774630000",
       "name": "Update README for Vibe Master upgrade migration",
       "description": "Update README so agents and users understand how to upgrade Vibe Master in an existing project that was built with an older Vibe Master version.",
-      "status": "MERGED",
+      "status": "DEPLOYED",
       "priority": "MEDIUM",
       "createdAt": "2026-03-28T00:30:00Z",
-      "updatedAt": "2026-03-28T00:30:00Z",
+      "updatedAt": "2026-04-09T07:07:23Z",
       "worktreeId": "feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration",
-      "origin": "vibe-master"
+      "origin": "vibe-master",
+      "deployedAt": "2026-04-09T07:07:23Z"
     },
     {
       "id": "REQ-1774632175",
