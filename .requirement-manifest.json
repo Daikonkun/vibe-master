@@ -139,12 +139,13 @@
       "id": "REQ-1774770322",
       "name": "Review follow-up: unify slug generation and fix init-project gaps",
       "description": "Source: code-review. Severity: MEDIUM. Evidence: (1) create-requirement.sh slug generation does not lowercase or collapse hyphens, while start-work.sh does — causing mismatched spec filenames vs branch names. (2) init-project.sh never creates docs/requirements/ directory or an initial git commit despite comments suggesting it should. (3) init-project.sh sed substitution is vulnerable to special characters in project name — should use jq --arg instead. (4) REQ-1774630000 manifest entry has updatedAt before createdAt. Required outcome: unify slug logic, complete init-project.sh setup, fix manifest timestamp, and add timestamp validation.",
-      "status": "MERGED",
+      "status": "DEPLOYED",
       "priority": "MEDIUM",
       "createdAt": "2026-03-29T07:45:22Z",
-      "updatedAt": "2026-03-29T08:29:07Z",
+      "updatedAt": "2026-04-09T07:07:23Z",
       "worktreeId": "feature/REQ-1774770322-review-follow-up-unify-slug-generation-and-fix-init-project-gaps",
-      "origin": "vibe-master"
+      "origin": "vibe-master",
+      "deployedAt": "2026-04-09T07:07:23Z"
     },
     {
       "id": "REQ-1774772256",
