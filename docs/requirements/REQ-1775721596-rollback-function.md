@@ -1,7 +1,7 @@
 # rollback function
 
 **ID**: REQ-1775721596  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-04-09T07:59:56Z  
 
@@ -31,14 +31,11 @@ add a rolling back command to allow users to restore the project code to the poi
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1775721596-rollback-function.md`.
-   - **Summary**: add a rolling back command to allow users to restore the project code to the poi
-   - **Key criteria**: - [ ] A new `scripts/rollback-requirement.sh` script accepts a REQ ID and reverts the corresponding 
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - **Approach**: Create `scripts/rollback-requirement.sh` that identifies the merge commit for a give
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1775721596` and verify success criteria are met.
+1. **Create `scripts/rollback-requirement.sh`** — Accept a `REQ-ID` argument. Look up the branch name from `.worktree-manifest.json` (pattern `feature/REQ-{id}-{slug}`). Find the merge commit on the base branch via `git log --merges --grep="Merge $BRANCH"`. Run `git revert -m 1 <merge-sha>` to undo it. Before reverting, check whether newer merge commits exist after the target and abort with a warning if so.
+2. **Revert manifest state** — In the same script, use `jq` to update `.requirement-manifest.json`: set requirement status back to `IN_PROGRESS`, clear `deployedAt`, and update `updatedAt`. Also update `.worktree-manifest.json`: set worktree status from `MERGED` back to `ACTIVE` and clear `mergedAt`.
+3. **Recreate the worktree branch** — After reverting, recreate the feature branch (`git branch feature/REQ-{id}-{slug} HEAD`) and re-add the worktree (`git worktree add <path> <branch>`) so the developer can resume work. Handle the case where the branch was deleted by `scripts/worktree-merge.sh`.
+4. **Regenerate docs & commit** — Call `scripts/regenerate-docs.sh` to sync `REQUIREMENTS.md`, `docs/STATUS.md`, `docs/ROADMAP.md`, and `docs/DEPENDENCIES.md`. Stage and commit the manifest + doc changes.
+5. **Add `/rollback` prompt file** — Create `.github/prompts/rollback.prompt.md` that documents the slash command interface, parsing the `REQ-ID` argument and invoking `scripts/rollback-requirement.sh`.
 
 **Last updated**: 2026-04-09T08:06:36Z
 
@@ -48,11 +45,11 @@ None
 
 ## Worktree
 
-(Will be populated when work starts: feature/REQ-ID-slug)
+feature/REQ-1775721596-rollback-function
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
+* **Linked Worktree**: feature/REQ-1775721596-rollback-function
+* **Branch**: feature/REQ-1775721596-rollback-function
 * **Merged**: No
 * **Deployed**: No
