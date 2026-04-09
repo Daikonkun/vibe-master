@@ -203,7 +203,8 @@
         "REQ-1775716475"
       ],
       "createdAt": "2026-04-09T06:36:49Z",
-      "status": "ACTIVE"
+      "status": "MERGED",
+      "mergedAt": "2026-04-09T07:02:59Z"
     }
   ]
 }
