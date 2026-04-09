@@ -31,12 +31,13 @@
       "id": "REQ-1774632175",
       "name": "Review follow-up: polish upgrade guide in README",
       "description": "Source: code-review of REQ-1774630000. Severity: LOW. Evidence: (1) Step 3 of the upgrade workflow tells users to place template files but gives no concrete command to fetch/clone them — users won't know how to obtain the latest template. (2) Step 1 creates a branch via checkout -b that is never used because Step 2 immediately creates a worktree with a different branch name. Required outcome: add a concrete fetch/clone example in Step 3, and simplify Step 1 to only create the safety tag (drop the unused branch).",
-      "status": "MERGED",
+      "status": "DEPLOYED",
       "priority": "LOW",
       "createdAt": "2026-03-27T17:22:55Z",
-      "updatedAt": "2026-03-27T17:27:01Z",
+      "updatedAt": "2026-04-09T07:07:23Z",
       "worktreeId": "feature/REQ-1774632175-review-follow-up-polish-upgrade-guide-in-readme",
-      "origin": "vibe-master"
+      "origin": "vibe-master",
+      "deployedAt": "2026-04-09T07:07:23Z"
     },
     {
       "id": "REQ-1774636689",
