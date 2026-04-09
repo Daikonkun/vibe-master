@@ -205,13 +205,14 @@
       "id": "REQ-1774775901",
       "name": "add /work-on command",
       "description": "add a command to work on a specific REQ until next status",
-      "status": "MERGED",
+      "status": "DEPLOYED",
       "priority": "MEDIUM",
       "createdAt": "2026-03-29T09:18:21Z",
-      "updatedAt": "2026-03-29T09:31:01Z",
+      "updatedAt": "2026-04-09T07:07:23Z",
       "notes": "Add /work-on prompt file that loads a REQ spec, validates worktree, drives iterative implementation, and auto-advances status on completion.",
       "worktreeId": "feature/REQ-1774775901-add-work-on-command",
-      "origin": "vibe-master"
+      "origin": "vibe-master",
+      "deployedAt": "2026-04-09T07:07:23Z"
     },
     {
       "id": "REQ-1774891128",
