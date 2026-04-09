@@ -216,6 +216,17 @@
       ],
       "createdAt": "2026-04-09T07:08:16Z",
       "status": "ACTIVE"
+    },
+    {
+      "id": "feature/REQ-1775721596-rollback-function",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1775721596-rollback-function",
+      "branch": "feature/REQ-1775721596-rollback-function",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1775721596"
+      ],
+      "createdAt": "2026-04-09T08:06:35Z",
+      "status": "ACTIVE"
     }
   ]
 }
