@@ -75,6 +75,7 @@ else
   "$schema": ".requirement-manifest.schema.json",
   "version": "1.0",
   "projectName": "",
+  "requiresDeployment": true,
   "requirements": []
 }
 JSON

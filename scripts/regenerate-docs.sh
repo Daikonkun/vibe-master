@@ -91,16 +91,28 @@ echo "📊 Generating docs/STATUS.md..."
   done
   
   TOTAL=$(jq '.requirements | length' "$REQ_MANIFEST")
+  REQUIRES_DEPLOYMENT=$(jq -r '.requiresDeployment // true' "$REQ_MANIFEST")
   DEPLOYED=$(jq '[.requirements[] | select(.status == "DEPLOYED")] | length' "$REQ_MANIFEST")
+  MERGED=$(jq '[.requirements[] | select(.status == "MERGED")] | length' "$REQ_MANIFEST")
+  if [ "$REQUIRES_DEPLOYMENT" = "false" ]; then
+    COMPLETED=$((DEPLOYED + MERGED))
+  else
+    COMPLETED=$DEPLOYED
+  fi
   if [ "$TOTAL" -eq 0 ]; then
     PCT=0
   else
-    PCT=$((DEPLOYED * 100 / TOTAL))
+    PCT=$((COMPLETED * 100 / TOTAL))
   fi
   
   echo "## Stats"
   echo "- Total Requirements: $TOTAL"
-  echo "- Deployed: $DEPLOYED ($PCT%)"
+  if [ "$REQUIRES_DEPLOYMENT" = "false" ]; then
+    echo "- Completed (Merged + Deployed): $COMPLETED ($PCT%)"
+  else
+    echo "- Deployed: $DEPLOYED ($PCT%)"
+    echo "- Merged (awaiting deploy): $MERGED"
+  fi
   echo "- In Progress: $(jq '[.requirements[] | select(.status == "IN_PROGRESS")] | length' "$REQ_MANIFEST")"
   echo "- Blocked: $(jq '[.requirements[] | select(.status == "BLOCKED")] | length' "$REQ_MANIFEST")"
 } > "$PROJECT_ROOT/docs/STATUS.md"

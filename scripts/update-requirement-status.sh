@@ -146,6 +146,13 @@ if [ "$FORCE" != "true" ] && ! can_transition "$CURRENT_STATUS" "$NEW_STATUS"; t
   exit 1
 fi
 
+# Warn if manually deploying on a non-deployment project
+REQUIRES_DEPLOYMENT="$(jq -r '.requiresDeployment // true' "$REQ_MANIFEST")"
+if [ "$NEW_STATUS" = "DEPLOYED" ] && [ "$REQUIRES_DEPLOYMENT" = "false" ]; then
+  echo "Note: This project has requiresDeployment=false. Requirements are auto-completed at merge."
+  echo "      Proceeding with manual DEPLOYED transition anyway."
+fi
+
 if [ "$CURRENT_STATUS" = "$NEW_STATUS" ]; then
   echo "No change: $REQ_ID is already $NEW_STATUS"
   exit 0

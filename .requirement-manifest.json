@@ -249,5 +249,6 @@
       "notes": "Add requiresDeployment project flag; worktree-merge conditionally auto-completes or reminds about deployment",
       "worktreeId": "feature/REQ-1775716475-instruction-on-deployment"
     }
-  ]
+  ],
+  "requiresDeployment": true
 }

@@ -25,6 +25,7 @@ if [ ! -f "$PROJECT_ROOT/.requirement-manifest.json" ]; then
   "$schema": ".requirement-manifest.schema.json",
   "version": "1.0",
   "projectName": "Vibe Project",
+  "requiresDeployment": true,
   "requirements": []
 }
 JSON

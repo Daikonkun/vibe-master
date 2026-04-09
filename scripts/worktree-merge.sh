@@ -62,18 +62,38 @@ jq --arg branch "$BRANCH" \
    )' \
    "$WORKTREE_MANIFEST" > "$WORKTREE_MANIFEST.tmp" && mv "$WORKTREE_MANIFEST.tmp" "$WORKTREE_MANIFEST"
 
+# Determine target status based on requiresDeployment flag
+REQUIRES_DEPLOYMENT="$(jq -r '.requiresDeployment // true' "$REQ_MANIFEST")"
+if [ "$REQUIRES_DEPLOYMENT" = "false" ]; then
+  REQ_TARGET_STATUS="DEPLOYED"
+else
+  REQ_TARGET_STATUS="MERGED"
+fi
+
 if [ -n "$REQ_IDS" ]; then
   while IFS= read -r reqId; do
     [ -z "$reqId" ] && continue
-    jq --arg reqId "$reqId" \
-       --arg ts "$TIMESTAMP" \
-       '.requirements |= map(
-         if .id == $reqId
-         then .status = "MERGED" | .updatedAt = $ts
-         else .
-         end
-       )' \
-       "$REQ_MANIFEST" > "$REQ_MANIFEST.tmp" && mv "$REQ_MANIFEST.tmp" "$REQ_MANIFEST"
+    if [ "$REQ_TARGET_STATUS" = "DEPLOYED" ]; then
+      jq --arg reqId "$reqId" \
+         --arg ts "$TIMESTAMP" \
+         '.requirements |= map(
+           if .id == $reqId
+           then .status = "DEPLOYED" | .updatedAt = $ts | .deployedAt = $ts
+           else .
+           end
+         )' \
+         "$REQ_MANIFEST" > "$REQ_MANIFEST.tmp" && mv "$REQ_MANIFEST.tmp" "$REQ_MANIFEST"
+    else
+      jq --arg reqId "$reqId" \
+         --arg ts "$TIMESTAMP" \
+         '.requirements |= map(
+           if .id == $reqId
+           then .status = "MERGED" | .updatedAt = $ts
+           else .
+           end
+         )' \
+         "$REQ_MANIFEST" > "$REQ_MANIFEST.tmp" && mv "$REQ_MANIFEST.tmp" "$REQ_MANIFEST"
+    fi
   done <<< "$REQ_IDS"
 fi
 
@@ -95,5 +115,11 @@ if [ -n "$WORKTREE_PATH" ]; then
   echo "Removed worktree: $WORKTREE_PATH"
 fi
 if [ -n "$REQ_IDS" ]; then
-  echo "Updated requirements to MERGED: $(echo "$REQ_IDS" | tr '\n' ' ' | xargs)"
+  echo "Updated requirements to $REQ_TARGET_STATUS: $(echo "$REQ_IDS" | tr '\n' ' ' | xargs)"
+  if [ "$REQ_TARGET_STATUS" = "DEPLOYED" ]; then
+    echo "✅ Requirements marked DEPLOYED (project does not require deployment)."
+  else
+    echo "⚠️  Requirements merged but not yet deployed. Deploy your changes, then run:"
+    echo "   /update-requirement <REQ-ID> DEPLOYED"
+  fi
 fi

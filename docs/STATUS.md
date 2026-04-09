@@ -73,5 +73,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 22
 - Deployed: 2 (9%)
+- Merged (awaiting deploy): 16
 - In Progress: 1
 - Blocked: 0
