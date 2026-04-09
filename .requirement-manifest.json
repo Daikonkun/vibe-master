@@ -80,13 +80,14 @@
       "id": "REQ-1774685792",
       "name": "upgrade functions referring to obra's superpower agent",
       "description": "read the repo https://github.com/obra/superpowers and suggest what functions can be referred to upgrade vibe master, yet not changing current workflow and standards significantly",
-      "status": "MERGED",
+      "status": "DEPLOYED",
       "priority": "MEDIUM",
       "createdAt": "2026-03-28T08:16:32Z",
-      "updatedAt": "2026-03-28T08:47:37Z",
+      "updatedAt": "2026-04-09T07:07:23Z",
       "notes": "Research superpowers skills (brainstorming, writing-plans, using-git-worktrees, systematic-debugging) for minimal-alignment upgrades to Vibe skills and prompts.",
       "worktreeId": "feature/REQ-1774685792-upgrade-functions-referring-to-obra-s-superpower-agent",
-      "origin": "vibe-master"
+      "origin": "vibe-master",
+      "deployedAt": "2026-04-09T07:07:23Z"
     },
     {
       "id": "REQ-1774770291",
