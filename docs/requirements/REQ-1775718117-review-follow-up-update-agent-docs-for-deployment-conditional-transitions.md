@@ -1,7 +1,7 @@
 # Review follow-up: update agent docs for deployment-conditional transitions
 
 **ID**: REQ-1775718117  
-**Status**: CODE_REVIEW  
+**Status**: MERGED  
 **Priority**: MEDIUM  
 **Created**: 2026-04-09T07:01:57Z  
 

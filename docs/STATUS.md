@@ -8,13 +8,13 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
+
+
+## MERGED (1)
 
 * REQ-1775718117: Review follow-up: update agent docs for deployment-conditional transitions (priority: MEDIUM)
   - Worktree: feature/REQ-1775718117-review-follow-up-update-agent-docs-for-deployment-conditional-transitions
-
-## MERGED (0)
-
 
 ## DEPLOYED (19)
 
@@ -75,6 +75,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 23
 - Deployed: 19 (82%)
-- Merged (awaiting deploy): 0
+- Merged (awaiting deploy): 1
 - In Progress: 0
 - Blocked: 0
