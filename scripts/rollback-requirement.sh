@@ -3,6 +3,13 @@
 
 set -euo pipefail
 
+FORCE="false"
+for arg in "$@"; do
+  case "$arg" in
+    --force) FORCE="true"; shift ;;
+  esac
+done
+
 REQ_ID="${1:-}"
 BASE_BRANCH="${2:-main}"
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
@@ -11,7 +18,7 @@ WORKTREE_MANIFEST="$PROJECT_ROOT/.worktree-manifest.json"
 TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
 if [ -z "$REQ_ID" ]; then
-  echo "Usage: $0 REQ-<timestamp> [base-branch]" >&2
+  echo "Usage: $0 REQ-<timestamp> [base-branch] [--force]" >&2
   exit 1
 fi
 
@@ -78,7 +85,7 @@ fi
 
 # --- Find the merge commit for this branch ---
 
-MERGE_COMMIT="$(git -C "$PROJECT_ROOT" log --merges --oneline --grep="Merge $BRANCH" --format="%H" | head -1)"
+MERGE_COMMIT="$(git -C "$PROJECT_ROOT" log --merges --grep="Merge $BRANCH" --format="%H" | head -1)"
 
 if [ -z "$MERGE_COMMIT" ]; then
   echo "Error: Could not find a merge commit for branch $BRANCH on $BASE_BRANCH" >&2
@@ -87,7 +94,7 @@ fi
 
 # --- Safety check: detect newer merge commits after the target ---
 
-NEWER_MERGES="$(git -C "$PROJECT_ROOT" log --merges --oneline "$MERGE_COMMIT"..HEAD --format="%H %s")"
+NEWER_MERGES="$(git -C "$PROJECT_ROOT" log --merges "$MERGE_COMMIT"..HEAD --format="%H %s")"
 
 if [ -n "$NEWER_MERGES" ]; then
   MERGE_COUNT="$(echo "$NEWER_MERGES" | wc -l | tr -d ' ')"
@@ -97,9 +104,11 @@ if [ -n "$NEWER_MERGES" ]; then
   echo "Newer merges:" >&2
   echo "$NEWER_MERGES" | head -5 >&2
   echo "" >&2
-  echo "Aborting rollback. To force, manually run:" >&2
-  echo "   git revert -m 1 $MERGE_COMMIT" >&2
-  exit 1
+  if [ "$FORCE" != "true" ]; then
+    echo "Aborting rollback. Use --force to override." >&2
+    exit 1
+  fi
+  echo "Proceeding anyway (--force)." >&2
 fi
 
 # --- Revert the merge commit ---
