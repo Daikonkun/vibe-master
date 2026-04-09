@@ -236,6 +236,16 @@
       "notes": "Add /init prompt + update init-project.sh to selectively clear only Vibe-Master-origin REQs using an origin tag, preserving project REQs and refusing to run on the master source repo.",
       "worktreeId": "feature/REQ-1775141920-add-init-command",
       "origin": "vibe-master"
+    },
+    {
+      "id": "REQ-1775716475",
+      "name": "instruction on deployment",
+      "description": "correctly prompt users when a project does not require deployment, REQ threads are completed at merged. and when a project needs deployment, /worktree-merge will notify the user that they still need to complete until deployed.",
+      "status": "PROPOSED",
+      "priority": "MEDIUM",
+      "origin": "project",
+      "createdAt": "2026-04-09T06:34:35Z",
+      "updatedAt": "2026-04-09T06:34:35Z"
     }
   ]
 }
