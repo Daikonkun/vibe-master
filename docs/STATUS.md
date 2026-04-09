@@ -10,12 +10,10 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
 
-* REQ-1775716475: instruction on deployment (priority: MEDIUM)
-  - Worktree: feature/REQ-1775716475-instruction-on-deployment
 
-## MERGED (16)
+## MERGED (17)
 
 * REQ-1774630000: Update README for Vibe Master upgrade migration (priority: MEDIUM)
   - Worktree: feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration
@@ -49,6 +47,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1775120162-e2e-testing-command
 * REQ-1775141920: add /init command (priority: MEDIUM)
   - Worktree: feature/REQ-1775141920-add-init-command
+* REQ-1775716475: instruction on deployment (priority: MEDIUM)
+  - Worktree: feature/REQ-1775716475-instruction-on-deployment
 
 ## DEPLOYED (2)
 
@@ -75,6 +75,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 23
 - Deployed: 2 (8%)
-- Merged (awaiting deploy): 16
+- Merged (awaiting deploy): 17
 - In Progress: 0
 - Blocked: 0

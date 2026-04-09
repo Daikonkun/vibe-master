@@ -241,11 +241,11 @@
       "id": "REQ-1775716475",
       "name": "instruction on deployment",
       "description": "correctly prompt users when a project does not require deployment, REQ threads are completed at merged. and when a project needs deployment, /worktree-merge will notify the user that they still need to complete until deployed.",
-      "status": "CODE_REVIEW",
+      "status": "MERGED",
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-09T06:34:35Z",
-      "updatedAt": "2026-04-09T06:57:35Z",
+      "updatedAt": "2026-04-09T07:02:45Z",
       "notes": "Add requiresDeployment project flag; worktree-merge conditionally auto-completes or reminds about deployment",
       "worktreeId": "feature/REQ-1775716475-instruction-on-deployment"
     },
