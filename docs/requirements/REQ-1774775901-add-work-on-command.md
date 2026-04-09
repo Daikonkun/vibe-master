@@ -1,7 +1,7 @@
 # add /work-on command
 
 **ID**: REQ-1774775901  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-03-29T09:18:21Z  
 

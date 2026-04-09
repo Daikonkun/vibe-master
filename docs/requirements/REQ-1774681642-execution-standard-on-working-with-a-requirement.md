@@ -1,7 +1,7 @@
 # execution standard on working with a requirement
 
 **ID**: REQ-1774681642  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-03-28T07:07:22Z  
 

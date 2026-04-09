@@ -1,7 +1,7 @@
 # Review follow-up: separate manifest schema from data
 
 **ID**: REQ-1774770298  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: HIGH  
 **Created**: 2026-03-29T07:44:58Z  
 

@@ -1,7 +1,7 @@
 # Add-requirement: populate spec sections after creation
 
 **ID**: REQ-1774639240  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: HIGH  
 **Created**: 2026-03-27T19:20:40Z  
 

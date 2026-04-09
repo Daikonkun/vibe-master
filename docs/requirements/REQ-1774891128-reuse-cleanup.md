@@ -1,7 +1,7 @@
 # reuse cleanup
 
 **ID**: REQ-1774891128  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-03-30T17:18:48Z  
 

@@ -13,12 +13,19 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (16)
+## MERGED (0)
 
+
+## DEPLOYED (19)
+
+* REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
+  - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
 * REQ-1774630000: Update README for Vibe Master upgrade migration (priority: MEDIUM)
   - Worktree: feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration
 * REQ-1774632175: Review follow-up: polish upgrade guide in README (priority: LOW)
   - Worktree: feature/REQ-1774632175-review-follow-up-polish-upgrade-guide-in-readme
+* REQ-1774636689: Auto-create REQ from bug-fix when new feature needed (priority: MEDIUM)
+  - Worktree: feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed
 * REQ-1774639240: Add-requirement: populate spec sections after creation (priority: HIGH)
   - Worktree: feature/REQ-1774639240-add-requirement-populate-spec-sections-after-creation
 * REQ-1774681642: execution standard on working with a requirement (priority: MEDIUM)
@@ -47,13 +54,6 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1775120162-e2e-testing-command
 * REQ-1775141920: add /init command (priority: MEDIUM)
   - Worktree: feature/REQ-1775141920-add-init-command
-
-## DEPLOYED (3)
-
-* REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
-  - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
-* REQ-1774636689: Auto-create REQ from bug-fix when new feature needed (priority: MEDIUM)
-  - Worktree: feature/REQ-1774636689-auto-create-req-from-bug-fix-when-new-feature-needed
 * REQ-1775716475: instruction on deployment (priority: MEDIUM)
   - Worktree: feature/REQ-1775716475-instruction-on-deployment
 
@@ -74,7 +74,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 23
-- Deployed: 3 (13%)
-- Merged (awaiting deploy): 16
+- Deployed: 19 (82%)
+- Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0

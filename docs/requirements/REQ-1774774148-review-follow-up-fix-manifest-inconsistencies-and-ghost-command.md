@@ -1,7 +1,7 @@
 # Review follow-up: fix manifest inconsistencies and ghost command
 
 **ID**: REQ-1774774148  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-03-29T08:49:08Z  
 

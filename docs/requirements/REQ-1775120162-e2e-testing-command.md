@@ -1,7 +1,7 @@
 # e2e testing command
 
 **ID**: REQ-1775120162  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-04-02T08:56:02Z  
 

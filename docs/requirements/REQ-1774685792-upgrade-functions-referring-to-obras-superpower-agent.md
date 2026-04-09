@@ -1,7 +1,7 @@
 # upgrade functions referring to obra's superpower agent
 
 **ID**: REQ-1774685792  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-03-28T08:16:32Z  
 

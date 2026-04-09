@@ -1,7 +1,7 @@
 # Review follow-up: fix SKILL.md jq injection examples and stale status values
 
 **ID**: REQ-1774770314  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-03-29T07:45:14Z  
 
