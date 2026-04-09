@@ -1,7 +1,7 @@
 # rollback function
 
 **ID**: REQ-1775721596  
-**Status**: CODE_REVIEW  
+**Status**: MERGED  
 **Priority**: MEDIUM  
 **Created**: 2026-04-09T07:59:56Z  
 

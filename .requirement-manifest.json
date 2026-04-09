@@ -286,11 +286,11 @@
       "id": "REQ-1775721596",
       "name": "rollback function",
       "description": "add a rolling back command to allow users to restore the project code to the point where a REQ is not yet merged",
-      "status": "CODE_REVIEW",
+      "status": "MERGED",
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-09T07:59:56Z",
-      "updatedAt": "2026-04-09T08:11:29Z",
+      "updatedAt": "2026-04-09T08:15:46Z",
       "notes": "New script rollback-requirement.sh to git-revert a REQ merge commit and restore manifest states to pre-merge",
       "worktreeId": "feature/REQ-1775721596-rollback-function"
     }
