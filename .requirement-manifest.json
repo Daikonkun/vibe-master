@@ -270,11 +270,11 @@
       "id": "REQ-1775718117",
       "name": "Review follow-up: update agent docs for deployment-conditional transitions",
       "description": "Source: code-review of REQ-1775716475. Severity: MEDIUM. Evidence: (1) work-on.prompt.md lifecycle map hard-codes MERGED→DEPLOYED without noting that MERGED is terminal when requiresDeployment=false — /work-on would erroneously try to advance past a terminal state. (2) orchestrator.agent.md state transitions show MERGED→DEPLOYED unconditionally. Required outcome: add deployment-conditional notes to both files so agents know MERGED can be terminal when requiresDeployment=false.",
-      "status": "IN_PROGRESS",
+      "status": "CODE_REVIEW",
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-09T07:01:57Z",
-      "updatedAt": "2026-04-09T07:08:16Z",
+      "updatedAt": "2026-04-09T07:12:30Z",
       "notes": "Doc-only: add deployment-conditional notes to work-on.prompt.md and orchestrator.agent.md",
       "dependsOn": [
         "REQ-1775716475"
