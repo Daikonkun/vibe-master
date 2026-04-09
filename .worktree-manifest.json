@@ -205,6 +205,17 @@
       "createdAt": "2026-04-09T06:36:49Z",
       "status": "MERGED",
       "mergedAt": "2026-04-09T07:02:59Z"
+    },
+    {
+      "id": "feature/REQ-1775718117-review-follow-up-update-agent-docs-for-deployment-conditional-transitions",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1775718117-review-follow-up-update-agent-docs-for-deployment-conditional-transitions",
+      "branch": "feature/REQ-1775718117-review-follow-up-update-agent-docs-for-deployment-conditional-transitions",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1775718117"
+      ],
+      "createdAt": "2026-04-09T07:08:16Z",
+      "status": "ACTIVE"
     }
   ]
 }

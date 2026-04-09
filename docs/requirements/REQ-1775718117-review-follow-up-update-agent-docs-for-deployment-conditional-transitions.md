@@ -1,7 +1,7 @@
 # Review follow-up: update agent docs for deployment-conditional transitions
 
 **ID**: REQ-1775718117  
-**Status**: PROPOSED  
+**Status**: IN_PROGRESS  
 **Priority**: MEDIUM  
 **Created**: 2026-04-09T07:01:57Z  
 
@@ -20,6 +20,20 @@ Source: code-review of REQ-1775716475. Severity: MEDIUM. Evidence: (1) work-on.p
 - **`.github/prompts/work-on.prompt.md`**: Step 3 lifecycle map needs a conditional: when `requiresDeployment=false`, MERGED should be listed as a terminal state (same as DEPLOYED/CANCELLED).
 - **`.github/agents/orchestrator.agent.md`**: State transition block (line ~113) needs an annotation on `MERGED → DEPLOYED` noting it only applies when `requiresDeployment=true`.
 - Small, doc-only change — no script modifications needed.
+
+
+## Development Plan
+
+1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1775718117-review-follow-up-update-agent-docs-for-deployment-conditional-transitions.md`.
+   - **Summary**: Source: code-review of REQ-1775716475. Severity: MEDIUM. Evidence: (1) work-on.p
+   - **Key criteria**: - [ ] `work-on.prompt.md` lifecycle map treats MERGED as terminal when `requiresDeployment=false` (r
+2. Analyse Technical Notes and identify implementation approach.
+   - **Notes**: - **`.github/prompts/work-on.prompt.md`**: Step 3 lifecycle map needs a conditional: when `requiresD
+3. Implement changes in the files/scripts referenced by the requirement spec.
+4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
+5. Validate with `./scripts/show-requirement.sh REQ-1775718117` and verify success criteria are met.
+
+**Last updated**: 2026-04-09T07:08:17Z
 
 ## Dependencies
 
