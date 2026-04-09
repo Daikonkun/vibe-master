@@ -11,11 +11,11 @@ correctly prompt users when a project does not require deployment, REQ threads a
 
 ## Success Criteria
 
-- [ ] A project-level configuration flag (e.g., `requiresDeployment` in `.requirement-manifest.json`) controls whether deployment is part of the requirement lifecycle
-- [ ] When `requiresDeployment` is `false`, `/worktree-merge` automatically transitions linked requirements to their terminal state (DEPLOYED) so the REQ thread is fully closed at merge time
-- [ ] When `requiresDeployment` is `true`, `/worktree-merge` sets status to MERGED and prints a clear reminder that the requirement is not yet complete and deployment is still required
-- [ ] The `/status` command accurately reflects completion based on the deployment configuration (non-deployment projects treat MERGED as done)
-- [ ] Users receive clear, actionable messaging in both paths explaining what "done" means for their project
+- [x] A project-level configuration flag (e.g., `requiresDeployment` in `.requirement-manifest.json`) controls whether deployment is part of the requirement lifecycle
+- [x] When `requiresDeployment` is `false`, `/worktree-merge` automatically transitions linked requirements to their terminal state (DEPLOYED) so the REQ thread is fully closed at merge time
+- [x] When `requiresDeployment` is `true`, `/worktree-merge` sets status to MERGED and prints a clear reminder that the requirement is not yet complete and deployment is still required
+- [x] The `/status` command accurately reflects completion based on the deployment configuration (non-deployment projects treat MERGED as done)
+- [x] Users receive clear, actionable messaging in both paths explaining what "done" means for their project
 
 ## Technical Notes
 
