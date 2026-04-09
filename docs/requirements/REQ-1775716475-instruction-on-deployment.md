@@ -29,16 +29,29 @@ correctly prompt users when a project does not require deployment, REQ threads a
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1775716475-instruction-on-deployment.md`.
-   - **Summary**: correctly prompt users when a project does not require deployment, REQ threads a
-   - **Key criteria**: - [ ] A project-level configuration flag (e.g., `requiresDeployment` in `.requirement-manifest.json`
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - **`scripts/worktree-merge.sh`**: Currently hard-codes status to `MERGED` for all linked requiremen
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1775716475` and verify success criteria are met.
+1. **Add `requiresDeployment` flag to manifest and init script**
+   - Add `"requiresDeployment": true` top-level field to `.requirement-manifest.json` (default `true` for backward-compat).
+   - Update `scripts/init-project.sh` to include the flag in newly created manifests.
 
-**Last updated**: 2026-04-09T06:36:49Z
+2. **Update `scripts/worktree-merge.sh` to be deployment-aware**
+   - After merge, read `requiresDeployment` from `.requirement-manifest.json`.
+   - If `false`: set linked requirement status to `DEPLOYED` (terminal) and print "✅ Requirement complete (no deployment required)."
+   - If `true` (default): keep status as `MERGED` and print "⚠️ Requirement merged but not yet deployed. Run deployment, then update status to DEPLOYED."
+
+3. **Update `scripts/status.sh` completion logic**
+   - Read `requiresDeployment` flag. When `false`, treat `MERGED` as a completed/terminal state in counts and messaging (alongside `DEPLOYED`).
+   - When `true`, keep existing behavior (only `DEPLOYED` is terminal).
+
+4. **Audit `scripts/regenerate-docs.sh` and `scripts/update-requirement-status.sh`**
+   - In `regenerate-docs.sh`: adjust progress percentage calculation to respect `requiresDeployment`.
+   - In `update-requirement-status.sh`: when `requiresDeployment` is `false`, skip or warn on `MERGED → DEPLOYED` transitions since they happen automatically.
+
+5. **Validate end-to-end**
+   - Run `scripts/regenerate-docs.sh` and `scripts/status.sh` to confirm correct output.
+   - Verify `scripts/show-requirement.sh REQ-1775716475` reflects the updated spec.
+   - Confirm messaging in both deployment and non-deployment scenarios.
+
+**Last updated**: 2026-04-09T06:38:00Z
 
 ## Dependencies
 
@@ -46,11 +59,11 @@ None
 
 ## Worktree
 
-(Will be populated when work starts: feature/REQ-ID-slug)
+feature/REQ-1775716475-instruction-on-deployment
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
+* **Linked Worktree**: feature/REQ-1775716475-instruction-on-deployment
+* **Branch**: feature/REQ-1775716475-instruction-on-deployment
 * **Merged**: No
 * **Deployed**: No
