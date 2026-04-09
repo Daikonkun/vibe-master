@@ -218,13 +218,14 @@
       "id": "REQ-1774891128",
       "name": "reuse cleanup",
       "description": "for users who clone the repo to inititate their project, they may not wish to see the REQ and Roadmap history of Vibe Master. this will be confusing. consider either cleanup the github repo or add an instruction for agents/users on not loading the historical REQs",
-      "status": "MERGED",
+      "status": "DEPLOYED",
       "priority": "MEDIUM",
       "createdAt": "2026-03-30T17:18:48Z",
-      "updatedAt": "2026-03-30T17:30:30Z",
+      "updatedAt": "2026-04-09T07:07:23Z",
       "notes": "Enhance init-project.sh to purge historical REQ files and reset generated docs; update README Quick Start with cleanup step",
       "worktreeId": "feature/REQ-1774891128-reuse-cleanup",
-      "origin": "vibe-master"
+      "origin": "vibe-master",
+      "deployedAt": "2026-04-09T07:07:23Z"
     },
     {
       "id": "REQ-1775120162",
