@@ -17,6 +17,11 @@
       "type": "string",
       "description": "Name of the project"
     },
+    "requiresDeployment": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this project requires a deployment step after merge. When false, requirements are auto-completed (DEPLOYED) at merge time."
+    },
     "requirements": {
       "type": "array",
       "description": "Array of all requirements",

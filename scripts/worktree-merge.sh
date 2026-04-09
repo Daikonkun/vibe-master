@@ -73,6 +73,11 @@ fi
 if [ -n "$REQ_IDS" ]; then
   while IFS= read -r reqId; do
     [ -z "$reqId" ] && continue
+    # Warn if requirement is not in an expected pre-merge state
+    CURRENT_REQ_STATUS="$(jq -r --arg reqId "$reqId" '.requirements[] | select(.id == $reqId) | .status' "$REQ_MANIFEST")"
+    if [ "$CURRENT_REQ_STATUS" != "CODE_REVIEW" ] && [ "$CURRENT_REQ_STATUS" != "MERGED" ]; then
+      echo "⚠️  Warning: $reqId is in $CURRENT_REQ_STATUS (expected CODE_REVIEW). Proceeding anyway."
+    fi
     if [ "$REQ_TARGET_STATUS" = "DEPLOYED" ]; then
       jq --arg reqId "$reqId" \
          --arg ts "$TIMESTAMP" \
