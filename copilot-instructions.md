@@ -40,6 +40,7 @@ description: "Global instructions for all agents in vibe coding projects. Ensure
 - `docs/requirements/{id}-{name}.md` — Detailed requirement specs
 - `.worktree-manifest.json` — Map of worktrees to requirements
 - `docs/STATUS.md` — Auto-generated status dashboard
+- `docs/e2e-screenshots/{scope}/` — E2e screenshot baselines and current runs (baselines are committed; `current/` is gitignored)
 
 ## Documentation Auto-Generation
 After any state change, regenerate:

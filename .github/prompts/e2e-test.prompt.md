@@ -1,6 +1,6 @@
 ---
 name: "e2e-test"
-description: "Run an end-to-end test for a vibe-master project, including screenshot-based cross-border visual validation. Inventories skills, orchestrates available test steps, and proposes new skill REQs when gaps are found."
+description: "Run end-to-end testing with screenshot-based cross-border visual validation; propose new skill REQs when gaps are found."
 argument-hint: "[scope]"
 agent: "Vibe Agent Orchestrator"
 ---
@@ -29,7 +29,7 @@ Workflow:
       - **Identify UI borders**: Scan the codebase for UI transition points — route definitions (e.g., React Router `<Route>`, Vue Router routes), modal/dialog triggers, form submission handlers, navigation links, and component boundary crossings in SPAs. Enumerate the discovered borders.
       - **Capture screenshots**: At each identified border, use the project's test runner screenshot API (Playwright `page.screenshot()`, Cypress `cy.screenshot()`, etc.) to capture a screenshot immediately after the transition occurs.
       - **Store screenshots**: Save screenshots under `docs/e2e-screenshots/{scope}/current/` using the naming convention `{border-name}-{timestamp}.png` (e.g., `login-to-dashboard-20260413T064200Z.png`). Create the directory if it does not exist.
-      - **Baseline comparison**: Check if a baseline exists at `docs/e2e-screenshots/{scope}/baselines/`. If no baseline exists, copy the current screenshot as the baseline and note it as a **new baseline** in the report. If a baseline exists, compare the current screenshot against it. Flag any visual drift (pixel-level differences) and include the diff in the pass/fail summary. If no dedicated diff tool is available, propose an appropriate one based on the project stack (e.g., `pixelmatch` for Node.js, `Pillow` for Python).
+      - **Baseline comparison**: Check if a baseline exists at `docs/e2e-screenshots/{scope}/baselines/`. If no baseline exists, copy the current screenshot as the baseline and note it as a **new baseline** in the report. If a baseline exists, compare the current screenshot against it. Flag any visual drift (pixel-level differences) and include the diff in the pass/fail summary. If no dedicated diff tool is available, propose an appropriate one based on the project stack (e.g., `pixelmatch` for Node.js, `Pillow` for Python), and mark the comparison result as **inconclusive — manual review required** rather than pass or fail.
       - **Report results**: Include a screenshot comparison section in the pass/fail summary listing each border, whether a baseline existed, whether a visual drift was detected, and the file paths of current/baseline/diff images.
    d. Run `/code-review [scope]` to perform a code review.
    e. If scope is a requirement ID, read its spec and verify each Success Criterion is satisfied.

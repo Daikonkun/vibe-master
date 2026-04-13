@@ -29,6 +29,9 @@ build/
 # VS Code extensions
 extensions/
 
+# E2e screenshot current runs (baselines are committed)
+docs/e2e-screenshots/*/current/
+
 # Logs
 *.log
 logs/
