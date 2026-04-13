@@ -2,8 +2,10 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (0)
+## PROPOSED (1)
 
+* REQ-1776062513: enhance e2e test skill (priority: MEDIUM)
+  - Worktree: none
 
 ## IN_PROGRESS (0)
 
@@ -75,8 +77,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 
 ## Stats
-- Total Requirements: 24
-- Deployed: 21 (87%)
+- Total Requirements: 25
+- Deployed: 21 (84%)
 - Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0
