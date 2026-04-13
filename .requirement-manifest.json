@@ -294,6 +294,16 @@
       "notes": "New script rollback-requirement.sh to git-revert a REQ merge commit and restore manifest states to pre-merge",
       "worktreeId": "feature/REQ-1775721596-rollback-function",
       "deployedAt": "2026-04-09T08:17:09Z"
+    },
+    {
+      "id": "REQ-1776062513",
+      "name": "enhance e2e test skill",
+      "description": "introduce screenshot-based cross-border test capability for /e2e-test skill",
+      "status": "PROPOSED",
+      "priority": "MEDIUM",
+      "origin": "project",
+      "createdAt": "2026-04-13T06:41:53Z",
+      "updatedAt": "2026-04-13T06:41:53Z"
     }
   ],
   "requiresDeployment": true
