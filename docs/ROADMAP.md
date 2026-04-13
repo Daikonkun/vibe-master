@@ -29,11 +29,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1775716475: instruction on deployment
 * [DEPLOYED] REQ-1775718117: Review follow-up: update agent docs for deployment-conditional transitions
 * [DEPLOYED] REQ-1775721596: rollback function
-<<<<<<< HEAD
-* [CODE_REVIEW] REQ-1776062513: enhance e2e test skill
-=======
-* [CODE_REVIEW] REQ-1776062513: enhance e2e test skill
->>>>>>> feature/REQ-1776062513-enhance-e2e-test-skill
+* [MERGED] REQ-1776062513: enhance e2e test skill
 
 ## Low Priority
 * [DEPLOYED] REQ-1774632175: Review follow-up: polish upgrade guide in README

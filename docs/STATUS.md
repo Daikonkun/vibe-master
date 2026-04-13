@@ -5,18 +5,16 @@ Kanban-style view of all requirements and their current state.
 ## PROPOSED (0)
 
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (0)
+
+
+## MERGED (1)
 
 * REQ-1776062513: enhance e2e test skill (priority: MEDIUM)
   - Worktree: feature/REQ-1776062513-enhance-e2e-test-skill
-
-## CODE_REVIEW (1)
-
-* REQ-1776062513: enhance e2e test skill (priority: MEDIUM)
-  - Worktree: feature/REQ-1776062513-enhance-e2e-test-skill
-
-## MERGED (0)
-
 
 ## DEPLOYED (21)
 
@@ -81,6 +79,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 25
 - Deployed: 21 (84%)
-- Merged (awaiting deploy): 0
-- In Progress: 1
+- Merged (awaiting deploy): 1
+- In Progress: 0
 - Blocked: 0
