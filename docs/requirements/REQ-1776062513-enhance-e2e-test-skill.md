@@ -1,7 +1,7 @@
 # enhance e2e test skill
 
 **ID**: REQ-1776062513  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-04-13T06:41:53Z  
 

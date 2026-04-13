@@ -2,16 +2,16 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (1)
+## PROPOSED (0)
 
-* REQ-1776062513: enhance e2e test skill (priority: MEDIUM)
-  - Worktree: none
 
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (0)
+## CODE_REVIEW (1)
 
+* REQ-1776062513: enhance e2e test skill (priority: MEDIUM)
+  - Worktree: feature/REQ-1776062513-enhance-e2e-test-skill
 
 ## MERGED (0)
 
