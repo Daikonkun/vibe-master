@@ -299,19 +299,11 @@
       "id": "REQ-1776062513",
       "name": "enhance e2e test skill",
       "description": "introduce screenshot-based cross-border test capability for /e2e-test skill",
-<<<<<<< HEAD
       "status": "CODE_REVIEW",
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-13T06:41:53Z",
       "updatedAt": "2026-04-13T06:47:54Z",
-=======
-      "status": "CODE_REVIEW",
-      "priority": "MEDIUM",
-      "origin": "project",
-      "createdAt": "2026-04-13T06:41:53Z",
-      "updatedAt": "2026-04-13T06:47:54Z",
->>>>>>> feature/REQ-1776062513-enhance-e2e-test-skill
       "notes": "Extend e2e-test.prompt.md with screenshot capture at UI borders, baseline diffing, and conditional skip for non-UI projects. Depends on REQ-1775120162.",
       "worktreeId": "feature/REQ-1776062513-enhance-e2e-test-skill"
     }
