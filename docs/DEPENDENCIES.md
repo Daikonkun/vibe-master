@@ -51,3 +51,5 @@ REQ-1775718117: Review follow-up: update agent docs for deployment-conditional t
 
 REQ-1775721596: rollback function (no dependencies)
 
+REQ-1776062513: enhance e2e test skill (no dependencies)
+

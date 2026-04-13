@@ -29,6 +29,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1775716475: instruction on deployment
 * [DEPLOYED] REQ-1775718117: Review follow-up: update agent docs for deployment-conditional transitions
 * [DEPLOYED] REQ-1775721596: rollback function
+* [IN_PROGRESS] REQ-1776062513: enhance e2e test skill
 
 ## Low Priority
 * [DEPLOYED] REQ-1774632175: Review follow-up: polish upgrade guide in README
