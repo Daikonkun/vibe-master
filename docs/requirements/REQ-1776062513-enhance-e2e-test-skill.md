@@ -28,14 +28,11 @@ introduce screenshot-based cross-border test capability for /e2e-test skill
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776062513-enhance-e2e-test-skill.md`.
-   - **Summary**: introduce screenshot-based cross-border test capability for /e2e-test skill
-   - **Key criteria**: - [ ] The `/e2e-test` prompt (`.github/prompts/e2e-test.prompt.md`) includes a workflow step that ca
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - **Approach**: Extend `.github/prompts/e2e-test.prompt.md` workflow step 5 (the full e2e cycle) to 
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776062513` and verify success criteria are met.
+1. **Extend `.github/prompts/e2e-test.prompt.md` — add screenshot & cross-border workflow steps** — Insert a new step 3b "Detect UI framework" (check for Playwright/Cypress/Selenium config or UI framework packages; if none found, mark screenshot phase as skipped). Insert a new step 5b "Screenshot capture & cross-border validation" between steps 5a and 5c: after build/lint and test execution, capture screenshots at identified UI borders, store under `docs/e2e-screenshots/{scope}/`, diff against baselines, and report mismatches. Update step 4 gap analysis to include "screenshot-capable test runner" as a required capability. Update step 6 to propose `/add-requirement` for a screenshot tool when missing.
+2. **Add baseline management & storage conventions to the prompt** — Define the `docs/e2e-screenshots/{scope}/` directory structure (baselines/ and current/ subdirs), naming convention (`{border-name}-{timestamp}.png`), and the diff reporting format in the pass/fail summary. Add a constraint about environment-dependent baselines and recommending consistent CI. Add a `.gitignore` note for large screenshot sets.
+3. **Update `copilot-instructions.md`** — Update the `/e2e-test` description in the slash-command table to mention "screenshot-based cross-border testing" capability.
+4. **Run `./scripts/regenerate-docs.sh`** — Keep REQUIREMENTS.md, STATUS.md, and other docs in sync.
+5. **Validate all 5 success criteria** — Re-read `.github/prompts/e2e-test.prompt.md` and verify each criterion is satisfied: screenshot step exists, cross-border phase defined, storage convention specified, gap-analysis covers screenshot tooling, original workflow intact.
 
 **Last updated**: 2026-04-13T06:42:49Z
 
@@ -45,11 +42,12 @@ REQ-1775120162 (e2e testing command — deployed; this is the base skill being e
 
 ## Worktree
 
-(Will be populated when work starts: feature/REQ-ID-slug)
+feature/REQ-1776062513-enhance-e2e-test-skill
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
+* **Linked Worktree**: feature/REQ-1776062513-enhance-e2e-test-skill
+* **Path**: /Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776062513-enhance-e2e-test-skill
+* **Branch**: feature/REQ-1776062513-enhance-e2e-test-skill
 * **Merged**: No
 * **Deployed**: No
