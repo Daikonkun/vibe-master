@@ -40,6 +40,7 @@ description: "Global instructions for all agents in vibe coding projects. Ensure
 - `docs/requirements/{id}-{name}.md` — Detailed requirement specs
 - `.worktree-manifest.json` — Map of worktrees to requirements
 - `docs/STATUS.md` — Auto-generated status dashboard
+- `docs/e2e-screenshots/{scope}/` — E2e screenshot baselines and current runs (baselines are committed; `current/` is gitignored)
 
 ## Documentation Auto-Generation
 After any state change, regenerate:
@@ -69,7 +70,7 @@ After any state change, regenerate:
 | `/update-manual [scope]` | Generate and refresh user manual content |
 | `/code-review [scope]` | Review code and create REQ follow-up threads for unresolved findings |
 | `/work-on <req-id>` | Work on a requirement until it reaches its next lifecycle status |
-| `/e2e-test [scope]` | Run end-to-end testing; propose new skill REQs when gaps are found |
+| `/e2e-test [scope]` | Run end-to-end testing with screenshot-based cross-border visual validation; propose new skill REQs when gaps are found |
 | `/init [project-name]` | Clear Vibe Master template REQs and initialize clean project manifests |
 
 Slash commands appear in chat only when they are backed by prompt files or valid skill definitions. `/add-requirement`, `/list-requirements`, `/update-requirement`, `/start-work`, `/show-requirement`, `/status`, `/worktree-list`, `/worktree-create`, `/worktree-prune`, `/worktree-status`, `/worktree-merge`, `/dependency-graph`, `/roadmap`, `/regen-docs`, `/bug-fix`, `/update-manual`, `/code-review`, `/work-on`, `/e2e-test`, and `/init` are implemented by prompt files in `.github/prompts/`; skill files must keep lowercase hyphenated `name` values that match their folder names.

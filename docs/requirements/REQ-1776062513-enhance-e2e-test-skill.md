@@ -1,7 +1,11 @@
 # enhance e2e test skill
 
 **ID**: REQ-1776062513  
-**Status**: IN_PROGRESS  
+<<<<<<< HEAD
+**Status**: CODE_REVIEW  
+=======
+**Status**: CODE_REVIEW  
+>>>>>>> feature/REQ-1776062513-enhance-e2e-test-skill
 **Priority**: MEDIUM  
 **Created**: 2026-04-13T06:41:53Z  
 
@@ -11,11 +15,19 @@ introduce screenshot-based cross-border test capability for /e2e-test skill
 
 ## Success Criteria
 
-- [ ] The `/e2e-test` prompt (`.github/prompts/e2e-test.prompt.md`) includes a workflow step that captures screenshots at key UI boundaries (e.g., page transitions, dialog opens, form submissions) during orchestrated test runs
-- [ ] A "cross-border" test phase is defined in the e2e workflow: after each skill invocation that modifies UI state, a screenshot is taken and compared against a baseline (or stored as a new baseline) to detect visual regressions across view boundaries
-- [ ] The e2e-test prompt specifies how screenshots are stored (e.g., `docs/e2e-screenshots/{REQ-ID}/`) and how baseline mismatches are reported in the pass/fail summary
-- [ ] When the project lacks a screenshot-capable test runner (e.g., Playwright, Cypress with screenshot plugin), the gap-analysis step surfaces this and proposes a `/add-requirement` for the missing capability
-- [ ] The existing e2e-test workflow (build/lint → test → code-review → validate criteria) remains intact; screenshot capture is an additive phase, not a replacement
+<<<<<<< HEAD
+- [x] The `/e2e-test` prompt (`.github/prompts/e2e-test.prompt.md`) includes a workflow step that captures screenshots at key UI boundaries (e.g., page transitions, dialog opens, form submissions) during orchestrated test runs
+- [x] A "cross-border" test phase is defined in the e2e workflow: after each skill invocation that modifies UI state, a screenshot is taken and compared against a baseline (or stored as a new baseline) to detect visual regressions across view boundaries
+- [x] The e2e-test prompt specifies how screenshots are stored (e.g., `docs/e2e-screenshots/{REQ-ID}/`) and how baseline mismatches are reported in the pass/fail summary
+- [x] When the project lacks a screenshot-capable test runner (e.g., Playwright, Cypress with screenshot plugin), the gap-analysis step surfaces this and proposes a `/add-requirement` for the missing capability
+- [x] The existing e2e-test workflow (build/lint → test → code-review → validate criteria) remains intact; screenshot capture is an additive phase, not a replacement
+=======
+- [x] The `/e2e-test` prompt (`.github/prompts/e2e-test.prompt.md`) includes a workflow step that captures screenshots at key UI boundaries (e.g., page transitions, dialog opens, form submissions) during orchestrated test runs
+- [x] A "cross-border" test phase is defined in the e2e workflow: after each skill invocation that modifies UI state, a screenshot is taken and compared against a baseline (or stored as a new baseline) to detect visual regressions across view boundaries
+- [x] The e2e-test prompt specifies how screenshots are stored (e.g., `docs/e2e-screenshots/{REQ-ID}/`) and how baseline mismatches are reported in the pass/fail summary
+- [x] When the project lacks a screenshot-capable test runner (e.g., Playwright, Cypress with screenshot plugin), the gap-analysis step surfaces this and proposes a `/add-requirement` for the missing capability
+- [x] The existing e2e-test workflow (build/lint → test → code-review → validate criteria) remains intact; screenshot capture is an additive phase, not a replacement
+>>>>>>> feature/REQ-1776062513-enhance-e2e-test-skill
 
 ## Technical Notes
 
