@@ -1,7 +1,7 @@
 # Review follow-up: fix compaction check hook in orchestrator scripts
 
 **ID**: REQ-1776235649  
-**Status**: IN_PROGRESS  
+**Status**: MERGED  
 **Priority**: HIGH  
 **Created**: 2026-04-15T06:47:29Z  
 
