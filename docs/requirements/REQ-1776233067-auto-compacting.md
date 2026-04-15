@@ -1,7 +1,7 @@
 # auto-compacting
 
 **ID**: REQ-1776233067  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-04-15T06:04:27Z  
 

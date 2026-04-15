@@ -31,7 +31,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1775718117: Review follow-up: update agent docs for deployment-conditional transitions
 * [DEPLOYED] REQ-1775721596: rollback function
 * [DEPLOYED] REQ-1776062513: enhance e2e test skill
-* [MERGED] REQ-1776233067: auto-compacting
+* [DEPLOYED] REQ-1776233067: auto-compacting
 * [MERGED] REQ-1776235658: Review follow-up: replace bc with portable arithmetic in compact-context.sh
 * [MERGED] REQ-1776238348: init-project script enhancement
 
