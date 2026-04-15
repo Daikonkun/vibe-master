@@ -1,11 +1,11 @@
-# Vibe Agent Orchestrator
+# Vibe Agent Orchestrator — Windows Edition
 
-A VS Code AI-driven development orchestrator for managing requirements, git worktrees, and parallel development in "vibe coding" projects (AI-only development driven through VS Code).
+A VS Code AI-driven development orchestrator for managing requirements, git worktrees, and parallel development in "vibe coding" projects (AI-only development driven through VS Code). This is the **Windows-adapted edition** — all scripts run natively in PowerShell 5.1+ with no external dependencies.
 
 ## 🚀 Quick Start
 
 ### 1. Clone This Template
-```bash
+```powershell
 git clone <this-repo-url> my-vibe-project
 cd my-vibe-project
 git remote remove origin  # Detach from template
@@ -13,24 +13,8 @@ git remote add origin <your-new-repo>
 ```
 
 ### 2. Initialize Your Project
-Run the init script to reset manifests and remove Vibe Master's own requirement history:
-
-**Linux/macOS:**
-```bash
-bash scripts/init-project.sh "My Project Name"
-```
-
-**Windows (PowerShell):**
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\init-project.ps1 -ProjectName "My Project Name"
-```
-
-**Cross-platform (auto-detects OS):**
-```bash
-# Linux/macOS:
-bash scripts/dispatch.sh init-project "My Project Name"
-# Windows:
-powershell -ExecutionPolicy Bypass -File scripts\dispatch.ps1 init-project "My Project Name"
 ```
 
 This will:
@@ -46,9 +30,7 @@ Open the project in VS Code. The orchestrator agent will auto-load from `.github
 /add-requirement "User Authentication" "Implement email/password authentication system"
 ```
 
-This slash command is provided by `.github/prompts/add-requirement.prompt.md`.
-
-The agent will:
+This slash command is provided by `.github/prompts/add-requirement.prompt.md`. The agent will:
 - Create requirement record (unique ID: `REQ-{timestamp}`)
 - Create detailed spec file (`docs/requirements/REQ-XXX-user-authentication.md`)
 - Update `REQUIREMENTS.md` summary
@@ -62,7 +44,7 @@ The agent will:
 The agent will:
 - Create a git worktree: `feature/REQ-001-user-authentication`
 - Update requirement status to `IN_PROGRESS`
-- Provide context on what to build
+- Provide development context
 
 ### 6. Check Status Anytime
 ```
@@ -70,89 +52,6 @@ The agent will:
 ```
 
 Shows current dashboard with all requirements, worktrees, and progress.
-
----
-
-## 🔄 Upgrading Existing Projects
-
-Use this when your repo already uses an older Vibe Master layout and you want the latest agents/skills/workflows without losing requirement history.
-
-### Safe Upgrade Workflow
-
-1. Tag the current state as a safety point.
-```bash
-git tag "pre-vibe-upgrade-$(date +%Y%m%d-%H%M)"
-```
-
-2. Create an isolated worktree for the migration.
-```bash
-git worktree add ../upgrade/vibe-master-latest -b chore/vibe-master-upgrade
-cd ../upgrade/vibe-master-latest
-```
-
-3. Fetch the latest Vibe Master template and compare before replacing files.
-```bash
-# Replace <org> with the GitHub org or user hosting your Vibe Master template
-git clone --depth 1 https://github.com/<org>/vibe-master.git .upgrade-template/latest
-# Compare template against your current project:
-diff -ruN --exclude='.git' --exclude='.upgrade-template' .upgrade-template/latest . | less
-```
-
-4. Merge files by category (replace vs merge) using the table below.
-
-5. Validate manifests and regenerate docs.
-```bash
-jq . .requirement-manifest.json >/dev/null
-jq . .worktree-manifest.json >/dev/null
-bash scripts/regenerate-docs.sh
-```
-
-6. Run a quick behavior check and review.
-```bash
-git status --short
-```
-
-Then run these in Copilot Chat:
-```
-/status
-/code-review README.md
-```
-
-7. Clean up the temporary template folder.
-```bash
-rm -rf .upgrade-template
-```
-
-### Replace vs Merge Guide
-
-| Path | Recommended Action | Why |
-|---|---|---|
-| `.github/agents/orchestrator.agent.md` | Replace, then re-apply local custom prompts | Agent mode and orchestration behavior changes most often here |
-| `.github/prompts/` | Replace prompt files from latest template, then keep local custom prompts with unique names | Slash commands appear in chat only when backed by prompt files |
-| `.github/skills/` | Replace skill folders from latest template | Keeps slash-command workflows and guidance current |
-| `copilot-instructions.md` | Merge carefully (do not blindly replace) | Local policy/tool constraints are often customized |
-| `scripts/regenerate-docs.sh` | Replace with latest, then verify project-specific edits | Fixes to generation logic accumulate over time |
-| `scripts/create-requirement.sh` | Replace with latest, then confirm ID format expectations | Prevents manifest drift caused by old creation logic |
-| `.requirement-manifest.json` | Merge data only; never replace with template stub | This file contains your real requirement history |
-| `.worktree-manifest.json` | Merge data only; keep active worktree entries | Replacing can orphan valid worktrees |
-| `README.md` | Merge sections selectively | Keep project-specific onboarding while adding new workflows |
-| `docs/` generated files | Regenerate, do not hand-copy from template | Generated docs should reflect your local manifests |
-
-### Compatibility Notes
-
-- Old repos may lack newer status values or fields (for example `worktreeId`, `dependsOn`, `deployedAt`); add missing fields incrementally rather than rewriting history.
-- Slash command behavior is driven by agent + skill files. If commands behave differently after upgrade, check `.github/agents/` and `.github/skills/` first.
-- If your project uses `develop` instead of `main`, update base-branch references in agent/instruction docs after template updates.
-- If your team added custom skills, move them back after template refresh and verify command names do not conflict.
-- Always run `bash scripts/regenerate-docs.sh` after manifest or workflow file changes so `REQUIREMENTS.md` and `docs/*.md` stay aligned.
-
-### Post-upgrade Verification Checklist
-
-- `git diff --name-only` shows expected workflow files only (`.github/agents`, `.github/prompts`, `.github/skills`, `copilot-instructions.md`, `scripts/*`).
-- All required slash command prompt files exist under `.github/prompts/` for the commands your team expects.
-- `jq . .requirement-manifest.json` and `jq . .worktree-manifest.json` both pass.
-- `bash scripts/regenerate-docs.sh` completes successfully without jq parse errors.
-- `/status`, `/show-requirement <req-id>`, and `/worktree-list` return expected output after refresh.
 
 ---
 
@@ -193,7 +92,7 @@ rm -rf .upgrade-template
 │   │   ├── requirement-tracker/SKILL.md    # Requirement lifecycle
 │   │   ├── update-manual/SKILL.md          # User manual generation/refresh
 │   │   └── worktree-manager/SKILL.md       # Git worktree management
-│   
+│
 ├── copilot-instructions.md                 # Global agent instructions
 │
 ├── REQUIREMENTS.md                         # Summary of all requirements
@@ -207,21 +106,20 @@ rm -rf .upgrade-template
 │   └── DEPENDENCIES.md                    # Dependency graph
 │
 └── scripts/
-    ├── create-requirement.sh / .ps1         # CLI: create new requirement
-    ├── dependency-graph.sh / .ps1           # CLI: regenerate + show dependency graph
-    ├── dispatch.sh / .ps1                   # Cross-platform script dispatcher
-    ├── generate-plan.sh / .ps1              # CLI: generate/update Development Plan in a spec
-    ├── init-project.sh / .ps1               # CLI: initialize project from template
-    ├── list-requirements.sh / .ps1          # CLI: list requirements by optional status
-    ├── regenerate-docs.sh / .ps1            # CLI: regenerate all docs
-    ├── roadmap.sh / .ps1                    # CLI: regenerate + show roadmap
-    ├── rollback-requirement.sh / .ps1       # CLI: revert a merged requirement
-    ├── show-requirement.sh / .ps1           # CLI: display requirement details
-    ├── start-work.sh / .ps1                 # CLI: create worktree + set IN_PROGRESS
-    ├── status.sh / .ps1                     # CLI: regenerate + show status summary
-    ├── update-requirement-status.sh / .ps1  # CLI: validate and update requirement status
-    ├── worktree-list.sh / .ps1              # CLI: list active worktrees from manifest
-    └── worktree-merge.sh / .ps1             # CLI: merge branch + clean worktree
+    ├── create-requirement.ps1              # CLI: create new requirement
+    ├── dependency-graph.ps1                # CLI: regenerate + show dependency graph
+    ├── generate-plan.ps1                   # CLI: generate/update Development Plan in a spec
+    ├── init-project.ps1                    # CLI: initialize project from template
+    ├── list-requirements.ps1              # CLI: list requirements by optional status
+    ├── regenerate-docs.ps1                 # CLI: regenerate all docs
+    ├── roadmap.ps1                         # CLI: regenerate + show roadmap
+    ├── rollback-requirement.ps1            # CLI: revert a merged requirement
+    ├── show-requirement.ps1                # CLI: display requirement details
+    ├── start-work.ps1                      # CLI: create worktree + set IN_PROGRESS
+    ├── status.ps1                          # CLI: regenerate + show status summary
+    ├── update-requirement-status.ps1       # CLI: validate and update requirement status
+    ├── worktree-list.ps1                   # CLI: list active worktrees from manifest
+    └── worktree-merge.ps1                  # CLI: merge branch + clean worktree
 ```
 
 ---
@@ -235,11 +133,7 @@ Best via slash command for interactive guidance:
 ```
 
 Or CLI:
-```bash
-# Linux/macOS:
-./scripts/create-requirement.sh "User Authentication" "Email/password login system" HIGH
-
-# Windows (PowerShell):
+```powershell
 powershell -ExecutionPolicy Bypass -File scripts\create-requirement.ps1 -Name "User Authentication" -Description "Email/password login system" -Priority HIGH
 ```
 
@@ -310,16 +204,16 @@ Alternative paths:
 Each requirement gets an isolated git worktree for parallel development:
 
 ```
-project-root/
-├── .git/
+project-root\
+├── .git\
 ├── (main branch files)
 └── ..
 
-../feature/REQ-001-auth-system/
+..\feature\REQ-001-auth-system\
 ├── .git (worktree)
 ├── (feature files)
 
-../feature/REQ-002-dashboard/
+..\feature\REQ-002-dashboard\
 ├── .git (worktree)
 ├── (feature files)
 ```
@@ -335,24 +229,15 @@ project-root/
 
 The orchestrator auto-generates these files:
 
-### `REQUIREMENTS.md`
-Table of all requirements with status, priority, dates
-
-### `docs/STATUS.md`
-Kanban board showing requirements grouped by status
-
-### `docs/ROADMAP.md`
-Timeline view ordered by priority
-
-### `docs/DEPENDENCIES.md`
-Graph showing which requirements depend on others
+| File | Content |
+|------|---------|
+| `REQUIREMENTS.md` | Table of all requirements with status, priority, dates |
+| `docs/STATUS.md` | Kanban board showing requirements grouped by status |
+| `docs/ROADMAP.md` | Timeline view ordered by priority |
+| `docs/DEPENDENCIES.md` | Graph showing which requirements depend on others |
 
 **Regenerate manually**:
-```bash
-# Linux/macOS:
-./scripts/regenerate-docs.sh
-
-# Windows (PowerShell):
+```powershell
 powershell -ExecutionPolicy Bypass -File scripts\regenerate-docs.ps1
 ```
 
@@ -425,49 +310,41 @@ Edit `copilot-instructions.md` and `.github/agents/orchestrator.agent.md` to ref
 ### Adjust Requirement ID Format
 Currently uses timestamp: `REQ-{unix-timestamp}` (e.g., `REQ-1704067200`)
 
-To use sequential IDs instead, modify `scripts/create-requirement.sh` or `scripts/create-requirement.ps1`:
-```bash
-# Current (bash): REQ-$(date +%s)
-# Alternative: REQ-$(printf "%03d" $COUNT)
-```
+To use sequential IDs instead, modify `scripts/create-requirement.ps1`:
 ```powershell
-# Current (PowerShell): REQ-$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())
+# Current: REQ-$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())
 # Alternative: REQ-{0:D3} -f $COUNT
 ```
-
----
-
-## 🪟 Windows Support
-
-This project supports both Linux/macOS (bash) and Windows (PowerShell 5.1+). Each script has both `.sh` and `.ps1` variants.
-
-### Cross-Platform Dispatch
-Use `scripts/dispatch.sh` (Linux/macOS) or `scripts/dispatch.ps1` (Windows) to auto-detect the OS and call the correct script variant:
-
-```bash
-# Linux/macOS:
-bash scripts/dispatch.sh create-requirement "Feature" "Description"
-
-# Windows:
-powershell -ExecutionPolicy Bypass -File scripts\dispatch.ps1 create-requirement "Feature" "Description"
-```
-
-### PowerShell Script Parameters
-PowerShell scripts use named parameters instead of positional arguments:
-
-| Bash | PowerShell |
-|------|------------|
-| `./scripts/create-requirement.sh "Name" "Desc" HIGH` | `powershell -ExecutionPolicy Bypass -File scripts\create-requirement.ps1 -Name "Name" -Description "Desc" -Priority HIGH` |
-| `./scripts/start-work.sh REQ-123 main` | `powershell -ExecutionPolicy Bypass -File scripts\start-work.ps1 -ReqId REQ-123 -BaseBranch main` |
-| `./scripts/update-requirement-status.sh REQ-123 CODE_REVIEW` | `powershell -ExecutionPolicy Bypass -File scripts\update-requirement-status.ps1 -ReqId REQ-123 -NewStatus CODE_REVIEW` |
-
-### No `jq` Required on Windows
-The PowerShell scripts use native `ConvertFrom-Json`/`ConvertTo-Json` cmdlets instead of `jq`, so no external dependencies are needed on Windows.
 
 ### Add Custom Status Types
 Edit:
 - `.requirement-manifest.json` (enum values)
 - `copilot-instructions.md` (state transitions)
+
+---
+
+## 📝 PowerShell Script Parameters
+
+All PowerShell scripts use named parameters. Here's a quick reference:
+
+| Script | Parameters |
+|--------|------------|
+| `create-requirement.ps1` | `-Name <string>` `-Description <string>` `[-Priority MEDIUM]` |
+| `start-work.ps1` | `-ReqId <string>` `[-BaseBranch main]` |
+| `update-requirement-status.ps1` | `-ReqId <string>` `-NewStatus <string>` `[-Force]` `[-NoRefresh]` |
+| `show-requirement.ps1` | `-ReqId <string>` |
+| `list-requirements.ps1` | `[[-Status] <string>]` |
+| `init-project.ps1` | `-ProjectName <string>` |
+| `rollback-requirement.ps1` | `-ReqId <string>` `[-BaseBranch main]` |
+| `worktree-merge.ps1` | `-Branch <string>` |
+| `regenerate-docs.ps1` | *(no parameters)* |
+| `status.ps1` | *(no parameters)* |
+| `dependency-graph.ps1` | *(no parameters)* |
+| `roadmap.ps1` | *(no parameters)* |
+| `worktree-list.ps1` | *(no parameters)* |
+| `generate-plan.ps1` | `-ReqId <string>` |
+
+> **No `jq` required** — PowerShell scripts use native `ConvertFrom-Json`/`ConvertTo-Json` cmdlets, so no external dependencies are needed.
 
 ---
 
@@ -502,7 +379,7 @@ Edit:
   "worktrees": [
     {
       "id": "feature/REQ-1704067200-user-auth",
-      "path": "../feature/REQ-1704067200-user-auth",
+      "path": "..\\feature\\REQ-1704067200-user-auth",
       "branch": "feature/REQ-1704067200-user-auth",
       "baseBranch": "main",
       "requirementIds": ["REQ-1704067200"],
@@ -520,7 +397,7 @@ Edit:
 **Agent not responding to `/` commands?**
 - Check that `copilot-instructions.md` is loaded (should be auto-loaded)
 - Confirm the command has a backing prompt or skill file; command prompts live in `.github/prompts/`
-- Ensure agent contextis fresh (close/reopen chat)
+- Ensure agent context is fresh (close/reopen chat)
 
 **Worktree creation failed?**
 - Check git is initialized: `git status`
@@ -528,12 +405,16 @@ Edit:
 - Run `git worktree prune` to clean stale worktrees
 
 **Documentation not updating?**
-- Manually regenerate: `./scripts/regenerate-docs.sh`
+- Manually regenerate: `powershell -ExecutionPolicy Bypass -File scripts\regenerate-docs.ps1`
 - Or use: `/regen-docs` slash command
 
 **Manifest files out of sync?**
 - Both are authoritative sources; if conflicted, prefer `.requirement-manifest.json`
 - Manually fix `.worktree-manifest.json` if entries are stale
+
+**PowerShell execution policy blocking scripts?**
+- Run scripts with: `powershell -ExecutionPolicy Bypass -File scripts\<script>.ps1`
+- Or set policy for current user: `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`
 
 ---
 
@@ -553,7 +434,3 @@ Edit:
 ## 📄 License
 
 This template is open source. Customize freely for your projects.
-
----
-
-**Happy vibe coding! 🎉**
