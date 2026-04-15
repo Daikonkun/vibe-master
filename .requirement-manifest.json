@@ -307,6 +307,16 @@
       "notes": "Extend e2e-test.prompt.md with screenshot capture at UI borders, baseline diffing, and conditional skip for non-UI projects. Depends on REQ-1775120162.",
       "worktreeId": "feature/REQ-1776062513-enhance-e2e-test-skill",
       "deployedAt": "2026-04-13T06:56:38Z"
+    },
+    {
+      "id": "REQ-1776233067",
+      "name": "auto-compacting",
+      "description": "add a feature of auto-compacting context when the context window is about to reach the limit of the working LLM",
+      "status": "PROPOSED",
+      "priority": "MEDIUM",
+      "origin": "project",
+      "createdAt": "2026-04-15T06:04:27Z",
+      "updatedAt": "2026-04-15T06:04:27Z"
     }
   ],
   "requiresDeployment": true
