@@ -2,8 +2,12 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (0)
+## PROPOSED (2)
 
+* REQ-1776235649: Review follow-up: fix compaction check hook in orchestrator scripts (priority: HIGH)
+  - Worktree: none
+* REQ-1776235658: Review follow-up: replace bc with portable arithmetic in compact-context.sh (priority: MEDIUM)
+  - Worktree: none
 
 ## IN_PROGRESS (0)
 
@@ -79,8 +83,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 
 ## Stats
-- Total Requirements: 26
-- Deployed: 22 (84%)
+- Total Requirements: 28
+- Deployed: 22 (78%)
 - Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0

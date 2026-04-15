@@ -11,17 +11,25 @@ Source: code-review REQ-1776233067. Severity: HIGH. Evidence: start-work.sh and 
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [ ] The compaction check hook in `scripts/start-work.sh` and `scripts/create-requirement.sh` does not hang waiting for stdin input
+- [ ] The hook either (a) passes explicit empty input so it exits cleanly as a no-op, or (b) is removed from bash scripts entirely with guidance that the AI agent should call `compact-context.sh` directly
+- [ ] `copilot-instructions.md` documents the recommended way to invoke compaction checks (agent-driven vs script-embedded)
+- [ ] Running `scripts/start-work.sh` or `scripts/create-requirement.sh` without any piped input completes without hanging or error
 
 ## Technical Notes
 
-(Add implementation notes here)
+**Recommended approach**: Remove the compaction check hook from bash scripts (start-work.sh, create-requirement.sh) since they don't have access to the LLM's conversation context. Instead, document in `copilot-instructions.md` that the AI agent should call `scripts/compact-context.sh check` and `scripts/compact-context.sh compact` directly when it detects its context is growing large. The agent has access to the conversation JSON and can pipe it to the script.
+
+**Affected files**:
+- `scripts/start-work.sh` — remove compaction check block
+- `scripts/create-requirement.sh` — remove compaction check block
+- `copilot-instructions.md` — add agent-driven compaction guidance
+
+**Risks**: None — the current hook is already a no-op, so removing it changes no behavior.
 
 ## Dependencies
 
-(List other requirement IDs if applicable, e.g., REQ-XXX, REQ-YYY)
+REQ-1776233067 (auto-compacting — parent feature)
 
 ## Worktree
 

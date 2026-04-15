@@ -55,3 +55,7 @@ REQ-1776062513: enhance e2e test skill (no dependencies)
 
 REQ-1776233067: auto-compacting (no dependencies)
 
+REQ-1776235649: Review follow-up: fix compaction check hook in orchestrator scripts (no dependencies)
+
+REQ-1776235658: Review follow-up: replace bc with portable arithmetic in compact-context.sh (no dependencies)
+

@@ -327,6 +327,7 @@
       "status": "PROPOSED",
       "priority": "HIGH",
       "origin": "project",
+      "notes": "Remove no-op compaction check hooks from bash scripts; document agent-driven compaction invocation in copilot-instructions.md instead.",
       "createdAt": "2026-04-15T06:47:29Z",
       "updatedAt": "2026-04-15T06:47:29Z"
     },
@@ -337,6 +338,7 @@
       "status": "PROPOSED",
       "priority": "MEDIUM",
       "origin": "project",
+      "notes": "Replace bc with awk for threshold calculation in compact-context.sh; two occurrences in compact() and check() functions.",
       "createdAt": "2026-04-15T06:47:38Z",
       "updatedAt": "2026-04-15T06:47:38Z"
     }

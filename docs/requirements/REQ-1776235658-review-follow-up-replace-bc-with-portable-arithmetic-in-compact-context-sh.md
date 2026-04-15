@@ -11,17 +11,25 @@ Source: code-review REQ-1776233067. Severity: MEDIUM. Evidence: scripts/compact-
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [ ] `scripts/compact-context.sh` no longer depends on `bc` — it uses `awk` or POSIX shell arithmetic instead
+- [ ] The threshold calculation produces the same results as before (e.g., 128000 × 0.80 = 102400)
+- [ ] The script runs successfully on a system without `bc` installed
+- [ ] Both `check` and `compact` commands work correctly with the new arithmetic
 
 ## Technical Notes
 
-(Add implementation notes here)
+**Approach**: Replace `echo "$LIMIT * $THRESHOLD" | bc | cut -d. -f1` with `awk "BEGIN {printf \"%d\", $LIMIT * $THRESHOLD}"`. `awk` is part of POSIX and available on virtually all Unix systems.
+
+**Alternative**: For integer-only thresholds (e.g., 0.80 → 80), use shell arithmetic: `threshold=$(( LIMIT * 80 / 100 ))`. This avoids external commands entirely but requires converting the threshold to an integer percentage.
+
+**Affected files**:
+- `scripts/compact-context.sh` — two occurrences of `bc` (in `compact()` and `check()`)
+
+**Risks**: Minimal — `awk` is more portable than `bc`. Verify output format matches (integer, no decimal point).
 
 ## Dependencies
 
-(List other requirement IDs if applicable, e.g., REQ-XXX, REQ-YYY)
+REQ-1776233067 (auto-compacting — parent feature)
 
 ## Worktree
 
