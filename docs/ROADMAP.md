@@ -32,7 +32,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1775721596: rollback function
 * [DEPLOYED] REQ-1776062513: enhance e2e test skill
 * [MERGED] REQ-1776233067: auto-compacting
-* [PROPOSED] REQ-1776235658: Review follow-up: replace bc with portable arithmetic in compact-context.sh
+* [IN_PROGRESS] REQ-1776235658: Review follow-up: replace bc with portable arithmetic in compact-context.sh
 
 ## Low Priority
 * [DEPLOYED] REQ-1774632175: Review follow-up: polish upgrade guide in README

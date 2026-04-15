@@ -264,6 +264,17 @@
       "createdAt": "2026-04-15T07:02:36Z",
       "status": "MERGED",
       "mergedAt": "2026-04-15T07:13:49Z"
+    },
+    {
+      "id": "feature/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh",
+      "branch": "feature/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776235658"
+      ],
+      "createdAt": "2026-04-15T07:14:48Z",
+      "status": "ACTIVE"
     }
   ]
 }
