@@ -101,6 +101,31 @@ If multiple requirements:
 - Clear requirement → worktree → code → merge pipeline
 - User reviews agent decisions; agent auto-executes approved work
 
+## Auto-Compaction (REQ-1776233067)
+
+When the context window approaches the LLM's token limit, auto-compaction triggers automatically:
+- **Threshold**: Configurable in `.vibe-config.json` (default: 80% of context window)
+- **What's preserved**: System prompt, active requirement IDs, current task state, and the last N turns (default: 3)
+- **What's compacted**: Older conversation turns are replaced with a structured summary
+- **Notification**: A `⚠️ Auto-compaction triggered` message appears with pre/post token counts
+- **Logging**: Every compaction event is logged to `logs/compaction.log` with timestamp, token counts, and summary
+- **Workflow continuity**: Multi-step workflows (e.g., `/start-work`, `/code-review`, `/bug-fix`) continue correctly after compaction
+- **Config**: See `.vibe-config.json` for `contextWindowLimit`, `compactionThreshold`, `preservedTurns`, and per-model overrides
+- **Manual check**: Run `scripts/compact-context.sh check` to see if compaction is needed
+- **Manual compact**: Run `scripts/compact-context.sh compact < input.json` to force compaction
+
+If critical context was lost during compaction, re-emit essential state from the `compactionSummary` field in the compacted output.
+
+### Agent-Driven Compaction
+The AI agent (not bash scripts) is responsible for invoking compaction, because only the agent has access to the conversation context JSON. When the agent detects its context is growing large:
+1. Pipe the conversation JSON to `scripts/compact-context.sh check` to see if compaction is needed.
+2. If `COMPACTION_NEEDED`, pipe the JSON to `scripts/compact-context.sh compact` to produce a compacted version.
+3. Use the compacted output as the new conversation context going forward.
+4. Re-emit any critical state from `compactionSummary` before continuing the current workflow.
+
+### User-Specific Config
+`.vibe-config.json` is tracked in the repo with sensible defaults. For personal overrides (e.g., different model preferences), create `.vibe-config.local.json` (gitignored) — the script will check for it first.
+
 ## Superpowers Alignment (REQ-1774685792)
 Compatible references (minimal, non-breaking):
 - `systematic-debugging` → aligns with `debug/SKILL.md` workflow

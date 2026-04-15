@@ -40,3 +40,5 @@ Constraints:
 - Ask the user for confirmation exactly once before advancing status. After the user confirms, advance immediately without re-asking.
 - Surface any script failures exactly.
 - If the spec is too vague to determine completion, ask clarifying questions rather than guessing.
+
+**Auto-Compaction** (REQ-1776233067): If `{{compacted_summary}}` is present in the context, use it to restore essential state (active requirement IDs, current task, recent findings) before continuing implementation. Check `logs/compaction.log` for full details if needed.

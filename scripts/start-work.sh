@@ -10,6 +10,15 @@ REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
 WORKTREE_MANIFEST="$PROJECT_ROOT/.worktree-manifest.json"
 TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
+# Auto-compaction check (REQ-1776233067)
+if [ -f "$PROJECT_ROOT/scripts/compact-context.sh" ]; then
+  COMPACT_RESULT="$($PROJECT_ROOT/scripts/compact-context.sh check 2>/dev/null || true)"
+  if echo "$COMPACT_RESULT" | grep -q "COMPACTION_NEEDED"; then
+    echo "⚠️  $COMPACT_RESULT"
+    echo "   Consider running compaction before proceeding."
+  fi
+fi
+
 if [ -z "$REQ_ID" ]; then
   echo "Usage: $0 REQ-<timestamp> [base-branch]" >&2
   exit 1
