@@ -8,12 +8,10 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
 
-* REQ-1776238348: init-project script enhancement (priority: MEDIUM)
-  - Worktree: feature/REQ-1776238348-init-project-script-enhancement
 
-## MERGED (3)
+## MERGED (4)
 
 * REQ-1776233067: auto-compacting (priority: MEDIUM)
   - Worktree: feature/REQ-1776233067-auto-compacting
@@ -21,6 +19,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1776235649-review-follow-up-fix-compaction-check-hook-in-orchestrator-scripts
 * REQ-1776235658: Review follow-up: replace bc with portable arithmetic in compact-context.sh (priority: MEDIUM)
   - Worktree: feature/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh
+* REQ-1776238348: init-project script enhancement (priority: MEDIUM)
+  - Worktree: feature/REQ-1776238348-init-project-script-enhancement
 
 ## DEPLOYED (22)
 
@@ -87,6 +87,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 29
 - Deployed: 22 (75%)
-- Merged (awaiting deploy): 3
+- Merged (awaiting deploy): 4
 - In Progress: 0
 - Blocked: 0
