@@ -116,6 +116,16 @@ When the context window approaches the LLM's token limit, auto-compaction trigge
 
 If critical context was lost during compaction, re-emit essential state from the `compactionSummary` field in the compacted output.
 
+### Agent-Driven Compaction
+The AI agent (not bash scripts) is responsible for invoking compaction, because only the agent has access to the conversation context JSON. When the agent detects its context is growing large:
+1. Pipe the conversation JSON to `scripts/compact-context.sh check` to see if compaction is needed.
+2. If `COMPACTION_NEEDED`, pipe the JSON to `scripts/compact-context.sh compact` to produce a compacted version.
+3. Use the compacted output as the new conversation context going forward.
+4. Re-emit any critical state from `compactionSummary` before continuing the current workflow.
+
+### User-Specific Config
+`.vibe-config.json` is tracked in the repo with sensible defaults. For personal overrides (e.g., different model preferences), create `.vibe-config.local.json` (gitignored) — the script will check for it first.
+
 ## Superpowers Alignment (REQ-1774685792)
 Compatible references (minimal, non-breaking):
 - `systematic-debugging` → aligns with `debug/SKILL.md` workflow

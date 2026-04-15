@@ -8,7 +8,10 @@
 set -euo pipefail
 
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
-CONFIG_FILE="${PROJECT_ROOT}/.vibe-config.json"
+CONFIG_FILE="${PROJECT_ROOT}/.vibe-config.local.json"
+if [ ! -f "$CONFIG_FILE" ]; then
+  CONFIG_FILE="${PROJECT_ROOT}/.vibe-config.json"
+fi
 COMPACT_LOG="${PROJECT_ROOT}/logs/compaction.log"
 
 # ── Defaults ──────────────────────────────────────────────────────────────
@@ -48,7 +51,7 @@ load_config() {
 estimate_tokens() {
   local text="$1"
   local char_count
-  char_count=$(echo -n "$text" | wc -c | tr -d ' ')
+  char_count=$(printf '%s' "$text" | wc -c | tr -d ' ')
   echo $(( char_count / 4 ))
 }
 
@@ -83,31 +86,22 @@ compact() {
 
   pre_tokens="$total_tokens"
 
-  # Extract preserved parts
-  local system_prompt active_reqs turns_count compacted_turns summary
+  # Single-pass jq: extract preserved parts, compact turns, and build summary
+  local compact_result
+  compact_result="$(echo "$input_text" | jq --argjson n "$PRESERVED_TURNS" '{
+    systemPrompt: .systemPrompt,
+    activeRequirements: .activeRequirements,
+    turns_count: (.turns | length),
+    compacted_turns: (.turns | (. | length) as $len | if $len <= $n then . else .[-$n:] end),
+    discarded_count: (if (.turns | length) > $n then (.turns | length) - $n else 0 end),
+    summary: (if (.turns | length) > $n then "Compacted \((.turns | length) - $n) earlier turns. Key topics: " + (.turns[:-$n] | map(select(.role == "user") | .content[:80]) | join("; ")) else "No turns compacted." end)
+  }')"
 
-  system_prompt="$(echo "$input_text" | jq -r '.systemPrompt // ""')"
-  active_reqs="$(echo "$input_text" | jq -r '.activeRequirements // []')"
-  turns_count="$(echo "$input_text" | jq '.turns | length')"
-
-  # Keep only the last N turns
-  compacted_turns="$(echo "$input_text" | jq --argjson n "$PRESERVED_TURNS" '
-    .turns | (. | length) as $len |
-    if $len <= $n then . else .[-$n:] end
-  ')"
-
-  # Build summary of discarded turns
-  local discarded_count=$(( turns_count - PRESERVED_TURNS ))
-  [ "$discarded_count" -lt 0 ] && discarded_count=0
-
-  summary="$(echo "$input_text" | jq --argjson n "$PRESERVED_TURNS" --arg dc "$discarded_count" '
-    if (.turns | length) > $n then
-      "Compacted \(($dc)) earlier turns. Key topics: " +
-      (.turns[:-($n)] | map(select(.role == "user") | .content[:80]) | join("; "))
-    else
-      "No turns compacted."
-    end
-  ')"
+  local turns_count discarded_count summary compacted_turns
+  turns_count="$(echo "$compact_result" | jq '.turns_count')"
+  discarded_count="$(echo "$compact_result" | jq '.discarded_count')"
+  summary="$(echo "$compact_result" | jq -r '.summary')"
+  compacted_turns="$(echo "$compact_result" | jq '.compacted_turns')"
 
   # Produce compacted output
   local output

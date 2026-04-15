@@ -39,6 +39,7 @@ logs/
 # Vibe config (project-specific, may contain local overrides)
 # .vibe-config.json is tracked by default; uncomment to ignore local overrides:
 # .vibe-config.local.json
+.vibe-config.local.json
 
 # Misc
 .env
