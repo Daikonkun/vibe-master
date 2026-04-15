@@ -5,13 +5,13 @@ Kanban-style view of all requirements and their current state.
 ## PROPOSED (0)
 
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1776238348: init-project script enhancement (priority: MEDIUM)
   - Worktree: feature/REQ-1776238348-init-project-script-enhancement
-
-## CODE_REVIEW (0)
-
 
 ## MERGED (3)
 
@@ -88,5 +88,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 29
 - Deployed: 22 (75%)
 - Merged (awaiting deploy): 3
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0

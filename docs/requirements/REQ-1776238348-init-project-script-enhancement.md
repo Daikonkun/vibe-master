@@ -1,7 +1,7 @@
 # init-project script enhancement
 
 **ID**: REQ-1776238348  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-04-15T07:32:28Z  
 
@@ -32,16 +32,13 @@ some DEPLOYED REQs still exists when I run the init command to start a new proje
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776238348-init-project-script-enhancement.md`.
-   - **Summary**: some DEPLOYED REQs still exists when I run the init command to start a new proje
-   - **Key criteria**: - [ ] Running `init-project.sh` on a cloned/copied Vibe Master repo clears ALL existing REQs from `.
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: **Root cause**: `init-project.sh` (lines 44–65) filters REQs by `select(.origin == "vibe-master")`. 
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776238348` and verify success criteria are met.
+1. **Replace origin-based manifest filter with full clear** — In `scripts/init-project.sh`, replace the `jq` filter `select(.origin != "vibe-master")` with one that empties the requirements array entirely (`.requirements = []`). Remove the `VM_IDS` collection and `KEPT` count logic since all REQs are now cleared.
+2. **Clear all REQ-* spec files except the example** — Replace the ID-based loop (`for f in docs/requirements/${reqId}-*.md`) with a glob that removes all `docs/requirements/REQ-*.md` files, preserving only `EXAMPLE-REQ-*.md`.
+3. **Clear worktree manifest unconditionally** — Remove the conditional branch that filters worktrees by `vmIds`; always reset `.worktrees = []` since all REQs are being cleared.
+4. **Verify `.vibe-master-source` guard is intact** — Confirm the guard check at the top of `init-project.sh` still exits early when the sentinel file exists. No code change needed—just verify.
+5. **Test end-to-end** — Run `regenerate-docs.sh` in the worktree to confirm `REQUIREMENTS.md`, `STATUS.md`, `ROADMAP.md`, and `DEPENDENCIES.md` contain no stale entries after the init logic changes.
 
-**Last updated**: 2026-04-15T07:34:45Z
+**Last updated**: 2026-04-15T07:35:00Z
 
 ## Dependencies
 
