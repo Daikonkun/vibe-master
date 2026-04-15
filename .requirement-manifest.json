@@ -319,6 +319,16 @@
       "createdAt": "2026-04-15T06:04:27Z",
       "updatedAt": "2026-04-15T06:42:18Z",
       "worktreeId": "feature/REQ-1776233067-auto-compacting"
+    },
+    {
+      "id": "REQ-1776235649",
+      "name": "Review follow-up: fix compaction check hook in orchestrator scripts",
+      "description": "Source: code-review REQ-1776233067. Severity: HIGH. Evidence: start-work.sh and create-requirement.sh call compact-context.sh check without providing stdin input, so the check reads nothing (0 tokens) and always reports OK — the hook is a no-op. Impact: compaction check never detects when context is near limit during script execution. Required outcome: redesign the check hook so it works meaningfully in the bash script context — either pass an explicit empty input and accept the no-op behavior as informational, or have the AI agent call compact-context.sh directly rather than embedding it in bash scripts. The script-based hook should at minimum not hang on stdin.",
+      "status": "PROPOSED",
+      "priority": "HIGH",
+      "origin": "project",
+      "createdAt": "2026-04-15T06:47:29Z",
+      "updatedAt": "2026-04-15T06:47:29Z"
     }
   ],
   "requiresDeployment": true
