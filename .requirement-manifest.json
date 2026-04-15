@@ -312,11 +312,13 @@
       "id": "REQ-1776233067",
       "name": "auto-compacting",
       "description": "add a feature of auto-compacting context when the context window is about to reach the limit of the working LLM",
-      "status": "PROPOSED",
+      "status": "IN_PROGRESS",
       "priority": "MEDIUM",
       "origin": "project",
+      "notes": "Context-monitoring layer that triggers compaction at a configurable token threshold, preserving active state and logging events; affects scripts, skills, and prompt templates.",
       "createdAt": "2026-04-15T06:04:27Z",
-      "updatedAt": "2026-04-15T06:04:27Z"
+      "updatedAt": "2026-04-15T06:07:10Z",
+      "worktreeId": "feature/REQ-1776233067-auto-compacting"
     }
   ],
   "requiresDeployment": true

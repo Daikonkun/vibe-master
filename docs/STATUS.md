@@ -5,8 +5,10 @@ Kanban-style view of all requirements and their current state.
 ## PROPOSED (0)
 
 
-## IN_PROGRESS (0)
+## IN_PROGRESS (1)
 
+* REQ-1776233067: auto-compacting (priority: MEDIUM)
+  - Worktree: feature/REQ-1776233067-auto-compacting
 
 ## CODE_REVIEW (0)
 
@@ -77,8 +79,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 
 ## Stats
-- Total Requirements: 25
-- Deployed: 22 (88%)
+- Total Requirements: 26
+- Deployed: 22 (84%)
 - Merged (awaiting deploy): 0
-- In Progress: 0
+- In Progress: 1
 - Blocked: 0

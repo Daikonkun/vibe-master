@@ -29,10 +29,11 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1775718117 | Review follow-up: update agent docs for deployment-conditional transitions | DEPLOYED | MEDIUM | feature/REQ-1775718117-review-follow-up-update-agent-docs-for-deployment-conditional-transitions | 2026-04-09 | 2026-04-09 |
 | REQ-1775721596 | rollback function | DEPLOYED | MEDIUM | feature/REQ-1775721596-rollback-function | 2026-04-09 | 2026-04-09 |
 | REQ-1776062513 | enhance e2e test skill | DEPLOYED | MEDIUM | feature/REQ-1776062513-enhance-e2e-test-skill | 2026-04-13 | 2026-04-13 |
+| REQ-1776233067 | auto-compacting | IN_PROGRESS | MEDIUM | feature/REQ-1776233067-auto-compacting | 2026-04-15 | 2026-04-15 |
 
 ## Status Breakdown
 - **Proposed**: 0
-- **In Progress**: 0
+- **In Progress**: 1
 - **Code Review**: 0
 - **Merged**: 0
 - **Deployed**: 22
@@ -45,6 +46,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-13T06:56:38Z
+* Last updated: 2026-04-15T06:07:11Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

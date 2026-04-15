@@ -240,6 +240,17 @@
       "createdAt": "2026-04-13T06:42:49Z",
       "status": "MERGED",
       "mergedAt": "2026-04-13T06:50:00Z"
+    },
+    {
+      "id": "feature/REQ-1776233067-auto-compacting",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776233067-auto-compacting",
+      "branch": "feature/REQ-1776233067-auto-compacting",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776233067"
+      ],
+      "createdAt": "2026-04-15T06:07:10Z",
+      "status": "ACTIVE"
     }
   ]
 }
