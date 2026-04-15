@@ -79,6 +79,14 @@ Then continue implementation in a dedicated worktree.
 
 During a `/bug-fix` session, if the fix requires implementing a **new function or feature** that does not yet exist in the project, do not silently build it inline. Instead, escalate it to a tracked requirement:
 
+## Auto-Compaction Awareness (REQ-1776233067)
+
+When auto-compaction fires during a debug session:
+- The compaction summary replaces older conversation turns but preserves active requirement IDs and current task state.
+- If critical debug context (stack traces, reproduction steps) was compacted, re-emit the essential state from the `compactionSummary` field.
+- Check `logs/compaction.log` for the full compaction record if needed.
+- The debug workflow is designed to continue correctly after compaction — no restart required.
+
 1. **Detect the need** — While proposing or applying a fix, recognise when the solution depends on functionality that is outside the scope of the current bug (e.g., a missing utility, a new API endpoint, or an unbuilt UI component).
 
 2. **Create a new REQ** — Run the create-requirement script to track the new work:

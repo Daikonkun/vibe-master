@@ -76,3 +76,11 @@ After creation:
 3. Distinguish must-fix items from optional improvements.
 4. Convert unresolved critical issues into REQ threads immediately.
 5. Ensure every thread has clear acceptance criteria.
+
+## Auto-Compaction Awareness (REQ-1776233067)
+
+When auto-compaction fires during a code review session:
+- The compaction summary replaces older conversation turns but preserves active requirement IDs and current review state.
+- If previously identified findings were compacted, re-emit them from the `compactionSummary` field before continuing.
+- Check `logs/compaction.log` for the full compaction record if needed.
+- The review workflow continues correctly after compaction — no restart required.

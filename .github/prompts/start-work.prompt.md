@@ -24,3 +24,5 @@ Constraints:
 - If the requirement spec file cannot be found, report the missing spec and stop before claiming plan persistence.
 
 **Superpowers Alignment** (REQ-1774685792): Compatible with `using-git-worktrees` skill. No changes to core logic or worktree-manager/SKILL.md.
+
+**Auto-Compaction** (REQ-1776233067): If `{{compacted_summary}}` is present in the context, use it to restore essential state (active requirement IDs, current task) before continuing. Check `logs/compaction.log` for full details if needed.
