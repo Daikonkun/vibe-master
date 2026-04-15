@@ -14,15 +14,6 @@ SLUG=$(echo "$REQ_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | s
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 
-# Auto-compaction check (REQ-1776233067)
-if [ -f "$PROJECT_ROOT/scripts/compact-context.sh" ]; then
-  COMPACT_RESULT="$($PROJECT_ROOT/scripts/compact-context.sh check 2>/dev/null || true)"
-  if echo "$COMPACT_RESULT" | grep -q "COMPACTION_NEEDED"; then
-    echo "⚠️  $COMPACT_RESULT"
-    echo "   Consider running compaction before proceeding."
-  fi
-fi
-
 echo "📝 Creating requirement: $REQ_ID"
 echo "   Name: $REQ_NAME"
 echo "   Priority: $REQ_PRIORITY"

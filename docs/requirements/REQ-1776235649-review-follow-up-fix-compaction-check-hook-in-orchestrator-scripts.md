@@ -11,10 +11,10 @@ Source: code-review REQ-1776233067. Severity: HIGH. Evidence: start-work.sh and 
 
 ## Success Criteria
 
-- [ ] The compaction check hook in `scripts/start-work.sh` and `scripts/create-requirement.sh` does not hang waiting for stdin input
-- [ ] The hook either (a) passes explicit empty input so it exits cleanly as a no-op, or (b) is removed from bash scripts entirely with guidance that the AI agent should call `compact-context.sh` directly
-- [ ] `copilot-instructions.md` documents the recommended way to invoke compaction checks (agent-driven vs script-embedded)
-- [ ] Running `scripts/start-work.sh` or `scripts/create-requirement.sh` without any piped input completes without hanging or error
+- [x] The compaction check hook in `scripts/start-work.sh` and `scripts/create-requirement.sh` does not hang waiting for stdin input
+- [x] The hook either (a) passes explicit empty input so it exits cleanly as a no-op, or (b) is removed from bash scripts entirely with guidance that the AI agent should call `compact-context.sh` directly
+- [x] `copilot-instructions.md` documents the recommended way to invoke compaction checks (agent-driven vs script-embedded)
+- [x] Running `scripts/start-work.sh` or `scripts/create-requirement.sh` without any piped input completes without hanging or error
 
 ## Technical Notes
 
