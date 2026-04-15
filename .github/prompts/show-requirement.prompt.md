@@ -5,11 +5,13 @@ argument-hint: "<REQ-ID>"
 agent: "Vibe Agent Orchestrator"
 ---
 
+**Platform Note**: On Windows, use `scripts/dispatch.ps1 <name>` instead of `scripts/<name>.sh`. On Linux/macOS, use `scripts/dispatch.sh <name>`.
+
 Display a requirement with all known metadata and specification content.
 
 Workflow:
 1. Parse one required argument: requirement ID like `REQ-1774630000`.
-2. Run `scripts/show-requirement.sh` with that requirement ID.
+2. Run `scripts/dispatch.ps1 show-requirement` (or `scripts/dispatch.sh show-requirement` on Linux/macOS) with that requirement ID.
 3. Summarize status, priority, worktree, and last updated timestamp.
 4. If the spec contains a `## Development Plan` section, surface the first pending step (or "Plan is up to date") as the recommended restart point.
 5. Include the spec file path when present.

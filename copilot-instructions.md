@@ -95,6 +95,15 @@ If multiple requirements:
 - Dependency chain → order them in worktree creation
 - Same goal, different users → consolidate into single requirement with variants
 
+## Cross-Platform Support (Windows + Linux/macOS)
+
+All scripts have both `.sh` (bash) and `.ps1` (PowerShell 5.1+) variants. Use the dispatch layer for automatic OS detection:
+
+- **Linux/macOS**: `bash scripts/dispatch.sh <script-name> [args...]`
+- **Windows**: `powershell -ExecutionPolicy Bypass -File scripts\dispatch.ps1 <script-name> [args...]`
+
+PowerShell scripts use native `ConvertFrom-Json`/`ConvertTo-Json` instead of `jq`, so no external dependencies are needed on Windows. Named parameters replace positional arguments (e.g., `-Name`, `-Description`, `-ReqId`).
+
 ## Notes for AI-Only Workflow
 - No manual git cherry-pick or complex rebasing — agent handles it
 - No context switching between files and CLI — everything happens here

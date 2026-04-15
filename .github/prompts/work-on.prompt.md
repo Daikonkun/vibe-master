@@ -29,8 +29,8 @@ Workflow:
    - After each step, check the Success Criteria — mark items done as they are satisfied.
    - Continue until all Success Criteria are met or the user intervenes.
 7. **Confirm before advancing**: Once all criteria appear met, ask the user **once** whether to advance the status to the next lifecycle state. If the user confirms (e.g. "yes", "go ahead", "do it"), proceed **immediately** to step 8 — do not re-ask or loop back.
-8. **Advance status**: Run `scripts/update-requirement-status.sh <REQ-ID> <next-status>` to persist the transition. This step must execute as soon as the user confirms in step 7.
-9. **Regenerate docs**: Run `scripts/regenerate-docs.sh` to keep REQUIREMENTS.md, STATUS.md, ROADMAP.md, and DEPENDENCIES.md in sync.
+8. **Advance status**: Run `scripts/dispatch.ps1 update-requirement-status <REQ-ID> <next-status>` (or `scripts/dispatch.sh` on Linux/macOS) to persist the transition. This step must execute as soon as the user confirms in step 7.
+9. **Regenerate docs**: Run `scripts/dispatch.ps1 regenerate-docs` (or `scripts/dispatch.sh regenerate-docs` on Linux/macOS) to keep REQUIREMENTS.md, STATUS.md, ROADMAP.md, and DEPENDENCIES.md in sync.
 10. Summarize what was done and the new status.
 
 Constraints:

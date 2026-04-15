@@ -5,12 +5,14 @@ argument-hint: "[project-name]"
 agent: "Vibe Agent Orchestrator"
 ---
 
+**Platform Note**: On Windows, use `scripts/dispatch.ps1 <name>` instead of `scripts/<name>.sh`. On Linux/macOS, use `scripts/dispatch.sh <name>`.
+
 Initialize a vibe project by clearing Vibe Master template REQs and preparing clean manifests.
 
 Workflow:
 1. **Parse arguments**: Accept an optional `[project-name]` (default: "My Vibe Project").
 2. **Self-protection check**: Verify that `.vibe-master-source` does **not** exist in the project root. If it does, report that this is the Vibe Master source repository and refuse to execute. This prevents accidental clearing of the template's own REQ history.
-3. **Run `scripts/init-project.sh`** with the project name argument. The script will:
+3. **Run `scripts/dispatch.ps1 init-project`** (or `scripts/dispatch.sh init-project` on Linux/macOS) with the project name argument. The script will:
    a. Remove only REQs tagged with `"origin": "vibe-master"` from `.requirement-manifest.json`.
    b. Delete only the corresponding `docs/requirements/REQ-*.md` spec files for those REQs.
    c. Preserve all REQs where `origin` is `"project"` or absent (treated as project-owned).
@@ -23,5 +25,5 @@ Workflow:
 Constraints:
 - Never run on the Vibe Master source repo (detected by `.vibe-master-source` sentinel).
 - Never delete REQs where `origin` is `"project"` or where `origin` is missing/null.
-- If `init-project.sh` fails, surface the exact error and stop.
+- If `dispatch.ps1 init-project` (or `dispatch.sh init-project`) fails, surface the exact error and stop.
 - If there are no Vibe Master REQs to clear, report that the project is already initialized.

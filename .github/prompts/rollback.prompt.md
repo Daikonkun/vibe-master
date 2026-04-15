@@ -10,7 +10,7 @@ Roll back a merged requirement to restore the project to its pre-merge state.
 Workflow:
 1. Parse required `REQ-ID` and optional base branch (default `main`).
 2. Validate that the requirement exists and is in `MERGED` or `DEPLOYED` status.
-3. Run `scripts/rollback-requirement.sh` with the parsed arguments.
+3. Run `scripts/dispatch.ps1 rollback-requirement` (or `scripts/dispatch.sh rollback-requirement` on Linux/macOS) with the parsed arguments.
 4. Report the reverted merge commit, restored branch/worktree, and updated status.
 
 Constraints:

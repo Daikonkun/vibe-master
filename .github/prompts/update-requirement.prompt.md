@@ -9,7 +9,7 @@ Update a requirement status using the dedicated lifecycle validator.
 
 Workflow:
 1. Parse required `REQ-ID` and `NEW-STATUS`, plus optional flags `--force` and `--no-refresh`.
-2. Run `scripts/update-requirement-status.sh` with the provided arguments.
+2. Run `scripts/dispatch.ps1 update-requirement-status` (or `scripts/dispatch.sh update-requirement-status` on Linux/macOS) with the provided arguments.
 3. Return the transition result (from -> to) and whether docs were regenerated.
 4. If successful, confirm where to verify output: `REQUIREMENTS.md` and `docs/STATUS.md`.
 

@@ -9,7 +9,7 @@ Merge and clean up a completed worktree branch.
 
 Workflow:
 1. Parse required branch and optional base branch (default main).
-2. Run scripts/worktree-merge.sh with the parsed arguments.
+2. Run `scripts/dispatch.ps1 worktree-merge` (or `scripts/dispatch.sh worktree-merge` on Linux/macOS) with the parsed arguments.
 3. Report merge outcome, removed worktree path, and updated requirement IDs.
 
 Constraints:

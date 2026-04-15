@@ -5,10 +5,12 @@ argument-hint: "[refresh]"
 agent: "Vibe Agent Orchestrator"
 ---
 
+**Platform Note**: On Windows, use `scripts/dispatch.ps1 <name>` instead of `scripts/<name>.sh`. On Linux/macOS, use `scripts/dispatch.sh <name>`.
+
 Show the current requirement dashboard for this workspace.
 
 Workflow:
-1. Run `scripts/status.sh` from the project root.
+1. Run `scripts/dispatch.ps1 status` (or `scripts/dispatch.sh status` on Linux/macOS) from the project root.
 2. Return a concise summary with:
    - total requirement count
    - outstanding requirement count (excluding MERGED, DEPLOYED, CANCELLED)

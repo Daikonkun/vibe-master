@@ -5,11 +5,13 @@ argument-hint: "<REQ-ID> [base-branch]"
 agent: "Vibe Agent Orchestrator"
 ---
 
+**Platform Note**: On Windows, use `scripts/dispatch.ps1 <name>` instead of `scripts/<name>.sh`. On Linux/macOS, use `scripts/dispatch.sh <name>`.
+
 Start implementation work for a requirement in an isolated git worktree.
 
 Workflow:
 1. Parse required `REQ-ID` and optional base branch (default `main`).
-2. Run `scripts/start-work.sh` with those arguments.
+2. Run `scripts/dispatch.ps1 start-work` (or `scripts/dispatch.sh start-work` on Linux/macOS) with those arguments.
 3. Locate the requirement spec file in `docs/requirements/` for that `REQ-ID` and read its Description, Success Criteria, and Technical Notes.
 4. Create or update a `## Development Plan` section in that spec file with 3-5 ordered, actionable steps tied to concrete repo files/scripts/commands.
 5. Keep the plan idempotent: if `## Development Plan` already exists, update that section instead of adding a duplicate header.

@@ -8,7 +8,7 @@ agent: "Vibe Agent Orchestrator"
 Show active worktree mappings.
 
 Workflow:
-1. Run scripts/worktree-list.sh.
+1. Run `scripts/dispatch.ps1 worktree-list` (or `scripts/dispatch.sh worktree-list` on Linux/macOS).
 2. Return active worktree IDs, paths, base branches, and linked requirement IDs.
 3. Include a concise active count summary.
 

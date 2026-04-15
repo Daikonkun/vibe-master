@@ -5,10 +5,12 @@ argument-hint: "(no arguments)"
 agent: "Vibe Agent Orchestrator"
 ---
 
+**Platform Note**: On Windows, use `scripts/dispatch.ps1 <name>` instead of `scripts/<name>.sh`. On Linux/macOS, use `scripts/dispatch.sh <name>`.
+
 Show the latest roadmap for requirements.
 
 Workflow:
-1. Run scripts/roadmap.sh.
+1. Run `scripts/dispatch.ps1 roadmap` (or `scripts/dispatch.sh roadmap` on Linux/macOS).
 2. Return the roadmap output and mention the source file docs/ROADMAP.md.
 
 Constraints:

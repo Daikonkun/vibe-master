@@ -1,20 +1,20 @@
-# Project Status
+﻿# Project Status
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (0)
+##  $args[0].Groups[1].Value.ToUpper() ROPOSED (0)
 
 
-## IN_PROGRESS (0)
+##  $args[0].Groups[1].Value.ToUpper() N  $args[0].Groups[1].Value.ToUpper() ROGRESS (0)
 
 
-## CODE_REVIEW (0)
+##  $args[0].Groups[1].Value.ToUpper() ODE  $args[0].Groups[1].Value.ToUpper() EVIEW (0)
 
 
-## MERGED (0)
+##  $args[0].Groups[1].Value.ToUpper() ERGED (0)
 
 
-## DEPLOYED (4)
+##  $args[0].Groups[1].Value.ToUpper() EPLOYED (4)
 
 * REQ-1775716475: instruction on deployment (priority: MEDIUM)
   - Worktree: feature/REQ-1775716475-instruction-on-deployment
@@ -25,13 +25,13 @@ Kanban-style view of all requirements and their current state.
 * REQ-1776062513: enhance e2e test skill (priority: MEDIUM)
   - Worktree: feature/REQ-1776062513-enhance-e2e-test-skill
 
-## BLOCKED (0)
+##  $args[0].Groups[1].Value.ToUpper() LOCKED (0)
 
 
-## BACKLOG (0)
+##  $args[0].Groups[1].Value.ToUpper() ACKLOG (0)
 
 
-## CANCELLED (0)
+##  $args[0].Groups[1].Value.ToUpper() ANCELLED (0)
 
 
 ## Stats
@@ -40,3 +40,4 @@ Kanban-style view of all requirements and their current state.
 - Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0
+

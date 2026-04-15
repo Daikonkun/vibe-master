@@ -14,9 +14,25 @@ git remote add origin <your-new-repo>
 
 ### 2. Initialize Your Project
 Run the init script to reset manifests and remove Vibe Master's own requirement history:
+
+**Linux/macOS:**
 ```bash
 bash scripts/init-project.sh "My Project Name"
 ```
+
+**Windows (PowerShell):**
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\init-project.ps1 -ProjectName "My Project Name"
+```
+
+**Cross-platform (auto-detects OS):**
+```bash
+# Linux/macOS:
+bash scripts/dispatch.sh init-project "My Project Name"
+# Windows:
+powershell -ExecutionPolicy Bypass -File scripts\dispatch.ps1 init-project "My Project Name"
+```
+
 This will:
 - Reset `.requirement-manifest.json` and `.worktree-manifest.json` to empty
 - Remove historical `REQ-*.md` files from `docs/requirements/` (example files are preserved)
@@ -191,20 +207,21 @@ rm -rf .upgrade-template
 │   └── DEPENDENCIES.md                    # Dependency graph
 │
 └── scripts/
-    ├── create-requirement.sh               # CLI: create new requirement
-    ├── dependency-graph.sh                 # CLI: regenerate + show dependency graph
-    ├── generate-plan.sh                    # CLI: generate/update Development Plan in a spec
-    ├── init-project.sh                     # CLI: initialize project from template
-    ├── list-requirements.sh                # CLI: list requirements by optional status
-    ├── regenerate-docs.sh                  # CLI: regenerate all docs
-    ├── roadmap.sh                          # CLI: regenerate + show roadmap
-    ├── rollback-requirement.sh             # CLI: revert a merged requirement
-    ├── show-requirement.sh                 # CLI: display requirement details
-    ├── start-work.sh                       # CLI: create worktree + set IN_PROGRESS
-    ├── status.sh                           # CLI: regenerate + show status summary
-    ├── update-requirement-status.sh        # CLI: validate and update requirement status
-    ├── worktree-list.sh                    # CLI: list active worktrees from manifest
-    └── worktree-merge.sh                   # CLI: merge branch + clean worktree
+    ├── create-requirement.sh / .ps1         # CLI: create new requirement
+    ├── dependency-graph.sh / .ps1           # CLI: regenerate + show dependency graph
+    ├── dispatch.sh / .ps1                   # Cross-platform script dispatcher
+    ├── generate-plan.sh / .ps1              # CLI: generate/update Development Plan in a spec
+    ├── init-project.sh / .ps1               # CLI: initialize project from template
+    ├── list-requirements.sh / .ps1          # CLI: list requirements by optional status
+    ├── regenerate-docs.sh / .ps1            # CLI: regenerate all docs
+    ├── roadmap.sh / .ps1                    # CLI: regenerate + show roadmap
+    ├── rollback-requirement.sh / .ps1       # CLI: revert a merged requirement
+    ├── show-requirement.sh / .ps1           # CLI: display requirement details
+    ├── start-work.sh / .ps1                 # CLI: create worktree + set IN_PROGRESS
+    ├── status.sh / .ps1                     # CLI: regenerate + show status summary
+    ├── update-requirement-status.sh / .ps1  # CLI: validate and update requirement status
+    ├── worktree-list.sh / .ps1              # CLI: list active worktrees from manifest
+    └── worktree-merge.sh / .ps1             # CLI: merge branch + clean worktree
 ```
 
 ---
@@ -219,7 +236,11 @@ Best via slash command for interactive guidance:
 
 Or CLI:
 ```bash
+# Linux/macOS:
 ./scripts/create-requirement.sh "User Authentication" "Email/password login system" HIGH
+
+# Windows (PowerShell):
+powershell -ExecutionPolicy Bypass -File scripts\create-requirement.ps1 -Name "User Authentication" -Description "Email/password login system" -Priority HIGH
 ```
 
 ### Starting Work on a Requirement
@@ -328,7 +349,11 @@ Graph showing which requirements depend on others
 
 **Regenerate manually**:
 ```bash
+# Linux/macOS:
 ./scripts/regenerate-docs.sh
+
+# Windows (PowerShell):
+powershell -ExecutionPolicy Bypass -File scripts\regenerate-docs.ps1
 ```
 
 ---
@@ -400,11 +425,44 @@ Edit `copilot-instructions.md` and `.github/agents/orchestrator.agent.md` to ref
 ### Adjust Requirement ID Format
 Currently uses timestamp: `REQ-{unix-timestamp}` (e.g., `REQ-1704067200`)
 
-To use sequential IDs instead, modify `scripts/create-requirement.sh`:
+To use sequential IDs instead, modify `scripts/create-requirement.sh` or `scripts/create-requirement.ps1`:
 ```bash
-# Current: REQ-$(date +%s)
+# Current (bash): REQ-$(date +%s)
 # Alternative: REQ-$(printf "%03d" $COUNT)
 ```
+```powershell
+# Current (PowerShell): REQ-$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())
+# Alternative: REQ-{0:D3} -f $COUNT
+```
+
+---
+
+## 🪟 Windows Support
+
+This project supports both Linux/macOS (bash) and Windows (PowerShell 5.1+). Each script has both `.sh` and `.ps1` variants.
+
+### Cross-Platform Dispatch
+Use `scripts/dispatch.sh` (Linux/macOS) or `scripts/dispatch.ps1` (Windows) to auto-detect the OS and call the correct script variant:
+
+```bash
+# Linux/macOS:
+bash scripts/dispatch.sh create-requirement "Feature" "Description"
+
+# Windows:
+powershell -ExecutionPolicy Bypass -File scripts\dispatch.ps1 create-requirement "Feature" "Description"
+```
+
+### PowerShell Script Parameters
+PowerShell scripts use named parameters instead of positional arguments:
+
+| Bash | PowerShell |
+|------|------------|
+| `./scripts/create-requirement.sh "Name" "Desc" HIGH` | `powershell -ExecutionPolicy Bypass -File scripts\create-requirement.ps1 -Name "Name" -Description "Desc" -Priority HIGH` |
+| `./scripts/start-work.sh REQ-123 main` | `powershell -ExecutionPolicy Bypass -File scripts\start-work.ps1 -ReqId REQ-123 -BaseBranch main` |
+| `./scripts/update-requirement-status.sh REQ-123 CODE_REVIEW` | `powershell -ExecutionPolicy Bypass -File scripts\update-requirement-status.ps1 -ReqId REQ-123 -NewStatus CODE_REVIEW` |
+
+### No `jq` Required on Windows
+The PowerShell scripts use native `ConvertFrom-Json`/`ConvertTo-Json` cmdlets instead of `jq`, so no external dependencies are needed on Windows.
 
 ### Add Custom Status Types
 Edit:

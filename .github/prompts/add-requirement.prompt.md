@@ -5,19 +5,21 @@ argument-hint: "\"Feature name\" \"Detailed description\" [CRITICAL|HIGH|MEDIUM|
 agent: "Vibe Agent Orchestrator"
 ---
 
+**Platform Note**: On Windows, use `scripts/dispatch.ps1 <name>` instead of `scripts/<name>.sh`. On Linux/macOS, use `scripts/dispatch.sh <name>`.
+
 Create a new requirement in the current workspace.
 
 Workflow:
 1. Parse the arguments as `name`, `description`, and optional `priority` with a default of `MEDIUM`.
 2. Validate that `name` and `description` are present and that `priority` is one of `CRITICAL`, `HIGH`, `MEDIUM`, or `LOW`.
-3. Run [create-requirement.sh](../../scripts/create-requirement.sh) with the parsed arguments.
+3. Run `scripts/dispatch.ps1 create-requirement` (or `scripts/dispatch.sh create-requirement` on Linux/macOS) with the parsed arguments.
 4. Read the generated spec file and enrich placeholder sections:
    - **Success Criteria**: Replace the placeholder items (`Criterion 1/2/3`) with 3–5 testable acceptance criteria derived from the description.
    - **Technical Notes**: Analyze the description and write implementation considerations — approach, affected areas, and risks.
    - **Dependencies**: Scan the description for references to other requirement IDs (e.g., `REQ-XXXXXXXXXX`). List any found; otherwise write "None".
    - **Worktree**: Leave as-is (populated later by `/start-work`).
    - Update the requirement's `notes` field in `.requirement-manifest.json` with a one-line technical summary.
-5. Run [regenerate-docs.sh](../../scripts/regenerate-docs.sh) so [REQUIREMENTS.md](../../REQUIREMENTS.md) and the docs remain in sync.
+5. Run `scripts/dispatch.ps1 regenerate-docs` (or `scripts/dispatch.sh regenerate-docs` on Linux/macOS) so [REQUIREMENTS.md](../../REQUIREMENTS.md) and the docs remain in sync.
 6. Summarize the created requirement ID, the generated spec path, and the next recommended step.
 
 Constraints:

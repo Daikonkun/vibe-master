@@ -5,11 +5,13 @@ argument-hint: "[PROPOSED|IN_PROGRESS|CODE_REVIEW|MERGED|DEPLOYED|BLOCKED|BACKLO
 agent: "Vibe Agent Orchestrator"
 ---
 
+**Platform Note**: On Windows, use `scripts/dispatch.ps1 <name>` instead of `scripts/<name>.sh`. On Linux/macOS, use `scripts/dispatch.sh <name>`.
+
 List requirements from the current workspace manifest.
 
 Workflow:
 1. Parse optional status argument.
-2. Run scripts/list-requirements.sh with the status filter when provided.
+2. Run `scripts/dispatch.ps1 list-requirements` (or `scripts/dispatch.sh list-requirements` on Linux/macOS) with the status filter when provided.
 3. Return the list and a short summary count.
 
 Constraints:
