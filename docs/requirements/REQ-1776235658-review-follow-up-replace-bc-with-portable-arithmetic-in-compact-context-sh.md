@@ -1,7 +1,7 @@
 # Review follow-up: replace bc with portable arithmetic in compact-context.sh
 
 **ID**: REQ-1776235658  
-**Status**: CODE_REVIEW  
+**Status**: MERGED  
 **Priority**: MEDIUM  
 **Created**: 2026-04-15T06:47:38Z  
 

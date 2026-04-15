@@ -31,13 +31,13 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1776062513 | enhance e2e test skill | DEPLOYED | MEDIUM | feature/REQ-1776062513-enhance-e2e-test-skill | 2026-04-13 | 2026-04-13 |
 | REQ-1776233067 | auto-compacting | MERGED | MEDIUM | feature/REQ-1776233067-auto-compacting | 2026-04-15 | 2026-04-15 |
 | REQ-1776235649 | Review follow-up: fix compaction check hook in orchestrator scripts | MERGED | HIGH | feature/REQ-1776235649-review-follow-up-fix-compaction-check-hook-in-orchestrator-scripts | 2026-04-15 | 2026-04-15 |
-| REQ-1776235658 | Review follow-up: replace bc with portable arithmetic in compact-context.sh | CODE_REVIEW | MEDIUM | feature/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh | 2026-04-15 | 2026-04-15 |
+| REQ-1776235658 | Review follow-up: replace bc with portable arithmetic in compact-context.sh | MERGED | MEDIUM | feature/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh | 2026-04-15 | 2026-04-15 |
 
 ## Status Breakdown
 - **Proposed**: 0
 - **In Progress**: 0
-- **Code Review**: 1
-- **Merged**: 2
+- **Code Review**: 0
+- **Merged**: 3
 - **Deployed**: 22
 - **Blocked**: 0
 - **Backlog**: 0
@@ -48,6 +48,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-15T07:23:09Z
+* Last updated: 2026-04-15T07:26:20Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

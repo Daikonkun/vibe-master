@@ -8,17 +8,17 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
 
-* REQ-1776235658: Review follow-up: replace bc with portable arithmetic in compact-context.sh (priority: MEDIUM)
-  - Worktree: feature/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh
 
-## MERGED (2)
+## MERGED (3)
 
 * REQ-1776233067: auto-compacting (priority: MEDIUM)
   - Worktree: feature/REQ-1776233067-auto-compacting
 * REQ-1776235649: Review follow-up: fix compaction check hook in orchestrator scripts (priority: HIGH)
   - Worktree: feature/REQ-1776235649-review-follow-up-fix-compaction-check-hook-in-orchestrator-scripts
+* REQ-1776235658: Review follow-up: replace bc with portable arithmetic in compact-context.sh (priority: MEDIUM)
+  - Worktree: feature/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh
 
 ## DEPLOYED (22)
 
@@ -85,6 +85,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 28
 - Deployed: 22 (78%)
-- Merged (awaiting deploy): 2
+- Merged (awaiting deploy): 3
 - In Progress: 0
 - Blocked: 0
