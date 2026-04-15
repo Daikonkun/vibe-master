@@ -121,7 +121,7 @@ $NewWt = [PSCustomObject]@{
     createdAt = $Timestamp
     status = "ACTIVE"
 }
-$WtManifest.worktrees += $NewWt
+$WtManifest.worktrees = @($WtManifest.worktrees) + @($NewWt)
 $WtManifest | ConvertTo-Json -Depth 10 | Set-Content $WorktreeManifestPath -Encoding UTF8
 
 # Regenerate docs

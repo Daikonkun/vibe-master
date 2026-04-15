@@ -21,7 +21,7 @@ if (-not $NoRefresh) {
 }
 
 $Manifest = Get-Content $ReqManifestPath -Raw | ConvertFrom-Json
-$Reqs = $Manifest.requirements
+$Reqs = @($Manifest.requirements)
 $RequiresDeployment = $Manifest.requiresDeployment
 if ($null -eq $RequiresDeployment) { $RequiresDeployment = $true }
 
@@ -69,3 +69,17 @@ Write-Host "Outstanding details:"
 foreach ($Req in $Outstanding) {
     Write-Host "- $($Req.id) [$($Req.status)]: $($Req.name) (priority: $($Req.priority))"
 }
+
+Write-Host ""
+Write-Host "Completed:"
+if ($RequiresDeployment -eq $false) {
+    Write-Host "- MERGED (auto-completed): $MergedCount"
+    Write-Host "- DEPLOYED: $DeployedCount"
+    Write-Host "- TOTAL COMPLETED: $CompletedCount"
+} else {
+    Write-Host "- MERGED (awaiting deploy): $MergedCount"
+    Write-Host "- DEPLOYED: $DeployedCount"
+    Write-Host "- TOTAL COMPLETED: $CompletedCount"
+}
+Write-Host ""
+Write-Host "Status board: docs/STATUS.md"

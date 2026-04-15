@@ -24,7 +24,7 @@ Write-Host "Regenerating documentation..."
 
 # Load manifest
 $Manifest = Get-Content $ReqManifestPath -Raw | ConvertFrom-Json
-$Reqs = $Manifest.requirements
+$Reqs = @($Manifest.requirements)
 $RequiresDeployment = $Manifest.requiresDeployment
 if ($null -eq $RequiresDeployment) { $RequiresDeployment = $true }
 
@@ -54,7 +54,7 @@ $Sb = [System.Text.StringBuilder]::new()
 [void]$Sb.AppendLine("|---|---|---|---|---|---|---|")
 
 foreach ($Req in $Reqs) {
-    $Wt = if ($Req.worktreeId) { $Req.worktreeId } else { "\u2014" }
+    $Wt = if ($Req.worktreeId) { $Req.worktreeId } else { [char]0x2014 }
     $Created = $Req.createdAt.Split("T")[0]
     $Updated = $Req.updatedAt.Split("T")[0]
     [void]$Sb.AppendLine("| $($Req.id) | $($Req.name) | $($Req.status) | $($Req.priority) | $Wt | $Created | $Updated |")
@@ -70,7 +70,7 @@ foreach ($Req in $Reqs) {
 [void]$Sb.AppendLine("## Status Breakdown")
 foreach ($Status in $StatusList) {
     $Count = if ($StatusCounts[$Status]) { $StatusCounts[$Status] } else { 0 }
-    $Label = ($Status -replace "_", " " -replace "\b(\w)", { $args[0].Groups[1].Value.ToUpper() })
+    $Label = (Get-Culture).TextInfo.ToTitleCase(($Status -replace "_", " ").ToLower())
     [void]$Sb.AppendLine("- **$Label**: $Count")
 }
 [void]$Sb.AppendLine("")
@@ -84,7 +84,7 @@ $Now = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
 [void]$Sb.AppendLine("* Structured data: See ``.requirement-manifest.json``")
 [void]$Sb.AppendLine("* Worktree mapping: See ``.worktree-manifest.json``")
 
-Set-Content -Path (Join-Path $ProjectRoot "REQUIREMENTS.md") -Value $Sb.ToString() -Encoding UTF8
+[System.IO.File]::WriteAllText((Join-Path $ProjectRoot "REQUIREMENTS.md"), $Sb.ToString(), (New-Object System.Text.UTF8Encoding $false))
 
 # --- Generate STATUS.md ---
 Write-Host "Generating docs/STATUS.md..."
@@ -96,7 +96,7 @@ $Sb = [System.Text.StringBuilder]::new()
 
 foreach ($Status in $StatusList) {
     $Matching = @($Reqs | Where-Object { $_.status -eq $Status })
-    $Label = ($Status -replace "_", " " -replace "\b(\w)", { $args[0].Groups[1].Value.ToUpper() })
+    $Label = (Get-Culture).TextInfo.ToTitleCase(($Status -replace "_", " ").ToLower())
     [void]$Sb.AppendLine("## $Label ($($Matching.Count))")
     [void]$Sb.AppendLine("")
     foreach ($Req in $Matching) {
@@ -130,7 +130,7 @@ if ($RequiresDeployment -eq $false) {
 [void]$Sb.AppendLine("- In Progress: $InProgress")
 [void]$Sb.AppendLine("- Blocked: $Blocked")
 
-Set-Content -Path (Join-Path $ProjectRoot "docs\STATUS.md") -Value $Sb.ToString() -Encoding UTF8
+[System.IO.File]::WriteAllText((Join-Path $ProjectRoot "docs\STATUS.md"), $Sb.ToString(), (New-Object System.Text.UTF8Encoding $false))
 
 # --- Generate ROADMAP.md ---
 Write-Host "Generating docs/ROADMAP.md..."
@@ -155,7 +155,7 @@ foreach ($P in $PriorityOrder) {
     [void]$Sb.AppendLine("")
 }
 
-Set-Content -Path (Join-Path $ProjectRoot "docs\ROADMAP.md") -Value $Sb.ToString() -Encoding UTF8
+[System.IO.File]::WriteAllText((Join-Path $ProjectRoot "docs\ROADMAP.md"), $Sb.ToString(), (New-Object System.Text.UTF8Encoding $false))
 
 # --- Generate DEPENDENCIES.md ---
 Write-Host "Generating docs/DEPENDENCIES.md..."
@@ -177,7 +177,7 @@ foreach ($Req in $Reqs) {
     }
 }
 
-Set-Content -Path (Join-Path $ProjectRoot "docs\DEPENDENCIES.md") -Value $Sb.ToString() -Encoding UTF8
+[System.IO.File]::WriteAllText((Join-Path $ProjectRoot "docs\DEPENDENCIES.md"), $Sb.ToString(), (New-Object System.Text.UTF8Encoding $false))
 
 Write-Host ""
 Write-Host "Documentation regenerated successfully!"

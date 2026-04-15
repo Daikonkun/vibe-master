@@ -30,8 +30,10 @@ if ($IsWindows) {
     if (Test-Path $ShPath) {
         $GitBash = "C:\Program Files\Git\bin\bash.exe"
         if (Test-Path $GitBash) {
-            $UnixRoot = $ProjectRoot -replace '\\','/' -replace '^([A-Z]):', { "/$($args[0].Groups[1].Value.ToLower())" }
-            $UnixScript = $ShPath -replace '\\','/' -replace '^([A-Z]):', { "/$($args[0].Groups[1].Value.ToLower())" }
+            $UnixRoot = $ProjectRoot -replace '\\','/'
+            if ($UnixRoot -match '^([A-Z]):') { $UnixRoot = '/' + $Matches[1].ToLower() + $UnixRoot.Substring(2) }
+            $UnixScript = $ShPath -replace '\\','/'
+            if ($UnixScript -match '^([A-Z]):') { $UnixScript = '/' + $Matches[1].ToLower() + $UnixScript.Substring(2) }
             $EscapedArgs = $ScriptArgs | ForEach-Object { "'$_'" }
             & $GitBash -c "cd '$UnixRoot' && bash '$UnixScript' $($EscapedArgs -join ' ')"
             return

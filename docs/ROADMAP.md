@@ -1,4 +1,4 @@
-﻿# Roadmap
+# Roadmap
 
 Timeline view of all requirements organized by status and priority.
 
@@ -13,5 +13,4 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776062513: enhance e2e test skill
 
 ## Low Priority
-
 

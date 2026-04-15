@@ -29,20 +29,20 @@ $Content = Get-Content $SpecFile -Raw -Encoding UTF8
 # Extract key sections using regex
 $Description = "No description"
 if ($Content -match '(?s)## Description\s*\r?\n(.*?)## Success Criteria') {
-    $Lines = $Matches[1].Trim() -split "`n" | Where-Object { $_.Trim() } | Select-Object -First 1
-    $Description = $Lines.Trim().Substring(0, [math]::Min(80, $Lines.Trim().Length))
+    $Lines = @($Matches[1].Trim() -split "`n" | Where-Object { $_.Trim() } | Select-Object -First 1)
+    if ($Lines.Count -gt 0 -and $Lines[0]) { $Description = $Lines[0].Trim().Substring(0, [math]::Min(80, $Lines[0].Trim().Length)) }
 }
 
 $Success = "No success criteria"
 if ($Content -match '(?s)## Success Criteria\s*\r?\n(.*?)## Technical Notes') {
-    $Lines = $Matches[1].Trim() -split "`n" | Where-Object { $_.Trim() } | Select-Object -First 2
-    $Success = ($Lines -join " ").Trim().Substring(0, [math]::Min(100, ($Lines -join " ").Trim().Length))
+    $Lines = @($Matches[1].Trim() -split "`n" | Where-Object { $_.Trim() } | Select-Object -First 2)
+    if ($Lines.Count -gt 0) { $Joined = ($Lines -join " ").Trim(); $Success = $Joined.Substring(0, [math]::Min(100, $Joined.Length)) }
 }
 
 $TechNotes = "No technical notes"
 if ($Content -match '(?s)## Technical Notes\s*\r?\n(.*?)## Dependencies') {
-    $Lines = $Matches[1].Trim() -split "`n" | Where-Object { $_.Trim() } | Select-Object -First 1
-    $TechNotes = $Lines.Trim().Substring(0, [math]::Min(100, $Lines.Trim().Length))
+    $Lines = @($Matches[1].Trim() -split "`n" | Where-Object { $_.Trim() } | Select-Object -First 1)
+    if ($Lines.Count -gt 0 -and $Lines[0]) { $TechNotes = $Lines[0].Trim().Substring(0, [math]::Min(100, $Lines[0].Trim().Length)) }
 }
 
 $RelSpec = "docs/requirements/$(Split-Path $SpecFile -Leaf)"

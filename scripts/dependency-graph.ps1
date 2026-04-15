@@ -8,7 +8,7 @@ $ProjectRoot = git rev-parse --show-toplevel 2>$null
 if (-not $ProjectRoot) { $ProjectRoot = $PWD.Path }
 
 $RegenScript = Join-Path $ProjectRoot "scripts\regenerate-docs.ps1"
-if (Test-Path $RegenScript) { & $RegenScript }
+if (Test-Path $RegenScript) { & $RegenScript 2>&1 | Out-Null }
 
 $DepFile = Join-Path $ProjectRoot "docs\DEPENDENCIES.md"
 if (Test-Path $DepFile) {

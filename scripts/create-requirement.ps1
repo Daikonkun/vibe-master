@@ -53,7 +53,7 @@ $NewReq = [PSCustomObject]@{
     createdAt = $Timestamp
     updatedAt = $Timestamp
 }
-$Manifest.requirements += $NewReq
+$Manifest.requirements = @($Manifest.requirements) + @($NewReq)
 $Manifest | ConvertTo-Json -Depth 10 | Set-Content $ManifestPath -Encoding UTF8
 
 # Create detailed spec file
@@ -105,3 +105,13 @@ Set-Content -Path $SpecPath -Value $SpecContent -Encoding UTF8
 Write-Host ""
 Write-Host "Requirement created: $ReqId"
 Write-Host "   Spec: docs/requirements/$ReqId-$Slug.md"
+
+# Git commit
+git -C $ProjectRoot add .requirement-manifest.json REQUIREMENTS.md docs/STATUS.md docs/ROADMAP.md docs/DEPENDENCIES.md docs/requirements/ 2>$null
+git -C $ProjectRoot commit -m "chore: create requirement $ReqId" --no-verify 2>$null
+
+Write-Host ""
+Write-Host "Next steps:"
+Write-Host "  1. Review the specification file"
+Write-Host "  2. Run: /start-work $ReqId"
+Write-Host "  3. This will create a git worktree for isolated development"

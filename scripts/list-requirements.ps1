@@ -24,7 +24,7 @@ if ($StatusFilter -and $ValidStatuses -notcontains $StatusFilter.ToUpper()) {
 }
 
 $Manifest = Get-Content $ReqManifestPath -Raw | ConvertFrom-Json
-$Reqs = $Manifest.requirements
+$Reqs = @($Manifest.requirements)
 
 if ($StatusFilter) {
     $Reqs = @($Reqs | Where-Object { $_.status -eq $StatusFilter.ToUpper() })

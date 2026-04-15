@@ -158,7 +158,7 @@ $RegenScript = Join-Path $ProjectRoot "scripts\regenerate-docs.ps1"
 if (Test-Path $RegenScript) { & $RegenScript }
 
 # Git commit
-git -C $ProjectRoot add -A
+git -C $ProjectRoot add .requirement-manifest.json .worktree-manifest.json REQUIREMENTS.md docs/STATUS.md docs/ROADMAP.md docs/DEPENDENCIES.md docs/requirements/ 2>$null
 git -C $ProjectRoot commit -m "chore: rollback $ReqId" --no-verify 2>$null
 
 Write-Host "Rollback complete for $ReqId"
