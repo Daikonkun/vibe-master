@@ -348,11 +348,13 @@
       "id": "REQ-1776238348",
       "name": "init-project script enhancement",
       "description": "some DEPLOYED REQs still exists when I run the init command to start a new project. also the REQ docs in requirements are not cleared after running the init for the other project. fix this carefully, do not clear the current vibe master project.",
-      "status": "PROPOSED",
+      "status": "IN_PROGRESS",
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-15T07:32:28Z",
-      "updatedAt": "2026-04-15T07:32:28Z"
+      "updatedAt": "2026-04-15T07:34:45Z",
+      "notes": "Fix init-project.sh to clear ALL REQs (not just origin:vibe-master) and remove all REQ-* spec files from docs/requirements/ on init",
+      "worktreeId": "feature/REQ-1776238348-init-project-script-enhancement"
     }
   ],
   "requiresDeployment": true

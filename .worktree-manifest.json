@@ -276,6 +276,17 @@
       "createdAt": "2026-04-15T07:14:48Z",
       "status": "MERGED",
       "mergedAt": "2026-04-15T07:26:20Z"
+    },
+    {
+      "id": "feature/REQ-1776238348-init-project-script-enhancement",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776238348-init-project-script-enhancement",
+      "branch": "feature/REQ-1776238348-init-project-script-enhancement",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776238348"
+      ],
+      "createdAt": "2026-04-15T07:34:45Z",
+      "status": "ACTIVE"
     }
   ]
 }

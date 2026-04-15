@@ -59,3 +59,5 @@ REQ-1776235649: Review follow-up: fix compaction check hook in orchestrator scri
 
 REQ-1776235658: Review follow-up: replace bc with portable arithmetic in compact-context.sh (no dependencies)
 
+REQ-1776238348: init-project script enhancement (no dependencies)
+
