@@ -9,7 +9,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1774770291: Review follow-up: fix generate-plan.sh triple bug
 * [DEPLOYED] REQ-1774770298: Review follow-up: separate manifest schema from data
 * [DEPLOYED] REQ-1774770305: Review follow-up: add missing prompt files for advertised slash commands
-* [PROPOSED] REQ-1776235649: Review follow-up: fix compaction check hook in orchestrator scripts
+* [IN_PROGRESS] REQ-1776235649: Review follow-up: fix compaction check hook in orchestrator scripts
 
 ## Medium Priority
 * [DEPLOYED] REQ-1774628144: Review follow-up: align slash commands with actual skill invocations
