@@ -11,16 +11,14 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (3)
+## MERGED (2)
 
-* REQ-1776235649: Review follow-up: fix compaction check hook in orchestrator scripts (priority: HIGH)
-  - Worktree: feature/REQ-1776235649-review-follow-up-fix-compaction-check-hook-in-orchestrator-scripts
 * REQ-1776235658: Review follow-up: replace bc with portable arithmetic in compact-context.sh (priority: MEDIUM)
   - Worktree: feature/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh
 * REQ-1776238348: init-project script enhancement (priority: MEDIUM)
   - Worktree: feature/REQ-1776238348-init-project-script-enhancement
 
-## DEPLOYED (23)
+## DEPLOYED (24)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -68,6 +66,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1776062513-enhance-e2e-test-skill
 * REQ-1776233067: auto-compacting (priority: MEDIUM)
   - Worktree: feature/REQ-1776233067-auto-compacting
+* REQ-1776235649: Review follow-up: fix compaction check hook in orchestrator scripts (priority: HIGH)
+  - Worktree: feature/REQ-1776235649-review-follow-up-fix-compaction-check-hook-in-orchestrator-scripts
 
 ## BLOCKED (0)
 
@@ -86,7 +86,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 29
-- Deployed: 23 (79%)
-- Merged (awaiting deploy): 3
+- Deployed: 24 (82%)
+- Merged (awaiting deploy): 2
 - In Progress: 0
 - Blocked: 0
