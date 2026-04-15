@@ -5,13 +5,13 @@ Kanban-style view of all requirements and their current state.
 ## PROPOSED (0)
 
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1776235658: Review follow-up: replace bc with portable arithmetic in compact-context.sh (priority: MEDIUM)
   - Worktree: feature/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh
-
-## CODE_REVIEW (0)
-
 
 ## MERGED (2)
 
@@ -86,5 +86,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 28
 - Deployed: 22 (78%)
 - Merged (awaiting deploy): 2
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0

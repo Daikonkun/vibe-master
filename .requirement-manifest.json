@@ -336,12 +336,12 @@
       "id": "REQ-1776235658",
       "name": "Review follow-up: replace bc with portable arithmetic in compact-context.sh",
       "description": "Source: code-review REQ-1776233067. Severity: MEDIUM. Evidence: scripts/compact-context.sh uses bc for floating-point multiplication (CONTEXT_WINDOW_LIMIT * COMPACTION_THRESHOLD). The bc command is not available in all minimal environments and will cause script failure. Required outcome: replace bc with awk or shell integer arithmetic so the script works on systems without bc installed.",
-      "status": "IN_PROGRESS",
+      "status": "CODE_REVIEW",
       "priority": "MEDIUM",
       "origin": "project",
       "notes": "Replace bc with awk for threshold calculation in compact-context.sh; two occurrences in compact() and check() functions.",
       "createdAt": "2026-04-15T06:47:38Z",
-      "updatedAt": "2026-04-15T07:14:48Z",
+      "updatedAt": "2026-04-15T07:23:09Z",
       "worktreeId": "feature/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh"
     }
   ],

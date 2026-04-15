@@ -1,7 +1,7 @@
 # Review follow-up: replace bc with portable arithmetic in compact-context.sh
 
 **ID**: REQ-1776235658  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-04-15T06:47:38Z  
 
@@ -30,14 +30,11 @@ Source: code-review REQ-1776233067. Severity: MEDIUM. Evidence: scripts/compact-
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh.md`.
-   - **Summary**: Source: code-review REQ-1776233067. Severity: MEDIUM. Evidence: scripts/compact-
-   - **Key criteria**: - [ ] `scripts/compact-context.sh` no longer depends on `bc` — it uses `awk` or POSIX shell arithmet
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: **Approach**: Replace `echo "$LIMIT * $THRESHOLD" | bc | cut -d. -f1` with `awk "BEGIN {printf \"%d\
-3. Implement changes in the files/scripts referenced by the requirement spec.
+1. ✅ Replace `bc` invocations in `scripts/compact-context.sh` with `awk "BEGIN {printf \"%d\", $LIMIT * $THRESHOLD}"` — both `compact()` (line 79) and `check()` (line 174) updated.
+2. ✅ Verify arithmetic equivalence: `awk` produces `102400` for `128000 * 0.80`, matching the old `bc | cut -d. -f1` output.
+3. ✅ Confirm no remaining `bc` references in the script (`grep -n bc` returns zero hits).
 4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776235658` and verify success criteria are met.
+5. Validate with `./scripts/show-requirement.sh REQ-1776235658` and verify all success criteria are met.
 
 **Last updated**: 2026-04-15T07:14:48Z
 
