@@ -1,3 +1,0 @@
-This file marks this directory as the Vibe Master source repository.
-The /init command will refuse to run when this file is present.
-Do not delete this file from the Vibe Master template source.
