@@ -76,7 +76,7 @@ compact() {
 
   input_text="$(cat "$input")"
   total_tokens="$(estimate_tokens "$input_text")"
-  threshold_tokens="$(echo "$CONTEXT_WINDOW_LIMIT * $COMPACTION_THRESHOLD" | bc | cut -d. -f1)"
+  threshold_tokens="$(awk "BEGIN {printf \"%d\", $CONTEXT_WINDOW_LIMIT * $COMPACTION_THRESHOLD}")"
 
   if [ "$total_tokens" -lt "$threshold_tokens" ]; then
     # No compaction needed
@@ -171,7 +171,7 @@ check() {
 
   input_text="$(cat "$input")"
   total_tokens="$(estimate_tokens "$input_text")"
-  threshold_tokens="$(echo "$CONTEXT_WINDOW_LIMIT * $COMPACTION_THRESHOLD" | bc | cut -d. -f1)"
+  threshold_tokens="$(awk "BEGIN {printf \"%d\", $CONTEXT_WINDOW_LIMIT * $COMPACTION_THRESHOLD}")"
 
   if [ "$total_tokens" -ge "$threshold_tokens" ]; then
     echo "COMPACTION_NEEDED: ${total_tokens}/${threshold_tokens} tokens (threshold: ${COMPACTION_THRESHOLD}×${CONTEXT_WINDOW_LIMIT})"
