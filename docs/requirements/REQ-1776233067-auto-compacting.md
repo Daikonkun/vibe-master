@@ -1,7 +1,7 @@
 # auto-compacting
 
 **ID**: REQ-1776233067  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-04-15T06:04:27Z  
 
@@ -39,14 +39,11 @@ add a feature of auto-compacting context when the context window is about to rea
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776233067-auto-compacting.md`.
-   - **Summary**: add a feature of auto-compacting context when the context window is about to rea
-   - **Key criteria**: - [ ] Context compaction triggers automatically when token usage exceeds a configurable threshold (e
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: **Approach**: Implement a context-monitoring layer that tracks approximate token usage before each L
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776233067` and verify success criteria are met.
+1. **Create `scripts/compact-context.sh`** — Implement the core compaction routine: estimate token count from conversation history, compare against a configurable threshold (default 80%), and when exceeded, serialize history into a structured summary preserving system prompt, active requirement IDs, and last N turns. Log the event with timestamp, pre/post token counts, and summary.
+2. **Add threshold configuration** — Create a config file (e.g., `.vibe-config.json` or extend existing config) with fields: `contextWindowLimit`, `compactionThreshold`, `preservedTurns`, and `modelOverrides`. Update `scripts/compact-context.sh` to read from this config.
+3. **Integrate compaction into orchestrator scripts** — Hook `compact-context.sh` into `scripts/start-work.sh`, `scripts/create-requirement.sh`, and other scripts that make LLM calls, so compaction is checked before each call. Add a notification message to stdout when compaction fires.
+4. **Update skills and prompts** — In `.github/skills/debug/SKILL.md` and `.github/skills/code-review/SKILL.md`, add a note about compaction awareness. In `.github/prompts/`, add a `{{compacted_summary}}` placeholder to relevant prompt templates. Update `copilot-instructions.md` to document the auto-compaction behavior.
+5. **Validate end-to-end** — Run `./scripts/regenerate-docs.sh`, then `./scripts/show-requirement.sh REQ-1776233067`. Manually test compaction by simulating a long context session and verifying: threshold trigger, info preservation, log output, user notification, and workflow continuity.
 
 **Last updated**: 2026-04-15T06:07:11Z
 
@@ -56,11 +53,11 @@ None
 
 ## Worktree
 
-(Will be populated when work starts: feature/REQ-ID-slug)
+feature/REQ-1776233067-auto-compacting
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
+* **Linked Worktree**: /Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776233067-auto-compacting
+* **Branch**: feature/REQ-1776233067-auto-compacting
 * **Merged**: No
 * **Deployed**: No
