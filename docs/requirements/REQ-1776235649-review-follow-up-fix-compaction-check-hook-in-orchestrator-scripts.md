@@ -30,14 +30,11 @@ Source: code-review REQ-1776233067. Severity: HIGH. Evidence: start-work.sh and 
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776235649-review-follow-up-fix-compaction-check-hook-in-orchestrator-scripts.md`.
-   - **Summary**: Source: code-review REQ-1776233067. Severity: HIGH. Evidence: start-work.sh and 
-   - **Key criteria**: - [ ] The compaction check hook in `scripts/start-work.sh` and `scripts/create-requirement.sh` does 
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: **Recommended approach**: Remove the compaction check hook from bash scripts (start-work.sh, create-
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776235649` and verify success criteria are met.
+1. **Remove compaction check hook from `scripts/start-work.sh`** — Delete the `# Auto-compaction check (REQ-1776233067)` block (lines that call `compact-context.sh check`). The hook is a no-op since bash scripts don't have conversation context.
+2. **Remove compaction check hook from `scripts/create-requirement.sh`** — Delete the same compaction check block from this script.
+3. **Verify `copilot-instructions.md` already has agent-driven compaction guidance** — The "Agent-Driven Compaction" subsection was added in the parent feature's LOW fix commit. Confirm it's present and sufficient; if not, enhance it.
+4. **Test both scripts** — Run `scripts/start-work.sh` and `scripts/create-requirement.sh` to confirm they no longer call compact-context.sh and don't hang on stdin.
+5. **Regenerate docs** — Run `scripts/regenerate-docs.sh` and verify with `scripts/show-requirement.sh REQ-1776235649`.
 
 **Last updated**: 2026-04-15T07:02:37Z
 
@@ -47,11 +44,11 @@ REQ-1776233067 (auto-compacting — parent feature)
 
 ## Worktree
 
-(Will be populated when work starts: feature/REQ-ID-slug)
+feature/REQ-1776235649-review-follow-up-fix-compaction-check-hook-in-orchestrator-scripts
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
+* **Linked Worktree**: /Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776235649-review-follow-up-fix-compaction-check-hook-in-orchestrator-scripts
+* **Branch**: feature/REQ-1776235649-review-follow-up-fix-compaction-check-hook-in-orchestrator-scripts
 * **Merged**: No
 * **Deployed**: No
