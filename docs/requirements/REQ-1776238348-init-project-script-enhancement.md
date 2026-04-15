@@ -1,7 +1,7 @@
 # init-project script enhancement
 
 **ID**: REQ-1776238348  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-04-15T07:32:28Z  
 

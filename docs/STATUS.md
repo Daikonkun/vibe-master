@@ -11,12 +11,10 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (1)
+## MERGED (0)
 
-* REQ-1776238348: init-project script enhancement (priority: MEDIUM)
-  - Worktree: feature/REQ-1776238348-init-project-script-enhancement
 
-## DEPLOYED (25)
+## DEPLOYED (26)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -68,6 +66,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1776235649-review-follow-up-fix-compaction-check-hook-in-orchestrator-scripts
 * REQ-1776235658: Review follow-up: replace bc with portable arithmetic in compact-context.sh (priority: MEDIUM)
   - Worktree: feature/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh
+* REQ-1776238348: init-project script enhancement (priority: MEDIUM)
+  - Worktree: feature/REQ-1776238348-init-project-script-enhancement
 
 ## BLOCKED (0)
 
@@ -86,7 +86,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 29
-- Deployed: 25 (86%)
-- Merged (awaiting deploy): 1
+- Deployed: 26 (89%)
+- Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0
