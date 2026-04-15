@@ -343,6 +343,16 @@
       "createdAt": "2026-04-15T06:47:38Z",
       "updatedAt": "2026-04-15T07:26:20Z",
       "worktreeId": "feature/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh"
+    },
+    {
+      "id": "REQ-1776238348",
+      "name": "init-project script enhancement",
+      "description": "some DEPLOYED REQs still exists when I run the init command to start a new project. also the REQ docs in requirements are not cleared after running the init for the other project. fix this carefully, do not clear the current vibe master project.",
+      "status": "PROPOSED",
+      "priority": "MEDIUM",
+      "origin": "project",
+      "createdAt": "2026-04-15T07:32:28Z",
+      "updatedAt": "2026-04-15T07:32:28Z"
     }
   ],
   "requiresDeployment": true
