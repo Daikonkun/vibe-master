@@ -1,6 +1,6 @@
 #!/bin/bash
-# Initialize a new vibe project by clearing Vibe-Master-internal REQs
-# while preserving any project-specific REQs.
+# Initialize a new vibe project by clearing ALL existing REQs
+# so the project starts with a clean slate.
 
 set -e
 
@@ -37,37 +37,30 @@ chmod +x scripts/*.sh
 # Create docs/requirements directory
 mkdir -p docs/requirements
 
-# --- Selective REQ clearing ---
-# Only remove REQs with origin "vibe-master". Preserve project REQs.
+# --- Clear ALL REQs ---
+# The .vibe-master-source guard above prevents this from running on Vibe Master itself.
+# On a cloned/copied repo, all REQs (regardless of origin) are cleared for a fresh start.
 
 if [ -f "$PROJECT_ROOT/.requirement-manifest.json" ]; then
-  # Collect IDs of vibe-master-origin REQs to delete their spec files
-  VM_IDS=$(jq -r '.requirements[] | select(.origin == "vibe-master") | .id' "$PROJECT_ROOT/.requirement-manifest.json" 2>/dev/null || true)
+  # Count existing REQs for reporting
+  TOTAL=$(jq '[.requirements[]] | length' "$PROJECT_ROOT/.requirement-manifest.json" 2>/dev/null || echo 0)
 
-  # Remove spec files for vibe-master REQs only
+  # Remove all REQ-* spec files, preserving EXAMPLE-REQ-* templates
   CLEANED=0
-  if [ -n "$VM_IDS" ]; then
-    while IFS= read -r reqId; do
-      [ -z "$reqId" ] && continue
-      for f in docs/requirements/${reqId}-*.md; do
-        [ -f "$f" ] || continue
-        rm "$f"
-        CLEANED=$((CLEANED + 1))
-      done
-    done <<< "$VM_IDS"
-  fi
+  for f in "$PROJECT_ROOT"/docs/requirements/REQ-*.md; do
+    [ -f "$f" ] || continue
+    rm "$f"
+    CLEANED=$((CLEANED + 1))
+  done
 
-  echo "🧹 Cleared $CLEANED Vibe Master REQ spec file(s)"
+  echo "🧹 Cleared $CLEANED REQ spec file(s) (from $TOTAL total requirements)"
 
-  # Remove vibe-master REQs from manifest, keep project REQs
-  KEPT=$(jq '[.requirements[] | select(.origin != "vibe-master")] | length' "$PROJECT_ROOT/.requirement-manifest.json")
+  # Empty the requirements array and set the new project name
   jq --arg name "$PROJECT_NAME" '
     .projectName = $name |
-    .requirements = [.requirements[] | select(.origin != "vibe-master")]
+    .requirements = []
   ' "$PROJECT_ROOT/.requirement-manifest.json" > "$PROJECT_ROOT/.requirement-manifest.json.tmp" && \
     mv "$PROJECT_ROOT/.requirement-manifest.json.tmp" "$PROJECT_ROOT/.requirement-manifest.json"
-
-  echo "   Preserved $KEPT project REQ(s)"
 else
   echo "📋 Initializing requirement manifest..."
   cat > "$PROJECT_ROOT/.requirement-manifest.json" << 'JSON'
@@ -83,25 +76,15 @@ JSON
     mv "$PROJECT_ROOT/.requirement-manifest.json.tmp" "$PROJECT_ROOT/.requirement-manifest.json"
 fi
 
-# Selectively clear worktree manifest — remove entries linked to cleared vibe-master REQs
-echo "📋 Cleaning worktree manifest..."
-if [ -f "$PROJECT_ROOT/.worktree-manifest.json" ] && [ -n "$VM_IDS" ]; then
-  # Build a jq filter that removes worktrees whose requirementIds overlap with cleared REQ IDs
-  jq --argjson vmIds "$(echo "$VM_IDS" | jq -R -s 'split("\n") | map(select(length > 0))')" '
-    .worktrees = [.worktrees[]? | select(
-      [.requirementIds[]?] | any(. as $rid | $vmIds | index($rid)) | not
-    )]
-  ' "$PROJECT_ROOT/.worktree-manifest.json" > "$PROJECT_ROOT/.worktree-manifest.json.tmp" && \
-    mv "$PROJECT_ROOT/.worktree-manifest.json.tmp" "$PROJECT_ROOT/.worktree-manifest.json"
-else
-  cat > "$PROJECT_ROOT/.worktree-manifest.json" << 'JSON'
+# Reset worktree manifest — all REQs are cleared, so all worktree entries are stale
+echo "📋 Resetting worktree manifest..."
+cat > "$PROJECT_ROOT/.worktree-manifest.json" << 'JSON'
 {
   "$schema": ".worktree-manifest.schema.json",
   "version": "1.0",
   "worktrees": []
 }
 JSON
-fi
 
 # Regenerate docs
 if [ -f scripts/regenerate-docs.sh ]; then
