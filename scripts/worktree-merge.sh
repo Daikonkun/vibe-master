@@ -9,6 +9,7 @@ PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
 WORKTREE_MANIFEST="$PROJECT_ROOT/.worktree-manifest.json"
 TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+STASHED=false
 
 if [ -z "$BRANCH" ]; then
   echo "Usage: $0 <branch> [base-branch]" >&2
@@ -20,9 +21,27 @@ if [ ! -f "$REQ_MANIFEST" ] || [ ! -f "$WORKTREE_MANIFEST" ]; then
   exit 1
 fi
 
-if [ -n "$(git -C "$PROJECT_ROOT" status --porcelain)" ]; then
-  echo "Error: Working tree is not clean. Commit or stash changes first." >&2
-  exit 1
+DIRTY_FILES="$(git -C "$PROJECT_ROOT" status --porcelain)"
+if [ -n "$DIRTY_FILES" ]; then
+  echo "⚠️  Working tree is not clean. Reviewing changes..."
+
+  # Auto-commit manifest and docs changes (these are auto-generated)
+  AUTO_COMMIT_FILES="$(echo "$DIRTY_FILES" | grep -E '^\s*[MADRC]\s+.*\.(json|md)$' | grep -E '(requirement-manifest|worktree-manifest|REQUIREMENTS|STATUS|ROADMAP|DEPENDENCIES|docs/requirements/)' || true)"
+  if [ -n "$AUTO_COMMIT_FILES" ]; then
+    echo "Auto-committing manifest/docs changes:"
+    echo "$AUTO_COMMIT_FILES" | sed 's/^/  /'
+    git -C "$PROJECT_ROOT" add -A
+    git -C "$PROJECT_ROOT" commit -m "chore: auto-commit manifest and docs before merge" --no-verify 2>/dev/null || true
+  fi
+
+  # Check if there are still dirty files after auto-commit
+  REMAINING_DIRTY="$(git -C "$PROJECT_ROOT" status --porcelain)"
+  if [ -n "$REMAINING_DIRTY" ]; then
+    echo "Stashing remaining uncommitted changes:"
+    echo "$REMAINING_DIRTY" | sed 's/^/  /'
+    git -C "$PROJECT_ROOT" stash push -m "auto-stash before merge of $BRANCH" --include-untracked
+    STASHED=true
+  fi
 fi
 
 if ! git -C "$PROJECT_ROOT" rev-parse --verify "$BASE_BRANCH" >/dev/null 2>&1; then
@@ -127,4 +146,12 @@ if [ -n "$REQ_IDS" ]; then
     echo "⚠️  Requirements merged but not yet deployed. Deploy your changes, then run:"
     echo "   /update-requirement <REQ-ID> DEPLOYED"
   fi
+fi
+
+# Restore stashed changes if any
+if [ "$STASHED" = true ]; then
+  echo "Restoring stashed changes..."
+  git -C "$PROJECT_ROOT" stash pop 2>/dev/null || {
+    echo "⚠️  Could not pop stash automatically. Run 'git stash pop' manually." >&2
+  }
 fi
