@@ -19,7 +19,7 @@ usage() {
 Usage: ./scripts/worktree-merge.sh <branch> [base-branch] [--force]
 
 Flags:
-  --force   Allow merge when no ACTIVE worktree mapping exists for the branch
+  --force   Override lifecycle/mapping safeguards (unmapped branch or non-CODE_REVIEW requirements)
 EOF
 }
 
@@ -108,6 +108,37 @@ else
   echo "Proceeding due to --force. Requirement status updates will be skipped." >&2
 fi
 
+if [ -n "$REQ_IDS" ]; then
+  while IFS= read -r reqId; do
+    [ -z "$reqId" ] && continue
+
+    CURRENT_REQ_STATUS="$(jq -r --arg reqId "$reqId" '
+      .requirements[] | select(.id == $reqId) | .status // empty
+    ' "$REQ_MANIFEST")"
+
+    if [ -z "$CURRENT_REQ_STATUS" ]; then
+      echo "Error: Requirement not found in manifest: $reqId" >&2
+      exit 1
+    fi
+
+    if [ "$CURRENT_REQ_STATUS" = "CODE_REVIEW" ]; then
+      continue
+    fi
+
+    if [ "$FORCE" = "true" ]; then
+      echo "⚠️  Warning: $reqId is in $CURRENT_REQ_STATUS. Proceeding due to --force." >&2
+      continue
+    fi
+
+    if [ "$CURRENT_REQ_STATUS" = "IN_PROGRESS" ]; then
+      echo "Error: $reqId is IN_PROGRESS. Move it to CODE_REVIEW before merging, or use --force to override." >&2
+    else
+      echo "Error: $reqId is $CURRENT_REQ_STATUS. Only CODE_REVIEW can be merged without --force." >&2
+    fi
+    exit 1
+  done <<< "$REQ_IDS"
+fi
+
 echo "Merging $BRANCH into $BASE_BRANCH..."
 git -C "$PROJECT_ROOT" checkout "$BASE_BRANCH"
 git -C "$PROJECT_ROOT" merge --no-ff "$BRANCH" -m "Merge $BRANCH"
@@ -155,11 +186,6 @@ fi
 if [ -n "$REQ_IDS" ]; then
   while IFS= read -r reqId; do
     [ -z "$reqId" ] && continue
-    # Warn if requirement is not in an expected pre-merge state
-    CURRENT_REQ_STATUS="$(jq -r --arg reqId "$reqId" '.requirements[] | select(.id == $reqId) | .status' "$REQ_MANIFEST")"
-    if [ "$CURRENT_REQ_STATUS" != "CODE_REVIEW" ] && [ "$CURRENT_REQ_STATUS" != "MERGED" ]; then
-      echo "⚠️  Warning: $reqId is in $CURRENT_REQ_STATUS (expected CODE_REVIEW). Proceeding anyway."
-    fi
     if [ "$REQ_TARGET_STATUS" = "DEPLOYED" ]; then
       jq_update_manifest_locked "$REQ_MANIFEST" \
         '.requirements |= map(

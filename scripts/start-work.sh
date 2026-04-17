@@ -45,6 +45,20 @@ if [ -n "$ACTIVE_WORKTREE" ]; then
   fi
 fi
 
+CURRENT_STATUS="$(jq -r --arg reqId "$REQ_ID" '
+  .requirements[] | select(.id == $reqId) | .status // empty
+' "$REQ_MANIFEST")"
+
+if [ -z "$CURRENT_STATUS" ]; then
+  echo "Error: Requirement status not found: $REQ_ID" >&2
+  exit 1
+fi
+
+if [ "$CURRENT_STATUS" != "PROPOSED" ] && [ "$CURRENT_STATUS" != "BACKLOG" ]; then
+  echo "Error: Requirement $REQ_ID is $CURRENT_STATUS. start-work is only allowed from PROPOSED or BACKLOG." >&2
+  exit 1
+fi
+
 REQ_NAME="$(jq -r --arg reqId "$REQ_ID" '.requirements[] | select(.id == $reqId) | .name' "$REQ_MANIFEST")"
 SLUG="$(echo "$REQ_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//; s/-$//')"
 BRANCH_ID="feature/${REQ_ID}-${SLUG}"
