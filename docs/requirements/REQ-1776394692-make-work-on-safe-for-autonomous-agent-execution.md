@@ -1,7 +1,7 @@
 # Make work-on safe for autonomous agent execution
 
 **ID**: REQ-1776394692  
-**Status**: PROPOSED  
+**Status**: IN_PROGRESS  
 **Priority**: MEDIUM  
 **Created**: 2026-04-17T02:58:12Z  
 
@@ -24,6 +24,20 @@ Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: (1) w
 - **start-work.sh idempotency**: `start-work.sh` already exits with error if worktree exists (line 42), so the worst case for a race is a clear failure message from the second invocation. The prompt should catch this error and proceed to step 5 instead of failing the entire `/work-on` flow.
 - **Affected files**: `.github/prompts/work-on.prompt.md`.
 - **Risk**: `--auto` removes a human safety gate. Misbehaving agents could advance status prematurely. Mitigated by requiring all success criteria to be checked before advancing, and by the lifecycle enforcement in REQ-1776394663.
+
+
+## Development Plan
+
+1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776394692-make-work-on-safe-for-autonomous-agent-execution.md`.
+   - **Summary**: Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: (1) w
+   - **Key criteria**: - [ ] `work-on.prompt.md` documents an `--auto` mode that, when present, skips the interactive confi
+2. Analyse Technical Notes and identify implementation approach.
+   - **Notes**: - **Confirmation skip**: In `work-on.prompt.md` step 7, add: "If `--auto` was passed, skip this conf
+3. Implement changes in the files/scripts referenced by the requirement spec.
+4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
+5. Validate with `./scripts/show-requirement.sh REQ-1776394692` and verify success criteria are met.
+
+**Last updated**: 2026-04-17T08:08:30Z
 
 ## Dependencies
 
