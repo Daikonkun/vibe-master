@@ -45,7 +45,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776394677: Make add-requirement creation and enrichment atomic
 * [DEPLOYED] REQ-1776394692: Make work-on safe for autonomous agent execution
 * [PROPOSED] REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants
-* [PROPOSED] REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work
+* [IN_PROGRESS] REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work
 
 ## Low Priority
 * [DEPLOYED] REQ-1774632175: Review follow-up: polish upgrade guide in README

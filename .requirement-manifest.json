@@ -500,12 +500,13 @@
       "id": "REQ-1776418077426972512",
       "name": "Review follow-up: clean lock/timestamp artifacts after start-work",
       "description": "Source: orchestrator workflow hygiene review. Evidence: after /start-work, stale lock artifacts (.requirement-manifest.json.lock and .worktree-manifest.json.lock) and timestamp-only doc diffs can remain in the repo, creating avoidable dirty-tree noise. Required outcome: make /start-work leave a clean workspace by removing lock artifacts reliably and avoiding unnecessary timestamp churn unless generated content materially changes.",
-      "status": "PROPOSED",
+      "status": "IN_PROGRESS",
       "priority": "MEDIUM",
       "origin": "project",
       "notes": "Clean flock lock-file residue and make generated-doc timestamps idempotent so /start-work does not leave lock or timestamp-only churn.",
       "createdAt": "2026-04-17T09:27:57Z",
-      "updatedAt": "2026-04-17T09:27:57Z"
+      "updatedAt": "2026-04-17T09:39:12Z",
+      "worktreeId": "feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work"
     }
   ],
   "requiresDeployment": true

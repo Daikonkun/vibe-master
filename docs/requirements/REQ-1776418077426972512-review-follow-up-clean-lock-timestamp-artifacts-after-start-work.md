@@ -1,7 +1,7 @@
 # Review follow-up: clean lock/timestamp artifacts after start-work
 
 **ID**: REQ-1776418077426972512  
-**Status**: PROPOSED  
+**Status**: IN_PROGRESS  
 **Priority**: MEDIUM  
 **Created**: 2026-04-17T09:27:57Z  
 
@@ -23,6 +23,20 @@ Source: orchestrator workflow hygiene review. Evidence: after /start-work, stale
 - `scripts/regenerate-docs.sh` currently writes `* Last updated: $(date -u ...)` on every run; this causes timestamp churn even when manifests are unchanged. Prefer a deterministic value (for example derived from manifest `updatedAt`) or skip rewriting that line when content is unchanged.
 - Keep failure semantics intact: lock cleanup must not swallow the original error code from manifest updates.
 
+
+## Development Plan
+
+1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work.md`.
+   - **Summary**: Source: orchestrator workflow hygiene review. Evidence: after /start-work, stale
+   - **Key criteria**: - [ ] Running `bash scripts/start-work.sh <REQ-ID>` from a clean repo leaves no lock artifacts (`.re
+2. Analyse Technical Notes and identify implementation approach.
+   - **Notes**: - Primary lock behavior lives in `scripts/_manifest-lock.sh` and is consumed by `scripts/start-work.
+3. Implement changes in the files/scripts referenced by the requirement spec.
+4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
+5. Validate with `./scripts/show-requirement.sh REQ-1776418077426972512` and verify success criteria are met.
+
+**Last updated**: 2026-04-17T09:39:13Z
+
 ## Dependencies
 
 None
@@ -33,7 +47,7 @@ None
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
+* **Linked Worktree**: feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work
+* **Branch**: feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work
 * **Merged**: No
 * **Deployed**: No

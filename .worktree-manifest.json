@@ -384,6 +384,17 @@
       "createdAt": "2026-04-17T09:17:21Z",
       "status": "MERGED",
       "mergedAt": "2026-04-17T09:36:23Z"
+    },
+    {
+      "id": "feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work",
+      "branch": "feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776418077426972512"
+      ],
+      "createdAt": "2026-04-17T09:39:12Z",
+      "status": "ACTIVE"
     }
   ]
 }
