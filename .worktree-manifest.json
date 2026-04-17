@@ -372,6 +372,17 @@
       "createdAt": "2026-04-17T08:08:30Z",
       "status": "MERGED",
       "mergedAt": "2026-04-17T08:25:48Z"
+    },
+    {
+      "id": "feature/REQ-1776415543221953328-review-follow-up-align-worktree-merge-prompt-with-strict-dirty-tree-behavior",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776415543221953328-review-follow-up-align-worktree-merge-prompt-with-strict-dirty-tree-behavior",
+      "branch": "feature/REQ-1776415543221953328-review-follow-up-align-worktree-merge-prompt-with-strict-dirty-tree-behavior",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776415543221953328"
+      ],
+      "createdAt": "2026-04-17T09:17:21Z",
+      "status": "ACTIVE"
     }
   ]
 }
