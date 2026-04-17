@@ -324,6 +324,17 @@
       "createdAt": "2026-04-17T04:01:39Z",
       "status": "MERGED",
       "mergedAt": "2026-04-17T06:13:51Z"
+    },
+    {
+      "id": "feature/REQ-1776395706-review-follow-up-harden-manifest-lock-helper-critical-section-and-portability",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776395706-review-follow-up-harden-manifest-lock-helper-critical-section-and-portability",
+      "branch": "feature/REQ-1776395706-review-follow-up-harden-manifest-lock-helper-critical-section-and-portability",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776395706"
+      ],
+      "createdAt": "2026-04-17T06:52:10Z",
+      "status": "ACTIVE"
     }
   ]
 }
