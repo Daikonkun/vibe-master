@@ -403,11 +403,11 @@
       "id": "REQ-1776394677",
       "name": "Make add-requirement creation and enrichment atomic",
       "description": "Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: The /add-requirement prompt workflow is a three-phase non-atomic sequence: (1) create-requirement.sh runs and auto-commits at line 101, (2) the agent enriches spec placeholder sections and updates manifest notes field, (3) regenerate-docs.sh runs. If the agent is interrupted between phases, the manifest contains a committed but unenriched requirement with placeholder criteria, the notes field is empty, and docs are stale. A concurrent agent reading the manifest may see the incomplete record. Required outcome: (1) create-requirement.sh defers its git commit so the agent can enrich before committing. (2) Alternatively, the prompt workflow performs a single atomic commit after all enrichment is done. (3) If interrupted mid-enrichment, no partial commit is left on main.",
-      "status": "CODE_REVIEW",
+      "status": "MERGED",
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-17T02:57:57Z",
-      "updatedAt": "2026-04-17T07:58:16Z",
+      "updatedAt": "2026-04-17T08:05:25Z",
       "notes": "Add --no-commit flag to create-requirement.sh; update add-requirement prompt to defer commit until after enrichment.",
       "dependsOn": [
         "REQ-1776394634"
