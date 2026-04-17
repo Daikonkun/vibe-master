@@ -1,7 +1,7 @@
 # Make add-requirement creation and enrichment atomic
 
 **ID**: REQ-1776394677  
-**Status**: PROPOSED  
+**Status**: IN_PROGRESS  
 **Priority**: MEDIUM  
 **Created**: 2026-04-17T02:57:57Z  
 
@@ -24,6 +24,20 @@ Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: The /
 - **Interruption safety**: Since `--no-commit` leaves files as unstaged modifications, an interrupted agent's partial work is visible via `git status` and easily cleaned with `git checkout -- .`.
 - **Affected files**: `scripts/create-requirement.sh`, `.github/prompts/add-requirement.prompt.md`.
 - **Risk**: If the agent crashes after writing the manifest but before committing, another agent reading the on-disk manifest will see the new requirement. This is tolerable since it is no worse than today's committed-but-unenriched state.
+
+
+## Development Plan
+
+1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776394677-make-add-requirement-creation-and-enrichment-atomic.md`.
+   - **Summary**: Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: The /
+   - **Key criteria**: - [ ] `create-requirement.sh` accepts a `--no-commit` flag that skips the `git add` + `git commit` a
+2. Analyse Technical Notes and identify implementation approach.
+   - **Notes**: - **Flag implementation**: Add a `--no-commit` argument parser to `create-requirement.sh`. When set,
+3. Implement changes in the files/scripts referenced by the requirement spec.
+4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
+5. Validate with `./scripts/show-requirement.sh REQ-1776394677` and verify success criteria are met.
+
+**Last updated**: 2026-04-17T07:48:27Z
 
 ## Dependencies
 

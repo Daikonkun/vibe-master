@@ -2,15 +2,15 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (2)
+## PROPOSED (1)
 
-* REQ-1776394677: Make add-requirement creation and enrichment atomic (priority: MEDIUM)
-  - Worktree: none
 * REQ-1776394692: Make work-on safe for autonomous agent execution (priority: MEDIUM)
   - Worktree: none
 
-## IN_PROGRESS (0)
+## IN_PROGRESS (1)
 
+* REQ-1776394677: Make add-requirement creation and enrichment atomic (priority: MEDIUM)
+  - Worktree: feature/REQ-1776394677-make-add-requirement-creation-and-enrichment-atomic
 
 ## CODE_REVIEW (0)
 
@@ -104,5 +104,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 37
 - Deployed: 31 (83%)
 - Merged (awaiting deploy): 0
-- In Progress: 0
+- In Progress: 1
 - Blocked: 0

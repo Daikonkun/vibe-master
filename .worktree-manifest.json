@@ -348,6 +348,17 @@
       "createdAt": "2026-04-17T07:22:50Z",
       "status": "MERGED",
       "mergedAt": "2026-04-17T07:45:01Z"
+    },
+    {
+      "id": "feature/REQ-1776394677-make-add-requirement-creation-and-enrichment-atomic",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776394677-make-add-requirement-creation-and-enrichment-atomic",
+      "branch": "feature/REQ-1776394677-make-add-requirement-creation-and-enrichment-atomic",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776394677"
+      ],
+      "createdAt": "2026-04-17T07:48:27Z",
+      "status": "ACTIVE"
     }
   ]
 }
