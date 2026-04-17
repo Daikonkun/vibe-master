@@ -1,7 +1,7 @@
 # Isolate worktree-merge git side-effects from concurrent agents
 
 **ID**: REQ-1776394648  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-04-17T02:57:28Z  
 
@@ -28,16 +28,13 @@ Source: code-review of agent concurrency flow. Severity: HIGH. Evidence: worktre
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776394648-isolate-worktree-merge-git-side-effects-from-concurrent-agents.md`.
-   - **Summary**: Source: code-review of agent concurrency flow. Severity: HIGH. Evidence: worktre
-   - **Key criteria**: - [ ] `worktree-merge.sh` no longer runs `git add -A`; instead it stages only the explicit files it 
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - **Explicit staging**: Replace `git add -A` (line 33) with `git add .requirement-manifest.json .wor
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776394648` and verify success criteria are met.
+1. In scripts/worktree-merge.sh, replace broad staging with explicit staging for only merge-owned files: .requirement-manifest.json, .worktree-manifest.json, REQUIREMENTS.md, docs/STATUS.md, docs/ROADMAP.md, docs/DEPENDENCIES.md, and linked docs/requirements/REQ-*.md entries for the current requirement IDs.
+2. In scripts/worktree-merge.sh, remove auto-stash behavior and add a dirty-tree guard using git status --porcelain that exits non-zero when unrelated dirty files are present, printing the exact unexpected file list.
+3. In scripts/worktree-merge.sh, add unmapped-branch protection right after branch-to-requirement lookup so missing worktree/requirement mappings fail fast unless --force is provided.
+4. Extend scripts/worktree-merge.sh argument parsing and help text to support --force, and when forced on an unmapped branch, complete the merge while logging that requirement status updates were skipped.
+5. Validate changes by running bash -n scripts/worktree-merge.sh, then execute scripts/show-requirement.sh REQ-1776394648 and scripts/status.sh to confirm requirement linkage/state behavior remains consistent with the success criteria.
 
-**Last updated**: 2026-04-17T03:45:34Z
+**Last updated**: 2026-04-17T03:46:15Z
 
 ## Dependencies
 
