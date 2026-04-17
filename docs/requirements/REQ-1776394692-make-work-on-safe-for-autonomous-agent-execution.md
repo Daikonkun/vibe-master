@@ -1,7 +1,7 @@
 # Make work-on safe for autonomous agent execution
 
 **ID**: REQ-1776394692  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-04-17T02:58:12Z  
 
@@ -11,11 +11,11 @@ Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: (1) w
 
 ## Success Criteria
 
-- [ ] `work-on.prompt.md` documents an `--auto` mode that, when present, skips the interactive confirmation gate at step 7 and advances status immediately after all success criteria are met
-- [ ] The `--auto` flag is only honored when the caller is the orchestrator agent (enforced via the `agent:` frontmatter field or explicit caller check)
-- [ ] When `/work-on` auto-invokes `/start-work` for a PROPOSED requirement, it first re-reads the manifest to check if a worktree was concurrently created; if one already exists, it skips `/start-work` and proceeds to implementation
-- [ ] Two parallel `/work-on` calls for the same REQ-ID do not both successfully create worktrees; the second one detects the existing worktree and either waits or fails with a clear message
-- [ ] The autonomous execution contract (when `--auto` is used, what guarantees apply, what is skipped) is documented in the prompt file constraints section
+- [x] `work-on.prompt.md` documents an `--auto` mode that, when present, skips the interactive confirmation gate at step 7 and advances status immediately after all success criteria are met
+- [x] The `--auto` flag is only honored when the caller is the orchestrator agent (enforced via the `agent:` frontmatter field or explicit caller check)
+- [x] When `/work-on` auto-invokes `/start-work` for a PROPOSED requirement, it first re-reads the manifest to check if a worktree was concurrently created; if one already exists, it skips `/start-work` and proceeds to implementation
+- [x] Two parallel `/work-on` calls for the same REQ-ID do not both successfully create worktrees; the second one detects the existing worktree and either waits or fails with a clear message
+- [x] The autonomous execution contract (when `--auto` is used, what guarantees apply, what is skipped) is documented in the prompt file constraints section
 
 ## Technical Notes
 
@@ -28,16 +28,23 @@ Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: (1) w
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776394692-make-work-on-safe-for-autonomous-agent-execution.md`.
-   - **Summary**: Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: (1) w
-   - **Key criteria**: - [ ] `work-on.prompt.md` documents an `--auto` mode that, when present, skips the interactive confi
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - **Confirmation skip**: In `work-on.prompt.md` step 7, add: "If `--auto` was passed, skip this conf
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776394692` and verify success criteria are met.
+1. Update argument parsing and trust checks in `.github/prompts/work-on.prompt.md`.
+   - Parse `REQ-ID`, optional target status, and optional `--auto` in step 1.
+   - Enforce that `--auto` is accepted only for trusted orchestrator callers (for example by checking `agent:` metadata or an explicit caller guard).
+2. Implement confirmation-gate behavior in `.github/prompts/work-on.prompt.md` step 7.
+   - If trusted `--auto` is present, skip the user confirmation prompt and continue directly to status advancement.
+   - Keep existing interactive confirmation unchanged when `--auto` is absent.
+3. Add race-safe auto-start logic around the `/start-work` path in `.github/prompts/work-on.prompt.md`.
+   - Re-read `.requirement-manifest.json` and `.worktree-manifest.json` immediately before invoking `/start-work`.
+   - If a worktree already exists for the requirement, skip `/start-work` and continue.
+   - If `/start-work` returns an already-exists style error, treat it as non-fatal and continue with the discovered worktree.
+4. Document the autonomous execution contract in the constraints section of `.github/prompts/work-on.prompt.md`.
+   - Define exactly what `--auto` skips, what checks remain mandatory, and that lifecycle enforcement still depends on `scripts/start-work.sh` and `scripts/update-requirement-status.sh`.
+5. Validate behavior with repository scripts after edits.
+   - Run `scripts/show-requirement.sh REQ-1776394692` and `scripts/status.sh` to confirm consistent status and worktree reporting.
+   - Re-read the updated prompt file to confirm one confirmation path for interactive mode and one explicit fast path for trusted `--auto` mode.
 
-**Last updated**: 2026-04-17T08:08:30Z
+**Last updated**: 2026-04-17T08:15:15Z
 
 ## Dependencies
 

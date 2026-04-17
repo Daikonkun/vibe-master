@@ -37,15 +37,15 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1776394648 | Isolate worktree-merge git side-effects from concurrent agents | DEPLOYED | HIGH | feature/REQ-1776394648-isolate-worktree-merge-git-side-effects-from-concurrent-agents | 2026-04-17 | 2026-04-17 |
 | REQ-1776394663 | Harden lifecycle enforcement in start-work and worktree-merge | DEPLOYED | MEDIUM | feature/REQ-1776394663-harden-lifecycle-enforcement-in-start-work-and-worktree-merge | 2026-04-17 | 2026-04-17 |
 | REQ-1776394677 | Make add-requirement creation and enrichment atomic | DEPLOYED | MEDIUM | feature/REQ-1776394677-make-add-requirement-creation-and-enrichment-atomic | 2026-04-17 | 2026-04-17 |
-| REQ-1776394692 | Make work-on safe for autonomous agent execution | IN_PROGRESS | MEDIUM | feature/REQ-1776394692-make-work-on-safe-for-autonomous-agent-execution | 2026-04-17 | 2026-04-17 |
+| REQ-1776394692 | Make work-on safe for autonomous agent execution | CODE_REVIEW | MEDIUM | feature/REQ-1776394692-make-work-on-safe-for-autonomous-agent-execution | 2026-04-17 | 2026-04-17 |
 | REQ-1776395706 | Review follow-up: harden manifest lock helper critical section and portability | DEPLOYED | HIGH | — | 2026-04-17 | 2026-04-17 |
 | REQ-1776398313767881380 | Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures | DEPLOYED | HIGH | feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures | 2026-04-17 | 2026-04-17 |
 | REQ-1776409551444648236 | Review follow-up: preserve error propagation in mkdir lock fallback | CANCELLED | HIGH | — | 2026-04-17 | 2026-04-17 |
 
 ## Status Breakdown
 - **Proposed**: 0
-- **In Progress**: 1
-- **Code Review**: 0
+- **In Progress**: 0
+- **Code Review**: 1
 - **Merged**: 0
 - **Deployed**: 32
 - **Blocked**: 0
@@ -57,6 +57,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-17T08:08:30Z
+* Last updated: 2026-04-17T08:20:37Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`
