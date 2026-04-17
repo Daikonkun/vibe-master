@@ -311,6 +311,17 @@
       ],
       "createdAt": "2026-04-17T03:45:33Z",
       "status": "ACTIVE"
+    },
+    {
+      "id": "feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures",
+      "branch": "feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776398313767881380"
+      ],
+      "createdAt": "2026-04-17T04:01:39Z",
+      "status": "ACTIVE"
     }
   ]
 }

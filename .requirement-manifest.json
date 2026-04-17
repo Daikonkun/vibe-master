@@ -439,11 +439,12 @@
       "id": "REQ-1776398313767881380",
       "name": "Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures",
       "description": "Source: code-review of REQ-1776394648. Severity: HIGH. Evidence: in scripts/worktree-merge.sh, the forced unmapped-branch path proceeds to merge but still runs 'git branch -d' under set -e without fallback; if the feature branch is checked out in another worktree or cannot be deleted, the script exits non-zero after merge and does not reliably emit completion/status-skipped messaging. Required outcome: (1) in forced unmapped mode, treat branch/worktree cleanup as best-effort warnings instead of fatal errors, (2) ensure success messaging still states that no requirement statuses were updated, and (3) add a regression check covering forced unmapped merge with undeletable branch.",
-      "status": "PROPOSED",
+      "status": "IN_PROGRESS",
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-17T03:58:33Z",
-      "updatedAt": "2026-04-17T03:58:33Z"
+      "updatedAt": "2026-04-17T04:01:39Z",
+      "worktreeId": "feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures"
     }
   ],
   "requiresDeployment": true
