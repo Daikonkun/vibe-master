@@ -10,6 +10,9 @@ echo ""
 
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 PROJECT_NAME="${1:-My Vibe Project}"
+REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
+WORKTREE_MANIFEST="$PROJECT_ROOT/.worktree-manifest.json"
+source "$PROJECT_ROOT/scripts/_manifest-lock.sh"
 
 echo "📦 Project: $PROJECT_NAME"
 echo "📍 Location: $PROJECT_ROOT"
@@ -41,9 +44,9 @@ mkdir -p docs/requirements
 # The .vibe-master-source guard above prevents this from running on Vibe Master itself.
 # On a cloned/copied repo, all REQs (regardless of origin) are cleared for a fresh start.
 
-if [ -f "$PROJECT_ROOT/.requirement-manifest.json" ]; then
+if [ -f "$REQ_MANIFEST" ]; then
   # Count existing REQs for reporting
-  TOTAL=$(jq '[.requirements[]] | length' "$PROJECT_ROOT/.requirement-manifest.json" 2>/dev/null || echo 0)
+  TOTAL=$(jq '[.requirements[]] | length' "$REQ_MANIFEST" 2>/dev/null || echo 0)
 
   # Remove all REQ-* spec files, preserving EXAMPLE-REQ-* templates
   CLEANED=0
@@ -56,14 +59,15 @@ if [ -f "$PROJECT_ROOT/.requirement-manifest.json" ]; then
   echo "🧹 Cleared $CLEANED REQ spec file(s) (from $TOTAL total requirements)"
 
   # Empty the requirements array and set the new project name
-  jq --arg name "$PROJECT_NAME" '
-    .projectName = $name |
-    .requirements = []
-  ' "$PROJECT_ROOT/.requirement-manifest.json" > "$PROJECT_ROOT/.requirement-manifest.json.tmp" && \
-    mv "$PROJECT_ROOT/.requirement-manifest.json.tmp" "$PROJECT_ROOT/.requirement-manifest.json"
+  jq_update_manifest_locked "$REQ_MANIFEST" \
+    '.projectName = $name |
+     .requirements = []' \
+    --arg name "$PROJECT_NAME"
 else
   echo "📋 Initializing requirement manifest..."
-  cat > "$PROJECT_ROOT/.requirement-manifest.json" << 'JSON'
+  with_manifest_lock "$REQ_MANIFEST" bash -c '
+    manifest="$1"
+    cat > "$manifest" << '\''JSON'\''
 {
   "$schema": ".requirement-manifest.schema.json",
   "version": "1.0",
@@ -72,19 +76,23 @@ else
   "requirements": []
 }
 JSON
-  jq --arg name "$PROJECT_NAME" '.projectName = $name' "$PROJECT_ROOT/.requirement-manifest.json" > "$PROJECT_ROOT/.requirement-manifest.json.tmp" && \
-    mv "$PROJECT_ROOT/.requirement-manifest.json.tmp" "$PROJECT_ROOT/.requirement-manifest.json"
+  ' _ "$REQ_MANIFEST"
+
+  jq_update_manifest_locked "$REQ_MANIFEST" '.projectName = $name' --arg name "$PROJECT_NAME"
 fi
 
 # Reset worktree manifest — all REQs are cleared, so all worktree entries are stale
 echo "📋 Resetting worktree manifest..."
-cat > "$PROJECT_ROOT/.worktree-manifest.json" << 'JSON'
+with_manifest_lock "$WORKTREE_MANIFEST" bash -c '
+  manifest="$1"
+  cat > "$manifest" << '\''JSON'\''
 {
   "$schema": ".worktree-manifest.schema.json",
   "version": "1.0",
   "worktrees": []
 }
 JSON
+ ' _ "$WORKTREE_MANIFEST"
 
 # Regenerate docs
 if [ -f scripts/regenerate-docs.sh ]; then

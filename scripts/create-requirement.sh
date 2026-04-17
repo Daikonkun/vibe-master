@@ -1,17 +1,81 @@
 #!/bin/bash
 # Create a new requirement and optionally start a worktree for it
 
-set -e
+set -euo pipefail
 
 REQ_NAME="${1:?Error: requirement name required}"
 REQ_DESCRIPTION="${2:?Error: requirement description required}"
 REQ_PRIORITY="${3:-MEDIUM}"
 
-# Generate requirement ID
-REQ_ID="REQ-$(date +%s)"
-SLUG=$(echo "$REQ_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//; s/-$//')
-
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
+source "$PROJECT_ROOT/scripts/_manifest-lock.sh"
+
+generate_req_numeric_id() {
+  if command -v python3 >/dev/null 2>&1; then
+    python3 - << 'PY'
+import random
+import time
+
+seed = int(time.time() * 1_000_000)
+suffix = random.randint(0, 999)
+print(f"{seed}{suffix:03d}")
+PY
+    return
+  fi
+
+  # Fallback: seconds plus two random chunks; still preserves numeric REQ-<digits> format.
+  printf '%s%05d%05d\n' "$(date +%s)" "$RANDOM" "$RANDOM"
+}
+
+append_requirement_locked() {
+  local manifest="$1"
+  local req_id="$2"
+  local req_name="$3"
+  local req_desc="$4"
+  local req_priority="$5"
+  local ts="$6"
+
+  with_manifest_lock "$manifest" bash -c '
+    manifest="$1"
+    req_id="$2"
+    req_name="$3"
+    req_desc="$4"
+    req_priority="$5"
+    ts="$6"
+
+    if jq -e --arg id "$req_id" ".requirements[]? | select(.id == \$id)" "$manifest" >/dev/null; then
+      echo "Error: Generated requirement ID collision: $req_id" >&2
+      exit 1
+    fi
+
+    tmp_file="$(mktemp "${manifest}.XXXXXX")"
+    if ! jq --arg id "$req_id" \
+            --arg name "$req_name" \
+            --arg desc "$req_desc" \
+            --arg priority "$req_priority" \
+            --arg ts "$ts" \
+            '\''.requirements += [{
+              "id": $id,
+              "name": $name,
+              "description": $desc,
+              "status": "PROPOSED",
+              "priority": $priority,
+              "origin": "project",
+              "createdAt": $ts,
+              "updatedAt": $ts
+            }] '\'' \
+            "$manifest" > "$tmp_file"; then
+      rm -f "$tmp_file"
+      exit 1
+    fi
+
+    mv "$tmp_file" "$manifest"
+  ' _ "$manifest" "$req_id" "$req_name" "$req_desc" "$req_priority" "$ts"
+}
+
+REQ_ID="REQ-$(generate_req_numeric_id)"
+SLUG=$(echo "$REQ_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//; s/-$//')
 TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 
 echo "📝 Creating requirement: $REQ_ID"
@@ -19,8 +83,14 @@ echo "   Name: $REQ_NAME"
 echo "   Priority: $REQ_PRIORITY"
 
 # Ensure manifest exists
-if [ ! -f "$PROJECT_ROOT/.requirement-manifest.json" ]; then
-  cat > "$PROJECT_ROOT/.requirement-manifest.json" << 'JSON'
+if [ ! -f "$REQ_MANIFEST" ]; then
+  with_manifest_lock "$REQ_MANIFEST" bash -c '
+    manifest="$1"
+    if [ -f "$manifest" ]; then
+      exit 0
+    fi
+
+    cat > "$manifest" << '\''JSON'\''
 {
   "$schema": ".requirement-manifest.schema.json",
   "version": "1.0",
@@ -29,26 +99,11 @@ if [ ! -f "$PROJECT_ROOT/.requirement-manifest.json" ]; then
   "requirements": []
 }
 JSON
+  ' _ "$REQ_MANIFEST"
 fi
 
-# Add to manifest using jq
-jq --arg id "$REQ_ID" \
-   --arg name "$REQ_NAME" \
-   --arg desc "$REQ_DESCRIPTION" \
-   --arg priority "$REQ_PRIORITY" \
-   --arg ts "$TIMESTAMP" \
-   '.requirements += [{
-     "id": $id,
-     "name": $name,
-     "description": $desc,
-     "status": "PROPOSED",
-     "priority": $priority,
-     "origin": "project",
-     "createdAt": $ts,
-     "updatedAt": $ts
-   }]' \
-   "$PROJECT_ROOT/.requirement-manifest.json" > "$PROJECT_ROOT/.requirement-manifest.json.tmp" && \
-   mv "$PROJECT_ROOT/.requirement-manifest.json.tmp" "$PROJECT_ROOT/.requirement-manifest.json"
+# Add to manifest with a lock-guarded collision check and atomic rename.
+append_requirement_locked "$REQ_MANIFEST" "$REQ_ID" "$REQ_NAME" "$REQ_DESCRIPTION" "$REQ_PRIORITY" "$TIMESTAMP"
 
 # Create detailed spec file
 mkdir -p "$PROJECT_ROOT/docs/requirements"

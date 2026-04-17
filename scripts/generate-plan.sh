@@ -48,18 +48,22 @@ EOF
 
 # Replace existing Development Plan section or append before Dependencies
 if grep -q "^## Development Plan" "$SPEC_FILE"; then
+  SPEC_TMP="$(mktemp "${SPEC_FILE}.XXXXXX")"
   awk -v planfile="$PLAN_FILE" '
     BEGIN { inplan=0 }
     /^## Development Plan/ { inplan=1; next }
     /^## (Dependencies|Worktree)/ { if (inplan) { system("cat " planfile); inplan=0 } }
     !inplan { print }
     END { if (inplan) system("cat " planfile) }
-  ' "$SPEC_FILE" > "$SPEC_FILE.tmp" && mv "$SPEC_FILE.tmp" "$SPEC_FILE"
+  ' "$SPEC_FILE" > "$SPEC_TMP"
+  mv "$SPEC_TMP" "$SPEC_FILE"
 else
+  SPEC_TMP="$(mktemp "${SPEC_FILE}.XXXXXX")"
   awk -v planfile="$PLAN_FILE" '
     /^## Dependencies/ { print ""; system("cat " planfile); print "" }
     { print }
-  ' "$SPEC_FILE" > "$SPEC_FILE.tmp" && mv "$SPEC_FILE.tmp" "$SPEC_FILE"
+  ' "$SPEC_FILE" > "$SPEC_TMP"
+  mv "$SPEC_TMP" "$SPEC_FILE"
 fi
 
 rm -f "$PLAN_FILE"

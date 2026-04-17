@@ -55,6 +55,10 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
+<<<<<<< HEAD
 * Last updated: 2026-04-17T03:15:10Z
+=======
+* Last updated: 2026-04-17T03:10:45Z
+>>>>>>> feature/REQ-1776394634-add-manifest-file-locking-and-collision-resistant-req-ids
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

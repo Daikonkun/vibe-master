@@ -11,11 +11,11 @@ Source: code-review of agent concurrency flow. Severity: HIGH. Evidence: All man
 
 ## Success Criteria
 
-- [ ] All scripts that write `.requirement-manifest.json` or `.worktree-manifest.json` acquire an advisory lock (`flock`) before reading the file and release it after the atomic rename
-- [ ] Temp filenames use `mktemp` with a unique suffix (e.g., `.$$.XXXXXX`) instead of the shared `.tmp` suffix, preventing clobber when two scripts run simultaneously
-- [ ] REQ ID generation produces unique IDs even when two `create-requirement.sh` invocations execute within the same wall-clock second (e.g., nanosecond timestamp, or appended random suffix)
-- [ ] `create-requirement.sh` validates that the generated ID does not already exist in the manifest before inserting; exits with error on collision
-- [ ] Existing scripts (`start-work.sh`, `update-requirement-status.sh`, `worktree-merge.sh`, `regenerate-docs.sh`, `generate-plan.sh`, `rollback-requirement.sh`) are updated to use the locking and unique-temp patterns
+- [x] All scripts that write `.requirement-manifest.json` or `.worktree-manifest.json` acquire an advisory lock (`flock`) before reading the file and release it after the atomic rename
+- [x] Temp filenames use `mktemp` with a unique suffix (e.g., `.$$.XXXXXX`) instead of the shared `.tmp` suffix, preventing clobber when two scripts run simultaneously
+- [x] REQ ID generation produces unique IDs even when two `create-requirement.sh` invocations execute within the same wall-clock second (e.g., nanosecond timestamp, or appended random suffix)
+- [x] `create-requirement.sh` validates that the generated ID does not already exist in the manifest before inserting; exits with error on collision
+- [x] Existing scripts (`start-work.sh`, `update-requirement-status.sh`, `worktree-merge.sh`, `regenerate-docs.sh`, `generate-plan.sh`, `rollback-requirement.sh`) are updated to use the locking and unique-temp patterns
 
 ## Technical Notes
 

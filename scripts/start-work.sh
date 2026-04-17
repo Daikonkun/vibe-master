@@ -8,6 +8,7 @@ BASE_BRANCH="${2:-main}"
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
 WORKTREE_MANIFEST="$PROJECT_ROOT/.worktree-manifest.json"
+source "$PROJECT_ROOT/scripts/_manifest-lock.sh"
 TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
 if [ -z "$REQ_ID" ]; then
@@ -68,13 +69,20 @@ else
 fi
 
 if [ ! -f "$WORKTREE_MANIFEST" ]; then
-  cat > "$WORKTREE_MANIFEST" << 'JSON'
+  with_manifest_lock "$WORKTREE_MANIFEST" bash -c '
+    manifest="$1"
+    if [ -f "$manifest" ]; then
+      exit 0
+    fi
+
+    cat > "$manifest" << '\''JSON'\''
 {
   "$schema": ".worktree-manifest.schema.json",
   "version": "1.0",
   "worktrees": []
 }
 JSON
+  ' _ "$WORKTREE_MANIFEST"
 fi
 
 # Validate updatedAt >= createdAt
@@ -84,33 +92,33 @@ if [ -n "$CREATED_AT" ] && [ "$CREATED_AT" != "null" ] && [[ "$TIMESTAMP" < "$CR
   exit 1
 fi
 
-jq --arg reqId "$REQ_ID" \
-   --arg branch "$BRANCH_ID" \
-   --arg ts "$TIMESTAMP" \
-   '.requirements |= map(
-      if .id == $reqId
-      then .status = "IN_PROGRESS" | .worktreeId = $branch | .updatedAt = $ts
-      else .
-      end
-    )' \
-   "$REQ_MANIFEST" > "$REQ_MANIFEST.tmp" && mv "$REQ_MANIFEST.tmp" "$REQ_MANIFEST"
+jq_update_manifest_locked "$REQ_MANIFEST" \
+  '.requirements |= map(
+     if .id == $reqId
+     then .status = "IN_PROGRESS" | .worktreeId = $branch | .updatedAt = $ts
+     else .
+     end
+   )' \
+  --arg reqId "$REQ_ID" \
+  --arg branch "$BRANCH_ID" \
+  --arg ts "$TIMESTAMP"
 
-jq --arg id "$BRANCH_ID" \
-   --arg path "$WORKTREE_PATH" \
-   --arg branch "$BRANCH_ID" \
-   --arg base "$BASE_BRANCH" \
-   --arg reqId "$REQ_ID" \
-   --arg ts "$TIMESTAMP" \
-   '.worktrees += [{
-      "id": $id,
-      "path": $path,
-      "branch": $branch,
-      "baseBranch": $base,
-      "requirementIds": [$reqId],
-      "createdAt": $ts,
-      "status": "ACTIVE"
-    }]' \
-   "$WORKTREE_MANIFEST" > "$WORKTREE_MANIFEST.tmp" && mv "$WORKTREE_MANIFEST.tmp" "$WORKTREE_MANIFEST"
+jq_update_manifest_locked "$WORKTREE_MANIFEST" \
+  '.worktrees += [{
+     "id": $id,
+     "path": $path,
+     "branch": $branch,
+     "baseBranch": $base,
+     "requirementIds": [$reqId],
+     "createdAt": $ts,
+     "status": "ACTIVE"
+   }]' \
+  --arg id "$BRANCH_ID" \
+  --arg path "$WORKTREE_PATH" \
+  --arg branch "$BRANCH_ID" \
+  --arg base "$BASE_BRANCH" \
+  --arg reqId "$REQ_ID" \
+  --arg ts "$TIMESTAMP"
 
 "$PROJECT_ROOT/scripts/regenerate-docs.sh" >/dev/null
 
