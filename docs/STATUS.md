@@ -14,13 +14,13 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
+
+
+## MERGED (1)
 
 * REQ-1776395706: Review follow-up: harden manifest lock helper critical section and portability (priority: HIGH)
   - Worktree: none
-
-## MERGED (0)
-
 
 ## DEPLOYED (29)
 
@@ -103,6 +103,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 37
 - Deployed: 29 (78%)
-- Merged (awaiting deploy): 0
+- Merged (awaiting deploy): 1
 - In Progress: 0
 - Blocked: 0
