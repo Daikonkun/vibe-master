@@ -25,6 +25,19 @@ manifest_lock_wait_for_directory() {
   done
 }
 
+manifest_lock_cleanup_artifacts() {
+  local lock_file="$1"
+  local lock_dir="${lock_file}.d"
+
+  rm -f "$lock_file" 2>/dev/null || true
+
+  if [ -d "$lock_dir" ]; then
+    if ! rmdir "$lock_dir" 2>/dev/null; then
+      rm -rf "$lock_dir" 2>/dev/null || true
+    fi
+  fi
+}
+
 with_manifest_lock() {
   local manifest_file="${1:-}"
   shift || true
@@ -35,17 +48,23 @@ with_manifest_lock() {
   fi
 
   local lock_file="${manifest_file}.lock"
-
-  if manifest_lock_supports_flock; then
-    (
-      flock -x 200
-      "$@"
-    ) 200>"$lock_file"
-    return $?
-  fi
-
   local lock_dir="${lock_file}.d"
   local status=0
+
+  if manifest_lock_supports_flock; then
+    if (
+      flock -x 200
+      "$@"
+    ) 200>"$lock_file"; then
+      status=0
+    else
+      status=$?
+    fi
+
+    manifest_lock_cleanup_artifacts "$lock_file"
+    return "$status"
+  fi
+
   manifest_lock_wait_for_directory "$lock_dir" || return 1
 
   if "$@"; then
@@ -54,7 +73,7 @@ with_manifest_lock() {
     status=$?
   fi
 
-  rmdir "$lock_dir" 2>/dev/null || true
+  manifest_lock_cleanup_artifacts "$lock_file"
   return "$status"
 }
 
