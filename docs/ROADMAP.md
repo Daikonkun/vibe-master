@@ -10,6 +10,8 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1774770298: Review follow-up: separate manifest schema from data
 * [DEPLOYED] REQ-1774770305: Review follow-up: add missing prompt files for advertised slash commands
 * [DEPLOYED] REQ-1776235649: Review follow-up: fix compaction check hook in orchestrator scripts
+* [PROPOSED] REQ-1776394634: Add manifest file locking and collision-resistant REQ IDs
+* [PROPOSED] REQ-1776394648: Isolate worktree-merge git side-effects from concurrent agents
 
 ## Medium Priority
 * [DEPLOYED] REQ-1774628144: Review follow-up: align slash commands with actual skill invocations
@@ -34,6 +36,9 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776233067: auto-compacting
 * [DEPLOYED] REQ-1776235658: Review follow-up: replace bc with portable arithmetic in compact-context.sh
 * [DEPLOYED] REQ-1776238348: init-project script enhancement
+* [PROPOSED] REQ-1776394663: Harden lifecycle enforcement in start-work and worktree-merge
+* [PROPOSED] REQ-1776394677: Make add-requirement creation and enrichment atomic
+* [PROPOSED] REQ-1776394692: Make work-on safe for autonomous agent execution
 
 ## Low Priority
 * [DEPLOYED] REQ-1774632175: Review follow-up: polish upgrade guide in README

@@ -61,3 +61,15 @@ REQ-1776235658: Review follow-up: replace bc with portable arithmetic in compact
 
 REQ-1776238348: init-project script enhancement (no dependencies)
 
+REQ-1776394634: Add manifest file locking and collision-resistant REQ IDs (no dependencies)
+
+REQ-1776394648: Isolate worktree-merge git side-effects from concurrent agents (no dependencies)
+
+REQ-1776394663: Harden lifecycle enforcement in start-work and worktree-merge (no dependencies)
+
+REQ-1776394677: Make add-requirement creation and enrichment atomic
+  └─ Depends on: REQ-1776394634
+
+REQ-1776394692: Make work-on safe for autonomous agent execution
+  └─ Depends on: REQ-1776394634, REQ-1776394663
+

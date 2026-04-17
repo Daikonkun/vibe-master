@@ -11,17 +11,23 @@ Source: code-review of agent concurrency flow. Severity: HIGH. Evidence: worktre
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [ ] `worktree-merge.sh` no longer runs `git add -A`; instead it stages only the explicit files it modifies (manifests, generated docs, and the specific spec files for linked REQ IDs)
+- [ ] If unrelated dirty files exist in the working tree, the script exits with a clear error message listing the unexpected dirty files, instead of auto-committing or stashing them
+- [ ] When the target branch has no entry in `.worktree-manifest.json`, the script prints a warning and exits non-zero unless `--force` is passed
+- [ ] The auto-stash behavior is removed entirely; the script requires a clean working tree (excluding its own manifest/doc writes) before proceeding
+- [ ] Merging an unmapped branch with `--force` still completes the git merge but logs that no requirement status was updated
 
 ## Technical Notes
 
-(Add implementation notes here)
+- **Explicit staging**: Replace `git add -A` (line 33) with `git add .requirement-manifest.json .worktree-manifest.json REQUIREMENTS.md docs/STATUS.md docs/ROADMAP.md docs/DEPENDENCIES.md docs/requirements/` — the same list already used at line 126.
+- **Dirty-tree check**: After the auto-commit of manifest/docs, re-check `git status --porcelain`. If remaining dirty files exist, print them and `exit 1` instead of stashing. This forces the operator/agent to commit or stash manually.
+- **Unmapped branch guard**: After `WORKTREE_PATH` and `REQ_IDS` lookups (lines 56-62), check if both are empty. If so, print warning + exit 1 unless `$FORCE` is set.
+- **Backward compatibility**: Add a `--force` flag parser (similar to `update-requirement-status.sh`) to opt into the old permissive behavior for edge cases.
+- **Affected file**: `scripts/worktree-merge.sh`.
 
 ## Dependencies
 
-(List other requirement IDs if applicable, e.g., REQ-XXX, REQ-YYY)
+None (can be implemented independently, but benefits from REQ-1776394634 locking infrastructure)
 
 ## Worktree
 

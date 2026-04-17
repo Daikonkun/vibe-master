@@ -368,7 +368,8 @@
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-17T02:57:14Z",
-      "updatedAt": "2026-04-17T02:57:14Z"
+      "updatedAt": "2026-04-17T02:57:14Z",
+      "notes": "Add flock-based advisory locking and mktemp-based unique temp files to all manifest-mutating scripts; switch REQ ID generation from date +%s to sub-second resolution."
     },
     {
       "id": "REQ-1776394648",
@@ -378,7 +379,8 @@
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-17T02:57:28Z",
-      "updatedAt": "2026-04-17T02:57:28Z"
+      "updatedAt": "2026-04-17T02:57:28Z",
+      "notes": "Replace git add -A in worktree-merge.sh with explicit file staging; remove auto-stash; add --force flag for unmapped-branch merges."
     },
     {
       "id": "REQ-1776394663",
@@ -388,7 +390,8 @@
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-17T02:57:43Z",
-      "updatedAt": "2026-04-17T02:57:43Z"
+      "updatedAt": "2026-04-17T02:57:43Z",
+      "notes": "Add status guard to start-work.sh (only PROPOSED/BACKLOG); harden worktree-merge.sh to reject non-CODE_REVIEW requirements; align orchestrator.agent.md transition docs."
     },
     {
       "id": "REQ-1776394677",
@@ -398,7 +401,11 @@
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-17T02:57:57Z",
-      "updatedAt": "2026-04-17T02:57:57Z"
+      "updatedAt": "2026-04-17T02:57:57Z",
+      "notes": "Add --no-commit flag to create-requirement.sh; update add-requirement prompt to defer commit until after enrichment.",
+      "dependsOn": [
+        "REQ-1776394634"
+      ]
     },
     {
       "id": "REQ-1776394692",
@@ -408,7 +415,12 @@
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-17T02:58:12Z",
-      "updatedAt": "2026-04-17T02:58:12Z"
+      "updatedAt": "2026-04-17T02:58:12Z",
+      "notes": "Add --auto flag to work-on.prompt.md; add re-read guard before auto-invoking /start-work; document autonomous execution contract.",
+      "dependsOn": [
+        "REQ-1776394634",
+        "REQ-1776394663"
+      ]
     }
   ],
   "requiresDeployment": true

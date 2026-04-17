@@ -2,8 +2,18 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (0)
+## PROPOSED (5)
 
+* REQ-1776394634: Add manifest file locking and collision-resistant REQ IDs (priority: HIGH)
+  - Worktree: none
+* REQ-1776394648: Isolate worktree-merge git side-effects from concurrent agents (priority: HIGH)
+  - Worktree: none
+* REQ-1776394663: Harden lifecycle enforcement in start-work and worktree-merge (priority: MEDIUM)
+  - Worktree: none
+* REQ-1776394677: Make add-requirement creation and enrichment atomic (priority: MEDIUM)
+  - Worktree: none
+* REQ-1776394692: Make work-on safe for autonomous agent execution (priority: MEDIUM)
+  - Worktree: none
 
 ## IN_PROGRESS (0)
 
@@ -85,8 +95,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 
 ## Stats
-- Total Requirements: 29
-- Deployed: 26 (89%)
+- Total Requirements: 34
+- Deployed: 26 (76%)
 - Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0

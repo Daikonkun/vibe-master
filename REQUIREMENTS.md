@@ -33,9 +33,14 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1776235649 | Review follow-up: fix compaction check hook in orchestrator scripts | DEPLOYED | HIGH | feature/REQ-1776235649-review-follow-up-fix-compaction-check-hook-in-orchestrator-scripts | 2026-04-15 | 2026-04-15 |
 | REQ-1776235658 | Review follow-up: replace bc with portable arithmetic in compact-context.sh | DEPLOYED | MEDIUM | feature/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh | 2026-04-15 | 2026-04-15 |
 | REQ-1776238348 | init-project script enhancement | DEPLOYED | MEDIUM | feature/REQ-1776238348-init-project-script-enhancement | 2026-04-15 | 2026-04-15 |
+| REQ-1776394634 | Add manifest file locking and collision-resistant REQ IDs | PROPOSED | HIGH | — | 2026-04-17 | 2026-04-17 |
+| REQ-1776394648 | Isolate worktree-merge git side-effects from concurrent agents | PROPOSED | HIGH | — | 2026-04-17 | 2026-04-17 |
+| REQ-1776394663 | Harden lifecycle enforcement in start-work and worktree-merge | PROPOSED | MEDIUM | — | 2026-04-17 | 2026-04-17 |
+| REQ-1776394677 | Make add-requirement creation and enrichment atomic | PROPOSED | MEDIUM | — | 2026-04-17 | 2026-04-17 |
+| REQ-1776394692 | Make work-on safe for autonomous agent execution | PROPOSED | MEDIUM | — | 2026-04-17 | 2026-04-17 |
 
 ## Status Breakdown
-- **Proposed**: 0
+- **Proposed**: 5
 - **In Progress**: 0
 - **Code Review**: 0
 - **Merged**: 0
@@ -49,6 +54,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-15T07:41:43Z
+* Last updated: 2026-04-17T03:00:13Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`
