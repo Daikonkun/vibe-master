@@ -38,9 +38,10 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1776394663 | Harden lifecycle enforcement in start-work and worktree-merge | PROPOSED | MEDIUM | — | 2026-04-17 | 2026-04-17 |
 | REQ-1776394677 | Make add-requirement creation and enrichment atomic | PROPOSED | MEDIUM | — | 2026-04-17 | 2026-04-17 |
 | REQ-1776394692 | Make work-on safe for autonomous agent execution | PROPOSED | MEDIUM | — | 2026-04-17 | 2026-04-17 |
+| REQ-1776395706 | Review follow-up: harden manifest lock helper critical section and portability | PROPOSED | HIGH | — | 2026-04-17 | 2026-04-17 |
 
 ## Status Breakdown
-- **Proposed**: 4
+- **Proposed**: 5
 - **In Progress**: 0
 - **Code Review**: 1
 - **Merged**: 0
@@ -54,6 +55,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-17T03:13:33Z
+* Last updated: 2026-04-17T03:15:10Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

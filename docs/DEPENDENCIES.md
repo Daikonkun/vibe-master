@@ -73,3 +73,5 @@ REQ-1776394677: Make add-requirement creation and enrichment atomic
 REQ-1776394692: Make work-on safe for autonomous agent execution
   └─ Depends on: REQ-1776394634, REQ-1776394663
 
+REQ-1776395706: Review follow-up: harden manifest lock helper critical section and portability (no dependencies)
+
