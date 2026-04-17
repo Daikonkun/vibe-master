@@ -2,17 +2,17 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (3)
+## PROPOSED (2)
 
-* REQ-1776394663: Harden lifecycle enforcement in start-work and worktree-merge (priority: MEDIUM)
-  - Worktree: none
 * REQ-1776394677: Make add-requirement creation and enrichment atomic (priority: MEDIUM)
   - Worktree: none
 * REQ-1776394692: Make work-on safe for autonomous agent execution (priority: MEDIUM)
   - Worktree: none
 
-## IN_PROGRESS (0)
+## IN_PROGRESS (1)
 
+* REQ-1776394663: Harden lifecycle enforcement in start-work and worktree-merge (priority: MEDIUM)
+  - Worktree: feature/REQ-1776394663-harden-lifecycle-enforcement-in-start-work-and-worktree-merge
 
 ## CODE_REVIEW (0)
 
@@ -104,5 +104,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 37
 - Deployed: 30 (81%)
 - Merged (awaiting deploy): 0
-- In Progress: 0
+- In Progress: 1
 - Blocked: 0

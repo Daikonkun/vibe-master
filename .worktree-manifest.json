@@ -336,6 +336,17 @@
       "createdAt": "2026-04-17T06:52:10Z",
       "status": "MERGED",
       "mergedAt": "2026-04-17T07:17:36Z"
+    },
+    {
+      "id": "feature/REQ-1776394663-harden-lifecycle-enforcement-in-start-work-and-worktree-merge",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776394663-harden-lifecycle-enforcement-in-start-work-and-worktree-merge",
+      "branch": "feature/REQ-1776394663-harden-lifecycle-enforcement-in-start-work-and-worktree-merge",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776394663"
+      ],
+      "createdAt": "2026-04-17T07:22:50Z",
+      "status": "ACTIVE"
     }
   ]
 }

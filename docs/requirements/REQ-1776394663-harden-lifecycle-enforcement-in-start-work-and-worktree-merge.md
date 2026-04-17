@@ -1,7 +1,7 @@
 # Harden lifecycle enforcement in start-work and worktree-merge
 
 **ID**: REQ-1776394663  
-**Status**: PROPOSED  
+**Status**: IN_PROGRESS  
 **Priority**: MEDIUM  
 **Created**: 2026-04-17T02:57:43Z  
 
@@ -24,6 +24,20 @@ Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: (1) s
 - **worktree-merge.sh guard**: After resolving `REQ_IDS` (line 60), loop through linked requirements and check each status. If any status is not `CODE_REVIEW` or `IN_PROGRESS`, print an error and exit unless `--force`. The existing warning at line 97-98 becomes a hard failure.
 - **Doc alignment**: The orchestrator declares `Any → BACKLOG` and `Any → CANCELLED`, but `update-requirement-status.sh` only allows BACKLOG from PROPOSED, IN_PROGRESS, CODE_REVIEW, BLOCKED. CANCELLED is allowed from any state via the shortcut at line 131. Update the agent doc to reflect the actual per-state BACKLOG rules, and note that CANCELLED is the only truly universal transition.
 - **Affected files**: `scripts/start-work.sh`, `scripts/worktree-merge.sh`, `.github/agents/orchestrator.agent.md`, `.github/prompts/work-on.prompt.md`.
+
+
+## Development Plan
+
+1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776394663-harden-lifecycle-enforcement-in-start-work-and-worktree-merge.md`.
+   - **Summary**: Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: (1) s
+   - **Key criteria**: - [ ] `start-work.sh` checks current requirement status before setting IN_PROGRESS; only PROPOSED an
+2. Analyse Technical Notes and identify implementation approach.
+   - **Notes**: - **start-work.sh guard**: After the existing worktree check (line 42), add: `CURRENT_STATUS=$(jq -r
+3. Implement changes in the files/scripts referenced by the requirement spec.
+4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
+5. Validate with `./scripts/show-requirement.sh REQ-1776394663` and verify success criteria are met.
+
+**Last updated**: 2026-04-17T07:22:51Z
 
 ## Dependencies
 
