@@ -45,5 +45,5 @@ feature/REQ-1776394663-harden-lifecycle-enforcement-in-start-work-and-worktree-m
 
 * **Linked Worktree**: feature/REQ-1776394663-harden-lifecycle-enforcement-in-start-work-and-worktree-merge
 * **Branch**: feature/REQ-1776394663-harden-lifecycle-enforcement-in-start-work-and-worktree-merge
-* **Merged**: No
-* **Deployed**: No
+* **Merged**: Yes
+* **Deployed**: Yes

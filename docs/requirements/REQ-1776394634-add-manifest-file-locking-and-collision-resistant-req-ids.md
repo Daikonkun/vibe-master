@@ -46,7 +46,7 @@ None (foundational — other concurrency REQs build on this)
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: feature/REQ-1776394634-add-manifest-file-locking-and-collision-resistant-req-ids
+* **Branch**: feature/REQ-1776394634-add-manifest-file-locking-and-collision-resistant-req-ids
+* **Merged**: Yes
+* **Deployed**: Yes

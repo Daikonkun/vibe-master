@@ -43,7 +43,7 @@ Source: code-review pass 2. Severity: MEDIUM. Fix: (1) two stale ACTIVE worktree
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: feature/REQ-1774774148-review-follow-up-fix-manifest-inconsistencies-and-ghost-command
+* **Branch**: feature/REQ-1774774148-review-follow-up-fix-manifest-inconsistencies-and-ghost-command
+* **Merged**: Yes
+* **Deployed**: Yes

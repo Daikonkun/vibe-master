@@ -43,7 +43,7 @@ Source: code-review of REQ-1774770314. Severity: LOW. Evidence: .github/agents/o
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: feature/REQ-1774772256-review-follow-up-replace-reverted-with-cancelled-in-orchestrator-agent-mode
+* **Branch**: feature/REQ-1774772256-review-follow-up-replace-reverted-with-cancelled-in-orchestrator-agent-mode
+* **Merged**: Yes
+* **Deployed**: Yes

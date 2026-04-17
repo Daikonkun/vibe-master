@@ -65,5 +65,5 @@ feature/REQ-1775716475-instruction-on-deployment
 
 * **Linked Worktree**: feature/REQ-1775716475-instruction-on-deployment
 * **Branch**: feature/REQ-1775716475-instruction-on-deployment
-* **Merged**: No
-* **Deployed**: No
+* **Merged**: Yes
+* **Deployed**: Yes

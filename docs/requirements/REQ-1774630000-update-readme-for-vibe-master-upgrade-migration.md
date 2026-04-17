@@ -37,5 +37,5 @@ feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration
 
 * **Linked Worktree**: feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration
 * **Branch**: feature/REQ-1774630000-update-readme-for-vibe-master-upgrade-migration
-* **Merged**: No
-* **Deployed**: No
+* **Merged**: Yes
+* **Deployed**: Yes

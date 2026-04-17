@@ -41,7 +41,7 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1776395706 | Review follow-up: harden manifest lock helper critical section and portability | DEPLOYED | HIGH | — | 2026-04-17 | 2026-04-17 |
 | REQ-1776398313767881380 | Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures | DEPLOYED | HIGH | feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures | 2026-04-17 | 2026-04-17 |
 | REQ-1776409551444648236 | Review follow-up: preserve error propagation in mkdir lock fallback | CANCELLED | HIGH | — | 2026-04-17 | 2026-04-17 |
-| REQ-1776415543221953328 | Review follow-up: align worktree-merge prompt with strict dirty-tree behavior | CODE_REVIEW | HIGH | feature/REQ-1776415543221953328-review-follow-up-align-worktree-merge-prompt-with-strict-dirty-tree-behavior | 2026-04-17 | 2026-04-17 |
+| REQ-1776415543221953328 | Review follow-up: align worktree-merge prompt with strict dirty-tree behavior | MERGED | HIGH | feature/REQ-1776415543221953328-review-follow-up-align-worktree-merge-prompt-with-strict-dirty-tree-behavior | 2026-04-17 | 2026-04-17 |
 | REQ-1776415552106978163 | Review follow-up: document work-on --auto for autonomous pipelines | PROPOSED | HIGH | — | 2026-04-17 | 2026-04-17 |
 | REQ-1776415557577295081 | Review follow-up: enforce requirement-worktree lifecycle invariants | PROPOSED | MEDIUM | — | 2026-04-17 | 2026-04-17 |
 | REQ-1776418077426972512 | Review follow-up: clean lock/timestamp artifacts after start-work | PROPOSED | MEDIUM | — | 2026-04-17 | 2026-04-17 |
@@ -49,8 +49,8 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 ## Status Breakdown
 - **Proposed**: 3
 - **In Progress**: 0
-- **Code Review**: 1
-- **Merged**: 0
+- **Code Review**: 0
+- **Merged**: 1
 - **Deployed**: 33
 - **Blocked**: 0
 - **Backlog**: 0
@@ -61,6 +61,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-17T09:29:20Z
+* Last updated: 2026-04-17T09:36:24Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

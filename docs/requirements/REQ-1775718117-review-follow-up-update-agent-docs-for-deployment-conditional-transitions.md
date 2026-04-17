@@ -42,7 +42,7 @@ REQ-1775716475
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: feature/REQ-1775718117-review-follow-up-update-agent-docs-for-deployment-conditional-transitions
+* **Branch**: feature/REQ-1775718117-review-follow-up-update-agent-docs-for-deployment-conditional-transitions
+* **Merged**: Yes
+* **Deployed**: Yes

@@ -46,4 +46,4 @@ None
 * **Linked Worktree**: feature/REQ-1774639240-add-requirement-populate-spec-sections-after-creation
 * **Branch**: feature/REQ-1774639240-add-requirement-populate-spec-sections-after-creation
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes

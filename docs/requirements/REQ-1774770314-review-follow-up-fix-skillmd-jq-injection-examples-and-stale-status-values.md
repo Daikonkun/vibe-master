@@ -46,7 +46,7 @@ Source: code-review. Severity: MEDIUM. Evidence: (1) requirement-tracker/SKILL.m
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: feature/REQ-1774770314-review-follow-up-fix-skill-md-jq-injection-examples-and-stale-status-values
+* **Branch**: feature/REQ-1774770314-review-follow-up-fix-skill-md-jq-injection-examples-and-stale-status-values
+* **Merged**: Yes
+* **Deployed**: Yes

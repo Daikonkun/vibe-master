@@ -382,7 +382,8 @@
         "REQ-1776415543221953328"
       ],
       "createdAt": "2026-04-17T09:17:21Z",
-      "status": "ACTIVE"
+      "status": "MERGED",
+      "mergedAt": "2026-04-17T09:36:23Z"
     }
   ]
 }

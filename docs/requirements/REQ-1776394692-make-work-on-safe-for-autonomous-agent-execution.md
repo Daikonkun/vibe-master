@@ -57,7 +57,7 @@ REQ-1776394663 (lifecycle enforcement ensures premature status advances are bloc
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: feature/REQ-1776394692-make-work-on-safe-for-autonomous-agent-execution
+* **Branch**: feature/REQ-1776394692-make-work-on-safe-for-autonomous-agent-execution
+* **Merged**: Yes
+* **Deployed**: Yes

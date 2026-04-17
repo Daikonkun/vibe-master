@@ -47,7 +47,7 @@ None
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: feature/REQ-1774891128-reuse-cleanup
+* **Branch**: feature/REQ-1774891128-reuse-cleanup
+* **Merged**: Yes
+* **Deployed**: Yes

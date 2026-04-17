@@ -46,7 +46,7 @@ None
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: feature/REQ-1775120162-e2e-testing-command
+* **Branch**: feature/REQ-1775120162-e2e-testing-command
+* **Merged**: Yes
+* **Deployed**: Yes

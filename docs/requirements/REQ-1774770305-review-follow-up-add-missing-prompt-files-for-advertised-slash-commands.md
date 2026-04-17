@@ -37,7 +37,7 @@ N/A — changes applied directly to main (prompt files and copilot-instructions.
 
 ---
 
-* **Linked Worktree**: None
-* **Branch**: main (direct)
+* **Linked Worktree**: None yet
+* **Branch**: None yet
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes

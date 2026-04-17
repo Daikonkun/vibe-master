@@ -48,7 +48,7 @@ REQ-1776233067 (auto-compacting — parent feature)
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: feature/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh
+* **Branch**: feature/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh
+* **Merged**: Yes
+* **Deployed**: Yes

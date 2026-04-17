@@ -43,7 +43,7 @@ REQ-1776394634 (locking ensures the manifest read-modify-write during enrichment
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: feature/REQ-1776394677-make-add-requirement-creation-and-enrichment-atomic
+* **Branch**: feature/REQ-1776394677-make-add-requirement-creation-and-enrichment-atomic
+* **Merged**: Yes
+* **Deployed**: Yes

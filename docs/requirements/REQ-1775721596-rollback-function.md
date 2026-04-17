@@ -51,5 +51,5 @@ feature/REQ-1775721596-rollback-function
 
 * **Linked Worktree**: feature/REQ-1775721596-rollback-function
 * **Branch**: feature/REQ-1775721596-rollback-function
-* **Merged**: No
-* **Deployed**: No
+* **Merged**: Yes
+* **Deployed**: Yes

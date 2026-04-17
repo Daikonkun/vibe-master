@@ -29,7 +29,7 @@ REQ-1774630000 (parent: upgrade guide must be merged first)
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: feature/REQ-1774632175-review-follow-up-polish-upgrade-guide-in-readme
+* **Branch**: feature/REQ-1774632175-review-follow-up-polish-upgrade-guide-in-readme
+* **Merged**: Yes
+* **Deployed**: Yes

@@ -46,7 +46,7 @@ Source: code-review of REQ-1776394634. Severity: HIGH. Evidence: scripts/_manife
 
 ---
 
-* **Linked Worktree**: feature/REQ-1776395706-review-follow-up-harden-manifest-lock-helper-critical-section-and-portability
-* **Branch**: feature/REQ-1776395706-review-follow-up-harden-manifest-lock-helper-critical-section-and-portability
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: None yet
+* **Branch**: None yet
+* **Merged**: Yes
+* **Deployed**: Yes

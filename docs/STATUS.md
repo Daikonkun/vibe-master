@@ -14,13 +14,13 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
+
+
+## MERGED (1)
 
 * REQ-1776415543221953328: Review follow-up: align worktree-merge prompt with strict dirty-tree behavior (priority: HIGH)
   - Worktree: feature/REQ-1776415543221953328-review-follow-up-align-worktree-merge-prompt-with-strict-dirty-tree-behavior
-
-## MERGED (0)
-
 
 ## DEPLOYED (33)
 
@@ -111,6 +111,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 41
 - Deployed: 33 (80%)
-- Merged (awaiting deploy): 0
+- Merged (awaiting deploy): 1
 - In Progress: 0
 - Blocked: 0

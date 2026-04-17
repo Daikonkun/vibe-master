@@ -45,7 +45,7 @@ None (can be implemented independently, but benefits from REQ-1776394634 locking
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: feature/REQ-1776394648-isolate-worktree-merge-git-side-effects-from-concurrent-agents
+* **Branch**: feature/REQ-1776394648-isolate-worktree-merge-git-side-effects-from-concurrent-agents
+* **Merged**: Yes
+* **Deployed**: Yes

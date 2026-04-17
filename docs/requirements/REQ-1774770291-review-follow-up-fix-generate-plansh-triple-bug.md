@@ -53,7 +53,7 @@ The heredoc body references obra/superpowers skills. Fix: replace with a generic
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: feature/REQ-1774770291-review-follow-up-fix-generate-plan-sh-triple-bug
+* **Branch**: feature/REQ-1774770291-review-follow-up-fix-generate-plan-sh-triple-bug
+* **Merged**: Yes
+* **Deployed**: Yes

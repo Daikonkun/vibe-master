@@ -57,7 +57,7 @@ None
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
+* **Linked Worktree**: feature/REQ-1776233067-auto-compacting
+* **Branch**: feature/REQ-1776233067-auto-compacting
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes

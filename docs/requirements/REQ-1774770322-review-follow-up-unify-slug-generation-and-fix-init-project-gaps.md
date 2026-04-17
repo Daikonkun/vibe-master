@@ -41,7 +41,7 @@ Source: code-review. Severity: MEDIUM. Evidence: (1) create-requirement.sh slug 
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: feature/REQ-1774770322-review-follow-up-unify-slug-generation-and-fix-init-project-gaps
+* **Branch**: feature/REQ-1774770322-review-follow-up-unify-slug-generation-and-fix-init-project-gaps
+* **Merged**: Yes
+* **Deployed**: Yes

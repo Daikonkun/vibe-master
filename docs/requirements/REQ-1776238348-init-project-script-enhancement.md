@@ -50,7 +50,7 @@ some DEPLOYED REQs still exists when I run the init command to start a new proje
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: feature/REQ-1776238348-init-project-script-enhancement
+* **Branch**: feature/REQ-1776238348-init-project-script-enhancement
+* **Merged**: Yes
+* **Deployed**: Yes

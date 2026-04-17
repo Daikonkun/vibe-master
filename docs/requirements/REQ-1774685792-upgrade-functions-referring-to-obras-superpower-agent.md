@@ -57,5 +57,5 @@ feature/REQ-1774685792-upgrade-functions-referring-to-obra-s-superpower-agent (a
 
 * **Linked Worktree**: feature/REQ-1774685792-upgrade-functions-referring-to-obra-s-superpower-agent
 * **Branch**: feature/REQ-1774685792-upgrade-functions-referring-to-obra-s-superpower-agent
-* **Merged**: No
-* **Deployed**: No
+* **Merged**: Yes
+* **Deployed**: Yes

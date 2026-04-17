@@ -43,7 +43,7 @@ Source: code-review of REQ-1776394648. Severity: HIGH. Evidence: in scripts/work
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures
+* **Branch**: feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures
+* **Merged**: Yes
+* **Deployed**: Yes

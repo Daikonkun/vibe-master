@@ -61,5 +61,5 @@ feature/REQ-1776062513-enhance-e2e-test-skill
 * **Linked Worktree**: feature/REQ-1776062513-enhance-e2e-test-skill
 * **Path**: /Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776062513-enhance-e2e-test-skill
 * **Branch**: feature/REQ-1776062513-enhance-e2e-test-skill
-* **Merged**: No
-* **Deployed**: No
+* **Merged**: Yes
+* **Deployed**: Yes

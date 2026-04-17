@@ -38,5 +38,5 @@ feature/REQ-1774681642-execution-standard-on-working-with-a-requirement
 
 * **Linked Worktree**: feature/REQ-1774681642-execution-standard-on-working-with-a-requirement
 * **Branch**: feature/REQ-1774681642-execution-standard-on-working-with-a-requirement
-* **Merged**: No
-* **Deployed**: No
+* **Merged**: Yes
+* **Deployed**: Yes

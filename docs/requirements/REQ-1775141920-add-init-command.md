@@ -50,7 +50,7 @@ None
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Linked Worktree**: feature/REQ-1775141920-add-init-command
+* **Branch**: feature/REQ-1775141920-add-init-command
+* **Merged**: Yes
+* **Deployed**: Yes

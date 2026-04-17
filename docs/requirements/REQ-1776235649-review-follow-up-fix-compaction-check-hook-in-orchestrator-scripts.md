@@ -48,7 +48,7 @@ feature/REQ-1776235649-review-follow-up-fix-compaction-check-hook-in-orchestrato
 
 ---
 
-* **Linked Worktree**: /Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776235649-review-follow-up-fix-compaction-check-hook-in-orchestrator-scripts
+* **Linked Worktree**: feature/REQ-1776235649-review-follow-up-fix-compaction-check-hook-in-orchestrator-scripts
 * **Branch**: feature/REQ-1776235649-review-follow-up-fix-compaction-check-hook-in-orchestrator-scripts
-* **Merged**: No
-* **Deployed**: No
+* **Merged**: Yes
+* **Deployed**: Yes

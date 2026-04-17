@@ -55,5 +55,5 @@ None
 
 * **Linked Worktree**: None yet
 * **Branch**: None yet
-* **Merged**: No
-* **Deployed**: No
+* **Merged**: Yes
+* **Deployed**: Yes
