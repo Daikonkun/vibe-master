@@ -39,7 +39,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776233067: auto-compacting
 * [DEPLOYED] REQ-1776235658: Review follow-up: replace bc with portable arithmetic in compact-context.sh
 * [DEPLOYED] REQ-1776238348: init-project script enhancement
-* [CODE_REVIEW] REQ-1776394663: Harden lifecycle enforcement in start-work and worktree-merge
+* [MERGED] REQ-1776394663: Harden lifecycle enforcement in start-work and worktree-merge
 * [PROPOSED] REQ-1776394677: Make add-requirement creation and enrichment atomic
 * [PROPOSED] REQ-1776394692: Make work-on safe for autonomous agent execution
 
