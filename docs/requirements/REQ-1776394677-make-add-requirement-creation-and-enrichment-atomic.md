@@ -1,7 +1,7 @@
 # Make add-requirement creation and enrichment atomic
 
 **ID**: REQ-1776394677  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-04-17T02:57:57Z  
 

@@ -13,12 +13,10 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (1)
+## MERGED (0)
 
-* REQ-1776394677: Make add-requirement creation and enrichment atomic (priority: MEDIUM)
-  - Worktree: feature/REQ-1776394677-make-add-requirement-creation-and-enrichment-atomic
 
-## DEPLOYED (31)
+## DEPLOYED (32)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -78,6 +76,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1776394648-isolate-worktree-merge-git-side-effects-from-concurrent-agents
 * REQ-1776394663: Harden lifecycle enforcement in start-work and worktree-merge (priority: MEDIUM)
   - Worktree: feature/REQ-1776394663-harden-lifecycle-enforcement-in-start-work-and-worktree-merge
+* REQ-1776394677: Make add-requirement creation and enrichment atomic (priority: MEDIUM)
+  - Worktree: feature/REQ-1776394677-make-add-requirement-creation-and-enrichment-atomic
 * REQ-1776395706: Review follow-up: harden manifest lock helper critical section and portability (priority: HIGH)
   - Worktree: none
 * REQ-1776398313767881380: Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures (priority: HIGH)
@@ -102,7 +102,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 37
-- Deployed: 31 (83%)
-- Merged (awaiting deploy): 1
+- Deployed: 32 (86%)
+- Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0
