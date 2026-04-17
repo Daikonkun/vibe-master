@@ -16,25 +16,79 @@ mkdir -p "$PROJECT_ROOT/docs"
 
 echo "🔨 Regenerating documentation..."
 
-# Sync per-requirement spec status lines with manifest so detailed docs don't drift.
+# Sync per-requirement spec status/worktree lines with manifest so detailed docs don't drift.
 echo "🧩 Syncing docs/requirements status fields..."
-while IFS=$'\t' read -r REQ_ID REQ_STATUS; do
+while IFS=$'\t' read -r REQ_ID REQ_STATUS REQ_WORKTREE_ID; do
   [ -z "$REQ_ID" ] && continue
 
   SPEC_FILE="$(find "$PROJECT_ROOT/docs/requirements" -maxdepth 1 -type f -name "${REQ_ID}-*.md" | head -1)"
   [ -z "$SPEC_FILE" ] && continue
 
+  LINKED_WORKTREE="None yet"
+  BRANCH_NAME="None yet"
+  if [ -n "${REQ_WORKTREE_ID:-}" ]; then
+    LINKED_WORKTREE="$REQ_WORKTREE_ID"
+    BRANCH_NAME="$REQ_WORKTREE_ID"
+
+    if [ -f "$WORKTREE_MANIFEST" ]; then
+      MAPPED_BRANCH="$(jq -r --arg wtId "$REQ_WORKTREE_ID" '.worktrees[]? | select(.id == $wtId) | .branch // empty' "$WORKTREE_MANIFEST" | head -1)"
+      if [ -n "$MAPPED_BRANCH" ]; then
+        BRANCH_NAME="$MAPPED_BRANCH"
+      fi
+    fi
+  fi
+
+  MERGED_FLAG="No"
+  DEPLOYED_FLAG="No"
+  if [ "$REQ_STATUS" = "MERGED" ] || [ "$REQ_STATUS" = "DEPLOYED" ]; then
+    MERGED_FLAG="Yes"
+  fi
+  if [ "$REQ_STATUS" = "DEPLOYED" ]; then
+    DEPLOYED_FLAG="Yes"
+  fi
+
   SPEC_TMP="$(mktemp "${SPEC_FILE}.XXXXXX")"
 
-  if ! awk -v status="$REQ_STATUS" '
-    BEGIN { replaced = 0 }
+  if ! awk -v status="$REQ_STATUS" -v linkedWorktree="$LINKED_WORKTREE" -v branch="$BRANCH_NAME" -v merged="$MERGED_FLAG" -v deployed="$DEPLOYED_FLAG" '
+    BEGIN {
+      statusReplaced = 0
+      linkedReplaced = 0
+      branchReplaced = 0
+      mergedReplaced = 0
+      deployedReplaced = 0
+    }
     {
-      if (!replaced && $0 ~ /^\*\*Status\*\*:/) {
+      if (!statusReplaced && $0 ~ /^\*\*Status\*\*:/) {
         print "**Status**: " status "  "
-        replaced = 1
-      } else {
-        print $0
+        statusReplaced = 1
+        next
       }
+
+      if (!linkedReplaced && $0 ~ /^\* \*\*Linked Worktree\*\*:/) {
+        print "* **Linked Worktree**: " linkedWorktree
+        linkedReplaced = 1
+        next
+      }
+
+      if (!branchReplaced && $0 ~ /^\* \*\*Branch\*\*:/) {
+        print "* **Branch**: " branch
+        branchReplaced = 1
+        next
+      }
+
+      if (!mergedReplaced && $0 ~ /^\* \*\*Merged\*\*:/) {
+        print "* **Merged**: " merged
+        mergedReplaced = 1
+        next
+      }
+
+      if (!deployedReplaced && $0 ~ /^\* \*\*Deployed\*\*:/) {
+        print "* **Deployed**: " deployed
+        deployedReplaced = 1
+        next
+      }
+
+      print $0
     }
   ' "$SPEC_FILE" > "$SPEC_TMP"; then
     rm -f "$SPEC_TMP"
@@ -42,7 +96,7 @@ while IFS=$'\t' read -r REQ_ID REQ_STATUS; do
   fi
 
   mv "$SPEC_TMP" "$SPEC_FILE"
-done < <(jq -r '.requirements[] | [.id, .status] | @tsv' "$REQ_MANIFEST")
+done < <(jq -r '.requirements[] | [.id, .status, (.worktreeId // "")] | @tsv' "$REQ_MANIFEST")
 
 # Generate REQUIREMENTS.md summary
 echo "📄 Generating REQUIREMENTS.md..."
