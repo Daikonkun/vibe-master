@@ -469,11 +469,11 @@
       "id": "REQ-1776415543221953328",
       "name": "Review follow-up: align worktree-merge prompt with strict dirty-tree behavior",
       "description": "Source: code-review of delegated REQ flow. Severity: HIGH. Evidence: .github/prompts/worktree-merge.prompt.md says dirty working trees are auto-committed/stashed, but scripts/worktree-merge.sh aborts immediately when dirty. Required outcome: align prompt/docs with actual strict clean-tree guard and document exact pre-merge cleanup steps.",
-      "status": "IN_PROGRESS",
+      "status": "CODE_REVIEW",
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-17T08:45:43Z",
-      "updatedAt": "2026-04-17T09:17:21Z",
+      "updatedAt": "2026-04-17T09:22:40Z",
       "worktreeId": "feature/REQ-1776415543221953328-review-follow-up-align-worktree-merge-prompt-with-strict-dirty-tree-behavior"
     },
     {
