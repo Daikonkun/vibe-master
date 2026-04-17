@@ -1,7 +1,7 @@
 # Review follow-up: harden manifest lock helper critical section and portability
 
 **ID**: REQ-1776395706  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: HIGH  
 **Created**: 2026-04-17T03:15:06Z  
 
