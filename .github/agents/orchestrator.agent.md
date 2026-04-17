@@ -101,18 +101,15 @@ You are the orchestrator for parallel AI-driven development. Your core responsib
 
 ### State Transitions
 ```
-PROPOSED → IN_PROGRESS
-         → BLOCKED (with reason)
+PROPOSED   → IN_PROGRESS, BACKLOG, CANCELLED
+IN_PROGRESS → CODE_REVIEW, BLOCKED, BACKLOG, CANCELLED
+CODE_REVIEW → MERGED, BLOCKED, CANCELLED
+MERGED      → DEPLOYED, CANCELLED
+DEPLOYED    → CANCELLED
+BLOCKED     → IN_PROGRESS, BACKLOG, CANCELLED
+BACKLOG     → PROPOSED, IN_PROGRESS, CANCELLED
+CANCELLED   → (terminal)
 
-IN_PROGRESS → CODE_REVIEW
-            → BLOCKED
-
-CODE_REVIEW → MERGED
-            → BLOCKED
-
-MERGED → DEPLOYED (only when requiresDeployment=true; default)
-         (MERGED is terminal when requiresDeployment=false)
-
-Any → BACKLOG (when deprioritized)
-Any → CANCELLED (when abandoned)
+Note: CANCELLED is allowed from any non-CANCELLED state.
+MERGED is terminal when requiresDeployment=false.
 ```

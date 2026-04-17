@@ -11,12 +11,14 @@ Workflow:
 1. Parse required `REQ-ID` and optional `target-status` from arguments. Validate format (`REQ-<digits>`). If `target-status` is provided, validate it is a known status.
 2. Read `.requirement-manifest.json` and look up the requirement's current status.
 3. **Determine the next status** using the lifecycle transition map (or use the explicit `target-status` if provided):
-   - PROPOSED → IN_PROGRESS
-   - IN_PROGRESS → CODE_REVIEW
-   - CODE_REVIEW → MERGED
-   - MERGED → DEPLOYED *(only when `requiresDeployment` is `true` or unset in the manifest — this is the default)*
-   - BLOCKED → IN_PROGRESS
-   - BACKLOG → IN_PROGRESS
+   - PROPOSED → IN_PROGRESS, BACKLOG, CANCELLED
+   - IN_PROGRESS → CODE_REVIEW, BLOCKED, BACKLOG, CANCELLED
+   - CODE_REVIEW → MERGED, BLOCKED, CANCELLED
+   - MERGED → DEPLOYED, CANCELLED *(DEPLOYED only when `requiresDeployment` is `true` or unset in the manifest — default behavior)*
+   - DEPLOYED → CANCELLED
+   - BLOCKED → IN_PROGRESS, BACKLOG, CANCELLED
+   - BACKLOG → PROPOSED, IN_PROGRESS, CANCELLED
+   - CANCELLED → terminal
    If the current status is DEPLOYED or CANCELLED, report that the requirement is in a terminal state and stop.
    If the current status is MERGED **and** the requirement's `requiresDeployment` flag is `false` in `.requirement-manifest.json`, treat MERGED as a terminal state (no further transition) and stop.
 4. **Check worktree**: Read `.worktree-manifest.json` and verify the requirement has an active worktree.
