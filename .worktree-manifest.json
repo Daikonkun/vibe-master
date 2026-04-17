@@ -300,6 +300,17 @@
       "createdAt": "2026-04-17T03:02:27Z",
       "status": "MERGED",
       "mergedAt": "2026-04-17T03:41:35Z"
+    },
+    {
+      "id": "feature/REQ-1776394648-isolate-worktree-merge-git-side-effects-from-concurrent-agents",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776394648-isolate-worktree-merge-git-side-effects-from-concurrent-agents",
+      "branch": "feature/REQ-1776394648-isolate-worktree-merge-git-side-effects-from-concurrent-agents",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776394648"
+      ],
+      "createdAt": "2026-04-17T03:45:33Z",
+      "status": "ACTIVE"
     }
   ]
 }

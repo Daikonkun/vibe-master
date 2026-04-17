@@ -377,12 +377,13 @@
       "id": "REQ-1776394648",
       "name": "Isolate worktree-merge git side-effects from concurrent agents",
       "description": "Source: code-review of agent concurrency flow. Severity: HIGH. Evidence: worktree-merge.sh runs git add -A (line 33) which stages ALL dirty files including other agents in-flight edits, then commits them as auto-commit manifest and docs. It also stashes remaining untracked changes (line 42). When an unmapped branch is merged (no worktree-manifest entry), requirement status updates are silently skipped (lines 60-92). Required outcome: (1) Replace git add -A with explicit file list matching only the current merge operation files. (2) Refuse to stash if unrelated dirty files exist — surface an error instead. (3) When branch is not mapped in worktree manifest, warn and require --force or explicit confirmation before proceeding. (4) Never auto-commit files that do not belong to the current merge operation.",
-      "status": "PROPOSED",
+      "status": "IN_PROGRESS",
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-17T02:57:28Z",
-      "updatedAt": "2026-04-17T02:57:28Z",
-      "notes": "Replace git add -A in worktree-merge.sh with explicit file staging; remove auto-stash; add --force flag for unmapped-branch merges."
+      "updatedAt": "2026-04-17T03:45:33Z",
+      "notes": "Replace git add -A in worktree-merge.sh with explicit file staging; remove auto-stash; add --force flag for unmapped-branch merges.",
+      "worktreeId": "feature/REQ-1776394648-isolate-worktree-merge-git-side-effects-from-concurrent-agents"
     },
     {
       "id": "REQ-1776394663",

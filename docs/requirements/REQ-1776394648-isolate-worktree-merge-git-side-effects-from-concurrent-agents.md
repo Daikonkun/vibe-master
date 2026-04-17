@@ -1,7 +1,7 @@
 # Isolate worktree-merge git side-effects from concurrent agents
 
 **ID**: REQ-1776394648  
-**Status**: PROPOSED  
+**Status**: IN_PROGRESS  
 **Priority**: HIGH  
 **Created**: 2026-04-17T02:57:28Z  
 
@@ -24,6 +24,20 @@ Source: code-review of agent concurrency flow. Severity: HIGH. Evidence: worktre
 - **Unmapped branch guard**: After `WORKTREE_PATH` and `REQ_IDS` lookups (lines 56-62), check if both are empty. If so, print warning + exit 1 unless `$FORCE` is set.
 - **Backward compatibility**: Add a `--force` flag parser (similar to `update-requirement-status.sh`) to opt into the old permissive behavior for edge cases.
 - **Affected file**: `scripts/worktree-merge.sh`.
+
+
+## Development Plan
+
+1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776394648-isolate-worktree-merge-git-side-effects-from-concurrent-agents.md`.
+   - **Summary**: Source: code-review of agent concurrency flow. Severity: HIGH. Evidence: worktre
+   - **Key criteria**: - [ ] `worktree-merge.sh` no longer runs `git add -A`; instead it stages only the explicit files it 
+2. Analyse Technical Notes and identify implementation approach.
+   - **Notes**: - **Explicit staging**: Replace `git add -A` (line 33) with `git add .requirement-manifest.json .wor
+3. Implement changes in the files/scripts referenced by the requirement spec.
+4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
+5. Validate with `./scripts/show-requirement.sh REQ-1776394648` and verify success criteria are met.
+
+**Last updated**: 2026-04-17T03:45:34Z
 
 ## Dependencies
 
