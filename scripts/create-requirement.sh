@@ -3,13 +3,60 @@
 
 set -euo pipefail
 
-REQ_NAME="${1:?Error: requirement name required}"
-REQ_DESCRIPTION="${2:?Error: requirement description required}"
-REQ_PRIORITY="${3:-MEDIUM}"
+usage() {
+  cat << 'EOF'
+Usage: ./scripts/create-requirement.sh "<name>" "<description>" [priority] [--no-commit]
+
+priority: CRITICAL | HIGH | MEDIUM | LOW (default: MEDIUM)
+
+Flags:
+  --no-commit  Create requirement files but skip final git add/commit
+EOF
+}
+
+ARGS=()
+NO_COMMIT="false"
+
+for arg in "$@"; do
+  case "$arg" in
+    --no-commit)
+      NO_COMMIT="true"
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    --*)
+      echo "Error: Unknown option: $arg" >&2
+      usage >&2
+      exit 1
+      ;;
+    *)
+      ARGS+=("$arg")
+      ;;
+  esac
+done
+
+if [ "${#ARGS[@]}" -lt 2 ] || [ "${#ARGS[@]}" -gt 3 ]; then
+  echo "Error: Invalid arguments." >&2
+  usage >&2
+  exit 1
+fi
+
+REQ_NAME="${ARGS[0]}"
+REQ_DESCRIPTION="${ARGS[1]}"
+REQ_PRIORITY="${ARGS[2]:-MEDIUM}"
 
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
 source "$PROJECT_ROOT/scripts/_manifest-lock.sh"
+
+cleanup_manifest_lock_artifact() {
+  # Best-effort cleanup for flock-created lock file artifacts.
+  rm -f "${REQ_MANIFEST}.lock"
+}
+
+trap cleanup_manifest_lock_artifact EXIT
 
 generate_req_numeric_id() {
   if command -v python3 >/dev/null 2>&1; then
@@ -145,15 +192,19 @@ $REQ_DESCRIPTION
 * **Deployed**: No
 EOF
 
-git -C "$PROJECT_ROOT" add \
-  .requirement-manifest.json \
-  REQUIREMENTS.md \
-  docs/STATUS.md \
-  docs/ROADMAP.md \
-  docs/DEPENDENCIES.md \
-  docs/requirements/ 2>/dev/null || true
+if [ "$NO_COMMIT" != "true" ]; then
+  git -C "$PROJECT_ROOT" add \
+    .requirement-manifest.json \
+    REQUIREMENTS.md \
+    docs/STATUS.md \
+    docs/ROADMAP.md \
+    docs/DEPENDENCIES.md \
+    docs/requirements/ 2>/dev/null || true
 
-git -C "$PROJECT_ROOT" commit -m "chore: create requirement $REQ_ID" --no-verify 2>/dev/null || true
+  git -C "$PROJECT_ROOT" commit -m "chore: create requirement $REQ_ID" --no-verify 2>/dev/null || true
+else
+  echo "ℹ️  Skipping commit due to --no-commit; changes remain uncommitted for enrichment workflow."
+fi
 
 echo "✅ Requirement created: $REQ_ID"
 echo "📄 Spec: docs/requirements/${REQ_ID}-${SLUG}.md"
