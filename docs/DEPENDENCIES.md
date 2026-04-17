@@ -85,3 +85,5 @@ REQ-1776415552106978163: Review follow-up: document work-on --auto for autonomou
 
 REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants (no dependencies)
 
+REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work (no dependencies)
+

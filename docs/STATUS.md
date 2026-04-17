@@ -2,11 +2,13 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (2)
+## PROPOSED (3)
 
 * REQ-1776415552106978163: Review follow-up: document work-on --auto for autonomous pipelines (priority: HIGH)
   - Worktree: none
 * REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants (priority: MEDIUM)
+  - Worktree: none
+* REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work (priority: MEDIUM)
   - Worktree: none
 
 ## IN_PROGRESS (0)
@@ -107,8 +109,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 
 ## Stats
-- Total Requirements: 40
-- Deployed: 33 (82%)
+- Total Requirements: 41
+- Deployed: 33 (80%)
 - Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0
