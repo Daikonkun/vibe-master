@@ -27,6 +27,12 @@ Install automatically on macOS with Homebrew:
 bash scripts/bootstrap-deps.sh --install
 ```
 
+### 2b. Install Local Git Hooks (Recommended)
+Enable the repository-managed pre-push guard so drift is blocked before remote pushes:
+```bash
+bash scripts/install-git-hooks.sh
+```
+
 ### 3. Initialize Your Project
 Run the init script to reset manifests and remove Vibe Master's own requirement history:
 ```bash
@@ -162,6 +168,8 @@ rm -rf .upgrade-template
 ├── .github/
 │   ├── agents/
 │   │   └── orchestrator.agent.md          # Main orchestrator agent
+│   ├── workflows/
+│   │   └── docs-sync-guard.yml            # CI: fail if generated docs drift from manifests
 │   ├── prompts/
 │   │   ├── add-requirement.prompt.md      # Slash command for requirement creation
 │   │   ├── bug-fix.prompt.md              # Wrapper prompt for debug workflow skill
@@ -193,6 +201,9 @@ rm -rf .upgrade-template
 │   │   ├── update-manual/SKILL.md          # User manual generation/refresh
 │   │   └── worktree-manager/SKILL.md       # Git worktree management
 │   
+├── .githooks/
+│   └── pre-push                            # Local push guard: run docs sync validation
+│
 ├── copilot-instructions.md                 # Global agent instructions
 │
 ├── REQUIREMENTS.md                         # Summary of all requirements
@@ -207,11 +218,13 @@ rm -rf .upgrade-template
 │
 └── scripts/
     ├── bootstrap-deps.sh                  # CLI: verify/install optional flock dependency
+    ├── check-docs-sync.sh                 # Guard: verify generated docs are synced with manifests
     ├── check-manifest-lock-race.sh        # Regression: concurrent manifest writers do not lose updates
     ├── create-requirement.sh               # CLI: create new requirement
     ├── dependency-graph.sh                 # CLI: regenerate + show dependency graph
     ├── generate-plan.sh                    # CLI: generate/update Development Plan in a spec
     ├── init-project.sh                     # CLI: initialize project from template
+    ├── install-git-hooks.sh                # CLI: activate repository-managed hooks (.githooks)
     ├── list-requirements.sh                # CLI: list requirements by optional status
     ├── regenerate-docs.sh                  # CLI: regenerate all docs
     ├── roadmap.sh                          # CLI: regenerate + show roadmap
