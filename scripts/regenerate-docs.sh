@@ -24,7 +24,9 @@ while IFS=$'\t' read -r REQ_ID REQ_STATUS; do
   SPEC_FILE="$(find "$PROJECT_ROOT/docs/requirements" -maxdepth 1 -type f -name "${REQ_ID}-*.md" | head -1)"
   [ -z "$SPEC_FILE" ] && continue
 
-  awk -v status="$REQ_STATUS" '
+  SPEC_TMP="$(mktemp "${SPEC_FILE}.XXXXXX")"
+
+  if ! awk -v status="$REQ_STATUS" '
     BEGIN { replaced = 0 }
     {
       if (!replaced && $0 ~ /^\*\*Status\*\*:/) {
@@ -34,7 +36,12 @@ while IFS=$'\t' read -r REQ_ID REQ_STATUS; do
         print $0
       }
     }
-  ' "$SPEC_FILE" > "$SPEC_FILE.tmp" && mv "$SPEC_FILE.tmp" "$SPEC_FILE"
+  ' "$SPEC_FILE" > "$SPEC_TMP"; then
+    rm -f "$SPEC_TMP"
+    exit 1
+  fi
+
+  mv "$SPEC_TMP" "$SPEC_FILE"
 done < <(jq -r '.requirements[] | [.id, .status] | @tsv' "$REQ_MANIFEST")
 
 # Generate REQUIREMENTS.md summary

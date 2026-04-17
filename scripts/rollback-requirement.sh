@@ -15,6 +15,7 @@ BASE_BRANCH="${2:-main}"
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
 WORKTREE_MANIFEST="$PROJECT_ROOT/.worktree-manifest.json"
+source "$PROJECT_ROOT/scripts/_manifest-lock.sh"
 TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
 if [ -z "$REQ_ID" ]; then
@@ -135,32 +136,32 @@ fi
 
 # --- Update .requirement-manifest.json ---
 
-jq --arg reqId "$REQ_ID" \
-   --arg ts "$TIMESTAMP" \
-   '.requirements |= map(
-     if .id == $reqId then
-       .status = "IN_PROGRESS"
-       | .updatedAt = $ts
-       | del(.deployedAt)
-     else
-       .
-     end
-   )' \
-   "$REQ_MANIFEST" > "$REQ_MANIFEST.tmp" && mv "$REQ_MANIFEST.tmp" "$REQ_MANIFEST"
+jq_update_manifest_locked "$REQ_MANIFEST" \
+  '.requirements |= map(
+    if .id == $reqId then
+      .status = "IN_PROGRESS"
+      | .updatedAt = $ts
+      | del(.deployedAt)
+    else
+      .
+    end
+  )' \
+  --arg reqId "$REQ_ID" \
+  --arg ts "$TIMESTAMP"
 
 # --- Update .worktree-manifest.json ---
 
-jq --arg reqId "$REQ_ID" \
-   --arg ts "$TIMESTAMP" \
-   '.worktrees |= map(
-     if (.requirementIds[]? == $reqId) then
-       .status = "ACTIVE"
-       | del(.mergedAt)
-     else
-       .
-     end
-   )' \
-   "$WORKTREE_MANIFEST" > "$WORKTREE_MANIFEST.tmp" && mv "$WORKTREE_MANIFEST.tmp" "$WORKTREE_MANIFEST"
+jq_update_manifest_locked "$WORKTREE_MANIFEST" \
+  '.worktrees |= map(
+    if (.requirementIds[]? == $reqId) then
+      .status = "ACTIVE"
+      | del(.mergedAt)
+    else
+      .
+    end
+  )' \
+  --arg reqId "$REQ_ID" \
+  --arg ts "$TIMESTAMP"
 
 # --- Update spec file status ---
 

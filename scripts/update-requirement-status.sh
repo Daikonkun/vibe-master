@@ -10,6 +10,7 @@ REFRESH_DOCS="true"
 
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
+source "$PROJECT_ROOT/scripts/_manifest-lock.sh"
 TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
 usage() {
@@ -165,19 +166,19 @@ if [ -n "$CREATED_AT" ] && [ "$CREATED_AT" != "null" ] && [[ "$TIMESTAMP" < "$CR
   exit 1
 fi
 
-jq --arg reqId "$REQ_ID" \
-   --arg newStatus "$NEW_STATUS" \
-   --arg ts "$TIMESTAMP" \
-   '.requirements |= map(
-     if .id == $reqId then
-       .status = $newStatus
-       | .updatedAt = $ts
-       | if $newStatus == "DEPLOYED" then .deployedAt = $ts else . end
-     else
-       .
-     end
-   )' \
-   "$REQ_MANIFEST" > "$REQ_MANIFEST.tmp" && mv "$REQ_MANIFEST.tmp" "$REQ_MANIFEST"
+jq_update_manifest_locked "$REQ_MANIFEST" \
+  '.requirements |= map(
+    if .id == $reqId then
+      .status = $newStatus
+      | .updatedAt = $ts
+      | if $newStatus == "DEPLOYED" then .deployedAt = $ts else . end
+    else
+      .
+    end
+  )' \
+  --arg reqId "$REQ_ID" \
+  --arg newStatus "$NEW_STATUS" \
+  --arg ts "$TIMESTAMP"
 
 if [ "$REFRESH_DOCS" = "true" ]; then
   "$PROJECT_ROOT/scripts/regenerate-docs.sh" >/dev/null

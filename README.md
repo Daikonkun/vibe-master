@@ -12,7 +12,20 @@ git remote remove origin  # Detach from template
 git remote add origin <your-new-repo>
 ```
 
-### 2. Initialize Your Project
+### 2. Bootstrap Dependencies (Required)
+Manifest-mutating workflows require `flock` for advisory locking.
+
+Verify prerequisites:
+```bash
+bash scripts/bootstrap-deps.sh
+```
+
+Install automatically on macOS with Homebrew:
+```bash
+bash scripts/bootstrap-deps.sh --install
+```
+
+### 3. Initialize Your Project
 Run the init script to reset manifests and remove Vibe Master's own requirement history:
 ```bash
 bash scripts/init-project.sh "My Project Name"
@@ -22,10 +35,10 @@ This will:
 - Remove historical `REQ-*.md` files from `docs/requirements/` (example files are preserved)
 - Regenerate clean `REQUIREMENTS.md`, `STATUS.md`, `ROADMAP.md`, and `DEPENDENCIES.md`
 
-### 3. Open in VS Code
+### 4. Open in VS Code
 Open the project in VS Code. The orchestrator agent will auto-load from `.github/agents/orchestrator.agent.md`.
 
-### 4. Submit Your First Requirement
+### 5. Submit Your First Requirement
 ```
 /add-requirement "User Authentication" "Implement email/password authentication system"
 ```
@@ -38,7 +51,7 @@ The agent will:
 - Update `REQUIREMENTS.md` summary
 - Suggest creating a git worktree
 
-### 5. Start Work
+### 6. Start Work
 ```
 /start-work REQ-001
 ```
@@ -48,7 +61,7 @@ The agent will:
 - Update requirement status to `IN_PROGRESS`
 - Provide context on what to build
 
-### 6. Check Status Anytime
+### 7. Check Status Anytime
 ```
 /status
 ```
@@ -191,6 +204,7 @@ rm -rf .upgrade-template
 │   └── DEPENDENCIES.md                    # Dependency graph
 │
 └── scripts/
+    ├── bootstrap-deps.sh                  # CLI: verify/install required local dependencies
     ├── create-requirement.sh               # CLI: create new requirement
     ├── dependency-graph.sh                 # CLI: regenerate + show dependency graph
     ├── generate-plan.sh                    # CLI: generate/update Development Plan in a spec
