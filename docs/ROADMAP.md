@@ -15,6 +15,8 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776395706: Review follow-up: harden manifest lock helper critical section and portability
 * [DEPLOYED] REQ-1776398313767881380: Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures
 * [CANCELLED] REQ-1776409551444648236: Review follow-up: preserve error propagation in mkdir lock fallback
+* [PROPOSED] REQ-1776415543221953328: Review follow-up: align worktree-merge prompt with strict dirty-tree behavior
+* [PROPOSED] REQ-1776415552106978163: Review follow-up: document work-on --auto for autonomous pipelines
 
 ## Medium Priority
 * [DEPLOYED] REQ-1774628144: Review follow-up: align slash commands with actual skill invocations
@@ -42,6 +44,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776394663: Harden lifecycle enforcement in start-work and worktree-merge
 * [DEPLOYED] REQ-1776394677: Make add-requirement creation and enrichment atomic
 * [DEPLOYED] REQ-1776394692: Make work-on safe for autonomous agent execution
+* [PROPOSED] REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants
 
 ## Low Priority
 * [DEPLOYED] REQ-1774632175: Review follow-up: polish upgrade guide in README

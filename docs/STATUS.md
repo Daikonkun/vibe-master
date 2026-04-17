@@ -2,8 +2,14 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (0)
+## PROPOSED (3)
 
+* REQ-1776415543221953328: Review follow-up: align worktree-merge prompt with strict dirty-tree behavior (priority: HIGH)
+  - Worktree: none
+* REQ-1776415552106978163: Review follow-up: document work-on --auto for autonomous pipelines (priority: HIGH)
+  - Worktree: none
+* REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants (priority: MEDIUM)
+  - Worktree: none
 
 ## IN_PROGRESS (0)
 
@@ -101,8 +107,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 
 ## Stats
-- Total Requirements: 37
-- Deployed: 33 (89%)
+- Total Requirements: 40
+- Deployed: 33 (82%)
 - Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0

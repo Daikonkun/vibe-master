@@ -79,3 +79,9 @@ REQ-1776398313767881380: Review follow-up: make worktree-merge forced unmapped m
 
 REQ-1776409551444648236: Review follow-up: preserve error propagation in mkdir lock fallback (no dependencies)
 
+REQ-1776415543221953328: Review follow-up: align worktree-merge prompt with strict dirty-tree behavior (no dependencies)
+
+REQ-1776415552106978163: Review follow-up: document work-on --auto for autonomous pipelines (no dependencies)
+
+REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants (no dependencies)
+
