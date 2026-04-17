@@ -18,13 +18,13 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
+
+
+## MERGED (1)
 
 * REQ-1776394634: Add manifest file locking and collision-resistant REQ IDs (priority: HIGH)
   - Worktree: feature/REQ-1776394634-add-manifest-file-locking-and-collision-resistant-req-ids
-
-## MERGED (0)
-
 
 ## DEPLOYED (26)
 
@@ -99,6 +99,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 35
 - Deployed: 26 (74%)
-- Merged (awaiting deploy): 0
+- Merged (awaiting deploy): 1
 - In Progress: 0
 - Blocked: 0
