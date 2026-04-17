@@ -9,13 +9,13 @@ Kanban-style view of all requirements and their current state.
 * REQ-1776394692: Make work-on safe for autonomous agent execution (priority: MEDIUM)
   - Worktree: none
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1776394663: Harden lifecycle enforcement in start-work and worktree-merge (priority: MEDIUM)
   - Worktree: feature/REQ-1776394663-harden-lifecycle-enforcement-in-start-work-and-worktree-merge
-
-## CODE_REVIEW (0)
-
 
 ## MERGED (0)
 
@@ -104,5 +104,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 37
 - Deployed: 30 (81%)
 - Merged (awaiting deploy): 0
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0

@@ -1,7 +1,7 @@
 # Harden lifecycle enforcement in start-work and worktree-merge
 
 **ID**: REQ-1776394663  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-04-17T02:57:43Z  
 
@@ -28,14 +28,11 @@ Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: (1) s
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776394663-harden-lifecycle-enforcement-in-start-work-and-worktree-merge.md`.
-   - **Summary**: Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: (1) s
-   - **Key criteria**: - [ ] `start-work.sh` checks current requirement status before setting IN_PROGRESS; only PROPOSED an
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - **start-work.sh guard**: After the existing worktree check (line 42), add: `CURRENT_STATUS=$(jq -r
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776394663` and verify success criteria are met.
+1. Inspect current lifecycle enforcement in `scripts/start-work.sh`, `scripts/worktree-merge.sh`, and `scripts/update-requirement-status.sh`, then map expected behavior from this spec before changing code.
+2. Implement a status gate in `scripts/start-work.sh` so only `PROPOSED` or `BACKLOG` can transition to `IN_PROGRESS`; return a non-zero exit and clear error text for all other states.
+3. Implement merge lifecycle enforcement in `scripts/worktree-merge.sh` so linked requirements must be `CODE_REVIEW` or `IN_PROGRESS`, and add a `--force` override path that is explicit and auditable.
+4. Align lifecycle documentation with script truth by updating `.github/agents/orchestrator.agent.md` and `.github/prompts/work-on.prompt.md` to match `allowed_transitions()` in `scripts/update-requirement-status.sh`.
+5. Validate behavior end-to-end with targeted commands: `scripts/show-requirement.sh REQ-1776394663`, `scripts/status.sh`, and at least one guarded failure-path invocation for `scripts/start-work.sh` or `scripts/worktree-merge.sh`.
 
 **Last updated**: 2026-04-17T07:22:51Z
 
