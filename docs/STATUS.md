@@ -2,7 +2,7 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (4)
+## PROPOSED (3)
 
 * REQ-1776394663: Harden lifecycle enforcement in start-work and worktree-merge (priority: MEDIUM)
   - Worktree: none
@@ -10,11 +10,11 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 * REQ-1776394692: Make work-on safe for autonomous agent execution (priority: MEDIUM)
   - Worktree: none
+
+## IN_PROGRESS (1)
+
 * REQ-1776395706: Review follow-up: harden manifest lock helper critical section and portability (priority: HIGH)
   - Worktree: none
-
-## IN_PROGRESS (0)
-
 
 ## CODE_REVIEW (0)
 
@@ -102,5 +102,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 36
 - Deployed: 29 (80%)
 - Merged (awaiting deploy): 0
-- In Progress: 0
+- In Progress: 1
 - Blocked: 0

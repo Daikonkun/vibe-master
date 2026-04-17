@@ -38,12 +38,12 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1776394663 | Harden lifecycle enforcement in start-work and worktree-merge | PROPOSED | MEDIUM | — | 2026-04-17 | 2026-04-17 |
 | REQ-1776394677 | Make add-requirement creation and enrichment atomic | PROPOSED | MEDIUM | — | 2026-04-17 | 2026-04-17 |
 | REQ-1776394692 | Make work-on safe for autonomous agent execution | PROPOSED | MEDIUM | — | 2026-04-17 | 2026-04-17 |
-| REQ-1776395706 | Review follow-up: harden manifest lock helper critical section and portability | PROPOSED | HIGH | — | 2026-04-17 | 2026-04-17 |
+| REQ-1776395706 | Review follow-up: harden manifest lock helper critical section and portability | IN_PROGRESS | HIGH | — | 2026-04-17 | 2026-04-17 |
 | REQ-1776398313767881380 | Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures | DEPLOYED | HIGH | feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures | 2026-04-17 | 2026-04-17 |
 
 ## Status Breakdown
-- **Proposed**: 4
-- **In Progress**: 0
+- **Proposed**: 3
+- **In Progress**: 1
 - **Code Review**: 0
 - **Merged**: 0
 - **Deployed**: 29
@@ -56,6 +56,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-17T06:49:29Z
+* Last updated: 2026-04-17T07:03:34Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`
