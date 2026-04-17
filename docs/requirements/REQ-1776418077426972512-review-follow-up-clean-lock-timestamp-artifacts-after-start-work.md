@@ -1,7 +1,7 @@
 # Review follow-up: clean lock/timestamp artifacts after start-work
 
 **ID**: REQ-1776418077426972512  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-04-17T09:27:57Z  
 
@@ -26,14 +26,11 @@ Source: orchestrator workflow hygiene review. Evidence: after /start-work, stale
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work.md`.
-   - **Summary**: Source: orchestrator workflow hygiene review. Evidence: after /start-work, stale
-   - **Key criteria**: - [ ] Running `bash scripts/start-work.sh <REQ-ID>` from a clean repo leaves no lock artifacts (`.re
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - Primary lock behavior lives in `scripts/_manifest-lock.sh` and is consumed by `scripts/start-work.
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776418077426972512` and verify success criteria are met.
+1. Trace lock lifecycle in `scripts/_manifest-lock.sh` and all `start-work` lock call sites in `scripts/start-work.sh`, including flock and mkdir fallback paths for `.requirement-manifest.json.lock`, `.worktree-manifest.json.lock`, and `*.lock.d` directories.
+2. Implement deterministic lock artifact cleanup in `scripts/_manifest-lock.sh` so cleanup runs on both success and failure paths without masking the original command exit code.
+3. Update `scripts/regenerate-docs.sh` to avoid timestamp-only churn by making the status metadata deterministic or by skipping writes when generated content is unchanged.
+4. Add or extend an automated guard script (for example `scripts/check-manifest-lock-race.sh`) to verify no stale lock artifacts remain after `bash scripts/start-work.sh REQ-1776418077426972512` and its failure/retry path.
+5. Run end-to-end validation commands from a clean tree: `bash scripts/start-work.sh REQ-1776418077426972512`, rerun for idempotency/failure checks as needed, then confirm clean output with `git status --short` and requirement metadata with `bash scripts/show-requirement.sh REQ-1776418077426972512`.
 
 **Last updated**: 2026-04-17T09:39:13Z
 

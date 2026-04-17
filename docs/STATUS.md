@@ -9,13 +9,13 @@ Kanban-style view of all requirements and their current state.
 * REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants (priority: MEDIUM)
   - Worktree: none
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work (priority: MEDIUM)
   - Worktree: feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work
-
-## CODE_REVIEW (0)
-
 
 ## MERGED (1)
 
@@ -112,5 +112,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 41
 - Deployed: 33 (80%)
 - Merged (awaiting deploy): 1
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0
