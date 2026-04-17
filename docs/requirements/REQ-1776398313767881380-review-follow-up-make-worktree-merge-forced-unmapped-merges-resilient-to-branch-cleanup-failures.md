@@ -1,7 +1,7 @@
 # Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures
 
 **ID**: REQ-1776398313767881380  
-**Status**: CODE_REVIEW  
+**Status**: MERGED  
 **Priority**: HIGH  
 **Created**: 2026-04-17T03:58:33Z  
 

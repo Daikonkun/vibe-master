@@ -16,15 +16,15 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (2)
+## CODE_REVIEW (1)
 
 * REQ-1776394648: Isolate worktree-merge git side-effects from concurrent agents (priority: HIGH)
   - Worktree: feature/REQ-1776394648-isolate-worktree-merge-git-side-effects-from-concurrent-agents
+
+## MERGED (1)
+
 * REQ-1776398313767881380: Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures (priority: HIGH)
   - Worktree: feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures
-
-## MERGED (0)
-
 
 ## DEPLOYED (27)
 
@@ -101,6 +101,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 36
 - Deployed: 27 (75%)
-- Merged (awaiting deploy): 0
+- Merged (awaiting deploy): 1
 - In Progress: 0
 - Blocked: 0
