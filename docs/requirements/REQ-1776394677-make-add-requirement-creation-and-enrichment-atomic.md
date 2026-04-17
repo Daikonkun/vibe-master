@@ -1,7 +1,7 @@
 # Make add-requirement creation and enrichment atomic
 
 **ID**: REQ-1776394677  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-04-17T02:57:57Z  
 
@@ -28,16 +28,13 @@ Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: The /
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776394677-make-add-requirement-creation-and-enrichment-atomic.md`.
-   - **Summary**: Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: The /
-   - **Key criteria**: - [ ] `create-requirement.sh` accepts a `--no-commit` flag that skips the `git add` + `git commit` a
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - **Flag implementation**: Add a `--no-commit` argument parser to `create-requirement.sh`. When set,
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776394677` and verify success criteria are met.
+1. Add a `--no-commit` option to `scripts/create-requirement.sh` argument parsing, defaulting to current behavior when the flag is not provided.
+2. Gate the final `git add` + `git commit` block in `scripts/create-requirement.sh` behind the new flag so `--no-commit` leaves changes uncommitted for enrichment workflows.
+3. Update `.github/prompts/add-requirement.prompt.md` to invoke `scripts/create-requirement.sh "$NAME" "$DESCRIPTION" "$PRIORITY" --no-commit`, then perform one final atomic `git add` + `git commit` after spec enrichment and `scripts/regenerate-docs.sh`.
+4. Update code-review REQ thread guidance in `.github/skills/code-review/SKILL.md` to document when `scripts/create-requirement.sh ... --no-commit` is appropriate for atomic multi-step creation.
+5. Validate with command-based checks: run `scripts/show-requirement.sh REQ-1776394677`, inspect `git status --short` during interrupted-flow simulation, and confirm backward compatibility by running `scripts/create-requirement.sh` without `--no-commit` in a disposable test repo.
 
-**Last updated**: 2026-04-17T07:48:27Z
+**Last updated**: 2026-04-17T07:48:55Z
 
 ## Dependencies
 
