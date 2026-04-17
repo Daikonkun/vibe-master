@@ -419,17 +419,18 @@
       "id": "REQ-1776394692",
       "name": "Make work-on safe for autonomous agent execution",
       "description": "Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: (1) work-on.prompt.md step 7 requires interactive user confirmation before advancing status (line 40: Ask the user for confirmation exactly once), which blocks unattended agent pipelines. (2) When a PROPOSED requirement has no worktree, work-on auto-invokes /start-work (line 23) — two parallel /work-on agents targeting the same REQ can both trigger /start-work simultaneously, racing on branch creation and manifest updates. Required outcome: (1) Add an --auto or agent-mode flag that skips the confirmation gate when the caller is a trusted orchestrator agent. (2) Add a check-and-set guard so only the first /work-on invocation triggers /start-work; the second detects the in-flight worktree creation and waits or fails gracefully. (3) Document the autonomous execution contract in the prompt file.",
-      "status": "MERGED",
+      "status": "DEPLOYED",
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-17T02:58:12Z",
-      "updatedAt": "2026-04-17T08:25:48Z",
+      "updatedAt": "2026-04-17T08:28:52Z",
       "notes": "Add --auto flag to work-on.prompt.md; add re-read guard before auto-invoking /start-work; document autonomous execution contract.",
       "dependsOn": [
         "REQ-1776394634",
         "REQ-1776394663"
       ],
-      "worktreeId": "feature/REQ-1776394692-make-work-on-safe-for-autonomous-agent-execution"
+      "worktreeId": "feature/REQ-1776394692-make-work-on-safe-for-autonomous-agent-execution",
+      "deployedAt": "2026-04-17T08:28:52Z"
     },
     {
       "id": "REQ-1776395706",
