@@ -13,15 +13,15 @@ Kanban-style view of all requirements and their current state.
 * REQ-1776395706: Review follow-up: harden manifest lock helper critical section and portability (priority: HIGH)
   - Worktree: none
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
 
-* REQ-1776398313767881380: Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures (priority: HIGH)
-  - Worktree: feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (2)
 
 * REQ-1776394648: Isolate worktree-merge git side-effects from concurrent agents (priority: HIGH)
   - Worktree: feature/REQ-1776394648-isolate-worktree-merge-git-side-effects-from-concurrent-agents
+* REQ-1776398313767881380: Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures (priority: HIGH)
+  - Worktree: feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures
 
 ## MERGED (0)
 
@@ -102,5 +102,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 36
 - Deployed: 27 (75%)
 - Merged (awaiting deploy): 0
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0

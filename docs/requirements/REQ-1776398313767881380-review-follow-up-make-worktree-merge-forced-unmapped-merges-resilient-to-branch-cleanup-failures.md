@@ -1,7 +1,7 @@
 # Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures
 
 **ID**: REQ-1776398313767881380  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-04-17T03:58:33Z  
 
@@ -11,27 +11,27 @@ Source: code-review of REQ-1776394648. Severity: HIGH. Evidence: in scripts/work
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [x] In `scripts/worktree-merge.sh`, forced unmapped merges (`--force` with no worktree-manifest mapping) complete even when branch/worktree cleanup fails; cleanup failures are warnings, not fatal exits
+- [x] Forced unmapped merge output always includes an explicit message that no requirement status was updated
+- [x] A repeatable regression check exists and passes for the undeletable-branch forced-unmapped path (`scripts/check-worktree-merge-unmapped-force.sh`)
 
 ## Technical Notes
 
-(Add implementation notes here)
+- Added argument parsing for `--force` and explicit unmapped-branch detection in `scripts/worktree-merge.sh`.
+- Introduced `UNMAPPED_FORCE_MODE` so merge cleanup (`git worktree remove`, `git branch -d`) is best-effort only in forced unmapped mode; normal mapped merges still fail fast on cleanup errors.
+- Added explicit end-of-run messaging: `Completed forced unmapped merge. No requirement statuses were updated.`
+- Added regression harness `scripts/check-worktree-merge-unmapped-force.sh` that creates a disposable git repo, forces branch deletion to fail via a second worktree, runs merge with `--force`, and asserts merge success plus required warning/status output.
 
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures.md`.
-   - **Summary**: Source: code-review of REQ-1776394648. Severity: HIGH. Evidence: in scripts/work
-   - **Key criteria**: - [ ] Criterion 1 - [ ] Criterion 2
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: (Add implementation notes here)
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776398313767881380` and verify success criteria are met.
+1. Add `--force` option support and unmapped-branch detection in `scripts/worktree-merge.sh`.
+2. In forced unmapped mode, convert branch/worktree cleanup failures to warnings while preserving fail-fast behavior for mapped merges.
+3. Ensure merge completion logs explicitly state requirement status updates were skipped for forced unmapped merges.
+4. Add `scripts/check-worktree-merge-unmapped-force.sh` to reproduce undeletable-branch cleanup failure and assert successful forced-unmapped merge behavior.
+5. Validate using `bash -n scripts/worktree-merge.sh`, `bash -n scripts/check-worktree-merge-unmapped-force.sh`, and `scripts/check-worktree-merge-unmapped-force.sh`.
 
-**Last updated**: 2026-04-17T04:01:39Z
+**Last updated**: 2026-04-17T05:24:23Z
 
 ## Dependencies
 
