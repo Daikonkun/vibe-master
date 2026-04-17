@@ -390,13 +390,14 @@
       "id": "REQ-1776394663",
       "name": "Harden lifecycle enforcement in start-work and worktree-merge",
       "description": "Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: (1) start-work.sh sets status to IN_PROGRESS unconditionally (line 92) without checking current status — a MERGED, DEPLOYED, or CANCELLED requirement can be reopened. (2) worktree-merge.sh only warns when requirement is not in CODE_REVIEW (line 97-98) then proceeds to set MERGED/DEPLOYED anyway, allowing merge before review. (3) orchestrator.agent.md declares Any to BACKLOG and Any to CANCELLED (lines 116-117) but update-requirement-status.sh has a narrower transition table — DEPLOYED only allows CANCELLED, CODE_REVIEW does not allow BACKLOG. Required outcome: (1) start-work.sh validates current status is PROPOSED or BACKLOG before proceeding; reject otherwise. (2) worktree-merge.sh rejects merge unless requirement is CODE_REVIEW or IN_PROGRESS; add --force flag for override. (3) Align orchestrator.agent.md state transition docs with the actual allowed_transitions() function in update-requirement-status.sh.",
-      "status": "MERGED",
+      "status": "DEPLOYED",
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-17T02:57:43Z",
-      "updatedAt": "2026-04-17T07:45:01Z",
+      "updatedAt": "2026-04-17T07:47:12Z",
       "notes": "Add status guard to start-work.sh (only PROPOSED/BACKLOG); harden worktree-merge.sh to reject non-CODE_REVIEW requirements; align orchestrator.agent.md transition docs.",
-      "worktreeId": "feature/REQ-1776394663-harden-lifecycle-enforcement-in-start-work-and-worktree-merge"
+      "worktreeId": "feature/REQ-1776394663-harden-lifecycle-enforcement-in-start-work-and-worktree-merge",
+      "deployedAt": "2026-04-17T07:47:12Z"
     },
     {
       "id": "REQ-1776394677",

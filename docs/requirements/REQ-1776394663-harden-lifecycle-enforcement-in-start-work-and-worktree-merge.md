@@ -1,7 +1,7 @@
 # Harden lifecycle enforcement in start-work and worktree-merge
 
 **ID**: REQ-1776394663  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-04-17T02:57:43Z  
 
