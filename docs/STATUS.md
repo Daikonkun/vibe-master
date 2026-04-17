@@ -19,12 +19,10 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (1)
+## MERGED (0)
 
-* REQ-1776398313767881380: Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures (priority: HIGH)
-  - Worktree: feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures
 
-## DEPLOYED (28)
+## DEPLOYED (29)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -82,6 +80,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1776394634-add-manifest-file-locking-and-collision-resistant-req-ids
 * REQ-1776394648: Isolate worktree-merge git side-effects from concurrent agents (priority: HIGH)
   - Worktree: feature/REQ-1776394648-isolate-worktree-merge-git-side-effects-from-concurrent-agents
+* REQ-1776398313767881380: Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures (priority: HIGH)
+  - Worktree: feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures
 
 ## BLOCKED (0)
 
@@ -100,7 +100,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 36
-- Deployed: 28 (77%)
-- Merged (awaiting deploy): 1
+- Deployed: 29 (80%)
+- Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0

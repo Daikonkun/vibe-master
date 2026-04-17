@@ -13,7 +13,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776394634: Add manifest file locking and collision-resistant REQ IDs
 * [DEPLOYED] REQ-1776394648: Isolate worktree-merge git side-effects from concurrent agents
 * [PROPOSED] REQ-1776395706: Review follow-up: harden manifest lock helper critical section and portability
-* [MERGED] REQ-1776398313767881380: Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures
+* [DEPLOYED] REQ-1776398313767881380: Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures
 
 ## Medium Priority
 * [DEPLOYED] REQ-1774628144: Review follow-up: align slash commands with actual skill invocations
