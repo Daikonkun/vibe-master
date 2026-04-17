@@ -11,7 +11,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1774770305: Review follow-up: add missing prompt files for advertised slash commands
 * [DEPLOYED] REQ-1776235649: Review follow-up: fix compaction check hook in orchestrator scripts
 * [DEPLOYED] REQ-1776394634: Add manifest file locking and collision-resistant REQ IDs
-* [CODE_REVIEW] REQ-1776394648: Isolate worktree-merge git side-effects from concurrent agents
+* [MERGED] REQ-1776394648: Isolate worktree-merge git side-effects from concurrent agents
 * [PROPOSED] REQ-1776395706: Review follow-up: harden manifest lock helper critical section and portability
 * [MERGED] REQ-1776398313767881380: Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures
 

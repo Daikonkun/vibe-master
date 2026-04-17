@@ -1,7 +1,7 @@
 # Isolate worktree-merge git side-effects from concurrent agents
 
 **ID**: REQ-1776394648  
-**Status**: CODE_REVIEW  
+**Status**: MERGED  
 **Priority**: HIGH  
 **Created**: 2026-04-17T02:57:28Z  
 

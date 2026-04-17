@@ -310,7 +310,8 @@
         "REQ-1776394648"
       ],
       "createdAt": "2026-04-17T03:45:33Z",
-      "status": "ACTIVE"
+      "status": "MERGED",
+      "mergedAt": "2026-04-17T06:22:48Z"
     },
     {
       "id": "feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures",
