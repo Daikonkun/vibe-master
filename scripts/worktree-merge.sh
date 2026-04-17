@@ -11,9 +11,7 @@ REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
 WORKTREE_MANIFEST="$PROJECT_ROOT/.worktree-manifest.json"
 source "$PROJECT_ROOT/scripts/_manifest-lock.sh"
 TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-STASHED=false
 UNMAPPED_FORCE_MODE=false
-HAS_WORKTREE_MAPPING=false
 WORKTREE_REMOVED=false
 
 usage() {
@@ -21,7 +19,7 @@ usage() {
 Usage: ./scripts/worktree-merge.sh <branch> [base-branch] [--force]
 
 Flags:
-  --force   Allow merge when no worktree-manifest mapping exists for the branch
+  --force   Allow merge when no ACTIVE worktree mapping exists for the branch
 EOF
 }
 
@@ -70,27 +68,15 @@ if [ ! -f "$REQ_MANIFEST" ] || [ ! -f "$WORKTREE_MANIFEST" ]; then
   exit 1
 fi
 
+# Remove stale lock artifacts from previous interrupted operations.
+rm -f "${REQ_MANIFEST}.lock" "${WORKTREE_MANIFEST}.lock"
+
 DIRTY_FILES="$(git -C "$PROJECT_ROOT" status --porcelain)"
 if [ -n "$DIRTY_FILES" ]; then
-  echo "⚠️  Working tree is not clean. Reviewing changes..."
-
-  # Auto-commit manifest and docs changes (these are auto-generated)
-  AUTO_COMMIT_FILES="$(echo "$DIRTY_FILES" | grep -E '^\s*[MADRC]\s+.*\.(json|md)$' | grep -E '(requirement-manifest|worktree-manifest|REQUIREMENTS|STATUS|ROADMAP|DEPENDENCIES|docs/requirements/)' || true)"
-  if [ -n "$AUTO_COMMIT_FILES" ]; then
-    echo "Auto-committing manifest/docs changes:"
-    echo "$AUTO_COMMIT_FILES" | sed 's/^/  /'
-    git -C "$PROJECT_ROOT" add -A
-    git -C "$PROJECT_ROOT" commit -m "chore: auto-commit manifest and docs before merge" --no-verify 2>/dev/null || true
-  fi
-
-  # Check if there are still dirty files after auto-commit
-  REMAINING_DIRTY="$(git -C "$PROJECT_ROOT" status --porcelain)"
-  if [ -n "$REMAINING_DIRTY" ]; then
-    echo "Stashing remaining uncommitted changes:"
-    echo "$REMAINING_DIRTY" | sed 's/^/  /'
-    git -C "$PROJECT_ROOT" stash push -m "auto-stash before merge of $BRANCH" --include-untracked
-    STASHED=true
-  fi
+  echo "Error: Working tree is not clean. Refusing to merge with unrelated in-flight changes." >&2
+  echo "Unexpected dirty files:" >&2
+  echo "$DIRTY_FILES" | sed 's/^/  /' >&2
+  exit 1
 fi
 
 if ! git -C "$PROJECT_ROOT" rev-parse --verify "$BASE_BRANCH" >/dev/null 2>&1; then
@@ -103,17 +89,17 @@ if ! git -C "$PROJECT_ROOT" show-ref --verify --quiet "refs/heads/$BRANCH"; then
   exit 1
 fi
 
-WORKTREE_PATH="$(jq -r --arg branch "$BRANCH" '
-  .worktrees[]? | select(.branch == $branch or .id == $branch) | .path
+WORKTREE_ENTRY="$(jq -c --arg branch "$BRANCH" '
+  .worktrees[]? | select((.branch == $branch or .id == $branch) and .status == "ACTIVE")
 ' "$WORKTREE_MANIFEST" | head -1)"
-REQ_IDS="$(jq -r --arg branch "$BRANCH" '
-  .worktrees[]? | select(.branch == $branch or .id == $branch) | .requirementIds[]
-' "$WORKTREE_MANIFEST")"
 
-if [ -n "$WORKTREE_PATH" ] || [ -n "$REQ_IDS" ]; then
-  HAS_WORKTREE_MAPPING=true
+WORKTREE_PATH=""
+REQ_IDS=""
+if [ -n "$WORKTREE_ENTRY" ]; then
+  WORKTREE_PATH="$(echo "$WORKTREE_ENTRY" | jq -r '.path // empty')"
+  REQ_IDS="$(echo "$WORKTREE_ENTRY" | jq -r '.requirementIds[]?')"
 else
-  echo "⚠️  Warning: No worktree-manifest mapping found for branch: $BRANCH" >&2
+  echo "⚠️  Warning: No ACTIVE worktree mapping found for branch: $BRANCH" >&2
   if [ "$FORCE" != "true" ]; then
     echo "Refusing to merge unmapped branch without --force." >&2
     exit 1
@@ -146,7 +132,7 @@ if ! git -C "$PROJECT_ROOT" branch -d "$BRANCH"; then
   fi
 fi
 
-if [ "$HAS_WORKTREE_MAPPING" = true ]; then
+if [ -n "$WORKTREE_ENTRY" ]; then
   jq_update_manifest_locked "$WORKTREE_MANIFEST" \
     '.worktrees |= map(
       if .branch == $branch or .id == $branch
@@ -202,14 +188,80 @@ fi
 
 "$PROJECT_ROOT/scripts/regenerate-docs.sh" >/dev/null
 
-git -C "$PROJECT_ROOT" add \
-  .requirement-manifest.json \
-  .worktree-manifest.json \
-  REQUIREMENTS.md \
-  docs/STATUS.md \
-  docs/ROADMAP.md \
-  docs/DEPENDENCIES.md \
-  docs/requirements/ 2>/dev/null || true
+# Remove transient lock artifacts produced by manifest updates.
+rm -f "${REQ_MANIFEST}.lock" "${WORKTREE_MANIFEST}.lock"
+
+FILES_TO_ADD=()
+
+add_stage_file() {
+  local candidate="$1"
+  local existing
+
+  [ -z "$candidate" ] && return
+  [ ! -e "$PROJECT_ROOT/$candidate" ] && return
+
+  for existing in "${FILES_TO_ADD[@]:-}"; do
+    if [ "$existing" = "$candidate" ]; then
+      return
+    fi
+  done
+
+  FILES_TO_ADD+=("$candidate")
+}
+
+add_stage_file ".requirement-manifest.json"
+add_stage_file ".worktree-manifest.json"
+add_stage_file "REQUIREMENTS.md"
+add_stage_file "docs/STATUS.md"
+add_stage_file "docs/ROADMAP.md"
+add_stage_file "docs/DEPENDENCIES.md"
+
+if [ -n "$REQ_IDS" ]; then
+  while IFS= read -r reqId; do
+    [ -z "$reqId" ] && continue
+    req_spec="$(find "$PROJECT_ROOT/docs/requirements" -maxdepth 1 -type f -name "${reqId}-*.md" | head -1)"
+    if [ -n "$req_spec" ]; then
+      add_stage_file "${req_spec#$PROJECT_ROOT/}"
+    fi
+  done <<< "$REQ_IDS"
+fi
+
+if [ "${#FILES_TO_ADD[@]}" -gt 0 ]; then
+  git -C "$PROJECT_ROOT" add -- "${FILES_TO_ADD[@]}"
+fi
+
+is_allowed_dirty_file() {
+  local candidate="$1"
+  local staged
+  for staged in "${FILES_TO_ADD[@]:-}"; do
+    if [ "$staged" = "$candidate" ]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+STATUS_AFTER_STAGE="$(git -C "$PROJECT_ROOT" status --porcelain)"
+if [ -n "$STATUS_AFTER_STAGE" ]; then
+  UNEXPECTED_DIRTY=()
+  while IFS= read -r line; do
+    [ -z "$line" ] && continue
+    dirty_path="${line:3}"
+    if [[ "$dirty_path" == *" -> "* ]]; then
+      dirty_path="${dirty_path##* -> }"
+    fi
+
+    if ! is_allowed_dirty_file "$dirty_path"; then
+      UNEXPECTED_DIRTY+=("$line")
+    fi
+  done <<< "$STATUS_AFTER_STAGE"
+
+  if [ "${#UNEXPECTED_DIRTY[@]}" -gt 0 ]; then
+    echo "Error: Unexpected dirty files detected; refusing to continue." >&2
+    printf '  %s\n' "${UNEXPECTED_DIRTY[@]}" >&2
+    exit 1
+  fi
+fi
 
 git -C "$PROJECT_ROOT" commit -m "chore: update manifests and docs after merging $BRANCH" --no-verify 2>/dev/null || true
 
@@ -228,12 +280,4 @@ if [ -n "$REQ_IDS" ]; then
 fi
 if [ "$UNMAPPED_FORCE_MODE" = true ]; then
   echo "⚠️  Completed forced unmapped merge. No requirement statuses were updated."
-fi
-
-# Restore stashed changes if any
-if [ "$STASHED" = true ]; then
-  echo "Restoring stashed changes..."
-  git -C "$PROJECT_ROOT" stash pop 2>/dev/null || {
-    echo "⚠️  Could not pop stash automatically. Run 'git stash pop' manually." >&2
-  }
 fi

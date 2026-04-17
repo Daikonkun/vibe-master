@@ -11,11 +11,11 @@ Source: code-review of agent concurrency flow. Severity: HIGH. Evidence: worktre
 
 ## Success Criteria
 
-- [ ] `worktree-merge.sh` no longer runs `git add -A`; instead it stages only the explicit files it modifies (manifests, generated docs, and the specific spec files for linked REQ IDs)
-- [ ] If unrelated dirty files exist in the working tree, the script exits with a clear error message listing the unexpected dirty files, instead of auto-committing or stashing them
-- [ ] When the target branch has no entry in `.worktree-manifest.json`, the script prints a warning and exits non-zero unless `--force` is passed
-- [ ] The auto-stash behavior is removed entirely; the script requires a clean working tree (excluding its own manifest/doc writes) before proceeding
-- [ ] Merging an unmapped branch with `--force` still completes the git merge but logs that no requirement status was updated
+- [x] `worktree-merge.sh` no longer runs `git add -A`; instead it stages only the explicit files it modifies (manifests, generated docs, and the specific spec files for linked REQ IDs)
+- [x] If unrelated dirty files exist in the working tree, the script exits with a clear error message listing the unexpected dirty files, instead of auto-committing or stashing them
+- [x] When the target branch has no entry in `.worktree-manifest.json`, the script prints a warning and exits non-zero unless `--force` is passed
+- [x] The auto-stash behavior is removed entirely; the script requires a clean working tree (excluding its own manifest/doc writes) before proceeding
+- [x] Merging an unmapped branch with `--force` still completes the git merge but logs that no requirement status was updated
 
 ## Technical Notes
 
@@ -24,7 +24,6 @@ Source: code-review of agent concurrency flow. Severity: HIGH. Evidence: worktre
 - **Unmapped branch guard**: After `WORKTREE_PATH` and `REQ_IDS` lookups (lines 56-62), check if both are empty. If so, print warning + exit 1 unless `$FORCE` is set.
 - **Backward compatibility**: Add a `--force` flag parser (similar to `update-requirement-status.sh`) to opt into the old permissive behavior for edge cases.
 - **Affected file**: `scripts/worktree-merge.sh`.
-
 
 ## Development Plan
 
