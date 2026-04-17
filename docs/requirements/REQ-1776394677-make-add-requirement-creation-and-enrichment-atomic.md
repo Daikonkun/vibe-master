@@ -11,11 +11,11 @@ Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: The /
 
 ## Success Criteria
 
-- [ ] `create-requirement.sh` accepts a `--no-commit` flag that skips the `git add` + `git commit` at the end, allowing the calling agent to enrich spec files before committing
-- [ ] The `/add-requirement` prompt workflow performs a single `git add` + `git commit` after all enrichment (spec sections + manifest notes field + regenerate-docs) is complete
-- [ ] If the agent is interrupted after `create-requirement.sh --no-commit` but before the final commit, the changes remain unstaged/uncommitted — no partial commit lands on main
-- [ ] Existing behavior (running `create-requirement.sh` without `--no-commit`) is preserved for backward compatibility and standalone script usage
-- [ ] The code-review skill's REQ thread creation pattern (`create-requirement.sh` invocations in skill docs) is updated to document the `--no-commit` option
+- [x] `create-requirement.sh` accepts a `--no-commit` flag that skips the `git add` + `git commit` at the end, allowing the calling agent to enrich spec files before committing
+- [x] The `/add-requirement` prompt workflow performs a single `git add` + `git commit` after all enrichment (spec sections + manifest notes field + regenerate-docs) is complete
+- [x] If the agent is interrupted after `create-requirement.sh --no-commit` but before the final commit, the changes remain unstaged/uncommitted — no partial commit lands on main
+- [x] Existing behavior (running `create-requirement.sh` without `--no-commit`) is preserved for backward compatibility and standalone script usage
+- [x] The code-review skill's REQ thread creation pattern (`create-requirement.sh` invocations in skill docs) is updated to document the `--no-commit` option
 
 ## Technical Notes
 
@@ -24,6 +24,14 @@ Source: code-review of agent concurrency flow. Severity: MEDIUM. Evidence: The /
 - **Interruption safety**: Since `--no-commit` leaves files as unstaged modifications, an interrupted agent's partial work is visible via `git status` and easily cleaned with `git checkout -- .`.
 - **Affected files**: `scripts/create-requirement.sh`, `.github/prompts/add-requirement.prompt.md`.
 - **Risk**: If the agent crashes after writing the manifest but before committing, another agent reading the on-disk manifest will see the new requirement. This is tolerable since it is no worse than today's committed-but-unenriched state.
+
+## Development Plan
+
+1. [x] Add a `--no-commit` argument to `scripts/create-requirement.sh`, including usage/help text and unknown-flag validation.
+2. [x] Keep backward-compatible default behavior in `scripts/create-requirement.sh` while gating final `git add` + `git commit` behind `--no-commit`.
+3. [x] Update `.github/prompts/add-requirement.prompt.md` so the workflow calls `create-requirement.sh ... --no-commit` and performs one final atomic commit after enrichment and `scripts/regenerate-docs.sh`.
+4. [x] Update `.github/skills/code-review/SKILL.md` to document `--no-commit` for multi-step atomic REQ thread creation workflows.
+5. [x] Validate behavior in disposable repos for both modes: default mode commits, and `--no-commit` mode leaves uncommitted changes with no new commit.
 
 ## Dependencies
 

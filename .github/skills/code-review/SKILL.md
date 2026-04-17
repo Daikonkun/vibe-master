@@ -64,6 +64,18 @@ Use one requirement per independent concern.
   HIGH
 ```
 
+For multi-step enrichment flows that must commit atomically, use:
+
+```bash
+./scripts/create-requirement.sh \
+  "Review follow-up: <short issue title>" \
+  "Source: code-review. Severity: <HIGH|MEDIUM|LOW>. Evidence: <summary>. Required outcome: <acceptance criteria>." \
+  HIGH \
+  --no-commit
+```
+
+Then enrich the generated spec and run `./scripts/regenerate-docs.sh`, followed by one final `git add` + `git commit`.
+
 After creation:
 - Link the new REQ ID in review notes
 - Set dependency links if it blocks another requirement
