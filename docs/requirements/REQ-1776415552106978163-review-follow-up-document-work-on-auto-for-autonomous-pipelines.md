@@ -11,13 +11,15 @@ Source: code-review of delegated REQ flow. Severity: HIGH. Evidence: .github/pro
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [x] `/work-on` command docs include `--auto|--no-auto` and describe trusted orchestrator default-auto behavior
+- [x] `.github/prompts/work-on.prompt.md` defines default auto mode for trusted orchestrator calls with explicit `--no-auto` opt-out
+- [x] Untrusted-caller safeguards for `--auto` remain explicit in prompt constraints
 
 ## Technical Notes
 
-(Add implementation notes here)
+- Decision confirmed on 2026-04-17: orchestrator-invoked `/work-on` defaults to auto mode.
+- Updated files: `.github/prompts/work-on.prompt.md`, `README.md`, `copilot-instructions.md`, `.github/agents/orchestrator.agent.md`.
+- Behavior contract: default auto for trusted orchestrator callers, `--no-auto` to force confirmation, and untrusted callers cannot enable auto mode.
 
 ## Dependencies
 

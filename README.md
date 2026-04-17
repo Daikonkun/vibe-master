@@ -372,7 +372,7 @@ Slash commands only show up in chat when they are backed by a prompt file or by 
 | `/add-requirement` | Submit new requirement |
 | `/update-requirement <req-id> <new-status> [--force] [--no-refresh]` | Update requirement lifecycle status with transition validation |
 | `/start-work <req-id>` | Begin work (create worktree + set IN_PROGRESS) |
-| `/work-on <req-id> [target-status]` | Iteratively implement a requirement until next lifecycle status |
+| `/work-on <req-id> [target-status] [--auto|--no-auto]` | Iteratively implement a requirement until next lifecycle status (trusted orchestrator calls default to auto mode) |
 | `/status` | Show current dashboard |
 | `/show-requirement <req-id>` | View requirement details |
 | `/list-requirements [status]` | List requirements by status |
@@ -380,7 +380,7 @@ Slash commands only show up in chat when they are backed by a prompt file or by 
 | `/rollback <req-id> [base-branch]` | Roll back a merged/deployed requirement by reverting its merge commit |
 | `/e2e-test [scope]` | Run end-to-end test; surfaces skill gaps as new REQs |
 | `/worktree-list` | Show all active worktrees |
-| `/worktree-merge <branch>` | Merge and cleanup |
+| `/worktree-merge <branch>` | Merge and cleanup (requires a clean working tree) |
 | `/worktree-create <req-id> [base-branch]` | Create a worktree without changing requirement status |
 | `/worktree-prune` | Remove orphaned worktrees and clean manifests |
 | `/worktree-status` | Show comprehensive worktree status dashboard |

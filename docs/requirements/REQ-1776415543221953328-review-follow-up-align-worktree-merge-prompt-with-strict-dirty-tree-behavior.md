@@ -11,13 +11,15 @@ Source: code-review of delegated REQ flow. Severity: HIGH. Evidence: .github/pro
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [x] `.github/prompts/worktree-merge.prompt.md` no longer claims auto-commit/stash behavior for dirty trees
+- [x] Prompt constraints explicitly state strict clean-tree gating and user remediation steps before retry
+- [x] Command reference docs align with strict clean-tree merge behavior
 
 ## Technical Notes
 
-(Add implementation notes here)
+- Decision confirmed on 2026-04-17: strict clean-tree merge behavior is the source of truth.
+- Updated files: `.github/prompts/worktree-merge.prompt.md`, `README.md`, `copilot-instructions.md`.
+- Keep `scripts/worktree-merge.sh` as the behavioral authority; prompt/docs must not describe auto-stash or auto-commit fallback.
 
 ## Dependencies
 

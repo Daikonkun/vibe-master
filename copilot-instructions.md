@@ -63,13 +63,13 @@ After any state change, regenerate:
 | `/worktree-create <req-id>` | Manually create a worktree for a requirement |
 | `/worktree-prune` | Remove orphaned worktrees |
 | `/worktree-status` | Show comprehensive worktree status dashboard |
-| `/worktree-merge <branch>` | Merge associated worktree and update docs |
+| `/worktree-merge <branch>` | Merge associated worktree and update docs (requires clean working tree) |
 | `/dependency-graph` | Visualize requirement dependencies |
 | `/roadmap` | Show timeline view of all requirements |
 | `/bug-fix "issue summary" [scope]` | Run structured debugging workflow and root-cause analysis |
 | `/update-manual [scope]` | Generate and refresh user manual content |
 | `/code-review [scope]` | Review code and create REQ follow-up threads for unresolved findings |
-| `/work-on <req-id>` | Work on a requirement until it reaches its next lifecycle status |
+| `/work-on <req-id> [target-status] [--auto|--no-auto]` | Work on a requirement until it reaches its next lifecycle status (trusted orchestrator calls default to auto mode) |
 | `/e2e-test [scope]` | Run end-to-end testing with screenshot-based cross-border visual validation; propose new skill REQs when gaps are found |
 | `/init [project-name]` | Clear Vibe Master template REQs and initialize clean project manifests |
 

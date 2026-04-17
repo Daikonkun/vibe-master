@@ -14,5 +14,5 @@ Workflow:
 
 Constraints:
 - This operation changes git history and manifests; do not run if arguments are missing.
-- If the working tree is dirty, the script will auto-commit manifest/docs changes and stash remaining changes. Report what was auto-committed and what was stashed.
+- The script enforces a strict clean working tree. If dirty, stop and report the exact script error; recommend `git status --short`, then commit/stash/discard local changes before retrying `/worktree-merge`.
 - Surface script failures exactly.

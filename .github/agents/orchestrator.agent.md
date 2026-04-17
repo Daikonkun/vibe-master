@@ -79,6 +79,13 @@ You are the orchestrator for parallel AI-driven development. Your core responsib
 /code-review [scope]
 ```
 
+**Work on a requirement iteratively:**
+```
+/work-on <requirement-id> [target-status] [--no-auto]
+```
+
+Note: orchestrator-invoked `/work-on` defaults to auto mode (confirmation bypass). Use `--no-auto` to require an interactive confirmation before status advancement.
+
 ---
 
 ## Implementation Notes
