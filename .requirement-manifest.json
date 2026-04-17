@@ -364,11 +364,11 @@
       "id": "REQ-1776394634",
       "name": "Add manifest file locking and collision-resistant REQ IDs",
       "description": "Source: code-review of agent concurrency flow. Severity: HIGH. Evidence: All manifest-mutating scripts (create-requirement.sh, start-work.sh, update-requirement-status.sh, worktree-merge.sh, regenerate-docs.sh, generate-plan.sh) use lockless read-modify-write via a shared .tmp suffix, causing last-writer-wins data loss under concurrency. REQ IDs use second-resolution timestamps (date +%s) which collide when two agents create requirements in the same second. Required outcome: (1) All scripts that mutate .requirement-manifest.json or .worktree-manifest.json acquire an advisory file lock (flock) before read-modify-write and use unique temp filenames (mktemp). (2) REQ ID generation uses sub-second or UUID-based uniqueness to prevent collisions. (3) JSON schema adds a uniqueItems constraint or scripts validate ID uniqueness before insertion.",
-      "status": "IN_PROGRESS",
+      "status": "CODE_REVIEW",
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-17T02:57:14Z",
-      "updatedAt": "2026-04-17T03:02:27Z",
+      "updatedAt": "2026-04-17T03:13:32Z",
       "notes": "Add flock-based advisory locking and mktemp-based unique temp files to all manifest-mutating scripts; switch REQ ID generation from date +%s to sub-second resolution.",
       "worktreeId": "feature/REQ-1776394634-add-manifest-file-locking-and-collision-resistant-req-ids"
     },

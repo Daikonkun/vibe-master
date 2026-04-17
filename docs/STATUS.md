@@ -13,13 +13,13 @@ Kanban-style view of all requirements and their current state.
 * REQ-1776394692: Make work-on safe for autonomous agent execution (priority: MEDIUM)
   - Worktree: none
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1776394634: Add manifest file locking and collision-resistant REQ IDs (priority: HIGH)
   - Worktree: feature/REQ-1776394634-add-manifest-file-locking-and-collision-resistant-req-ids
-
-## CODE_REVIEW (0)
-
 
 ## MERGED (0)
 
@@ -98,5 +98,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 34
 - Deployed: 26 (76%)
 - Merged (awaiting deploy): 0
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0

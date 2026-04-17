@@ -1,7 +1,7 @@
 # Add manifest file locking and collision-resistant REQ IDs
 
 **ID**: REQ-1776394634  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-04-17T02:57:14Z  
 
@@ -28,16 +28,13 @@ Source: code-review of agent concurrency flow. Severity: HIGH. Evidence: All man
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776394634-add-manifest-file-locking-and-collision-resistant-req-ids.md`.
-   - **Summary**: Source: code-review of agent concurrency flow. Severity: HIGH. Evidence: All man
-   - **Key criteria**: - [ ] All scripts that write `.requirement-manifest.json` or `.worktree-manifest.json` acquire an ad
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - **Locking approach**: Use `flock` (available on macOS via Homebrew `flock` or built-in on Linux). 
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776394634` and verify success criteria are met.
+1. Implement collision-resistant REQ ID generation and pre-insert ID uniqueness validation in `scripts/create-requirement.sh`, while preserving the existing `REQ-<digits>` identifier shape.
+2. Add a reusable locked manifest-write pattern (advisory lock + `mktemp` + atomic `mv`) for `.requirement-manifest.json` writes in `scripts/create-requirement.sh`.
+3. Apply the same lock and unique-temp write flow to all remaining manifest mutators: `scripts/start-work.sh`, `scripts/update-requirement-status.sh`, `scripts/worktree-merge.sh`, `scripts/regenerate-docs.sh`, `scripts/generate-plan.sh`, `scripts/rollback-requirement.sh`, and `scripts/init-project.sh`.
+4. Run workflow checks from repo root to ensure behavior is unchanged after refactoring: `./scripts/start-work.sh REQ-1776394634`, `./scripts/worktree-list.sh`, `./scripts/status.sh`, and `./scripts/show-requirement.sh REQ-1776394634`.
+5. Validate each Success Criteria checkbox against concrete evidence (script diffs and command results), then keep the requirement status as `IN_PROGRESS` until implementation is ready for review.
 
-**Last updated**: 2026-04-17T03:02:28Z
+**Last updated**: 2026-04-17T03:03:42Z
 
 ## Dependencies
 
