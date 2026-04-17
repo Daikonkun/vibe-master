@@ -1,7 +1,7 @@
 # Review follow-up: preserve error propagation in mkdir lock fallback
 
 **ID**: REQ-1776409551444648236  
-**Status**: PROPOSED  
+**Status**: CANCELLED  
 **Priority**: HIGH  
 **Created**: 2026-04-17T07:05:51Z  
 

@@ -77,3 +77,5 @@ REQ-1776395706: Review follow-up: harden manifest lock helper critical section a
 
 REQ-1776398313767881380: Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures (no dependencies)
 
+REQ-1776409551444648236: Review follow-up: preserve error propagation in mkdir lock fallback (no dependencies)
+
