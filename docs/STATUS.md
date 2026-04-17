@@ -2,10 +2,8 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (5)
+## PROPOSED (4)
 
-* REQ-1776394648: Isolate worktree-merge git side-effects from concurrent agents (priority: HIGH)
-  - Worktree: none
 * REQ-1776394663: Harden lifecycle enforcement in start-work and worktree-merge (priority: MEDIUM)
   - Worktree: none
 * REQ-1776394677: Make add-requirement creation and enrichment atomic (priority: MEDIUM)
@@ -15,8 +13,10 @@ Kanban-style view of all requirements and their current state.
 * REQ-1776395706: Review follow-up: harden manifest lock helper critical section and portability (priority: HIGH)
   - Worktree: none
 
-## IN_PROGRESS (0)
+## IN_PROGRESS (1)
 
+* REQ-1776394648: Isolate worktree-merge git side-effects from concurrent agents (priority: HIGH)
+  - Worktree: none
 
 ## CODE_REVIEW (0)
 
@@ -100,5 +100,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 35
 - Deployed: 27 (77%)
 - Merged (awaiting deploy): 0
-- In Progress: 0
+- In Progress: 1
 - Blocked: 0

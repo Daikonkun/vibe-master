@@ -1,7 +1,7 @@
 # Isolate worktree-merge git side-effects from concurrent agents
 
 **ID**: REQ-1776394648  
-**Status**: PROPOSED  
+**Status**: IN_PROGRESS  
 **Priority**: HIGH  
 **Created**: 2026-04-17T02:57:28Z  
 
@@ -11,11 +11,11 @@ Source: code-review of agent concurrency flow. Severity: HIGH. Evidence: worktre
 
 ## Success Criteria
 
-- [ ] `worktree-merge.sh` no longer runs `git add -A`; instead it stages only the explicit files it modifies (manifests, generated docs, and the specific spec files for linked REQ IDs)
-- [ ] If unrelated dirty files exist in the working tree, the script exits with a clear error message listing the unexpected dirty files, instead of auto-committing or stashing them
-- [ ] When the target branch has no entry in `.worktree-manifest.json`, the script prints a warning and exits non-zero unless `--force` is passed
-- [ ] The auto-stash behavior is removed entirely; the script requires a clean working tree (excluding its own manifest/doc writes) before proceeding
-- [ ] Merging an unmapped branch with `--force` still completes the git merge but logs that no requirement status was updated
+- [x] `worktree-merge.sh` no longer runs `git add -A`; instead it stages only the explicit files it modifies (manifests, generated docs, and the specific spec files for linked REQ IDs)
+- [x] If unrelated dirty files exist in the working tree, the script exits with a clear error message listing the unexpected dirty files, instead of auto-committing or stashing them
+- [x] When the target branch has no entry in `.worktree-manifest.json`, the script prints a warning and exits non-zero unless `--force` is passed
+- [x] The auto-stash behavior is removed entirely; the script requires a clean working tree (excluding its own manifest/doc writes) before proceeding
+- [x] Merging an unmapped branch with `--force` still completes the git merge but logs that no requirement status was updated
 
 ## Technical Notes
 
@@ -24,6 +24,14 @@ Source: code-review of agent concurrency flow. Severity: HIGH. Evidence: worktre
 - **Unmapped branch guard**: After `WORKTREE_PATH` and `REQ_IDS` lookups (lines 56-62), check if both are empty. If so, print warning + exit 1 unless `$FORCE` is set.
 - **Backward compatibility**: Add a `--force` flag parser (similar to `update-requirement-status.sh`) to opt into the old permissive behavior for edge cases.
 - **Affected file**: `scripts/worktree-merge.sh`.
+
+## Development Plan
+
+1. Review existing `scripts/worktree-merge.sh` merge flow and identify all git side-effect points (`git add -A`, auto-stash, and unmapped-branch continuation).
+2. Add `--force` option parsing and enforce an active-worktree mapping guard so unmapped branches fail fast unless explicitly forced.
+3. Replace broad staging with explicit, merge-owned staging: manifests, generated docs, and only linked `docs/requirements/REQ-*.md` files.
+4. Remove auto-stash behavior and enforce clean-working-tree checks that print unexpected dirty files and exit non-zero.
+5. Validate script syntax and invariants (`bash -n scripts/worktree-merge.sh`) and verify no `git add -A` or stash operations remain.
 
 ## Dependencies
 
