@@ -21,12 +21,10 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (1)
+## MERGED (0)
 
-* REQ-1776394634: Add manifest file locking and collision-resistant REQ IDs (priority: HIGH)
-  - Worktree: feature/REQ-1776394634-add-manifest-file-locking-and-collision-resistant-req-ids
 
-## DEPLOYED (26)
+## DEPLOYED (27)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -80,6 +78,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1776235658-review-follow-up-replace-bc-with-portable-arithmetic-in-compact-context-sh
 * REQ-1776238348: init-project script enhancement (priority: MEDIUM)
   - Worktree: feature/REQ-1776238348-init-project-script-enhancement
+* REQ-1776394634: Add manifest file locking and collision-resistant REQ IDs (priority: HIGH)
+  - Worktree: feature/REQ-1776394634-add-manifest-file-locking-and-collision-resistant-req-ids
 
 ## BLOCKED (0)
 
@@ -98,7 +98,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 35
-- Deployed: 26 (74%)
-- Merged (awaiting deploy): 1
+- Deployed: 27 (77%)
+- Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0

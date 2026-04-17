@@ -1,7 +1,7 @@
 # Add manifest file locking and collision-resistant REQ IDs
 
 **ID**: REQ-1776394634  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: HIGH  
 **Created**: 2026-04-17T02:57:14Z  
 
