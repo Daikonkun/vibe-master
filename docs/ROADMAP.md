@@ -41,7 +41,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776238348: init-project script enhancement
 * [DEPLOYED] REQ-1776394663: Harden lifecycle enforcement in start-work and worktree-merge
 * [DEPLOYED] REQ-1776394677: Make add-requirement creation and enrichment atomic
-* [CODE_REVIEW] REQ-1776394692: Make work-on safe for autonomous agent execution
+* [MERGED] REQ-1776394692: Make work-on safe for autonomous agent execution
 
 ## Low Priority
 * [DEPLOYED] REQ-1774632175: Review follow-up: polish upgrade guide in README
