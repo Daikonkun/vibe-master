@@ -288,6 +288,17 @@
       "createdAt": "2026-04-15T07:34:45Z",
       "status": "MERGED",
       "mergedAt": "2026-04-15T07:40:01Z"
+    },
+    {
+      "id": "feature/REQ-1776394634-add-manifest-file-locking-and-collision-resistant-req-ids",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776394634-add-manifest-file-locking-and-collision-resistant-req-ids",
+      "branch": "feature/REQ-1776394634-add-manifest-file-locking-and-collision-resistant-req-ids",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776394634"
+      ],
+      "createdAt": "2026-04-17T03:02:27Z",
+      "status": "ACTIVE"
     }
   ]
 }
