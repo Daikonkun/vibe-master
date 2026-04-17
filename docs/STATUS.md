@@ -11,13 +11,13 @@ Kanban-style view of all requirements and their current state.
 * REQ-1776394692: Make work-on safe for autonomous agent execution (priority: MEDIUM)
   - Worktree: none
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1776395706: Review follow-up: harden manifest lock helper critical section and portability (priority: HIGH)
-  - Worktree: feature/REQ-1776395706-review-follow-up-harden-manifest-lock-helper-critical-section-and-portability
-
-## CODE_REVIEW (0)
-
+  - Worktree: none
 
 ## MERGED (0)
 
@@ -89,7 +89,7 @@ Kanban-style view of all requirements and their current state.
 ## BACKLOG (0)
 
 
-## CANCELLED (3)
+## CANCELLED (4)
 
 * REQ-1774774129: Review follow-up: fix manifest inconsistencies and ghost command (priority: MEDIUM)
   - Worktree: none
@@ -97,10 +97,12 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 * REQ-1774774145: Review follow-up: fix manifest inconsistencies and ghost command (priority: MEDIUM)
   - Worktree: none
+* REQ-1776409551444648236: Review follow-up: preserve error propagation in mkdir lock fallback (priority: HIGH)
+  - Worktree: none
 
 ## Stats
-- Total Requirements: 36
-- Deployed: 29 (80%)
+- Total Requirements: 37
+- Deployed: 29 (78%)
 - Merged (awaiting deploy): 0
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0

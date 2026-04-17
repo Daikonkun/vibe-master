@@ -430,12 +430,11 @@
       "id": "REQ-1776395706",
       "name": "Review follow-up: harden manifest lock helper critical section and portability",
       "description": "Source: code-review of REQ-1776394634. Severity: HIGH. Evidence: scripts/_manifest-lock.sh currently releases flock before mv in jq_update_manifest_locked, allowing lost updates under concurrent writers; it also hard-fails when flock is unavailable on macOS by default. Required outcome: (1) hold lock from read through atomic rename for each manifest update, (2) provide a macOS-compatible locking path or dependency bootstrap guidance that is enforced before mutating workflows, and (3) add a regression check for concurrent manifest writers.",
-      "status": "IN_PROGRESS",
+      "status": "CODE_REVIEW",
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-17T03:15:06Z",
-      "updatedAt": "2026-04-17T06:52:10Z",
-      "worktreeId": "feature/REQ-1776395706-review-follow-up-harden-manifest-lock-helper-critical-section-and-portability"
+      "updatedAt": "2026-04-17T07:03:34Z"
     },
     {
       "id": "REQ-1776398313767881380",
@@ -448,6 +447,16 @@
       "updatedAt": "2026-04-17T06:49:29Z",
       "worktreeId": "feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures",
       "deployedAt": "2026-04-17T06:49:29Z"
+    },
+    {
+      "id": "REQ-1776409551444648236",
+      "name": "Review follow-up: preserve error propagation in mkdir lock fallback",
+      "description": "Source: code-review of REQ-1776395706. Severity: HIGH. Evidence: scripts/_manifest-lock.sh uses 'if ! \"\"; then status=0; fi' in the mkdir fallback path, which captures the status of the negated condition instead of the wrapped command; fallback lock operations can incorrectly report success. Repro: under MANIFEST_LOCK_FORCE_MKDIR=1, with_manifest_lock on a command that exits 17 returns 0. Required outcome: preserve wrapped command exit status in fallback mode and add a regression assertion for non-zero propagation.",
+      "status": "CANCELLED",
+      "priority": "HIGH",
+      "origin": "project",
+      "createdAt": "2026-04-17T07:05:51Z",
+      "updatedAt": "2026-04-17T07:13:58Z"
     }
   ],
   "requiresDeployment": true

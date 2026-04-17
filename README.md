@@ -12,8 +12,10 @@ git remote remove origin  # Detach from template
 git remote add origin <your-new-repo>
 ```
 
-### 2. Bootstrap Dependencies (Required)
-Manifest-mutating workflows require `flock` for advisory locking.
+### 2. Bootstrap Dependencies (Recommended)
+Manifest-mutating workflows use lock-safe writes.
+If `flock` is available, scripts use advisory `flock` locking.
+If `flock` is unavailable (common on fresh macOS), scripts fall back to a portable `mkdir` lock.
 
 Verify prerequisites:
 ```bash
@@ -204,7 +206,8 @@ rm -rf .upgrade-template
 │   └── DEPENDENCIES.md                    # Dependency graph
 │
 └── scripts/
-    ├── bootstrap-deps.sh                  # CLI: verify/install required local dependencies
+    ├── bootstrap-deps.sh                  # CLI: verify/install optional flock dependency
+    ├── check-manifest-lock-race.sh        # Regression: concurrent manifest writers do not lose updates
     ├── create-requirement.sh               # CLI: create new requirement
     ├── dependency-graph.sh                 # CLI: regenerate + show dependency graph
     ├── generate-plan.sh                    # CLI: generate/update Development Plan in a spec
