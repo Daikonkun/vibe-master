@@ -3,17 +3,65 @@
 
 set -euo pipefail
 
-BRANCH="${1:-}"
-BASE_BRANCH="${2:-main}"
+BRANCH=""
+BASE_BRANCH="main"
+FORCE="false"
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
 WORKTREE_MANIFEST="$PROJECT_ROOT/.worktree-manifest.json"
 source "$PROJECT_ROOT/scripts/_manifest-lock.sh"
 TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 STASHED=false
+UNMAPPED_FORCE_MODE=false
+HAS_WORKTREE_MAPPING=false
+WORKTREE_REMOVED=false
+
+usage() {
+  cat << 'EOF'
+Usage: ./scripts/worktree-merge.sh <branch> [base-branch] [--force]
+
+Flags:
+  --force   Allow merge when no worktree-manifest mapping exists for the branch
+EOF
+}
+
+if [ "$#" -eq 0 ]; then
+  usage >&2
+  exit 1
+fi
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+  usage
+  exit 0
+fi
+
+BRANCH="$1"
+shift
+
+if [ "$#" -gt 0 ] && [[ "$1" != --* ]]; then
+  BASE_BRANCH="$1"
+  shift
+fi
+
+for arg in "$@"; do
+  case "$arg" in
+    --force)
+      FORCE="true"
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "Error: Unknown option: $arg" >&2
+      usage >&2
+      exit 1
+      ;;
+  esac
+done
 
 if [ -z "$BRANCH" ]; then
-  echo "Usage: $0 <branch> [base-branch]" >&2
+  usage >&2
   exit 1
 fi
 
@@ -62,25 +110,53 @@ REQ_IDS="$(jq -r --arg branch "$BRANCH" '
   .worktrees[]? | select(.branch == $branch or .id == $branch) | .requirementIds[]
 ' "$WORKTREE_MANIFEST")"
 
+if [ -n "$WORKTREE_PATH" ] || [ -n "$REQ_IDS" ]; then
+  HAS_WORKTREE_MAPPING=true
+else
+  echo "⚠️  Warning: No worktree-manifest mapping found for branch: $BRANCH" >&2
+  if [ "$FORCE" != "true" ]; then
+    echo "Refusing to merge unmapped branch without --force." >&2
+    exit 1
+  fi
+  UNMAPPED_FORCE_MODE=true
+  echo "Proceeding due to --force. Requirement status updates will be skipped." >&2
+fi
+
 echo "Merging $BRANCH into $BASE_BRANCH..."
 git -C "$PROJECT_ROOT" checkout "$BASE_BRANCH"
 git -C "$PROJECT_ROOT" merge --no-ff "$BRANCH" -m "Merge $BRANCH"
 
 if [ -n "$WORKTREE_PATH" ] && [ -d "$WORKTREE_PATH" ]; then
-  git -C "$PROJECT_ROOT" worktree remove "$WORKTREE_PATH"
+  if git -C "$PROJECT_ROOT" worktree remove "$WORKTREE_PATH"; then
+    WORKTREE_REMOVED=true
+  elif [ "$UNMAPPED_FORCE_MODE" = true ]; then
+    echo "⚠️  Could not remove worktree during forced unmapped merge: $WORKTREE_PATH" >&2
+  else
+    echo "Error: Failed to remove worktree: $WORKTREE_PATH" >&2
+    exit 1
+  fi
 fi
 
-git -C "$PROJECT_ROOT" branch -d "$BRANCH"
+if ! git -C "$PROJECT_ROOT" branch -d "$BRANCH"; then
+  if [ "$UNMAPPED_FORCE_MODE" = true ]; then
+    echo "⚠️  Could not delete branch during forced unmapped merge: $BRANCH" >&2
+  else
+    echo "Error: Failed to delete merged branch: $BRANCH" >&2
+    exit 1
+  fi
+fi
 
-jq_update_manifest_locked "$WORKTREE_MANIFEST" \
-  '.worktrees |= map(
-    if .branch == $branch or .id == $branch
-    then .status = "MERGED" | .mergedAt = $ts
-    else .
-    end
-  )' \
-  --arg branch "$BRANCH" \
-  --arg ts "$TIMESTAMP"
+if [ "$HAS_WORKTREE_MAPPING" = true ]; then
+  jq_update_manifest_locked "$WORKTREE_MANIFEST" \
+    '.worktrees |= map(
+      if .branch == $branch or .id == $branch
+      then .status = "MERGED" | .mergedAt = $ts
+      else .
+      end
+    )' \
+    --arg branch "$BRANCH" \
+    --arg ts "$TIMESTAMP"
+fi
 
 # Determine target status based on requiresDeployment flag
 REQUIRES_DEPLOYMENT="$(jq -r '.requiresDeployment // true' "$REQ_MANIFEST")"
@@ -120,6 +196,8 @@ if [ -n "$REQ_IDS" ]; then
         --arg ts "$TIMESTAMP"
     fi
   done <<< "$REQ_IDS"
+else
+  echo "⚠️  No mapped requirements found for $BRANCH; no requirement status was updated."
 fi
 
 "$PROJECT_ROOT/scripts/regenerate-docs.sh" >/dev/null
@@ -136,7 +214,7 @@ git -C "$PROJECT_ROOT" add \
 git -C "$PROJECT_ROOT" commit -m "chore: update manifests and docs after merging $BRANCH" --no-verify 2>/dev/null || true
 
 echo "✅ Merged $BRANCH"
-if [ -n "$WORKTREE_PATH" ]; then
+if [ "$WORKTREE_REMOVED" = true ]; then
   echo "Removed worktree: $WORKTREE_PATH"
 fi
 if [ -n "$REQ_IDS" ]; then
@@ -147,6 +225,9 @@ if [ -n "$REQ_IDS" ]; then
     echo "⚠️  Requirements merged but not yet deployed. Deploy your changes, then run:"
     echo "   /update-requirement <REQ-ID> DEPLOYED"
   fi
+fi
+if [ "$UNMAPPED_FORCE_MODE" = true ]; then
+  echo "⚠️  Completed forced unmapped merge. No requirement statuses were updated."
 fi
 
 # Restore stashed changes if any
