@@ -82,6 +82,32 @@ Shows current dashboard with all requirements, worktrees, and progress.
 
 Use this when your repo already uses an older Vibe Master layout and you want the latest agents/skills/workflows without losing requirement history.
 
+### Automated Slash Command (Recommended)
+
+Use `/upgrade` to run a conflict-aware, worktree-isolated upgrade workflow.
+
+Preview only (safe default):
+```
+/upgrade
+```
+
+Apply after review:
+```
+/upgrade --apply
+```
+
+Optional template source override:
+```
+/upgrade --template-repo https://github.com/<org>/vibe-master.git
+```
+
+What this command guarantees:
+- Preflight slash-command name conflict checks before file operations
+- Upgrade preparation in an isolated sibling worktree (not the currently edited tree)
+- A generated diff preview before any apply step
+- Explicit confirmation before applying template files
+- Post-upgrade validation guidance for `jq` manifest checks and `scripts/regenerate-docs.sh`
+
 ### Safe Upgrade Workflow
 
 1. Tag the current state as a safety point.
@@ -184,6 +210,7 @@ rm -rf .upgrade-template
 │   │   ├── show-requirement.prompt.md     # Slash command for requirement details
 │   │   ├── start-work.prompt.md           # Slash command for worktree start
 │   │   ├── status.prompt.md               # Slash command for status dashboard
+│   │   ├── upgrade.prompt.md              # Slash command for safe Vibe Master upgrades
 │   │   ├── update-manual.prompt.md        # Wrapper prompt for manual update skill
 │   │   ├── update-requirement.prompt.md   # Slash command for lifecycle status transitions
 │   │   ├── work-on.prompt.md              # Slash command for iterative requirement work
@@ -232,6 +259,7 @@ rm -rf .upgrade-template
     ├── show-requirement.sh                 # CLI: display requirement details
     ├── start-work.sh                       # CLI: create worktree + set IN_PROGRESS
     ├── status.sh                           # CLI: regenerate + show status summary
+    ├── upgrade.sh                          # CLI: isolated template upgrade preview/apply helper
     ├── update-requirement-status.sh        # CLI: validate and update requirement status
     ├── worktree-list.sh                    # CLI: list active worktrees from manifest
     └── worktree-merge.sh                   # CLI: merge branch + clean worktree
@@ -372,6 +400,7 @@ Slash commands only show up in chat when they are backed by a prompt file or by 
 | `/add-requirement` | Submit new requirement |
 | `/update-requirement <req-id> <new-status> [--force] [--no-refresh]` | Update requirement lifecycle status with transition validation |
 | `/start-work <req-id>` | Begin work (create worktree + set IN_PROGRESS) |
+| `/upgrade [--template-repo <github-url>] [--base-branch <branch>] [--apply]` | Safely preview/apply Vibe Master template upgrades in an isolated worktree with preflight command-conflict checks |
 | `/work-on <req-id> [target-status] [--auto|--no-auto] [--no-diff-reason "reason"]` | Iteratively implement a requirement until next lifecycle status; no-op transitions are blocked by default, and no-diff `CODE_REVIEW` advances require an explicit persisted reason |
 | `/status` | Show current dashboard |
 | `/show-requirement <req-id>` | View requirement details |
