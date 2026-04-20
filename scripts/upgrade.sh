@@ -19,6 +19,11 @@ TEMPLATE_DIR=""
 DIFF_FILE=""
 DIFF_HAS_CHANGES="false"
 
+MANIFEST_FILES=(
+  ".requirement-manifest.json"
+  ".worktree-manifest.json"
+)
+
 ROOT_STATUS_BEFORE="$(git -C "$PROJECT_ROOT" status --short || true)"
 
 usage() {
@@ -45,6 +50,7 @@ Behavior:
   3) Clones latest template into <worktree>/.upgrade-template/latest.
   4) Generates diff preview at <worktree>/.upgrade-template/upgrade-preview.diff.
   5) Applies changes only when --apply is used and confirmation is explicit.
+  6) Preserves local manifest history by merging manifest metadata instead of replacing manifest data arrays.
 EOF
 }
 
@@ -174,7 +180,12 @@ prepare_preview() {
   echo "⬇️  Cloning template: $TEMPLATE_REPO"
   git clone --depth 1 "$TEMPLATE_REPO" "$TEMPLATE_DIR" >/dev/null
 
-  if diff -ruN --exclude='.git' --exclude='.upgrade-template' "$TEMPLATE_DIR" "$WORKTREE_PATH" > "$DIFF_FILE"; then
+  if diff -ruN \
+    --exclude='.git' \
+    --exclude='.upgrade-template' \
+    --exclude='.requirement-manifest.json' \
+    --exclude='.worktree-manifest.json' \
+    "$TEMPLATE_DIR" "$WORKTREE_PATH" > "$DIFF_FILE"; then
     DIFF_HAS_CHANGES="false"
   else
     DIFF_HAS_CHANGES="true"
@@ -184,6 +195,7 @@ prepare_preview() {
   echo "   Worktree: $WORKTREE_PATH"
   echo "   Template: $TEMPLATE_REPO"
   echo "   Diff file: $DIFF_FILE"
+  echo "   Manifests: explicit merge path (history-preserving) during --apply"
   if [ "$DIFF_HAS_CHANGES" = "true" ]; then
     echo ""
     echo "Preview (first 120 lines):"
@@ -191,6 +203,97 @@ prepare_preview() {
   else
     echo "   No differences detected between template and worktree."
   fi
+}
+
+manifest_entry_count() {
+  local file_path="$1"
+  local array_key="$2"
+
+  jq -r --arg key "$array_key" '(.[$key] // []) | if type == "array" then length else 0 end' "$file_path"
+}
+
+merge_manifest_preserving_history() {
+  local manifest_name="$1"
+  local local_path="$WORKTREE_PATH/$manifest_name"
+  local template_path="$TEMPLATE_DIR/$manifest_name"
+  local merged_path="$local_path.upgrade-merge.tmp"
+  local array_key=""
+  local before_count="0"
+  local after_count="0"
+
+  if [ ! -f "$local_path" ]; then
+    echo "ℹ️  Local manifest missing, skipping merge: $manifest_name"
+    return 0
+  fi
+
+  if [ ! -f "$template_path" ]; then
+    echo "ℹ️  Template manifest missing, keeping local file unchanged: $manifest_name"
+    return 0
+  fi
+
+  if ! jq -e . "$local_path" >/dev/null; then
+    echo "Error: local manifest is not valid JSON: $local_path" >&2
+    return 1
+  fi
+
+  if ! jq -e . "$template_path" >/dev/null; then
+    echo "Error: template manifest is not valid JSON: $template_path" >&2
+    return 1
+  fi
+
+  case "$manifest_name" in
+    .requirement-manifest.json)
+      array_key="requirements"
+      before_count="$(manifest_entry_count "$local_path" "$array_key")"
+      jq -n \
+        --argfile local "$local_path" \
+        --argfile template "$template_path" \
+        '$local
+        | .["$schema"] = ($template["$schema"] // .["$schema"])
+        | .version = ($template.version // .version)
+        | .projectName = (.projectName // $template.projectName)
+        | .requiresDeployment = (.requiresDeployment // $template.requiresDeployment // true)
+        | .requirements = (.requirements // [])' > "$merged_path"
+      ;;
+    .worktree-manifest.json)
+      array_key="worktrees"
+      before_count="$(manifest_entry_count "$local_path" "$array_key")"
+      jq -n \
+        --argfile local "$local_path" \
+        --argfile template "$template_path" \
+        '$local
+        | .["$schema"] = ($template["$schema"] // .["$schema"])
+        | .version = ($template.version // .version)
+        | .worktrees = (.worktrees // [])' > "$merged_path"
+      ;;
+    *)
+      echo "Error: unsupported manifest for merge: $manifest_name" >&2
+      return 1
+      ;;
+  esac
+
+  after_count="$(manifest_entry_count "$merged_path" "$array_key")"
+  if [ "$after_count" -lt "$before_count" ]; then
+    rm -f "$merged_path"
+    echo "Error: refusing to reduce $manifest_name $array_key entries ($before_count -> $after_count)." >&2
+    return 1
+  fi
+
+  mv "$merged_path" "$local_path"
+  echo "✅ Preserved local $manifest_name history ($array_key entries: $after_count)."
+}
+
+merge_upgrade_manifests() {
+  local manifest_name
+
+  if ! command -v jq >/dev/null 2>&1; then
+    echo "Error: jq is required for manifest-preserving upgrade apply." >&2
+    return 1
+  fi
+
+  for manifest_name in "${MANIFEST_FILES[@]}"; do
+    merge_manifest_preserving_history "$manifest_name"
+  done
 }
 
 apply_template() {
@@ -218,7 +321,11 @@ apply_template() {
   rsync -a --delete \
     --exclude '.git' \
     --exclude '.upgrade-template' \
+    --exclude '.requirement-manifest.json' \
+    --exclude '.worktree-manifest.json' \
     "$TEMPLATE_DIR"/ "$WORKTREE_PATH"/
+
+  merge_upgrade_manifests
 
   echo "✅ Applied template files in isolated worktree."
   echo "   Review with: git -C \"$WORKTREE_PATH\" status --short"
@@ -351,3 +458,4 @@ echo "Next steps:"
 echo "  1. Inspect diff: $DIFF_FILE"
 echo "  2. If ready, run: ./scripts/upgrade.sh --apply --template-repo \"$TEMPLATE_REPO\""
 echo "  3. Validate manifests/docs: jq . .requirement-manifest.json && jq . .worktree-manifest.json && bash scripts/regenerate-docs.sh"
+echo "  4. Run upgrade regression check: bash scripts/check-upgrade-manifest-history.sh"

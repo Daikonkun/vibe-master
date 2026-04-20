@@ -1,7 +1,7 @@
 # Review follow-up: prevent /upgrade from overwriting manifest history
 
 **ID**: REQ-1776671113723590863  
-**Status**: PROPOSED  
+**Status**: IN_PROGRESS  
 **Priority**: HIGH  
 **Created**: 2026-04-20T07:45:13Z  
 
@@ -11,13 +11,26 @@ Source: code-review of REQ-1776670068095886474. Severity: HIGH. Evidence: script
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [x] `scripts/upgrade.sh` does not blanket-replace `.requirement-manifest.json` or `.worktree-manifest.json` during `--apply`.
+- [x] Upgrade apply path uses an explicit manifest merge flow that preserves local requirement/worktree history entries.
+- [x] A regression check proves manifest history survives upgrade apply and is included in upgrade validation guidance.
 
 ## Technical Notes
 
-(Add implementation notes here)
+- `scripts/upgrade.sh` now excludes both manifest files from both preview diff scope and rsync apply scope.
+- `scripts/upgrade.sh` now runs explicit, JSON-validated merge logic for `.requirement-manifest.json` and `.worktree-manifest.json`, while refusing merges that would reduce history entry counts.
+- Added `scripts/check-upgrade-manifest-history.sh`, which seeds manifest history, runs `scripts/upgrade.sh --apply` against a stub template, and asserts history entries/counts are preserved.
+- Wired regression coverage into upgrade validation guidance in `README.md` and `.github/prompts/upgrade.prompt.md`.
+
+## Development Plan
+
+1. Update upgrade apply behavior in `scripts/upgrade.sh` so template sync excludes `.requirement-manifest.json` and `.worktree-manifest.json` from blanket replacement. Completed.
+2. Add explicit manifest-preservation merge logic in `scripts/upgrade.sh` so upgrade metadata can be applied without overwriting local requirement/worktree history. Completed.
+3. Add `scripts/check-upgrade-manifest-history.sh` to seed history and verify `scripts/upgrade.sh --apply` preserves records. Completed.
+4. Wire regression command into upgrade validation flow in `README.md` and `.github/prompts/upgrade.prompt.md`. Completed.
+5. Validate with `bash scripts/check-upgrade-manifest-history.sh` and `bash scripts/upgrade.sh --check-only --command-name upgrade`. Completed.
+
+**Last updated**: 2026-04-20T08:02:00Z
 
 ## Dependencies
 
@@ -29,7 +42,7 @@ Source: code-review of REQ-1776670068095886474. Severity: HIGH. Evidence: script
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
+* **Linked Worktree**: feature/REQ-1776671113723590863-review-follow-up-prevent-upgrade-from-overwriting-manifest-history
+* **Branch**: feature/REQ-1776671113723590863-review-follow-up-prevent-upgrade-from-overwriting-manifest-history
 * **Merged**: No
 * **Deployed**: No
