@@ -14,15 +14,15 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
 
-* REQ-1776415552106978163: Review follow-up: document work-on --auto for autonomous pipelines (priority: HIGH)
-  - Worktree: feature/REQ-1776415552106978163-review-follow-up-document-work-on-auto-for-autonomous-pipelines
 
-## MERGED (2)
+## MERGED (3)
 
 * REQ-1776415543221953328: Review follow-up: align worktree-merge prompt with strict dirty-tree behavior (priority: HIGH)
   - Worktree: feature/REQ-1776415543221953328-review-follow-up-align-worktree-merge-prompt-with-strict-dirty-tree-behavior
+* REQ-1776415552106978163: Review follow-up: document work-on --auto for autonomous pipelines (priority: HIGH)
+  - Worktree: feature/REQ-1776415552106978163-review-follow-up-document-work-on-auto-for-autonomous-pipelines
 * REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work (priority: MEDIUM)
   - Worktree: feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work
 
@@ -115,6 +115,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 43
 - Deployed: 33 (76%)
-- Merged (awaiting deploy): 2
+- Merged (awaiting deploy): 3
 - In Progress: 0
 - Blocked: 0
