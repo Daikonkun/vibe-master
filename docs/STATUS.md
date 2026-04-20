@@ -15,12 +15,10 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (1)
+## MERGED (0)
 
-* REQ-1776657240260646946: Review follow-up: prevent fallback lock-file accumulation for temporary manifests (priority: MEDIUM)
-  - Worktree: feature/REQ-1776657240260646946-review-follow-up-prevent-fallback-lock-file-accumulation-for-temporary-manifests
 
-## DEPLOYED (42)
+## DEPLOYED (43)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -98,6 +96,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts
 * REQ-1776655671293288695: Review follow-up: block no-op work-on status advancement without scoped changes (priority: HIGH)
   - Worktree: feature/REQ-1776655671293288695-review-follow-up-block-no-op-work-on-status-advancement-without-scoped-changes
+* REQ-1776657240260646946: Review follow-up: prevent fallback lock-file accumulation for temporary manifests (priority: MEDIUM)
+  - Worktree: feature/REQ-1776657240260646946-review-follow-up-prevent-fallback-lock-file-accumulation-for-temporary-manifests
 * REQ-1776668079797649000: Review follow-up: include working tree evidence in work-on no-op guard (priority: HIGH)
   - Worktree: feature/REQ-1776668079797649000-review-follow-up-include-working-tree-evidence-in-work-on-no-op-guard
 * REQ-1776670068095886474: add a /upgrade slash command (priority: MEDIUM)
@@ -128,7 +128,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 50
-- Deployed: 42 (84%)
-- Merged (awaiting deploy): 1
+- Deployed: 43 (86%)
+- Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0

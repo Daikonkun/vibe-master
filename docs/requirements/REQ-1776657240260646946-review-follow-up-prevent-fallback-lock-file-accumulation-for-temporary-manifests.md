@@ -1,7 +1,7 @@
 # Review follow-up: prevent fallback lock-file accumulation for temporary manifests
 
 **ID**: REQ-1776657240260646946  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-04-20T03:54:00Z  
 
@@ -45,4 +45,4 @@ REQ-1776420349206613978
 * **Linked Worktree**: feature/REQ-1776657240260646946-review-follow-up-prevent-fallback-lock-file-accumulation-for-temporary-manifests
 * **Branch**: feature/REQ-1776657240260646946-review-follow-up-prevent-fallback-lock-file-accumulation-for-temporary-manifests
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes
