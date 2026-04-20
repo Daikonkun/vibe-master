@@ -19,12 +19,10 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (1)
+## MERGED (0)
 
-* REQ-1776655671293288695: Review follow-up: block no-op work-on status advancement without scoped changes (priority: HIGH)
-  - Worktree: feature/REQ-1776655671293288695-review-follow-up-block-no-op-work-on-status-advancement-without-scoped-changes
 
-## DEPLOYED (37)
+## DEPLOYED (38)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -100,6 +98,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work
 * REQ-1776420349206613978: Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts (priority: HIGH)
   - Worktree: feature/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts
+* REQ-1776655671293288695: Review follow-up: block no-op work-on status advancement without scoped changes (priority: HIGH)
+  - Worktree: feature/REQ-1776655671293288695-review-follow-up-block-no-op-work-on-status-advancement-without-scoped-changes
 
 ## BLOCKED (0)
 
@@ -120,7 +120,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 46
-- Deployed: 37 (80%)
-- Merged (awaiting deploy): 1
+- Deployed: 38 (82%)
+- Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0
