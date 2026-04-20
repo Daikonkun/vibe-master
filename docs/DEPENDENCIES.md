@@ -102,3 +102,5 @@ REQ-1776670068095886474: add a /upgrade slash command (no dependencies)
 
 REQ-1776671113723590863: Review follow-up: prevent /upgrade from overwriting manifest history (no dependencies)
 
+REQ-1776672458915568759: Review follow-up: ensure /upgrade merges manifest metadata when only manifests differ (no dependencies)
+
