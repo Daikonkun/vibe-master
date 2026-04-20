@@ -2,7 +2,7 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (4)
+## PROPOSED (3)
 
 * REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants (priority: MEDIUM)
   - Worktree: none
@@ -10,11 +10,11 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 * REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against manifest context drift (priority: MEDIUM)
   - Worktree: none
+
+## IN_PROGRESS (1)
+
 * REQ-1776671113723590863: Review follow-up: prevent /upgrade from overwriting manifest history (priority: HIGH)
-  - Worktree: none
-
-## IN_PROGRESS (0)
-
+  - Worktree: feature/REQ-1776671113723590863-review-follow-up-prevent-upgrade-from-overwriting-manifest-history
 
 ## CODE_REVIEW (0)
 
@@ -126,5 +126,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 48
 - Deployed: 40 (83%)
 - Merged (awaiting deploy): 0
-- In Progress: 0
+- In Progress: 1
 - Blocked: 0

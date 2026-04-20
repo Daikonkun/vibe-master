@@ -456,6 +456,17 @@
       "createdAt": "2026-04-20T07:30:14Z",
       "status": "MERGED",
       "mergedAt": "2026-04-20T07:48:28Z"
+    },
+    {
+      "id": "feature/REQ-1776671113723590863-review-follow-up-prevent-upgrade-from-overwriting-manifest-history",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776671113723590863-review-follow-up-prevent-upgrade-from-overwriting-manifest-history",
+      "branch": "feature/REQ-1776671113723590863-review-follow-up-prevent-upgrade-from-overwriting-manifest-history",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776671113723590863"
+      ],
+      "createdAt": "2026-04-20T07:54:05Z",
+      "status": "ACTIVE"
     }
   ]
 }
