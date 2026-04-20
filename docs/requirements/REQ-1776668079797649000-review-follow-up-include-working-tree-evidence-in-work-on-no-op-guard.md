@@ -1,7 +1,7 @@
 # Review follow-up: include working tree evidence in work-on no-op guard
 
 **ID**: REQ-1776668079797649000  
-**Status**: CODE_REVIEW  
+**Status**: MERGED  
 **Priority**: HIGH  
 **Created**: 2026-04-20T06:54:39Z  
 
@@ -44,5 +44,5 @@ Source: code-review of REQ-1776655671293288695. Severity: HIGH. Evidence: .githu
 
 * **Linked Worktree**: feature/REQ-1776668079797649000-review-follow-up-include-working-tree-evidence-in-work-on-no-op-guard
 * **Branch**: feature/REQ-1776668079797649000-review-follow-up-include-working-tree-evidence-in-work-on-no-op-guard
-* **Merged**: No
+* **Merged**: Yes
 * **Deployed**: No
