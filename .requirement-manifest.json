@@ -644,11 +644,12 @@
       "id": "REQ-1776672458915568759",
       "name": "Review follow-up: ensure /upgrade merges manifest metadata when only manifests differ",
       "description": "Source: code-review of REQ-1776671113723590863. Severity: HIGH. Evidence: scripts/upgrade.sh computes DIFF_HAS_CHANGES from a preview diff that excludes .requirement-manifest.json and .worktree-manifest.json, then apply_template returns early when DIFF_HAS_CHANGES=false before calling merge_upgrade_manifests; this skips the explicit manifest merge path when template changes are manifest-only. scripts/check-upgrade-manifest-history.sh currently copies the full repo into its template fixture, so it does not enforce the manifest-only branch. Required outcome: ensure --apply executes manifest merge logic even when non-manifest diff is empty, and add regression coverage that fails if manifest-only template updates bypass merge.",
-      "status": "PROPOSED",
+      "status": "IN_PROGRESS",
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-20T08:07:38Z",
-      "updatedAt": "2026-04-20T08:07:38Z"
+      "updatedAt": "2026-04-20T08:12:36Z",
+      "worktreeId": "feature/REQ-1776672458915568759-review-follow-up-ensure-upgrade-merges-manifest-metadata-when-only-manifests-differ"
     }
   ],
   "requiresDeployment": true

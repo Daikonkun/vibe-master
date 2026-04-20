@@ -467,6 +467,17 @@
       ],
       "createdAt": "2026-04-20T07:54:05Z",
       "status": "ACTIVE"
+    },
+    {
+      "id": "feature/REQ-1776672458915568759-review-follow-up-ensure-upgrade-merges-manifest-metadata-when-only-manifests-differ",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776672458915568759-review-follow-up-ensure-upgrade-merges-manifest-metadata-when-only-manifests-differ",
+      "branch": "feature/REQ-1776672458915568759-review-follow-up-ensure-upgrade-merges-manifest-metadata-when-only-manifests-differ",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776672458915568759"
+      ],
+      "createdAt": "2026-04-20T08:12:36Z",
+      "status": "ACTIVE"
     }
   ]
 }
