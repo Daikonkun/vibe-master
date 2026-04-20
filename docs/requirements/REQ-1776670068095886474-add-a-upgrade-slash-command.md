@@ -36,16 +36,20 @@ Primary risks and mitigations:
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776670068095886474-add-a-upgrade-slash-command.md`.
-   - **Summary**: add a slash command, i.e. /upgrade (check if it conflicts with native VS code or
-   - **Key criteria**: - [ ] A prompt file exists at `.github/prompts/upgrade.prompt.md`, and invoking `/upgrade` in Copilo
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: Implement `/upgrade` as a new prompt wrapper at `.github/prompts/upgrade.prompt.md`, following the c
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776670068095886474` and verify success criteria are met.
+1. Create `.github/prompts/upgrade.prompt.md` with argument parsing and a preflight slash-command conflict check against existing project prompts in `.github/prompts/` plus known native/Copilot slash names.
+2. Implement a safe upgrade executor script at `scripts/upgrade.sh` that:
+   - creates/uses an isolated sibling worktree,
+   - fetches the latest template repo into `.upgrade-template/latest`,
+   - prints `diff -ruN` output before any apply step,
+   - and exits without changing the active project tree unless the user confirms.
+3. Wire `/upgrade` prompt workflow steps to run deterministic commands from `scripts/upgrade.sh` and include explicit stop conditions for dirty working trees and command-name conflicts.
+4. Update `README.md` to document `/upgrade` usage, rollback/safety expectations, and the no-touch guarantee for currently edited project files.
+5. Validate end-to-end with:
+   - `bash scripts/regenerate-docs.sh`
+   - `bash scripts/show-requirement.sh REQ-1776670068095886474`
+   - `git status --short` in the active repo after a dry-run upgrade path to confirm no unintended edits.
 
-**Last updated**: 2026-04-20T07:30:15Z
+**Last updated**: 2026-04-20T07:31:30Z
 
 ## Dependencies
 
