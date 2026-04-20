@@ -49,7 +49,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776394663: Harden lifecycle enforcement in start-work and worktree-merge
 * [DEPLOYED] REQ-1776394677: Make add-requirement creation and enrichment atomic
 * [DEPLOYED] REQ-1776394692: Make work-on safe for autonomous agent execution
-* [IN_PROGRESS] REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants
+* [CODE_REVIEW] REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants
 * [DEPLOYED] REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work
 * [DEPLOYED] REQ-1776657240260646946: Review follow-up: prevent fallback lock-file accumulation for temporary manifests
 * [PROPOSED] REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against manifest context drift
