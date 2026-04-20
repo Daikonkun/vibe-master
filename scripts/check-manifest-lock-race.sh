@@ -16,10 +16,14 @@ export MANIFEST_LOCK_DIR="$LOCK_ROOT"
 TEST_MANIFEST="$(manifest_lock_normalize_path "$TEST_MANIFEST")"
 TEST_LOCK_FILE="$(manifest_lock_file_path "$TEST_MANIFEST")"
 
-cleanup() {
+cleanup_test_lock_file() {
   if [ -n "${TEST_LOCK_FILE:-}" ]; then
     rm -f "$TEST_LOCK_FILE" 2>/dev/null || true
   fi
+}
+
+cleanup() {
+  cleanup_test_lock_file
   rm -rf "$TMP_ROOT"
 }
 trap cleanup EXIT
@@ -171,23 +175,25 @@ if manifest_lock_supports_flock; then
   assert_count "mkdir" "$WORKERS"
   assert_error_propagation "mkdir"
 
+  cleanup_test_lock_file
   FINAL_LOCK_COUNT="$(lock_file_count)"
-  if [ "$FINAL_LOCK_COUNT" -gt $((INITIAL_LOCK_COUNT + 1)) ]; then
-    echo "FAIL: lock artifact growth exceeded bound in test lock root '$LOCK_ROOT' (before=$INITIAL_LOCK_COUNT after=$FINAL_LOCK_COUNT)." >&2
+  if [ "$FINAL_LOCK_COUNT" -gt "$INITIAL_LOCK_COUNT" ]; then
+    echo "FAIL: lock artifacts grew in controlled test lock root '$LOCK_ROOT' (before=$INITIAL_LOCK_COUNT after=$FINAL_LOCK_COUNT)." >&2
     exit 1
   fi
 
-  echo "PASS: flock and mkdir lock backends preserved concurrent writes, exclusivity, error propagation, and bounded lock growth ($WORKERS each)."
+  echo "PASS: flock and mkdir lock backends preserved concurrent writes, exclusivity, error propagation, and strict no lock growth ($WORKERS each)."
 else
   run_parallel_writes "mkdir" "$WORKERS"
   assert_count "mkdir" "$WORKERS"
   assert_error_propagation "mkdir"
 
+  cleanup_test_lock_file
   FINAL_LOCK_COUNT="$(lock_file_count)"
-  if [ "$FINAL_LOCK_COUNT" -gt $((INITIAL_LOCK_COUNT + 1)) ]; then
-    echo "FAIL: lock artifact growth exceeded bound in test lock root '$LOCK_ROOT' (before=$INITIAL_LOCK_COUNT after=$FINAL_LOCK_COUNT)." >&2
+  if [ "$FINAL_LOCK_COUNT" -gt "$INITIAL_LOCK_COUNT" ]; then
+    echo "FAIL: lock artifacts grew in controlled test lock root '$LOCK_ROOT' (before=$INITIAL_LOCK_COUNT after=$FINAL_LOCK_COUNT)." >&2
     exit 1
   fi
 
-  echo "PASS: mkdir lock backend preserved concurrent writes, error propagation, and bounded lock growth ($WORKERS)."
+  echo "PASS: mkdir lock backend preserved concurrent writes, error propagation, and strict no lock growth ($WORKERS)."
 fi
