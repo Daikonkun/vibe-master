@@ -51,7 +51,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776394692: Make work-on safe for autonomous agent execution
 * [PROPOSED] REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants
 * [DEPLOYED] REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work
-* [CODE_REVIEW] REQ-1776657240260646946: Review follow-up: prevent fallback lock-file accumulation for temporary manifests
+* [MERGED] REQ-1776657240260646946: Review follow-up: prevent fallback lock-file accumulation for temporary manifests
 * [PROPOSED] REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against manifest context drift
 * [DEPLOYED] REQ-1776670068095886474: add a /upgrade slash command
 * [CANCELLED] REQ-1776677538888266188: Review follow-up: tighten lock-growth assertion for repeated lock-race runs
