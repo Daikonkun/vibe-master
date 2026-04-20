@@ -408,6 +408,17 @@
       "createdAt": "2026-04-20T03:03:23Z",
       "status": "MERGED",
       "mergedAt": "2026-04-20T03:32:23Z"
+    },
+    {
+      "id": "feature/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts",
+      "branch": "feature/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776420349206613978"
+      ],
+      "createdAt": "2026-04-20T03:38:34Z",
+      "status": "ACTIVE"
     }
   ]
 }

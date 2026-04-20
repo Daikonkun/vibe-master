@@ -1,7 +1,7 @@
 # Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts
 
 **ID**: REQ-1776420349206613978  
-**Status**: PROPOSED  
+**Status**: IN_PROGRESS  
 **Priority**: HIGH  
 **Created**: 2026-04-17T10:05:49Z  
 
@@ -19,6 +19,20 @@ Source: code-review. Severity: HIGH. Evidence: scripts/_manifest-lock.sh removes
 
 (Add implementation notes here)
 
+
+## Development Plan
+
+1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts.md`.
+   - **Summary**: Source: code-review. Severity: HIGH. Evidence: scripts/_manifest-lock.sh removes
+   - **Key criteria**: - [ ] Criterion 1 - [ ] Criterion 2
+2. Analyse Technical Notes and identify implementation approach.
+   - **Notes**: (Add implementation notes here)
+3. Implement changes in the files/scripts referenced by the requirement spec.
+4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
+5. Validate with `./scripts/show-requirement.sh REQ-1776420349206613978` and verify success criteria are met.
+
+**Last updated**: 2026-04-20T03:38:35Z
+
 ## Dependencies
 
 (List other requirement IDs if applicable, e.g., REQ-XXX, REQ-YYY)
@@ -29,7 +43,7 @@ Source: code-review. Severity: HIGH. Evidence: scripts/_manifest-lock.sh removes
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
+* **Linked Worktree**: feature/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts
+* **Branch**: feature/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts
 * **Merged**: No
 * **Deployed**: No

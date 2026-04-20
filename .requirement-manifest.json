@@ -516,11 +516,12 @@
       "id": "REQ-1776420349206613978",
       "name": "Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts",
       "description": "Source: code-review. Severity: HIGH. Evidence: scripts/_manifest-lock.sh removes .lock files after flock-backed operations; waiting processes may still hold file descriptors to the previous inode while a new process recreates the lock path, allowing overlapping critical sections. Required outcome: preserve strict mutual exclusion while still avoiding stale lock artifacts, add a regression that covers waiter-plus-newcomer lock contention, and verify start-work remains clean.",
-      "status": "PROPOSED",
+      "status": "IN_PROGRESS",
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-17T10:05:49Z",
-      "updatedAt": "2026-04-17T10:05:49Z"
+      "updatedAt": "2026-04-20T03:38:34Z",
+      "worktreeId": "feature/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts"
     },
     {
       "id": "REQ-1776655671293288695",
