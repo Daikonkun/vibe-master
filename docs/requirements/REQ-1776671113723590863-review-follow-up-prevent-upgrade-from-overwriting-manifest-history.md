@@ -1,7 +1,7 @@
 # Review follow-up: prevent /upgrade from overwriting manifest history
 
 **ID**: REQ-1776671113723590863  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-04-20T07:45:13Z  
 
@@ -22,16 +22,13 @@ Source: code-review of REQ-1776670068095886474. Severity: HIGH. Evidence: script
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776671113723590863-review-follow-up-prevent-upgrade-from-overwriting-manifest-history.md`.
-   - **Summary**: Source: code-review of REQ-1776670068095886474. Severity: HIGH. Evidence: script
-   - **Key criteria**: - [ ] Criterion 1 - [ ] Criterion 2
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: (Add implementation notes here)
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776671113723590863` and verify success criteria are met.
+1. Update upgrade apply behavior in `scripts/upgrade.sh` so the template sync excludes `.requirement-manifest.json` and `.worktree-manifest.json` from any blanket replace path.
+2. Add an explicit manifest-preservation/merge path in `scripts/upgrade.sh` (or a helper it calls) so upgrade metadata can be incorporated without overwriting existing requirement and worktree history.
+3. Add a regression check script at `scripts/check-upgrade-manifest-history.sh` that seeds manifest history, runs the upgrade apply path against a fixture/template, and fails if historical requirement/worktree entries are lost.
+4. Wire the new regression into validation flow by invoking `bash scripts/check-upgrade-manifest-history.sh` from local verification and any existing upgrade-related checks.
+5. Regenerate and verify docs with `bash scripts/regenerate-docs.sh` and `bash scripts/show-requirement.sh REQ-1776671113723590863`, then confirm `docs/STATUS.md` and manifests still show the requirement/worktree state correctly.
 
-**Last updated**: 2026-04-20T07:54:06Z
+**Last updated**: 2026-04-20T07:55:16Z
 
 ## Dependencies
 

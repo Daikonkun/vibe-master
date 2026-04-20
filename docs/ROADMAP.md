@@ -20,7 +20,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776420349206613978: Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts
 * [DEPLOYED] REQ-1776655671293288695: Review follow-up: block no-op work-on status advancement without scoped changes
 * [DEPLOYED] REQ-1776668079797649000: Review follow-up: include working tree evidence in work-on no-op guard
-* [IN_PROGRESS] REQ-1776671113723590863: Review follow-up: prevent /upgrade from overwriting manifest history
+* [CODE_REVIEW] REQ-1776671113723590863: Review follow-up: prevent /upgrade from overwriting manifest history
 
 ## Medium Priority
 * [DEPLOYED] REQ-1774628144: Review follow-up: align slash commands with actual skill invocations
