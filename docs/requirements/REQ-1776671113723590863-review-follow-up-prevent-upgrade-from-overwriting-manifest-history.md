@@ -1,7 +1,7 @@
 # Review follow-up: prevent /upgrade from overwriting manifest history
 
 **ID**: REQ-1776671113723590863  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: HIGH  
 **Created**: 2026-04-20T07:45:13Z  
 
@@ -43,4 +43,4 @@ Source: code-review of REQ-1776670068095886474. Severity: HIGH. Evidence: script
 * **Linked Worktree**: feature/REQ-1776671113723590863-review-follow-up-prevent-upgrade-from-overwriting-manifest-history
 * **Branch**: feature/REQ-1776671113723590863-review-follow-up-prevent-upgrade-from-overwriting-manifest-history
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes
