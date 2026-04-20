@@ -41,11 +41,12 @@ Workflow:
    - Continue until all Success Criteria are met or the user intervenes.
 7. **Enforce no-op evidence guard before status advancement**:
    - Resolve the requirement's active worktree from `.worktree-manifest.json` and read its `path` and `baseBranch` (default `main` if `baseBranch` is missing).
-   - Collect requirement-scoped diff evidence with `git -C <worktree-path> diff --name-status <base-branch>...HEAD`.
-   - If evidence is non-empty, continue to step 8.
-   - If evidence is empty and `next-status` is `CODE_REVIEW`, allow a verification-only override only when `--no-diff-reason "<reason>"` is provided.
-   - If evidence is empty and `next-status` is `CODE_REVIEW` and no override reason is provided, report the blocked no-op transition and stop.
-   - If evidence is empty and `next-status` is not `CODE_REVIEW`, report that implementation evidence is required and stop.
+   - Collect requirement-scoped commit-diff evidence with `git -C <worktree-path> diff --name-status <base-branch>...HEAD`.
+   - Collect requirement-scoped tracked working-tree/index evidence with `git -C <worktree-path> status --porcelain --untracked-files=no`.
+   - Treat evidence as present when either signal is non-empty.
+   - If both signals are empty and `next-status` is `CODE_REVIEW`, allow a verification-only override only when `--no-diff-reason "<reason>"` is provided.
+   - If both signals are empty and `next-status` is `CODE_REVIEW` and no override reason is provided, report the blocked no-op transition and state that only tracked staged/unstaged changes count as implementation evidence.
+   - If both signals are empty and `next-status` is not `CODE_REVIEW`, report that implementation evidence is required and state that untracked files do not count.
 8. **Confirm before advancing**: Once all criteria appear met and the no-op guard passes:
    - If effective auto mode is active (trusted default, or trusted `--auto` without `--no-auto`), skip interactive confirmation and proceed **immediately** to step 9.
    - Otherwise, ask the user **once** whether to advance the status to the next lifecycle state. If the user confirms (e.g. "yes", "go ahead", "do it"), proceed **immediately** to step 9 — do not re-ask or loop back.
@@ -59,7 +60,8 @@ Constraints:
 - If the requirement does not exist in the manifest, report the error and stop.
 - If the requirement is in a terminal status (DEPLOYED, CANCELLED, or MERGED when `requiresDeployment=false`), explain that there is no next status and stop.
 - If there is no active worktree and the requirement is PROPOSED or BACKLOG, re-read manifests immediately before `/start-work`; if a worktree appears concurrently, skip `/start-work` and continue. For other statuses without a worktree, suggest `/start-work` and stop.
-- Before advancing status, collect diff evidence from the active worktree path against its base branch. An empty diff blocks no-op advancement by default.
+- Before advancing status, collect evidence from the active worktree using both `git -C <worktree-path> diff --name-status <base-branch>...HEAD` and `git -C <worktree-path> status --porcelain --untracked-files=no`; block no-op advancement only when both are empty.
+- No-op evidence is tracked-only: staged and unstaged tracked deltas count, while untracked files are excluded.
 - `--no-diff-reason` is only valid for no-diff transitions targeting `CODE_REVIEW`; the reason must be non-empty and must be persisted via `scripts/update-requirement-status.sh --reason`.
 - Trusted orchestrator callers default to auto mode unless `--no-auto` is explicitly provided.
 - `--auto` is only valid for trusted orchestrator callers. If caller trust cannot be established, treat `--auto` as invalid and stop.
