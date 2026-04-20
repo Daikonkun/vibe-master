@@ -69,7 +69,7 @@ After any state change, regenerate:
 | `/bug-fix "issue summary" [scope]` | Run structured debugging workflow and root-cause analysis |
 | `/update-manual [scope]` | Generate and refresh user manual content |
 | `/code-review [scope]` | Review code and create REQ follow-up threads for unresolved findings |
-| `/work-on <req-id> [target-status] [--auto|--no-auto]` | Work on a requirement until it reaches its next lifecycle status (trusted orchestrator calls default to auto mode) |
+| `/work-on <req-id> [target-status] [--auto|--no-auto] [--no-diff-reason "reason"]` | Work on a requirement until it reaches its next lifecycle status; no-op transitions are blocked by default, and no-diff `CODE_REVIEW` advances require an explicit persisted reason |
 | `/e2e-test [scope]` | Run end-to-end testing with screenshot-based cross-border visual validation; propose new skill REQs when gaps are found |
 | `/init [project-name]` | Clear Vibe Master template REQs and initialize clean project manifests |
 
