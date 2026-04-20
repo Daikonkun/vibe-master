@@ -466,7 +466,8 @@
         "REQ-1776671113723590863"
       ],
       "createdAt": "2026-04-20T07:54:05Z",
-      "status": "ACTIVE"
+      "status": "MERGED",
+      "mergedAt": "2026-04-20T08:53:33Z"
     },
     {
       "id": "feature/REQ-1776672458915568759-review-follow-up-ensure-upgrade-merges-manifest-metadata-when-only-manifests-differ",
