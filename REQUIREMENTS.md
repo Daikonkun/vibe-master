@@ -48,12 +48,12 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1776420349206613978 | Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts | DEPLOYED | HIGH | feature/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts | 2026-04-17 | 2026-04-20 |
 | REQ-1776655671293288695 | Review follow-up: block no-op work-on status advancement without scoped changes | DEPLOYED | HIGH | feature/REQ-1776655671293288695-review-follow-up-block-no-op-work-on-status-advancement-without-scoped-changes | 2026-04-20 | 2026-04-20 |
 | REQ-1776657240260646946 | Review follow-up: prevent fallback lock-file accumulation for temporary manifests | PROPOSED | MEDIUM | — | 2026-04-20 | 2026-04-20 |
-| REQ-1776668079797649000 | Review follow-up: include working tree evidence in work-on no-op guard | PROPOSED | HIGH | — | 2026-04-20 | 2026-04-20 |
+| REQ-1776668079797649000 | Review follow-up: include working tree evidence in work-on no-op guard | IN_PROGRESS | HIGH | feature/REQ-1776668079797649000-review-follow-up-include-working-tree-evidence-in-work-on-no-op-guard | 2026-04-20 | 2026-04-20 |
 | REQ-1776668089944983961 | Review follow-up: harden work-on no-op guard against manifest context drift | PROPOSED | MEDIUM | — | 2026-04-20 | 2026-04-20 |
 
 ## Status Breakdown
-- **Proposed**: 4
-- **In Progress**: 0
+- **Proposed**: 3
+- **In Progress**: 1
 - **Code Review**: 0
 - **Merged**: 0
 - **Deployed**: 38
@@ -66,6 +66,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-20T07:03:41Z
+* Last updated: 2026-04-20T07:06:08Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

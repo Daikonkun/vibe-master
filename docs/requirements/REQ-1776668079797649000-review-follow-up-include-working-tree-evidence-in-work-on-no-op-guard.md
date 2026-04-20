@@ -1,7 +1,7 @@
 # Review follow-up: include working tree evidence in work-on no-op guard
 
 **ID**: REQ-1776668079797649000  
-**Status**: PROPOSED  
+**Status**: IN_PROGRESS  
 **Priority**: HIGH  
 **Created**: 2026-04-20T06:54:39Z  
 
@@ -21,6 +21,20 @@ Source: code-review of REQ-1776655671293288695. Severity: HIGH. Evidence: .githu
 - Keep commit-diff evidence (`<base>...HEAD`) and tracked working-tree evidence as separate signals; block only when both are empty.
 - Use tracked-only inspection (`git status --porcelain --untracked-files=no`) to avoid false positives from generated/untracked artifacts.
 
+
+## Development Plan
+
+1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776668079797649000-review-follow-up-include-working-tree-evidence-in-work-on-no-op-guard.md`.
+   - **Summary**: Source: code-review of REQ-1776655671293288695. Severity: HIGH. Evidence: .githu
+   - **Key criteria**: - [ ] `/work-on` no-op detection evaluates tracked working-tree deltas (`staged` + `unstaged`) in ad
+2. Analyse Technical Notes and identify implementation approach.
+   - **Notes**: - OQ decision (2026-04-20): only tracked staged/unstaged deltas count for no-op evidence.
+3. Implement changes in the files/scripts referenced by the requirement spec.
+4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
+5. Validate with `./scripts/show-requirement.sh REQ-1776668079797649000` and verify success criteria are met.
+
+**Last updated**: 2026-04-20T07:06:08Z
+
 ## Dependencies
 
 - REQ-1776655671293288695
@@ -31,7 +45,7 @@ Source: code-review of REQ-1776655671293288695. Severity: HIGH. Evidence: .githu
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
+* **Linked Worktree**: feature/REQ-1776668079797649000-review-follow-up-include-working-tree-evidence-in-work-on-no-op-guard
+* **Branch**: feature/REQ-1776668079797649000-review-follow-up-include-working-tree-evidence-in-work-on-no-op-guard
 * **Merged**: No
 * **Deployed**: No

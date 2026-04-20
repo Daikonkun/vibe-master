@@ -432,6 +432,17 @@
       "createdAt": "2026-04-20T04:02:52Z",
       "status": "MERGED",
       "mergedAt": "2026-04-20T07:00:30Z"
+    },
+    {
+      "id": "feature/REQ-1776668079797649000-review-follow-up-include-working-tree-evidence-in-work-on-no-op-guard",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776668079797649000-review-follow-up-include-working-tree-evidence-in-work-on-no-op-guard",
+      "branch": "feature/REQ-1776668079797649000-review-follow-up-include-working-tree-evidence-in-work-on-no-op-guard",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776668079797649000"
+      ],
+      "createdAt": "2026-04-20T07:06:08Z",
+      "status": "ACTIVE"
     }
   ]
 }
