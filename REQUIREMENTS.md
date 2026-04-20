@@ -52,13 +52,13 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1776668089944983961 | Review follow-up: harden work-on no-op guard against manifest context drift | PROPOSED | MEDIUM | — | 2026-04-20 | 2026-04-20 |
 | REQ-1776670068095886474 | add a /upgrade slash command | DEPLOYED | MEDIUM | feature/REQ-1776670068095886474-add-a-upgrade-slash-command | 2026-04-20 | 2026-04-20 |
 | REQ-1776671113723590863 | Review follow-up: prevent /upgrade from overwriting manifest history | IN_PROGRESS | HIGH | feature/REQ-1776671113723590863-review-follow-up-prevent-upgrade-from-overwriting-manifest-history | 2026-04-20 | 2026-04-20 |
-| REQ-1776672458915568759 | Review follow-up: ensure /upgrade merges manifest metadata when only manifests differ | CODE_REVIEW | HIGH | feature/REQ-1776672458915568759-review-follow-up-ensure-upgrade-merges-manifest-metadata-when-only-manifests-differ | 2026-04-20 | 2026-04-20 |
+| REQ-1776672458915568759 | Review follow-up: ensure /upgrade merges manifest metadata when only manifests differ | MERGED | HIGH | feature/REQ-1776672458915568759-review-follow-up-ensure-upgrade-merges-manifest-metadata-when-only-manifests-differ | 2026-04-20 | 2026-04-20 |
 
 ## Status Breakdown
 - **Proposed**: 3
 - **In Progress**: 1
-- **Code Review**: 1
-- **Merged**: 0
+- **Code Review**: 0
+- **Merged**: 1
 - **Deployed**: 40
 - **Blocked**: 0
 - **Backlog**: 0
@@ -69,6 +69,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-20T08:21:01Z
+* Last updated: 2026-04-20T08:32:26Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

@@ -16,13 +16,13 @@ Kanban-style view of all requirements and their current state.
 * REQ-1776671113723590863: Review follow-up: prevent /upgrade from overwriting manifest history (priority: HIGH)
   - Worktree: feature/REQ-1776671113723590863-review-follow-up-prevent-upgrade-from-overwriting-manifest-history
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
+
+
+## MERGED (1)
 
 * REQ-1776672458915568759: Review follow-up: ensure /upgrade merges manifest metadata when only manifests differ (priority: HIGH)
   - Worktree: feature/REQ-1776672458915568759-review-follow-up-ensure-upgrade-merges-manifest-metadata-when-only-manifests-differ
-
-## MERGED (0)
-
 
 ## DEPLOYED (40)
 
@@ -127,6 +127,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 49
 - Deployed: 40 (81%)
-- Merged (awaiting deploy): 0
+- Merged (awaiting deploy): 1
 - In Progress: 1
 - Blocked: 0
