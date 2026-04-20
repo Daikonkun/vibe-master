@@ -1,7 +1,7 @@
 # Review follow-up: ensure /upgrade merges manifest metadata when only manifests differ
 
 **ID**: REQ-1776672458915568759  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: HIGH  
 **Created**: 2026-04-20T08:07:38Z  
 
@@ -45,4 +45,4 @@ Source: code-review of REQ-1776671113723590863. Severity: HIGH. Evidence: script
 * **Linked Worktree**: feature/REQ-1776672458915568759-review-follow-up-ensure-upgrade-merges-manifest-metadata-when-only-manifests-differ
 * **Branch**: feature/REQ-1776672458915568759-review-follow-up-ensure-upgrade-merges-manifest-metadata-when-only-manifests-differ
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes

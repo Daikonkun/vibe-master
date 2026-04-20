@@ -17,12 +17,10 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (1)
+## MERGED (0)
 
-* REQ-1776672458915568759: Review follow-up: ensure /upgrade merges manifest metadata when only manifests differ (priority: HIGH)
-  - Worktree: feature/REQ-1776672458915568759-review-follow-up-ensure-upgrade-merges-manifest-metadata-when-only-manifests-differ
 
-## DEPLOYED (41)
+## DEPLOYED (42)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -106,6 +104,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1776670068095886474-add-a-upgrade-slash-command
 * REQ-1776671113723590863: Review follow-up: prevent /upgrade from overwriting manifest history (priority: HIGH)
   - Worktree: feature/REQ-1776671113723590863-review-follow-up-prevent-upgrade-from-overwriting-manifest-history
+* REQ-1776672458915568759: Review follow-up: ensure /upgrade merges manifest metadata when only manifests differ (priority: HIGH)
+  - Worktree: feature/REQ-1776672458915568759-review-follow-up-ensure-upgrade-merges-manifest-metadata-when-only-manifests-differ
 
 ## BLOCKED (0)
 
@@ -126,7 +126,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 49
-- Deployed: 41 (83%)
-- Merged (awaiting deploy): 1
+- Deployed: 42 (85%)
+- Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0
