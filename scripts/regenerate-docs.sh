@@ -7,12 +7,12 @@ PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
 WORKTREE_MANIFEST="$PROJECT_ROOT/.worktree-manifest.json"
 
-LAST_UPDATED="$(jq -r '[.requirements[]?.updatedAt | select(type == "string" and length > 0)] | max // "1970-01-01T00:00:00Z"' "$REQ_MANIFEST")"
-
 if [ ! -f "$REQ_MANIFEST" ]; then
   echo "❌ Error: .requirement-manifest.json not found"
   exit 1
 fi
+
+LAST_UPDATED="$(jq -r '[.requirements[]?.updatedAt | select(type == "string" and length > 0)] | max // "1970-01-01T00:00:00Z"' "$REQ_MANIFEST")"
 
 mkdir -p "$PROJECT_ROOT/docs"
 
