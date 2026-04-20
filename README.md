@@ -106,7 +106,7 @@ What this command guarantees:
 - Upgrade preparation in an isolated sibling worktree (not the currently edited tree)
 - A generated diff preview before any apply step
 - Explicit confirmation before applying template files
-- Post-upgrade validation guidance for `jq` manifest checks and `scripts/regenerate-docs.sh`
+- Post-upgrade validation guidance for manifest checks, docs regeneration, and upgrade-history regression coverage
 
 ### Safe Upgrade Workflow
 
@@ -136,6 +136,7 @@ diff -ruN --exclude='.git' --exclude='.upgrade-template' .upgrade-template/lates
 jq . .requirement-manifest.json >/dev/null
 jq . .worktree-manifest.json >/dev/null
 bash scripts/regenerate-docs.sh
+bash scripts/check-upgrade-manifest-history.sh
 ```
 
 6. Run a quick behavior check and review.
@@ -183,6 +184,7 @@ rm -rf .upgrade-template
 - All required slash command prompt files exist under `.github/prompts/` for the commands your team expects.
 - `jq . .requirement-manifest.json` and `jq . .worktree-manifest.json` both pass.
 - `bash scripts/regenerate-docs.sh` completes successfully without jq parse errors.
+- `bash scripts/check-upgrade-manifest-history.sh` passes so upgrade apply behavior does not wipe manifest history.
 - `/status`, `/show-requirement <req-id>`, and `/worktree-list` return expected output after refresh.
 
 ---
@@ -245,6 +247,7 @@ rm -rf .upgrade-template
 │
 └── scripts/
     ├── bootstrap-deps.sh                  # CLI: verify/install optional flock dependency
+  ├── check-upgrade-manifest-history.sh  # Regression: ensure upgrade apply preserves manifest history
     ├── check-docs-sync.sh                 # Guard: verify generated docs are synced with manifests
     ├── check-manifest-lock-race.sh        # Regression: concurrent manifest writers do not lose updates
     ├── create-requirement.sh               # CLI: create new requirement

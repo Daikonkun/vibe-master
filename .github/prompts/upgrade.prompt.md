@@ -22,6 +22,7 @@ Workflow:
    - `jq . .requirement-manifest.json >/dev/null`
    - `jq . .worktree-manifest.json >/dev/null`
    - `bash scripts/regenerate-docs.sh`
+   - `bash scripts/check-upgrade-manifest-history.sh`
 
 Constraints:
 - Never write upgrade changes directly into the currently edited project tree.
