@@ -42,15 +42,15 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1776398313767881380 | Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures | DEPLOYED | HIGH | feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures | 2026-04-17 | 2026-04-17 |
 | REQ-1776409551444648236 | Review follow-up: preserve error propagation in mkdir lock fallback | CANCELLED | HIGH | — | 2026-04-17 | 2026-04-17 |
 | REQ-1776415543221953328 | Review follow-up: align worktree-merge prompt with strict dirty-tree behavior | MERGED | HIGH | feature/REQ-1776415543221953328-review-follow-up-align-worktree-merge-prompt-with-strict-dirty-tree-behavior | 2026-04-17 | 2026-04-17 |
-| REQ-1776415552106978163 | Review follow-up: document work-on --auto for autonomous pipelines | IN_PROGRESS | HIGH | feature/REQ-1776415552106978163-review-follow-up-document-work-on-auto-for-autonomous-pipelines | 2026-04-17 | 2026-04-20 |
+| REQ-1776415552106978163 | Review follow-up: document work-on --auto for autonomous pipelines | CODE_REVIEW | HIGH | feature/REQ-1776415552106978163-review-follow-up-document-work-on-auto-for-autonomous-pipelines | 2026-04-17 | 2026-04-20 |
 | REQ-1776415557577295081 | Review follow-up: enforce requirement-worktree lifecycle invariants | PROPOSED | MEDIUM | — | 2026-04-17 | 2026-04-17 |
 | REQ-1776418077426972512 | Review follow-up: clean lock/timestamp artifacts after start-work | MERGED | MEDIUM | feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work | 2026-04-17 | 2026-04-20 |
 | REQ-1776420349206613978 | Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts | PROPOSED | HIGH | — | 2026-04-17 | 2026-04-17 |
 
 ## Status Breakdown
 - **Proposed**: 2
-- **In Progress**: 1
-- **Code Review**: 0
+- **In Progress**: 0
+- **Code Review**: 1
 - **Merged**: 2
 - **Deployed**: 33
 - **Blocked**: 0
@@ -62,6 +62,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-20T03:03:23Z
+* Last updated: 2026-04-20T03:07:12Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`
