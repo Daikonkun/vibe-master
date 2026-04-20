@@ -2,11 +2,13 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (2)
+## PROPOSED (3)
 
 * REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants (priority: MEDIUM)
   - Worktree: none
 * REQ-1776655671293288695: Review follow-up: block no-op work-on status advancement without scoped changes (priority: HIGH)
+  - Worktree: none
+* REQ-1776657240260646946: Review follow-up: prevent fallback lock-file accumulation for temporary manifests (priority: MEDIUM)
   - Worktree: none
 
 ## IN_PROGRESS (0)
@@ -113,8 +115,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 
 ## Stats
-- Total Requirements: 43
-- Deployed: 36 (83%)
+- Total Requirements: 44
+- Deployed: 36 (81%)
 - Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0
