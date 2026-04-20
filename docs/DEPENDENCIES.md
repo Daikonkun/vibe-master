@@ -100,3 +100,5 @@ REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against ma
 
 REQ-1776670068095886474: add a /upgrade slash command (no dependencies)
 
+REQ-1776671113723590863: Review follow-up: prevent /upgrade from overwriting manifest history (no dependencies)
+
