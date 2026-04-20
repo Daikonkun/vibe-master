@@ -528,11 +528,11 @@
       "id": "REQ-1776655671293288695",
       "name": "Review follow-up: block no-op work-on status advancement without scoped changes",
       "description": "Source: code-review of REQ-1776415552106978163. Severity: HIGH. Evidence: linked worktree feature/REQ-1776415552106978163-review-follow-up-document-work-on-auto-for-autonomous-pipelines has no diff versus main (git diff --name-status main...HEAD is empty), yet the workflow advanced status from IN_PROGRESS to CODE_REVIEW. Required outcome: add a /work-on no-op guard that blocks lifecycle advancement when no requirement-scoped implementation evidence exists, unless an explicit override reason is provided and recorded.",
-      "status": "CODE_REVIEW",
+      "status": "MERGED",
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-20T03:27:51Z",
-      "updatedAt": "2026-04-20T06:47:44Z",
+      "updatedAt": "2026-04-20T07:00:30Z",
       "worktreeId": "feature/REQ-1776655671293288695-review-follow-up-block-no-op-work-on-status-advancement-without-scoped-changes"
     },
     {

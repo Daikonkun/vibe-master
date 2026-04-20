@@ -16,13 +16,13 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
+
+
+## MERGED (1)
 
 * REQ-1776655671293288695: Review follow-up: block no-op work-on status advancement without scoped changes (priority: HIGH)
   - Worktree: feature/REQ-1776655671293288695-review-follow-up-block-no-op-work-on-status-advancement-without-scoped-changes
-
-## MERGED (0)
-
 
 ## DEPLOYED (37)
 
@@ -121,6 +121,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 46
 - Deployed: 37 (80%)
-- Merged (awaiting deploy): 0
+- Merged (awaiting deploy): 1
 - In Progress: 0
 - Blocked: 0

@@ -1,7 +1,7 @@
 # Review follow-up: block no-op work-on status advancement without scoped changes
 
 **ID**: REQ-1776655671293288695  
-**Status**: CODE_REVIEW  
+**Status**: MERGED  
 **Priority**: HIGH  
 **Created**: 2026-04-20T03:27:51Z  
 
@@ -43,5 +43,5 @@ Source: code-review of REQ-1776415552106978163. Severity: HIGH. Evidence: linked
 
 * **Linked Worktree**: feature/REQ-1776655671293288695-review-follow-up-block-no-op-work-on-status-advancement-without-scoped-changes
 * **Branch**: feature/REQ-1776655671293288695-review-follow-up-block-no-op-work-on-status-advancement-without-scoped-changes
-* **Merged**: No
+* **Merged**: Yes
 * **Deployed**: No
