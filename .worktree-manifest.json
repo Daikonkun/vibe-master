@@ -480,6 +480,17 @@
       "createdAt": "2026-04-20T08:12:36Z",
       "status": "MERGED",
       "mergedAt": "2026-04-20T08:32:26Z"
+    },
+    {
+      "id": "feature/REQ-1776657240260646946-review-follow-up-prevent-fallback-lock-file-accumulation-for-temporary-manifests",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776657240260646946-review-follow-up-prevent-fallback-lock-file-accumulation-for-temporary-manifests",
+      "branch": "feature/REQ-1776657240260646946-review-follow-up-prevent-fallback-lock-file-accumulation-for-temporary-manifests",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776657240260646946"
+      ],
+      "createdAt": "2026-04-20T09:08:21Z",
+      "status": "ACTIVE"
     }
   ]
 }

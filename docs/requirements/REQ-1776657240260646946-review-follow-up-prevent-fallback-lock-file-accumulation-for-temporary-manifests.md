@@ -1,7 +1,7 @@
 # Review follow-up: prevent fallback lock-file accumulation for temporary manifests
 
 **ID**: REQ-1776657240260646946  
-**Status**: PROPOSED  
+**Status**: IN_PROGRESS  
 **Priority**: MEDIUM  
 **Created**: 2026-04-20T03:54:00Z  
 
@@ -22,6 +22,20 @@ Source: code-review. Severity: MEDIUM. Evidence: scripts/_manifest-lock.sh write
 	- Affected paths are mainly in regression tooling.
 - Keep exclusivity and exit-code propagation guarantees validated by existing lock race checks while introducing lifecycle management.
 
+
+## Development Plan
+
+1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776657240260646946-review-follow-up-prevent-fallback-lock-file-accumulation-for-temporary-manifests.md`.
+   - **Summary**: Source: code-review. Severity: MEDIUM. Evidence: scripts/_manifest-lock.sh write
+   - **Key criteria**: - [ ] Fallback flock lock files are lifecycle-managed (for example by bounded cleanup, deterministic
+2. Analyse Technical Notes and identify implementation approach.
+   - **Notes**: - Open Question decisions captured on 2026-04-20:
+3. Implement changes in the files/scripts referenced by the requirement spec.
+4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
+5. Validate with `./scripts/show-requirement.sh REQ-1776657240260646946` and verify success criteria are met.
+
+**Last updated**: 2026-04-20T09:08:22Z
+
 ## Dependencies
 
 REQ-1776420349206613978
@@ -32,7 +46,7 @@ REQ-1776420349206613978
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
+* **Linked Worktree**: feature/REQ-1776657240260646946-review-follow-up-prevent-fallback-lock-file-accumulation-for-temporary-manifests
+* **Branch**: feature/REQ-1776657240260646946-review-follow-up-prevent-fallback-lock-file-accumulation-for-temporary-manifests
 * **Merged**: No
 * **Deployed**: No
