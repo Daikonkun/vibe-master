@@ -9,6 +9,72 @@ manifest_lock_supports_flock() {
   command -v flock >/dev/null 2>&1
 }
 
+manifest_lock_normalize_path() {
+  local manifest_file="$1"
+  local manifest_dir
+  local manifest_name
+  local abs_dir
+
+  manifest_dir="$(dirname "$manifest_file")"
+  manifest_name="$(basename "$manifest_file")"
+
+  if ! abs_dir="$(cd "$manifest_dir" 2>/dev/null && pwd -P)"; then
+    echo "Error: Unable to resolve manifest directory: $manifest_dir" >&2
+    return 1
+  fi
+
+  printf '%s/%s\n' "$abs_dir" "$manifest_name"
+}
+
+manifest_lock_directory() {
+  local manifest_file="$1"
+  local manifest_dir
+  local git_common_dir
+  local abs_git_common_dir
+
+  if [ -n "${MANIFEST_LOCK_DIR:-}" ]; then
+    printf '%s\n' "$MANIFEST_LOCK_DIR"
+    return 0
+  fi
+
+  manifest_dir="$(dirname "$manifest_file")"
+
+  if command -v git >/dev/null 2>&1; then
+    if git_common_dir="$(git -C "$manifest_dir" rev-parse --git-common-dir 2>/dev/null)"; then
+      if [ -n "$git_common_dir" ]; then
+        if [ "${git_common_dir#/}" != "$git_common_dir" ]; then
+          printf '%s/.manifest-locks\n' "$git_common_dir"
+        else
+          abs_git_common_dir="$(cd "$manifest_dir" && cd "$git_common_dir" && pwd -P)"
+          printf '%s/.manifest-locks\n' "$abs_git_common_dir"
+        fi
+        return 0
+      fi
+    fi
+  fi
+
+  printf '%s/vibe-manifest-locks\n' "${TMPDIR:-/tmp}"
+}
+
+manifest_lock_file_path() {
+  local manifest_file="$1"
+  local lock_root
+  local checksum
+  local manifest_slug
+
+  lock_root="$(manifest_lock_directory "$manifest_file")" || return 1
+
+  if ! mkdir -p "$lock_root"; then
+    echo "Error: Unable to create manifest lock directory: $lock_root" >&2
+    return 1
+  fi
+
+  checksum="$(printf '%s' "$manifest_file" | cksum | awk '{print $1 "-" $2}')"
+  manifest_slug="$(basename "$manifest_file" | tr -c 'A-Za-z0-9._-' '_')"
+
+  printf '%s/%s-%s.lock\n' "$lock_root" "$manifest_slug" "$checksum"
+}
+
 manifest_lock_wait_for_directory() {
   local lock_dir="$1"
   local max_attempts="${2:-3000}"
@@ -26,10 +92,7 @@ manifest_lock_wait_for_directory() {
 }
 
 manifest_lock_cleanup_artifacts() {
-  local lock_file="$1"
-  local lock_dir="${lock_file}.d"
-
-  rm -f "$lock_file" 2>/dev/null || true
+  local lock_dir="$1"
 
   if [ -d "$lock_dir" ]; then
     if ! rmdir "$lock_dir" 2>/dev/null; then
@@ -48,33 +111,37 @@ with_manifest_lock() {
   fi
 
   local lock_file="${manifest_file}.lock"
-  local lock_dir="${lock_file}.d"
-  local status=0
+  local lock_dir=""
+  local exit_code=0
+  local normalized_manifest_file=""
+
+  normalized_manifest_file="$(manifest_lock_normalize_path "$manifest_file")" || return 1
+  lock_file="$(manifest_lock_file_path "$normalized_manifest_file")" || return 1
+  lock_dir="${lock_file}.d"
 
   if manifest_lock_supports_flock; then
     if (
       flock -x 200
       "$@"
-    ) 200>"$lock_file"; then
-      status=0
+    ) 200>>"$lock_file"; then
+      exit_code=0
     else
-      status=$?
+      exit_code=$?
     fi
 
-    manifest_lock_cleanup_artifacts "$lock_file"
-    return "$status"
+    return "$exit_code"
   fi
 
   manifest_lock_wait_for_directory "$lock_dir" || return 1
 
   if "$@"; then
-    status=0
+    exit_code=0
   else
-    status=$?
+    exit_code=$?
   fi
 
-  manifest_lock_cleanup_artifacts "$lock_file"
-  return "$status"
+  manifest_lock_cleanup_artifacts "$lock_dir"
+  return "$exit_code"
 }
 
 _jq_update_manifest_locked_inner() {

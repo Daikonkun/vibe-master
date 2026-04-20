@@ -51,13 +51,6 @@ PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
 source "$PROJECT_ROOT/scripts/_manifest-lock.sh"
 
-cleanup_manifest_lock_artifact() {
-  # Best-effort cleanup for flock-created lock file artifacts.
-  rm -f "${REQ_MANIFEST}.lock"
-}
-
-trap cleanup_manifest_lock_artifact EXIT
-
 generate_req_numeric_id() {
   if command -v python3 >/dev/null 2>&1; then
     python3 - << 'PY'

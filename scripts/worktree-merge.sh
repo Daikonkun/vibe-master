@@ -68,9 +68,6 @@ if [ ! -f "$REQ_MANIFEST" ] || [ ! -f "$WORKTREE_MANIFEST" ]; then
   exit 1
 fi
 
-# Remove stale lock artifacts from previous interrupted operations.
-rm -f "${REQ_MANIFEST}.lock" "${WORKTREE_MANIFEST}.lock"
-
 DIRTY_FILES="$(git -C "$PROJECT_ROOT" status --porcelain)"
 if [ -n "$DIRTY_FILES" ]; then
   echo "Error: Working tree is not clean. Refusing to merge with unrelated in-flight changes." >&2
@@ -213,9 +210,6 @@ else
 fi
 
 "$PROJECT_ROOT/scripts/regenerate-docs.sh" >/dev/null
-
-# Remove transient lock artifacts produced by manifest updates.
-rm -f "${REQ_MANIFEST}.lock" "${WORKTREE_MANIFEST}.lock"
 
 FILES_TO_ADD=()
 

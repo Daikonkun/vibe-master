@@ -82,10 +82,68 @@ assert_error_propagation() {
   fi
 }
 
+assert_waiter_newcomer_exclusivity_flock() {
+  local first_holder_pid
+  local waiter_pid
+  local waiter_marker="$TMP_ROOT/flock-waiter-holding"
+  local newcomer_exit=0
+  local attempts=0
+
+  rm -f "$waiter_marker"
+
+  with_manifest_lock "$TEST_MANIFEST" bash -c 'sleep 0.20' &
+  first_holder_pid=$!
+
+  sleep 0.05
+
+  with_manifest_lock "$TEST_MANIFEST" bash -c '
+    marker="$1"
+    touch "$marker"
+    sleep 0.30
+    rm -f "$marker"
+  ' _ "$waiter_marker" &
+  waiter_pid=$!
+
+  wait "$first_holder_pid"
+
+  while [ ! -f "$waiter_marker" ]; do
+    attempts=$((attempts + 1))
+    if [ "$attempts" -ge 300 ]; then
+      echo "FAIL: flock waiter did not acquire lock within expected time." >&2
+      wait "$waiter_pid" || true
+      exit 1
+    fi
+    sleep 0.01
+  done
+
+  set +e
+  with_manifest_lock "$TEST_MANIFEST" bash -c '
+    marker="$1"
+    if [ -f "$marker" ]; then
+      exit 42
+    fi
+  ' _ "$waiter_marker"
+  newcomer_exit=$?
+  set -e
+
+  wait "$waiter_pid"
+
+  if [ "$newcomer_exit" -eq 42 ]; then
+    echo "FAIL: flock waiter/newcomer overlap detected; lock exclusivity was broken." >&2
+    exit 1
+  fi
+
+  if [ "$newcomer_exit" -ne 0 ]; then
+    echo "FAIL: newcomer lock attempt failed unexpectedly (exit=$newcomer_exit)." >&2
+    exit 1
+  fi
+}
+
 if manifest_lock_supports_flock; then
   run_parallel_writes "flock" "$WORKERS"
   assert_count "flock" "$WORKERS"
   assert_error_propagation "flock"
+  assert_waiter_newcomer_exclusivity_flock
 
   MANIFEST_LOCK_FORCE_MKDIR=1
   run_parallel_writes "mkdir" "$WORKERS"
@@ -93,7 +151,7 @@ if manifest_lock_supports_flock; then
   assert_count "mkdir" "$WORKERS"
   assert_error_propagation "mkdir"
 
-  echo "PASS: flock and mkdir lock backends preserved concurrent writes and error propagation ($WORKERS each)."
+  echo "PASS: flock and mkdir lock backends preserved concurrent writes, exclusivity, and error propagation ($WORKERS each)."
 else
   run_parallel_writes "mkdir" "$WORKERS"
   assert_count "mkdir" "$WORKERS"
