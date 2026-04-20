@@ -420,6 +420,17 @@
       "createdAt": "2026-04-20T03:38:34Z",
       "status": "MERGED",
       "mergedAt": "2026-04-20T03:59:32Z"
+    },
+    {
+      "id": "feature/REQ-1776655671293288695-review-follow-up-block-no-op-work-on-status-advancement-without-scoped-changes",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776655671293288695-review-follow-up-block-no-op-work-on-status-advancement-without-scoped-changes",
+      "branch": "feature/REQ-1776655671293288695-review-follow-up-block-no-op-work-on-status-advancement-without-scoped-changes",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776655671293288695"
+      ],
+      "createdAt": "2026-04-20T04:02:52Z",
+      "status": "ACTIVE"
     }
   ]
 }
