@@ -14,13 +14,13 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
+
+
+## MERGED (1)
 
 * REQ-1776420349206613978: Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts (priority: HIGH)
   - Worktree: feature/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts
-
-## MERGED (0)
-
 
 ## DEPLOYED (36)
 
@@ -117,6 +117,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 44
 - Deployed: 36 (81%)
-- Merged (awaiting deploy): 0
+- Merged (awaiting deploy): 1
 - In Progress: 0
 - Blocked: 0

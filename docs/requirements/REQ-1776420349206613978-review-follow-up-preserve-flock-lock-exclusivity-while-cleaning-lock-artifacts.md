@@ -1,7 +1,7 @@
 # Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts
 
 **ID**: REQ-1776420349206613978  
-**Status**: CODE_REVIEW  
+**Status**: MERGED  
 **Priority**: HIGH  
 **Created**: 2026-04-17T10:05:49Z  
 
@@ -48,5 +48,5 @@ Source: code-review. Severity: HIGH. Evidence: scripts/_manifest-lock.sh removes
 
 * **Linked Worktree**: feature/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts
 * **Branch**: feature/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts
-* **Merged**: No
+* **Merged**: Yes
 * **Deployed**: No
