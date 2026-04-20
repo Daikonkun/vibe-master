@@ -12,6 +12,8 @@ if [ ! -f "$REQ_MANIFEST" ]; then
   exit 1
 fi
 
+LAST_UPDATED="$(jq -r '[.requirements[]?.updatedAt | select(type == "string" and length > 0)] | max // "1970-01-01T00:00:00Z"' "$REQ_MANIFEST")"
+
 mkdir -p "$PROJECT_ROOT/docs"
 
 echo "🔨 Regenerating documentation..."
@@ -128,7 +130,7 @@ echo "📄 Generating REQUIREMENTS.md..."
   echo ""
   echo "---"
   echo ""
-  echo "* Last updated: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  echo "* Last updated: $LAST_UPDATED"
   echo "* Structured data: See \`.requirement-manifest.json\`"
   echo "* Worktree mapping: See \`.worktree-manifest.json\`"
 } > "$PROJECT_ROOT/REQUIREMENTS.md"
