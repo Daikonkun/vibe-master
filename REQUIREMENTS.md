@@ -45,7 +45,7 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1776415552106978163 | Review follow-up: document work-on --auto for autonomous pipelines | DEPLOYED | HIGH | feature/REQ-1776415552106978163-review-follow-up-document-work-on-auto-for-autonomous-pipelines | 2026-04-17 | 2026-04-20 |
 | REQ-1776415557577295081 | Review follow-up: enforce requirement-worktree lifecycle invariants | PROPOSED | MEDIUM | — | 2026-04-17 | 2026-04-17 |
 | REQ-1776418077426972512 | Review follow-up: clean lock/timestamp artifacts after start-work | DEPLOYED | MEDIUM | feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work | 2026-04-17 | 2026-04-20 |
-| REQ-1776420349206613978 | Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts | MERGED | HIGH | feature/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts | 2026-04-17 | 2026-04-20 |
+| REQ-1776420349206613978 | Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts | DEPLOYED | HIGH | feature/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts | 2026-04-17 | 2026-04-20 |
 | REQ-1776655671293288695 | Review follow-up: block no-op work-on status advancement without scoped changes | PROPOSED | HIGH | — | 2026-04-20 | 2026-04-20 |
 | REQ-1776657240260646946 | Review follow-up: prevent fallback lock-file accumulation for temporary manifests | PROPOSED | MEDIUM | — | 2026-04-20 | 2026-04-20 |
 
@@ -53,8 +53,8 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 - **Proposed**: 3
 - **In Progress**: 0
 - **Code Review**: 0
-- **Merged**: 1
-- **Deployed**: 36
+- **Merged**: 0
+- **Deployed**: 37
 - **Blocked**: 0
 - **Backlog**: 0
 - **Cancelled**: 4
@@ -64,6 +64,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-20T03:59:32Z
+* Last updated: 2026-04-20T04:01:09Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

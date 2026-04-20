@@ -17,12 +17,10 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (1)
+## MERGED (0)
 
-* REQ-1776420349206613978: Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts (priority: HIGH)
-  - Worktree: feature/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts
 
-## DEPLOYED (36)
+## DEPLOYED (37)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -96,6 +94,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1776415552106978163-review-follow-up-document-work-on-auto-for-autonomous-pipelines
 * REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work (priority: MEDIUM)
   - Worktree: feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work
+* REQ-1776420349206613978: Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts (priority: HIGH)
+  - Worktree: feature/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts
 
 ## BLOCKED (0)
 
@@ -116,7 +116,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 44
-- Deployed: 36 (81%)
-- Merged (awaiting deploy): 1
+- Deployed: 37 (84%)
+- Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0
