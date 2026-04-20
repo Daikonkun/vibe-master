@@ -43,7 +43,7 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1776409551444648236 | Review follow-up: preserve error propagation in mkdir lock fallback | CANCELLED | HIGH | — | 2026-04-17 | 2026-04-17 |
 | REQ-1776415543221953328 | Review follow-up: align worktree-merge prompt with strict dirty-tree behavior | DEPLOYED | HIGH | feature/REQ-1776415543221953328-review-follow-up-align-worktree-merge-prompt-with-strict-dirty-tree-behavior | 2026-04-17 | 2026-04-20 |
 | REQ-1776415552106978163 | Review follow-up: document work-on --auto for autonomous pipelines | DEPLOYED | HIGH | feature/REQ-1776415552106978163-review-follow-up-document-work-on-auto-for-autonomous-pipelines | 2026-04-17 | 2026-04-20 |
-| REQ-1776415557577295081 | Review follow-up: enforce requirement-worktree lifecycle invariants | PROPOSED | MEDIUM | — | 2026-04-17 | 2026-04-17 |
+| REQ-1776415557577295081 | Review follow-up: enforce requirement-worktree lifecycle invariants | IN_PROGRESS | MEDIUM | feature/REQ-1776415557577295081-review-follow-up-enforce-requirement-worktree-lifecycle-invariants | 2026-04-17 | 2026-04-20 |
 | REQ-1776418077426972512 | Review follow-up: clean lock/timestamp artifacts after start-work | DEPLOYED | MEDIUM | feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work | 2026-04-17 | 2026-04-20 |
 | REQ-1776420349206613978 | Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts | DEPLOYED | HIGH | feature/REQ-1776420349206613978-review-follow-up-preserve-flock-lock-exclusivity-while-cleaning-lock-artifacts | 2026-04-17 | 2026-04-20 |
 | REQ-1776655671293288695 | Review follow-up: block no-op work-on status advancement without scoped changes | DEPLOYED | HIGH | feature/REQ-1776655671293288695-review-follow-up-block-no-op-work-on-status-advancement-without-scoped-changes | 2026-04-20 | 2026-04-20 |
@@ -56,8 +56,8 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1776677538888266188 | Review follow-up: tighten lock-growth assertion for repeated lock-race runs | CANCELLED | MEDIUM | — | 2026-04-20 | 2026-04-20 |
 
 ## Status Breakdown
-- **Proposed**: 2
-- **In Progress**: 0
+- **Proposed**: 1
+- **In Progress**: 1
 - **Code Review**: 0
 - **Merged**: 0
 - **Deployed**: 43
@@ -70,6 +70,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-20T09:53:27Z
+* Last updated: 2026-04-20T09:55:50Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`
