@@ -1,7 +1,7 @@
 # Review follow-up: block no-op work-on status advancement without scoped changes
 
 **ID**: REQ-1776655671293288695  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-04-20T03:27:51Z  
 
@@ -24,16 +24,17 @@ Source: code-review of REQ-1776415552106978163. Severity: HIGH. Evidence: linked
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776655671293288695-review-follow-up-block-no-op-work-on-status-advancement-without-scoped-changes.md`.
-   - **Summary**: Source: code-review of REQ-1776415552106978163. Severity: HIGH. Evidence: linked
-   - **Key criteria**: - [ ] `/work-on` blocks status advancement to `CODE_REVIEW` when requirement-scoped diff evidence is
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - Product decision (2026-04-20): verification-only requirements may advance with zero diff evidence 
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776655671293288695` and verify success criteria are met.
+1. Add a no-op evidence guard to `.github/prompts/work-on.prompt.md` so `IN_PROGRESS -> CODE_REVIEW` is blocked when requirement-scoped diff evidence is empty.
+   - Read the active worktree from `.worktree-manifest.json` and evaluate evidence with `git -C <worktree-path> diff --name-status main...HEAD` before running the status transition step.
+2. Implement a verification-only override in `.github/prompts/work-on.prompt.md` that is valid only when the target transition is `CODE_REVIEW`.
+   - Require an explicit override reason argument and fail with a clear error when reason text is missing.
+3. Persist override audit data in requirement artifacts by extending `scripts/update-requirement-status.sh` and `.requirement-manifest.json`.
+   - Add support for passing the override reason and store it on the requirement record (for example in a status-history/note field) with timestamp and target status.
+4. Mirror the new no-op guard and override contract in user-facing docs by updating `README.md` and `copilot-instructions.md` `/work-on` command guidance.
+5. Validate end-to-end behavior and regenerate docs.
+   - Run `./scripts/show-requirement.sh REQ-1776655671293288695`, run `./scripts/regenerate-docs.sh`, and confirm `docs/STATUS.md` remains consistent after plan and manifest updates.
 
-**Last updated**: 2026-04-20T04:02:53Z
+**Last updated**: 2026-04-20T04:03:46Z
 
 ## Dependencies
 
