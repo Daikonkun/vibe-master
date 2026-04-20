@@ -682,6 +682,16 @@
         }
       ],
       "deployedAt": "2026-04-20T08:55:56Z"
+    },
+    {
+      "id": "REQ-1776677538888266188",
+      "name": "Review follow-up: tighten lock-growth assertion for repeated lock-race runs",
+      "description": "Source: code-review. Severity: MEDIUM. Evidence: scripts/check-manifest-lock-race.sh allows FINAL_LOCK_COUNT up to INITIAL_LOCK_COUNT + 1, so a leak of one new lock file per run still passes each run and repeated-run accumulation can evade in-script detection. Required outcome: update the lock-growth assertion to fail on any net increase in the controlled test lock root across a single run, and add regression coverage or explicit checks that prove repeated executions do not accumulate lock artifacts.",
+      "status": "PROPOSED",
+      "priority": "MEDIUM",
+      "origin": "project",
+      "createdAt": "2026-04-20T09:32:18Z",
+      "updatedAt": "2026-04-20T09:32:18Z"
     }
   ],
   "requiresDeployment": true
