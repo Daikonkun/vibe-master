@@ -17,16 +17,10 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (3)
+## MERGED (0)
 
-* REQ-1776415543221953328: Review follow-up: align worktree-merge prompt with strict dirty-tree behavior (priority: HIGH)
-  - Worktree: feature/REQ-1776415543221953328-review-follow-up-align-worktree-merge-prompt-with-strict-dirty-tree-behavior
-* REQ-1776415552106978163: Review follow-up: document work-on --auto for autonomous pipelines (priority: HIGH)
-  - Worktree: feature/REQ-1776415552106978163-review-follow-up-document-work-on-auto-for-autonomous-pipelines
-* REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work (priority: MEDIUM)
-  - Worktree: feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work
 
-## DEPLOYED (33)
+## DEPLOYED (36)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -94,6 +88,12 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 * REQ-1776398313767881380: Review follow-up: make worktree-merge forced unmapped merges resilient to branch cleanup failures (priority: HIGH)
   - Worktree: feature/REQ-1776398313767881380-review-follow-up-make-worktree-merge-forced-unmapped-merges-resilient-to-branch-cleanup-failures
+* REQ-1776415543221953328: Review follow-up: align worktree-merge prompt with strict dirty-tree behavior (priority: HIGH)
+  - Worktree: feature/REQ-1776415543221953328-review-follow-up-align-worktree-merge-prompt-with-strict-dirty-tree-behavior
+* REQ-1776415552106978163: Review follow-up: document work-on --auto for autonomous pipelines (priority: HIGH)
+  - Worktree: feature/REQ-1776415552106978163-review-follow-up-document-work-on-auto-for-autonomous-pipelines
+* REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work (priority: MEDIUM)
+  - Worktree: feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work
 
 ## BLOCKED (0)
 
@@ -114,7 +114,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 43
-- Deployed: 33 (76%)
-- Merged (awaiting deploy): 3
+- Deployed: 36 (83%)
+- Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0

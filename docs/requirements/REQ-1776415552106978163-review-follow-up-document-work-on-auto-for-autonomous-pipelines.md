@@ -1,7 +1,7 @@
 # Review follow-up: document work-on --auto for autonomous pipelines
 
 **ID**: REQ-1776415552106978163  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: HIGH  
 **Created**: 2026-04-17T08:45:52Z  
 
@@ -55,4 +55,4 @@ Source: code-review of delegated REQ flow. Severity: HIGH. Evidence: .github/pro
 * **Linked Worktree**: feature/REQ-1776415552106978163-review-follow-up-document-work-on-auto-for-autonomous-pipelines
 * **Branch**: feature/REQ-1776415552106978163-review-follow-up-document-work-on-auto-for-autonomous-pipelines
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes

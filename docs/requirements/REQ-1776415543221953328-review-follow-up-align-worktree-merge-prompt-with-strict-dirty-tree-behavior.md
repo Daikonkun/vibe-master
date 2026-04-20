@@ -1,7 +1,7 @@
 # Review follow-up: align worktree-merge prompt with strict dirty-tree behavior
 
 **ID**: REQ-1776415543221953328  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: HIGH  
 **Created**: 2026-04-17T08:45:43Z  
 
@@ -45,4 +45,4 @@ Source: code-review of delegated REQ flow. Severity: HIGH. Evidence: .github/pro
 * **Linked Worktree**: feature/REQ-1776415543221953328-review-follow-up-align-worktree-merge-prompt-with-strict-dirty-tree-behavior
 * **Branch**: feature/REQ-1776415543221953328-review-follow-up-align-worktree-merge-prompt-with-strict-dirty-tree-behavior
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes
