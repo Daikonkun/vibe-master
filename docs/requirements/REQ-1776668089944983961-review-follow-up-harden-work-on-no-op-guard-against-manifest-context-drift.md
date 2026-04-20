@@ -11,17 +11,19 @@ Source: code-review of REQ-1776655671293288695. Severity: MEDIUM. Evidence: .git
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [ ] `/work-on` resolves requirement/worktree lifecycle state from the canonical tracker manifests in the project root (source of truth).
+- [ ] When canonical mapping is unavailable or stale, `/work-on` falls back to resolving by current repository path/branch identity.
+- [ ] If both canonical and fallback resolution fail, `/work-on` exits with a clear, actionable diagnostic that includes next-step commands.
 
 ## Technical Notes
 
-(Add implementation notes here)
+- OQ decision (2026-04-20): prefer canonical project-root manifests for lifecycle and worktree mapping because they are the source of truth for status transitions.
+- Best-practice fallback: if canonical lookup cannot map the active REQ/worktree, infer context from current repository root and checked-out branch, then re-validate against manifests.
+- Keep strict failure behavior when resolution remains ambiguous; do not guess mappings silently.
 
 ## Dependencies
 
-(List other requirement IDs if applicable, e.g., REQ-XXX, REQ-YYY)
+- REQ-1776655671293288695
 
 ## Worktree
 

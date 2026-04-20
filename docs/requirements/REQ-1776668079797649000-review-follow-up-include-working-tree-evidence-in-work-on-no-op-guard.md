@@ -11,17 +11,19 @@ Source: code-review of REQ-1776655671293288695. Severity: HIGH. Evidence: .githu
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [ ] `/work-on` no-op detection evaluates tracked working-tree deltas (`staged` + `unstaged`) in addition to `<base>...HEAD` commit diff evidence.
+- [ ] Untracked files do not count as implementation evidence for no-op detection.
+- [ ] The `/work-on` contract and inline diagnostics explicitly state the tracked-only evidence rule.
 
 ## Technical Notes
 
-(Add implementation notes here)
+- OQ decision (2026-04-20): only tracked staged/unstaged deltas count for no-op evidence.
+- Keep commit-diff evidence (`<base>...HEAD`) and tracked working-tree evidence as separate signals; block only when both are empty.
+- Use tracked-only inspection (`git status --porcelain --untracked-files=no`) to avoid false positives from generated/untracked artifacts.
 
 ## Dependencies
 
-(List other requirement IDs if applicable, e.g., REQ-XXX, REQ-YYY)
+- REQ-1776655671293288695
 
 ## Worktree
 
