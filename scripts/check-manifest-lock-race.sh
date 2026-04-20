@@ -9,11 +9,31 @@ source "$PROJECT_ROOT/scripts/_manifest-lock.sh"
 WORKERS="${1:-40}"
 TMP_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/manifest-lock-race.XXXXXX")"
 TEST_MANIFEST="$TMP_ROOT/manifest.json"
+LOCK_ROOT="${MANIFEST_LOCK_DIR:-$TMP_ROOT/vibe-manifest-locks}"
+
+# Keep lock artifacts in a controlled test root so they are cleaned with TMP_ROOT.
+export MANIFEST_LOCK_DIR="$LOCK_ROOT"
+TEST_MANIFEST="$(manifest_lock_normalize_path "$TEST_MANIFEST")"
+TEST_LOCK_FILE="$(manifest_lock_file_path "$TEST_MANIFEST")"
 
 cleanup() {
+  if [ -n "${TEST_LOCK_FILE:-}" ]; then
+    rm -f "$TEST_LOCK_FILE" 2>/dev/null || true
+  fi
   rm -rf "$TMP_ROOT"
 }
 trap cleanup EXIT
+
+lock_file_count() {
+  if [ ! -d "$LOCK_ROOT" ]; then
+    echo 0
+    return
+  fi
+
+  find "$LOCK_ROOT" -type f -name '*.lock' | wc -l | tr -d ' '
+}
+
+INITIAL_LOCK_COUNT="$(lock_file_count)"
 
 if [[ ! "$WORKERS" =~ ^[0-9]+$ ]] || [ "$WORKERS" -le 0 ]; then
   echo "Usage: $0 [worker-count]" >&2
@@ -151,11 +171,23 @@ if manifest_lock_supports_flock; then
   assert_count "mkdir" "$WORKERS"
   assert_error_propagation "mkdir"
 
-  echo "PASS: flock and mkdir lock backends preserved concurrent writes, exclusivity, and error propagation ($WORKERS each)."
+  FINAL_LOCK_COUNT="$(lock_file_count)"
+  if [ "$FINAL_LOCK_COUNT" -gt $((INITIAL_LOCK_COUNT + 1)) ]; then
+    echo "FAIL: lock artifact growth exceeded bound in test lock root '$LOCK_ROOT' (before=$INITIAL_LOCK_COUNT after=$FINAL_LOCK_COUNT)." >&2
+    exit 1
+  fi
+
+  echo "PASS: flock and mkdir lock backends preserved concurrent writes, exclusivity, error propagation, and bounded lock growth ($WORKERS each)."
 else
   run_parallel_writes "mkdir" "$WORKERS"
   assert_count "mkdir" "$WORKERS"
   assert_error_propagation "mkdir"
 
-  echo "PASS: mkdir lock backend preserved concurrent writes and error propagation ($WORKERS)."
+  FINAL_LOCK_COUNT="$(lock_file_count)"
+  if [ "$FINAL_LOCK_COUNT" -gt $((INITIAL_LOCK_COUNT + 1)) ]; then
+    echo "FAIL: lock artifact growth exceeded bound in test lock root '$LOCK_ROOT' (before=$INITIAL_LOCK_COUNT after=$FINAL_LOCK_COUNT)." >&2
+    exit 1
+  fi
+
+  echo "PASS: mkdir lock backend preserved concurrent writes, error propagation, and bounded lock growth ($WORKERS)."
 fi
