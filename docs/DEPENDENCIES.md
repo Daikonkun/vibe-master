@@ -104,3 +104,5 @@ REQ-1776671113723590863: Review follow-up: prevent /upgrade from overwriting man
 
 REQ-1776672458915568759: Review follow-up: ensure /upgrade merges manifest metadata when only manifests differ (no dependencies)
 
+REQ-1776677538888266188: Review follow-up: tighten lock-growth assertion for repeated lock-race runs (no dependencies)
+

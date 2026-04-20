@@ -1,7 +1,7 @@
 # Review follow-up: tighten lock-growth assertion for repeated lock-race runs
 
 **ID**: REQ-1776677538888266188  
-**Status**: PROPOSED  
+**Status**: CANCELLED  
 **Priority**: MEDIUM  
 **Created**: 2026-04-20T09:32:18Z  
 

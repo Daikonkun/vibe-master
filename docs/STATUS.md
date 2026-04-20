@@ -113,7 +113,7 @@ Kanban-style view of all requirements and their current state.
 ## BACKLOG (0)
 
 
-## CANCELLED (4)
+## CANCELLED (5)
 
 * REQ-1774774129: Review follow-up: fix manifest inconsistencies and ghost command (priority: MEDIUM)
   - Worktree: none
@@ -123,10 +123,12 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 * REQ-1776409551444648236: Review follow-up: preserve error propagation in mkdir lock fallback (priority: HIGH)
   - Worktree: none
+* REQ-1776677538888266188: Review follow-up: tighten lock-growth assertion for repeated lock-race runs (priority: MEDIUM)
+  - Worktree: none
 
 ## Stats
-- Total Requirements: 49
-- Deployed: 42 (85%)
+- Total Requirements: 50
+- Deployed: 42 (84%)
 - Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0
