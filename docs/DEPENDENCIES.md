@@ -98,3 +98,5 @@ REQ-1776668079797649000: Review follow-up: include working tree evidence in work
 
 REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against manifest context drift (no dependencies)
 
+REQ-1776670068095886474: add a /upgrade slash command (no dependencies)
+
