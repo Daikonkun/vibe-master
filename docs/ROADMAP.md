@@ -19,7 +19,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776415552106978163: Review follow-up: document work-on --auto for autonomous pipelines
 * [DEPLOYED] REQ-1776420349206613978: Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts
 * [DEPLOYED] REQ-1776655671293288695: Review follow-up: block no-op work-on status advancement without scoped changes
-* [MERGED] REQ-1776668079797649000: Review follow-up: include working tree evidence in work-on no-op guard
+* [DEPLOYED] REQ-1776668079797649000: Review follow-up: include working tree evidence in work-on no-op guard
 
 ## Medium Priority
 * [DEPLOYED] REQ-1774628144: Review follow-up: align slash commands with actual skill invocations
