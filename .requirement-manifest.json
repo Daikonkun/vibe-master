@@ -480,11 +480,12 @@
       "id": "REQ-1776415552106978163",
       "name": "Review follow-up: document work-on --auto for autonomous pipelines",
       "description": "Source: code-review of delegated REQ flow. Severity: HIGH. Evidence: .github/prompts/work-on.prompt.md defines --auto to skip confirmation, but README.md and copilot-instructions.md advertise /work-on without --auto; autonomous runs can pause at confirmation unexpectedly. Required outcome: update command tables and execution guidance to include --auto usage, trust constraints, and recommended autonomous invocation patterns.",
-      "status": "PROPOSED",
+      "status": "IN_PROGRESS",
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-17T08:45:52Z",
-      "updatedAt": "2026-04-17T08:45:52Z"
+      "updatedAt": "2026-04-20T03:03:23Z",
+      "worktreeId": "feature/REQ-1776415552106978163-review-follow-up-document-work-on-auto-for-autonomous-pipelines"
     },
     {
       "id": "REQ-1776415557577295081",

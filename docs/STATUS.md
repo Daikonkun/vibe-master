@@ -2,17 +2,17 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (3)
+## PROPOSED (2)
 
-* REQ-1776415552106978163: Review follow-up: document work-on --auto for autonomous pipelines (priority: HIGH)
-  - Worktree: none
 * REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants (priority: MEDIUM)
   - Worktree: none
 * REQ-1776420349206613978: Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts (priority: HIGH)
   - Worktree: none
 
-## IN_PROGRESS (0)
+## IN_PROGRESS (1)
 
+* REQ-1776415552106978163: Review follow-up: document work-on --auto for autonomous pipelines (priority: HIGH)
+  - Worktree: feature/REQ-1776415552106978163-review-follow-up-document-work-on-auto-for-autonomous-pipelines
 
 ## CODE_REVIEW (0)
 
@@ -114,5 +114,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 42
 - Deployed: 33 (78%)
 - Merged (awaiting deploy): 2
-- In Progress: 0
+- In Progress: 1
 - Blocked: 0
