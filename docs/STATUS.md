@@ -19,12 +19,10 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (1)
+## MERGED (0)
 
-* REQ-1776670068095886474: add a /upgrade slash command (priority: MEDIUM)
-  - Worktree: feature/REQ-1776670068095886474-add-a-upgrade-slash-command
 
-## DEPLOYED (39)
+## DEPLOYED (40)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -104,6 +102,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1776655671293288695-review-follow-up-block-no-op-work-on-status-advancement-without-scoped-changes
 * REQ-1776668079797649000: Review follow-up: include working tree evidence in work-on no-op guard (priority: HIGH)
   - Worktree: feature/REQ-1776668079797649000-review-follow-up-include-working-tree-evidence-in-work-on-no-op-guard
+* REQ-1776670068095886474: add a /upgrade slash command (priority: MEDIUM)
+  - Worktree: feature/REQ-1776670068095886474-add-a-upgrade-slash-command
 
 ## BLOCKED (0)
 
@@ -124,7 +124,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 48
-- Deployed: 39 (81%)
-- Merged (awaiting deploy): 1
+- Deployed: 40 (83%)
+- Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0

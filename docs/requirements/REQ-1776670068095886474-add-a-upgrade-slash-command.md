@@ -1,7 +1,7 @@
 # add a /upgrade slash command
 
 **ID**: REQ-1776670068095886474  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-04-20T07:27:48Z  
 
@@ -64,4 +64,4 @@ None
 * **Linked Worktree**: feature/REQ-1776670068095886474-add-a-upgrade-slash-command
 * **Branch**: feature/REQ-1776670068095886474-add-a-upgrade-slash-command
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes

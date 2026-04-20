@@ -594,20 +594,26 @@
       "id": "REQ-1776670068095886474",
       "name": "add a /upgrade slash command",
       "description": "add a slash command, i.e. /upgrade (check if it conflicts with native VS code or copilot command), the purpose is for user to upgrade their vibe master from the latest github repo, while not affecting any working files of the project being edited by vibe master.",
-      "status": "MERGED",
+      "status": "DEPLOYED",
       "priority": "MEDIUM",
       "notes": "Add a conflict-aware /upgrade slash workflow that executes upgrades in an isolated worktree to protect active project files.",
       "origin": "project",
       "createdAt": "2026-04-20T07:27:48Z",
-      "updatedAt": "2026-04-20T07:48:28Z",
+      "updatedAt": "2026-04-20T07:50:38Z",
       "worktreeId": "feature/REQ-1776670068095886474-add-a-upgrade-slash-command",
       "statusHistory": [
         {
           "from": "IN_PROGRESS",
           "to": "CODE_REVIEW",
           "changedAt": "2026-04-20T07:40:49Z"
+        },
+        {
+          "from": "MERGED",
+          "to": "DEPLOYED",
+          "changedAt": "2026-04-20T07:50:38Z"
         }
-      ]
+      ],
+      "deployedAt": "2026-04-20T07:50:38Z"
     },
     {
       "id": "REQ-1776671113723590863",
