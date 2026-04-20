@@ -1,7 +1,7 @@
 # Review follow-up: include working tree evidence in work-on no-op guard
 
 **ID**: REQ-1776668079797649000  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-04-20T06:54:39Z  
 
@@ -11,9 +11,9 @@ Source: code-review of REQ-1776655671293288695. Severity: HIGH. Evidence: .githu
 
 ## Success Criteria
 
-- [ ] `/work-on` no-op detection evaluates tracked working-tree deltas (`staged` + `unstaged`) in addition to `<base>...HEAD` commit diff evidence.
-- [ ] Untracked files do not count as implementation evidence for no-op detection.
-- [ ] The `/work-on` contract and inline diagnostics explicitly state the tracked-only evidence rule.
+- [x] `/work-on` no-op detection evaluates tracked working-tree deltas (`staged` + `unstaged`) in addition to `<base>...HEAD` commit diff evidence.
+- [x] Untracked files do not count as implementation evidence for no-op detection.
+- [x] The `/work-on` contract and inline diagnostics explicitly state the tracked-only evidence rule.
 
 ## Technical Notes
 
@@ -24,14 +24,11 @@ Source: code-review of REQ-1776655671293288695. Severity: HIGH. Evidence: .githu
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776668079797649000-review-follow-up-include-working-tree-evidence-in-work-on-no-op-guard.md`.
-   - **Summary**: Source: code-review of REQ-1776655671293288695. Severity: HIGH. Evidence: .githu
-   - **Key criteria**: - [ ] `/work-on` no-op detection evaluates tracked working-tree deltas (`staged` + `unstaged`) in ad
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - OQ decision (2026-04-20): only tracked staged/unstaged deltas count for no-op evidence.
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776668079797649000` and verify success criteria are met.
+1. Update step 7 in `.github/prompts/work-on.prompt.md` so no-op evidence is computed from two tracked signals: commit diff (`git -C <worktree-path> diff --name-status <base-branch>...HEAD`) and tracked working-tree/index diff (`git -C <worktree-path> status --porcelain --untracked-files=no`).
+2. Update the constraints and diagnostics text in `.github/prompts/work-on.prompt.md` to state the tracked-only rule explicitly: staged/unstaged tracked deltas count as implementation evidence, untracked files do not.
+3. Add regression coverage in `scripts/check-work-on-no-op-guard.sh` to assert the prompt contains both evidence commands and tracked-only semantics, then make it executable with `chmod +x scripts/check-work-on-no-op-guard.sh`.
+4. Run validation commands from repo root: `scripts/check-work-on-no-op-guard.sh`, `scripts/check-docs-sync.sh`, and `scripts/regenerate-docs.sh`.
+5. Re-open the requirement with `scripts/show-requirement.sh REQ-1776668079797649000`, update Success Criteria checkboxes in this spec file as items are satisfied, and advance with `/work-on REQ-1776668079797649000 CODE_REVIEW` when evidence checks pass.
 
 **Last updated**: 2026-04-20T07:06:08Z
 
