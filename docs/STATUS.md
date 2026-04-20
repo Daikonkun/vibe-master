@@ -2,7 +2,7 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (4)
+## PROPOSED (3)
 
 * REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants (priority: MEDIUM)
   - Worktree: none
@@ -10,11 +10,11 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 * REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against manifest context drift (priority: MEDIUM)
   - Worktree: none
+
+## IN_PROGRESS (1)
+
 * REQ-1776670068095886474: add a /upgrade slash command (priority: MEDIUM)
-  - Worktree: none
-
-## IN_PROGRESS (0)
-
+  - Worktree: feature/REQ-1776670068095886474-add-a-upgrade-slash-command
 
 ## CODE_REVIEW (0)
 
@@ -124,5 +124,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 47
 - Deployed: 39 (82%)
 - Merged (awaiting deploy): 0
-- In Progress: 0
+- In Progress: 1
 - Blocked: 0

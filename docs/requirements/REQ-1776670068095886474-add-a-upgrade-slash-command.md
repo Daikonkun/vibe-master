@@ -1,7 +1,7 @@
 # add a /upgrade slash command
 
 **ID**: REQ-1776670068095886474  
-**Status**: PROPOSED  
+**Status**: IN_PROGRESS  
 **Priority**: MEDIUM  
 **Created**: 2026-04-20T07:27:48Z  
 
@@ -33,6 +33,20 @@ Primary risks and mitigations:
 - Accidental overwrite of local project state: enforce isolated worktree execution and require a clean-state check before apply.
 - Manifest/docs drift after workflow changes: run `scripts/regenerate-docs.sh` after updates and include verification checks in the command output.
 
+
+## Development Plan
+
+1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776670068095886474-add-a-upgrade-slash-command.md`.
+   - **Summary**: add a slash command, i.e. /upgrade (check if it conflicts with native VS code or
+   - **Key criteria**: - [ ] A prompt file exists at `.github/prompts/upgrade.prompt.md`, and invoking `/upgrade` in Copilo
+2. Analyse Technical Notes and identify implementation approach.
+   - **Notes**: Implement `/upgrade` as a new prompt wrapper at `.github/prompts/upgrade.prompt.md`, following the c
+3. Implement changes in the files/scripts referenced by the requirement spec.
+4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
+5. Validate with `./scripts/show-requirement.sh REQ-1776670068095886474` and verify success criteria are met.
+
+**Last updated**: 2026-04-20T07:30:15Z
+
 ## Dependencies
 
 None
@@ -43,7 +57,7 @@ None
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
+* **Linked Worktree**: feature/REQ-1776670068095886474-add-a-upgrade-slash-command
+* **Branch**: feature/REQ-1776670068095886474-add-a-upgrade-slash-command
 * **Merged**: No
 * **Deployed**: No
