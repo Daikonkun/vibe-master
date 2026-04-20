@@ -1,7 +1,7 @@
 # Review follow-up: prevent /upgrade from overwriting manifest history
 
 **ID**: REQ-1776671113723590863  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-04-20T07:45:13Z  
 
