@@ -19,6 +19,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776415552106978163: Review follow-up: document work-on --auto for autonomous pipelines
 * [DEPLOYED] REQ-1776420349206613978: Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts
 * [CODE_REVIEW] REQ-1776655671293288695: Review follow-up: block no-op work-on status advancement without scoped changes
+* [PROPOSED] REQ-1776668079797649000: Review follow-up: include working tree evidence in work-on no-op guard
 
 ## Medium Priority
 * [DEPLOYED] REQ-1774628144: Review follow-up: align slash commands with actual skill invocations
@@ -49,6 +50,7 @@ Timeline view of all requirements organized by status and priority.
 * [PROPOSED] REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants
 * [DEPLOYED] REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work
 * [PROPOSED] REQ-1776657240260646946: Review follow-up: prevent fallback lock-file accumulation for temporary manifests
+* [PROPOSED] REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against manifest context drift
 
 ## Low Priority
 * [DEPLOYED] REQ-1774632175: Review follow-up: polish upgrade guide in README

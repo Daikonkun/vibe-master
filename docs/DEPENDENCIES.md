@@ -94,3 +94,7 @@ REQ-1776655671293288695: Review follow-up: block no-op work-on status advancemen
 REQ-1776657240260646946: Review follow-up: prevent fallback lock-file accumulation for temporary manifests
   └─ Depends on: REQ-1776420349206613978
 
+REQ-1776668079797649000: Review follow-up: include working tree evidence in work-on no-op guard (no dependencies)
+
+REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against manifest context drift (no dependencies)
+
