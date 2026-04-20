@@ -1,7 +1,7 @@
 # Review follow-up: prevent fallback lock-file accumulation for temporary manifests
 
 **ID**: REQ-1776657240260646946  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-04-20T03:54:00Z  
 
@@ -25,16 +25,13 @@ Source: code-review. Severity: MEDIUM. Evidence: scripts/_manifest-lock.sh write
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776657240260646946-review-follow-up-prevent-fallback-lock-file-accumulation-for-temporary-manifests.md`.
-   - **Summary**: Source: code-review. Severity: MEDIUM. Evidence: scripts/_manifest-lock.sh write
-   - **Key criteria**: - [ ] Fallback flock lock files are lifecycle-managed (for example by bounded cleanup, deterministic
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - Open Question decisions captured on 2026-04-20:
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776657240260646946` and verify success criteria are met.
+1. Reproduce the lock-artifact growth under a controlled test lock root by running `MANIFEST_LOCK_DIR="$(mktemp -d "${TMPDIR:-/tmp}/manifest-locks.XXXXXX")" bash scripts/check-manifest-lock-race.sh 1` twice and recording lock-file counts with `find "$MANIFEST_LOCK_DIR" -type f -name '*.lock' | wc -l`.
+2. Implement lifecycle management for fallback flock lock artifacts in `scripts/_manifest-lock.sh` (around `manifest_lock_file_path()` and `with_manifest_lock()`), while preserving both lock exclusivity and exact child exit-code propagation.
+3. Limit behavior changes to regression-tooling temporary manifests by using a test-scoped lock root in `scripts/check-manifest-lock-race.sh` via `MANIFEST_LOCK_DIR`, without altering normal repo-scoped `.manifest-locks` semantics for production manifests.
+4. Extend `scripts/check-manifest-lock-race.sh` assertions to fail when repeated executions show net `.lock` growth in the controlled lock root, while keeping the current concurrent-write and error-propagation checks.
+5. Validate by running `bash scripts/check-manifest-lock-race.sh 1` repeatedly, then run `./scripts/regenerate-docs.sh` and `./scripts/show-requirement.sh REQ-1776657240260646946` to confirm docs/status stay consistent with the updated requirement state.
 
-**Last updated**: 2026-04-20T09:08:22Z
+**Last updated**: 2026-04-20T09:09:12Z
 
 ## Dependencies
 

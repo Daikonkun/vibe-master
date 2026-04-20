@@ -9,13 +9,13 @@ Kanban-style view of all requirements and their current state.
 * REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against manifest context drift (priority: MEDIUM)
   - Worktree: none
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1776657240260646946: Review follow-up: prevent fallback lock-file accumulation for temporary manifests (priority: MEDIUM)
   - Worktree: feature/REQ-1776657240260646946-review-follow-up-prevent-fallback-lock-file-accumulation-for-temporary-manifests
-
-## CODE_REVIEW (0)
-
 
 ## MERGED (0)
 
@@ -128,5 +128,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 49
 - Deployed: 42 (85%)
 - Merged (awaiting deploy): 0
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0
