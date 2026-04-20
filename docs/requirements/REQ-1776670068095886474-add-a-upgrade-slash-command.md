@@ -1,7 +1,7 @@
 # add a /upgrade slash command
 
 **ID**: REQ-1776670068095886474  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-04-20T07:27:48Z  
 
@@ -11,11 +11,11 @@ add a slash command, i.e. /upgrade (check if it conflicts with native VS code or
 
 ## Success Criteria
 
-- [ ] A prompt file exists at `.github/prompts/upgrade.prompt.md`, and invoking `/upgrade` in Copilot Chat follows that prompt workflow.
-- [ ] The `/upgrade` workflow performs a preflight command-name conflict check (project slash commands plus known native/Copilot slash names); if a conflict is detected, it exits with a clear rename recommendation.
-- [ ] Upgrade execution runs in an isolated location (for example, a sibling git worktree) rather than the currently edited project tree, and the active repo remains unchanged after completion (`git status --short` shows no upgrade-induced edits).
-- [ ] The workflow fetches the latest Vibe Master template from GitHub, presents a reviewable diff before applying changes, and requires explicit user confirmation before any replace/merge step.
-- [ ] Usage and safety/rollback guidance for `/upgrade` is documented in `README.md`, including post-upgrade validation via `jq` manifest checks and `scripts/regenerate-docs.sh`.
+- [x] A prompt file exists at `.github/prompts/upgrade.prompt.md`, and invoking `/upgrade` in Copilot Chat follows that prompt workflow.
+- [x] The `/upgrade` workflow performs a preflight command-name conflict check (project slash commands plus known native/Copilot slash names); if a conflict is detected, it exits with a clear rename recommendation.
+- [x] Upgrade execution runs in an isolated location (for example, a sibling git worktree) rather than the currently edited project tree, and the active repo remains unchanged after completion (`git status --short` shows no upgrade-induced edits).
+- [x] The workflow fetches the latest Vibe Master template from GitHub, presents a reviewable diff before applying changes, and requires explicit user confirmation before any replace/merge step.
+- [x] Usage and safety/rollback guidance for `/upgrade` is documented in `README.md`, including post-upgrade validation via `jq` manifest checks and `scripts/regenerate-docs.sh`.
 
 ## Technical Notes
 

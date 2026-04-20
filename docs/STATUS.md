@@ -11,13 +11,13 @@ Kanban-style view of all requirements and their current state.
 * REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against manifest context drift (priority: MEDIUM)
   - Worktree: none
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1776670068095886474: add a /upgrade slash command (priority: MEDIUM)
   - Worktree: feature/REQ-1776670068095886474-add-a-upgrade-slash-command
-
-## CODE_REVIEW (0)
-
 
 ## MERGED (0)
 
@@ -124,5 +124,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 47
 - Deployed: 39 (82%)
 - Merged (awaiting deploy): 0
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0

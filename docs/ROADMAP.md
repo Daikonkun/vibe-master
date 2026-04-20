@@ -51,7 +51,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work
 * [PROPOSED] REQ-1776657240260646946: Review follow-up: prevent fallback lock-file accumulation for temporary manifests
 * [PROPOSED] REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against manifest context drift
-* [IN_PROGRESS] REQ-1776670068095886474: add a /upgrade slash command
+* [CODE_REVIEW] REQ-1776670068095886474: add a /upgrade slash command
 
 ## Low Priority
 * [DEPLOYED] REQ-1774632175: Review follow-up: polish upgrade guide in README
