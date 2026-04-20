@@ -17,6 +17,7 @@ Timeline view of all requirements organized by status and priority.
 * [CANCELLED] REQ-1776409551444648236: Review follow-up: preserve error propagation in mkdir lock fallback
 * [MERGED] REQ-1776415543221953328: Review follow-up: align worktree-merge prompt with strict dirty-tree behavior
 * [PROPOSED] REQ-1776415552106978163: Review follow-up: document work-on --auto for autonomous pipelines
+* [PROPOSED] REQ-1776420349206613978: Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts
 
 ## Medium Priority
 * [DEPLOYED] REQ-1774628144: Review follow-up: align slash commands with actual skill invocations
@@ -45,7 +46,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776394677: Make add-requirement creation and enrichment atomic
 * [DEPLOYED] REQ-1776394692: Make work-on safe for autonomous agent execution
 * [PROPOSED] REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants
-* [CODE_REVIEW] REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work
+* [MERGED] REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work
 
 ## Low Priority
 * [DEPLOYED] REQ-1774632175: Review follow-up: polish upgrade guide in README

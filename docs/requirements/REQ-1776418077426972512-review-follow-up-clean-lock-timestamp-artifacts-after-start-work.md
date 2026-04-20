@@ -1,7 +1,7 @@
 # Review follow-up: clean lock/timestamp artifacts after start-work
 
 **ID**: REQ-1776418077426972512  
-**Status**: CODE_REVIEW  
+**Status**: MERGED  
 **Priority**: MEDIUM  
 **Created**: 2026-04-17T09:27:57Z  
 
@@ -42,5 +42,5 @@ None
 
 * **Linked Worktree**: feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work
 * **Branch**: feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work
-* **Merged**: No
+* **Merged**: Yes
 * **Deployed**: No

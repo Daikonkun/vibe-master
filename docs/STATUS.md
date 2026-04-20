@@ -2,25 +2,27 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (2)
+## PROPOSED (3)
 
 * REQ-1776415552106978163: Review follow-up: document work-on --auto for autonomous pipelines (priority: HIGH)
   - Worktree: none
 * REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants (priority: MEDIUM)
   - Worktree: none
+* REQ-1776420349206613978: Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts (priority: HIGH)
+  - Worktree: none
 
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
 
-* REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work (priority: MEDIUM)
-  - Worktree: feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work
 
-## MERGED (1)
+## MERGED (2)
 
 * REQ-1776415543221953328: Review follow-up: align worktree-merge prompt with strict dirty-tree behavior (priority: HIGH)
   - Worktree: feature/REQ-1776415543221953328-review-follow-up-align-worktree-merge-prompt-with-strict-dirty-tree-behavior
+* REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work (priority: MEDIUM)
+  - Worktree: feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work
 
 ## DEPLOYED (33)
 
@@ -109,8 +111,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 
 ## Stats
-- Total Requirements: 41
-- Deployed: 33 (80%)
-- Merged (awaiting deploy): 1
+- Total Requirements: 42
+- Deployed: 33 (78%)
+- Merged (awaiting deploy): 2
 - In Progress: 0
 - Blocked: 0

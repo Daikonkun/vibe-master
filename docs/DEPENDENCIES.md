@@ -87,3 +87,5 @@ REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycl
 
 REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work (no dependencies)
 
+REQ-1776420349206613978: Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts (no dependencies)
+
