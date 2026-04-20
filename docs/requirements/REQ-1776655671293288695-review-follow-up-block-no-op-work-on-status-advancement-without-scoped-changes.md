@@ -11,17 +11,19 @@ Source: code-review of REQ-1776415552106978163. Severity: HIGH. Evidence: linked
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [ ] `/work-on` blocks status advancement to `CODE_REVIEW` when requirement-scoped diff evidence is empty by default.
+- [ ] A verification-only override path is supported for no-diff transitions, but only when the target transition is to `CODE_REVIEW`.
+- [ ] Override usage requires an explicit reason and persists that reason in requirement artifacts for auditability.
 
 ## Technical Notes
 
-(Add implementation notes here)
+- Product decision (2026-04-20): verification-only requirements may advance with zero diff evidence when explicitly justified.
+- Scope limit (2026-04-20): this exception must be limited to transitions targeting `CODE_REVIEW`; all other transitions keep strict evidence requirements.
+- Suggested implementation path: add a dedicated guarded override in `.github/prompts/work-on.prompt.md` and mirror constraints in user-facing docs.
 
 ## Dependencies
 
-(List other requirement IDs if applicable, e.g., REQ-XXX, REQ-YYY)
+- REQ-1776415552106978163
 
 ## Worktree
 
