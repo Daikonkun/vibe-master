@@ -372,7 +372,7 @@ Slash commands only show up in chat when they are backed by a prompt file or by 
 | `/add-requirement` | Submit new requirement |
 | `/update-requirement <req-id> <new-status> [--force] [--no-refresh]` | Update requirement lifecycle status with transition validation |
 | `/start-work <req-id>` | Begin work (create worktree + set IN_PROGRESS) |
-| `/work-on <req-id> [target-status] [--auto|--no-auto]` | Iteratively implement a requirement until next lifecycle status (trusted orchestrator calls default to auto mode) |
+| `/work-on <req-id> [target-status] [--auto|--no-auto] [--no-diff-reason "reason"]` | Iteratively implement a requirement until next lifecycle status; no-op transitions are blocked by default, and no-diff `CODE_REVIEW` advances require an explicit persisted reason |
 | `/status` | Show current dashboard |
 | `/show-requirement <req-id>` | View requirement details |
 | `/list-requirements [status]` | List requirements by status |

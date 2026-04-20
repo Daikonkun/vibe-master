@@ -11,9 +11,9 @@ Source: code-review of REQ-1776415552106978163. Severity: HIGH. Evidence: linked
 
 ## Success Criteria
 
-- [ ] `/work-on` blocks status advancement to `CODE_REVIEW` when requirement-scoped diff evidence is empty by default.
-- [ ] A verification-only override path is supported for no-diff transitions, but only when the target transition is to `CODE_REVIEW`.
-- [ ] Override usage requires an explicit reason and persists that reason in requirement artifacts for auditability.
+- [x] `/work-on` blocks status advancement to `CODE_REVIEW` when requirement-scoped diff evidence is empty by default.
+- [x] A verification-only override path is supported for no-diff transitions, but only when the target transition is to `CODE_REVIEW`.
+- [x] Override usage requires an explicit reason and persists that reason in requirement artifacts for auditability.
 
 ## Technical Notes
 
@@ -21,20 +21,15 @@ Source: code-review of REQ-1776415552106978163. Severity: HIGH. Evidence: linked
 - Scope limit (2026-04-20): this exception must be limited to transitions targeting `CODE_REVIEW`; all other transitions keep strict evidence requirements.
 - Suggested implementation path: add a dedicated guarded override in `.github/prompts/work-on.prompt.md` and mirror constraints in user-facing docs.
 
-
 ## Development Plan
 
 1. Add a no-op evidence guard to `.github/prompts/work-on.prompt.md` so `IN_PROGRESS -> CODE_REVIEW` is blocked when requirement-scoped diff evidence is empty.
-   - Read the active worktree from `.worktree-manifest.json` and evaluate evidence with `git -C <worktree-path> diff --name-status main...HEAD` before running the status transition step.
-2. Implement a verification-only override in `.github/prompts/work-on.prompt.md` that is valid only when the target transition is `CODE_REVIEW`.
-   - Require an explicit override reason argument and fail with a clear error when reason text is missing.
-3. Persist override audit data in requirement artifacts by extending `scripts/update-requirement-status.sh` and `.requirement-manifest.json`.
-   - Add support for passing the override reason and store it on the requirement record (for example in a status-history/note field) with timestamp and target status.
-4. Mirror the new no-op guard and override contract in user-facing docs by updating `README.md` and `copilot-instructions.md` `/work-on` command guidance.
-5. Validate end-to-end behavior and regenerate docs.
-   - Run `./scripts/show-requirement.sh REQ-1776655671293288695`, run `./scripts/regenerate-docs.sh`, and confirm `docs/STATUS.md` remains consistent after plan and manifest updates.
+2. Add a verification-only override contract in `.github/prompts/work-on.prompt.md` with `--no-diff-reason "<reason>"`, restricted to no-diff transitions targeting `CODE_REVIEW`.
+3. Extend `scripts/update-requirement-status.sh` to accept `--reason "text"` and persist transition audit data in `.requirement-manifest.json`.
+4. Update `.requirement-manifest.schema.json`, `README.md`, and `copilot-instructions.md` so the persisted reason and `/work-on` command contract stay aligned.
+5. Validate with `bash -n scripts/update-requirement-status.sh`, `./scripts/show-requirement.sh REQ-1776655671293288695`, and `./scripts/regenerate-docs.sh`.
 
-**Last updated**: 2026-04-20T04:03:46Z
+**Last updated**: 2026-04-20T06:46:49Z
 
 ## Dependencies
 
@@ -42,7 +37,7 @@ Source: code-review of REQ-1776415552106978163. Severity: HIGH. Evidence: linked
 
 ## Worktree
 
-(Will be populated when work starts: feature/REQ-ID-slug)
+(Implementation tracked in dedicated feature worktree)
 
 ---
 

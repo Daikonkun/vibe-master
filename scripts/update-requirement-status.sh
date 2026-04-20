@@ -7,6 +7,7 @@ REQ_ID="${1:-}"
 NEW_STATUS_RAW="${2:-}"
 FORCE="false"
 REFRESH_DOCS="true"
+REASON=""
 
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
@@ -15,7 +16,7 @@ TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
 usage() {
   cat << 'EOF'
-Usage: ./scripts/update-requirement-status.sh REQ-<timestamp> <new-status> [--force] [--no-refresh]
+Usage: ./scripts/update-requirement-status.sh REQ-<timestamp> <new-status> [--force] [--no-refresh] [--reason "text"]
 
 Valid statuses:
   PROPOSED, IN_PROGRESS, CODE_REVIEW, MERGED, DEPLOYED, BLOCKED, BACKLOG, CANCELLED
@@ -23,6 +24,7 @@ Valid statuses:
 Flags:
   --force       Bypass transition validation
   --no-refresh  Skip docs regeneration
+  --reason      Persist an audit reason for this status transition
 EOF
 }
 
@@ -31,28 +33,46 @@ if [ "$REQ_ID" = "-h" ] || [ "$REQ_ID" = "--help" ]; then
   exit 0
 fi
 
-for arg in "${@:3}"; do
-  case "$arg" in
+if [ -z "$REQ_ID" ] || [ -z "$NEW_STATUS_RAW" ]; then
+  usage >&2
+  exit 1
+fi
+
+shift 2
+while [ "$#" -gt 0 ]; do
+  case "$1" in
     --force)
       FORCE="true"
+      shift
       ;;
     --no-refresh)
       REFRESH_DOCS="false"
+      shift
+      ;;
+    --reason)
+      shift
+      if [ "$#" -eq 0 ]; then
+        echo "Error: --reason requires a value" >&2
+        usage >&2
+        exit 1
+      fi
+      REASON="$1"
+      shift
       ;;
     -h|--help)
       usage
       exit 0
       ;;
     *)
-      echo "Error: Unknown option: $arg" >&2
+      echo "Error: Unknown option: $1" >&2
       usage >&2
       exit 1
       ;;
   esac
 done
 
-if [ -z "$REQ_ID" ] || [ -z "$NEW_STATUS_RAW" ]; then
-  usage >&2
+if [ -n "$REASON" ] && ! printf '%s' "$REASON" | grep -q '[^[:space:]]'; then
+  echo "Error: --reason must not be empty" >&2
   exit 1
 fi
 
@@ -172,12 +192,37 @@ jq_update_manifest_locked "$REQ_MANIFEST" \
       .status = $newStatus
       | .updatedAt = $ts
       | if $newStatus == "DEPLOYED" then .deployedAt = $ts else . end
+      | .statusHistory = ((.statusHistory // []) + [
+          if ($reason | length) > 0 then
+            {
+              "from": $fromStatus,
+              "to": $newStatus,
+              "changedAt": $ts,
+              "reason": $reason
+            }
+          else
+            {
+              "from": $fromStatus,
+              "to": $newStatus,
+              "changedAt": $ts
+            }
+          end
+        ])
+      | if ($reason | length) > 0 then
+          .notes = ((.notes // "") as $existing
+            | (if ($existing | length) > 0 then $existing + "\n" else "" end)
+            + "[" + $ts + "] transition " + $fromStatus + " -> " + $newStatus + " reason: " + $reason)
+        else
+          .
+        end
     else
       .
     end
   )' \
   --arg reqId "$REQ_ID" \
   --arg newStatus "$NEW_STATUS" \
+  --arg fromStatus "$CURRENT_STATUS" \
+  --arg reason "$REASON" \
   --arg ts "$TIMESTAMP"
 
 if [ "$REFRESH_DOCS" = "true" ]; then
@@ -196,6 +241,9 @@ git -C "$PROJECT_ROOT" commit -m "chore: update $REQ_ID status to $NEW_STATUS" -
 
 echo "✅ Updated $REQ_ID"
 echo "   $CURRENT_STATUS -> $NEW_STATUS"
+if [ -n "$REASON" ]; then
+  echo "   Audit reason persisted"
+fi
 if [ "$REFRESH_DOCS" = "true" ]; then
   echo "   Docs regenerated"
 else
