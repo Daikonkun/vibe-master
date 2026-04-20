@@ -89,3 +89,5 @@ REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after 
 
 REQ-1776420349206613978: Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts (no dependencies)
 
+REQ-1776655671293288695: Review follow-up: block no-op work-on status advancement without scoped changes (no dependencies)
+

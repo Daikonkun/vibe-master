@@ -46,9 +46,10 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1776415557577295081 | Review follow-up: enforce requirement-worktree lifecycle invariants | PROPOSED | MEDIUM | — | 2026-04-17 | 2026-04-17 |
 | REQ-1776418077426972512 | Review follow-up: clean lock/timestamp artifacts after start-work | MERGED | MEDIUM | feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work | 2026-04-17 | 2026-04-20 |
 | REQ-1776420349206613978 | Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts | PROPOSED | HIGH | — | 2026-04-17 | 2026-04-17 |
+| REQ-1776655671293288695 | Review follow-up: block no-op work-on status advancement without scoped changes | PROPOSED | HIGH | — | 2026-04-20 | 2026-04-20 |
 
 ## Status Breakdown
-- **Proposed**: 2
+- **Proposed**: 3
 - **In Progress**: 0
 - **Code Review**: 1
 - **Merged**: 2
@@ -62,6 +63,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-20T03:07:12Z
+* Last updated: 2026-04-20T03:27:51Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`
