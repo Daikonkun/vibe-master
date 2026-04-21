@@ -11,12 +11,10 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (1)
+## MERGED (0)
 
-* REQ-1776738115172246724: Review follow-up: define true canonical manifest root for /work-on (priority: HIGH)
-  - Worktree: feature/REQ-1776738115172246724-review-follow-up-define-true-canonical-manifest-root-for-work-on
 
-## DEPLOYED (45)
+## DEPLOYED (46)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -108,6 +106,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1776671113723590863-review-follow-up-prevent-upgrade-from-overwriting-manifest-history
 * REQ-1776672458915568759: Review follow-up: ensure /upgrade merges manifest metadata when only manifests differ (priority: HIGH)
   - Worktree: feature/REQ-1776672458915568759-review-follow-up-ensure-upgrade-merges-manifest-metadata-when-only-manifests-differ
+* REQ-1776738115172246724: Review follow-up: define true canonical manifest root for /work-on (priority: HIGH)
+  - Worktree: feature/REQ-1776738115172246724-review-follow-up-define-true-canonical-manifest-root-for-work-on
 
 ## BLOCKED (0)
 
@@ -130,7 +130,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 51
-- Deployed: 45 (88%)
-- Merged (awaiting deploy): 1
+- Deployed: 46 (90%)
+- Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0

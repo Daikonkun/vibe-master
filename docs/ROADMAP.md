@@ -22,7 +22,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776668079797649000: Review follow-up: include working tree evidence in work-on no-op guard
 * [DEPLOYED] REQ-1776671113723590863: Review follow-up: prevent /upgrade from overwriting manifest history
 * [DEPLOYED] REQ-1776672458915568759: Review follow-up: ensure /upgrade merges manifest metadata when only manifests differ
-* [MERGED] REQ-1776738115172246724: Review follow-up: define true canonical manifest root for /work-on
+* [DEPLOYED] REQ-1776738115172246724: Review follow-up: define true canonical manifest root for /work-on
 
 ## Medium Priority
 * [DEPLOYED] REQ-1774628144: Review follow-up: align slash commands with actual skill invocations

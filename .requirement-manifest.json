@@ -740,19 +740,25 @@
       "id": "REQ-1776738115172246724",
       "name": "Review follow-up: define true canonical manifest root for /work-on",
       "description": "Source: code-review of REQ-1776668089944983961. Severity: HIGH. Evidence: .github/prompts/work-on.prompt.md now says to resolve the canonical tracker root via git rev-parse --show-toplevel, but in a linked feature worktree this returns that worktree root (which may contain stale local manifests), not the tracker source-of-truth root. Required outcome: update /work-on instructions and checks to derive canonical manifest root independently of current worktree, then keep fallback resolution and diagnostics anchored to that canonical source.",
-      "status": "MERGED",
+      "status": "DEPLOYED",
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-21T02:21:55Z",
-      "updatedAt": "2026-04-21T02:29:24Z",
+      "updatedAt": "2026-04-21T02:31:08Z",
       "worktreeId": "feature/REQ-1776738115172246724-review-follow-up-define-true-canonical-manifest-root-for-work-on",
       "statusHistory": [
         {
           "from": "IN_PROGRESS",
           "to": "CODE_REVIEW",
           "changedAt": "2026-04-21T02:27:11Z"
+        },
+        {
+          "from": "MERGED",
+          "to": "DEPLOYED",
+          "changedAt": "2026-04-21T02:31:08Z"
         }
-      ]
+      ],
+      "deployedAt": "2026-04-21T02:31:08Z"
     }
   ],
   "requiresDeployment": true
