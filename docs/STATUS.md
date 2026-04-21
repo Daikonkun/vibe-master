@@ -2,13 +2,13 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (1)
+## PROPOSED (0)
+
+
+## IN_PROGRESS (1)
 
 * REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against manifest context drift (priority: MEDIUM)
-  - Worktree: none
-
-## IN_PROGRESS (0)
-
+  - Worktree: feature/REQ-1776668089944983961-review-follow-up-harden-work-on-no-op-guard-against-manifest-context-drift
 
 ## CODE_REVIEW (0)
 
@@ -130,5 +130,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 50
 - Deployed: 44 (88%)
 - Merged (awaiting deploy): 0
-- In Progress: 0
+- In Progress: 1
 - Blocked: 0
