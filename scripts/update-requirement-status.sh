@@ -11,6 +11,7 @@ REASON=""
 
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
+WORKTREE_MANIFEST="$PROJECT_ROOT/.worktree-manifest.json"
 source "$PROJECT_ROOT/scripts/_manifest-lock.sh"
 TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
@@ -160,6 +161,135 @@ can_transition() {
   return 1
 }
 
+is_terminal_status() {
+  case "$1" in
+    MERGED|DEPLOYED|CANCELLED)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+status_update_locked() {
+  local enforce_terminal_invariant="$1"
+  local current_status_locked
+  local created_at
+  local req_worktree_id
+  local wt_status
+  local wt_links_requirement
+  local active_reverse_worktrees
+  local active_reverse_worktrees_flat
+
+  current_status_locked="$(jq -r --arg reqId "$REQ_ID" '
+    .requirements[] | select(.id == $reqId) | .status
+  ' "$REQ_MANIFEST")"
+
+  if [ -z "$current_status_locked" ] || [ "$current_status_locked" = "null" ]; then
+    echo "Error: Requirement not found: $REQ_ID" >&2
+    return 1
+  fi
+
+  if [ "$current_status_locked" != "$CURRENT_STATUS" ]; then
+    echo "Error: Requirement $REQ_ID changed concurrently ($CURRENT_STATUS -> $current_status_locked). Retry." >&2
+    return 1
+  fi
+
+  created_at="$(jq -r --arg reqId "$REQ_ID" '.requirements[] | select(.id == $reqId) | .createdAt' "$REQ_MANIFEST")"
+  if [ -n "$created_at" ] && [ "$created_at" != "null" ] && [[ "$TIMESTAMP" < "$created_at" ]]; then
+    echo "Error: updatedAt ($TIMESTAMP) would be before createdAt ($created_at)" >&2
+    return 1
+  fi
+
+  if [ "$enforce_terminal_invariant" = "true" ]; then
+    active_reverse_worktrees="$(jq -r --arg reqId "$REQ_ID" '
+      .worktrees[]?
+      | select(.status == "ACTIVE")
+      | select(any(.requirementIds[]?; . == $reqId))
+      | .id
+    ' "$WORKTREE_MANIFEST")"
+
+    if [ -n "$active_reverse_worktrees" ]; then
+      active_reverse_worktrees_flat="$(printf '%s\n' "$active_reverse_worktrees" | tr '\n' ' ' | xargs)"
+      echo "Error: Cannot transition $REQ_ID to $NEW_STATUS while ACTIVE worktree link(s) exist: $active_reverse_worktrees_flat" >&2
+      echo "Resolve the worktree first (for example via scripts/worktree-merge.sh) or repair historical drift with ./scripts/reconcile-lifecycle-invariants.sh --apply." >&2
+      return 1
+    fi
+
+    req_worktree_id="$(jq -r --arg reqId "$REQ_ID" '
+      .requirements[] | select(.id == $reqId) | .worktreeId // empty
+    ' "$REQ_MANIFEST")"
+
+    if [ -n "$req_worktree_id" ]; then
+      wt_status="$(jq -r --arg wtId "$req_worktree_id" '
+        .worktrees[]? | select(.id == $wtId) | .status // empty
+      ' "$WORKTREE_MANIFEST" | head -1)"
+
+      if [ -z "$wt_status" ]; then
+        echo "Error: Requirement $REQ_ID references worktree $req_worktree_id, but no matching entry exists in .worktree-manifest.json." >&2
+        echo "Run ./scripts/reconcile-lifecycle-invariants.sh --apply to repair manifest drift." >&2
+        return 1
+      fi
+
+      wt_links_requirement="$(jq -r --arg wtId "$req_worktree_id" --arg reqId "$REQ_ID" '
+        .worktrees[]? | select(.id == $wtId) | any(.requirementIds[]?; . == $reqId)
+      ' "$WORKTREE_MANIFEST" | head -1)"
+
+      if [ "$wt_links_requirement" != "true" ]; then
+        echo "Error: Worktree $req_worktree_id is not linked back to requirement $REQ_ID in .worktree-manifest.json." >&2
+        echo "Run ./scripts/reconcile-lifecycle-invariants.sh --apply to repair manifest drift." >&2
+        return 1
+      fi
+
+      if [ "$wt_status" = "ACTIVE" ]; then
+        echo "Error: Cannot transition $REQ_ID to $NEW_STATUS while linked worktree remains ACTIVE: $req_worktree_id" >&2
+        echo "Resolve the worktree first (for example via scripts/worktree-merge.sh) or repair historical drift with ./scripts/reconcile-lifecycle-invariants.sh --apply." >&2
+        return 1
+      fi
+    fi
+  fi
+
+  _jq_update_manifest_locked_inner "$REQ_MANIFEST" \
+    '.requirements |= map(
+      if .id == $reqId then
+        .status = $newStatus
+        | .updatedAt = $ts
+        | if $newStatus == "DEPLOYED" then .deployedAt = $ts else . end
+        | .statusHistory = ((.statusHistory // []) + [
+            if ($reason | length) > 0 then
+              {
+                "from": $fromStatus,
+                "to": $newStatus,
+                "changedAt": $ts,
+                "reason": $reason
+              }
+            else
+              {
+                "from": $fromStatus,
+                "to": $newStatus,
+                "changedAt": $ts
+              }
+            end
+          ])
+        | if ($reason | length) > 0 then
+            .notes = ((.notes // "") as $existing
+              | (if ($existing | length) > 0 then $existing + "\n" else "" end)
+              + "[" + $ts + "] transition " + $fromStatus + " -> " + $newStatus + " reason: " + $reason)
+          else
+            .
+          end
+      else
+        .
+      end
+    )' \
+    --arg reqId "$REQ_ID" \
+    --arg newStatus "$NEW_STATUS" \
+    --arg fromStatus "$CURRENT_STATUS" \
+    --arg reason "$REASON" \
+    --arg ts "$TIMESTAMP"
+}
+
 if [ "$FORCE" != "true" ] && ! can_transition "$CURRENT_STATUS" "$NEW_STATUS"; then
   echo "Error: Invalid transition: $CURRENT_STATUS -> $NEW_STATUS" >&2
   echo "Allowed from $CURRENT_STATUS: $(allowed_transitions "$CURRENT_STATUS")" >&2
@@ -179,51 +309,20 @@ if [ "$CURRENT_STATUS" = "$NEW_STATUS" ]; then
   exit 0
 fi
 
-# Validate updatedAt >= createdAt
-CREATED_AT="$(jq -r --arg reqId "$REQ_ID" '.requirements[] | select(.id == $reqId) | .createdAt' "$REQ_MANIFEST")"
-if [ -n "$CREATED_AT" ] && [ "$CREATED_AT" != "null" ] && [[ "$TIMESTAMP" < "$CREATED_AT" ]]; then
-  echo "Error: updatedAt ($TIMESTAMP) would be before createdAt ($CREATED_AT)" >&2
-  exit 1
+ENFORCE_TERMINAL_INVARIANT="false"
+if [ "$FORCE" != "true" ] && is_terminal_status "$NEW_STATUS"; then
+  ENFORCE_TERMINAL_INVARIANT="true"
+  if [ ! -f "$WORKTREE_MANIFEST" ]; then
+    echo "Error: .worktree-manifest.json not found" >&2
+    exit 1
+  fi
 fi
 
-jq_update_manifest_locked "$REQ_MANIFEST" \
-  '.requirements |= map(
-    if .id == $reqId then
-      .status = $newStatus
-      | .updatedAt = $ts
-      | if $newStatus == "DEPLOYED" then .deployedAt = $ts else . end
-      | .statusHistory = ((.statusHistory // []) + [
-          if ($reason | length) > 0 then
-            {
-              "from": $fromStatus,
-              "to": $newStatus,
-              "changedAt": $ts,
-              "reason": $reason
-            }
-          else
-            {
-              "from": $fromStatus,
-              "to": $newStatus,
-              "changedAt": $ts
-            }
-          end
-        ])
-      | if ($reason | length) > 0 then
-          .notes = ((.notes // "") as $existing
-            | (if ($existing | length) > 0 then $existing + "\n" else "" end)
-            + "[" + $ts + "] transition " + $fromStatus + " -> " + $newStatus + " reason: " + $reason)
-        else
-          .
-        end
-    else
-      .
-    end
-  )' \
-  --arg reqId "$REQ_ID" \
-  --arg newStatus "$NEW_STATUS" \
-  --arg fromStatus "$CURRENT_STATUS" \
-  --arg reason "$REASON" \
-  --arg ts "$TIMESTAMP"
+if [ "$ENFORCE_TERMINAL_INVARIANT" = "true" ]; then
+  with_manifest_locks "$REQ_MANIFEST" "$WORKTREE_MANIFEST" status_update_locked "true"
+else
+  with_manifest_lock "$REQ_MANIFEST" status_update_locked "false"
+fi
 
 if [ "$REFRESH_DOCS" = "true" ]; then
   "$PROJECT_ROOT/scripts/regenerate-docs.sh" >/dev/null

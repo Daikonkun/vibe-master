@@ -175,3 +175,45 @@ jq_update_manifest_locked() {
 
   with_manifest_lock "$manifest_file" _jq_update_manifest_locked_inner "$manifest_file" "$jq_filter" "$@"
 }
+
+_with_manifest_locks_inner() {
+  local first_manifest="$1"
+  local second_manifest="$2"
+  shift 2
+
+  with_manifest_lock "$first_manifest" with_manifest_lock "$second_manifest" "$@"
+}
+
+with_manifest_locks() {
+  local manifest_a="${1:-}"
+  local manifest_b="${2:-}"
+  shift 2 || true
+
+  if [ -z "$manifest_a" ] || [ -z "$manifest_b" ] || [ "$#" -eq 0 ]; then
+    echo "Usage: with_manifest_locks <manifest-a> <manifest-b> <command> [args...]" >&2
+    return 1
+  fi
+
+  local normalized_a
+  local normalized_b
+  local first_manifest
+  local second_manifest
+
+  normalized_a="$(manifest_lock_normalize_path "$manifest_a")" || return 1
+  normalized_b="$(manifest_lock_normalize_path "$manifest_b")" || return 1
+
+  if [ "$normalized_a" = "$normalized_b" ]; then
+    with_manifest_lock "$normalized_a" "$@"
+    return $?
+  fi
+
+  if [ "$normalized_a" \< "$normalized_b" ]; then
+    first_manifest="$normalized_a"
+    second_manifest="$normalized_b"
+  else
+    first_manifest="$normalized_b"
+    second_manifest="$normalized_a"
+  fi
+
+  _with_manifest_locks_inner "$first_manifest" "$second_manifest" "$@"
+}
