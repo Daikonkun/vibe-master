@@ -1,6 +1,6 @@
 #!/bin/bash
-# Initialize a new vibe project by clearing ALL existing REQs
-# so the project starts with a clean slate.
+# Initialize a new vibe project by clearing only Vibe Master template REQs
+# while preserving project-owned REQs.
 
 set -e
 
@@ -40,28 +40,42 @@ chmod +x scripts/*.sh
 # Create docs/requirements directory
 mkdir -p docs/requirements
 
-# --- Clear ALL REQs ---
-# The .vibe-master-source guard above prevents this from running on Vibe Master itself.
-# On a cloned/copied repo, all REQs (regardless of origin) are cleared for a fresh start.
+# --- Clear only Vibe Master template REQs ---
+# Keep project-owned REQs (origin: "project" or missing/null origin).
 
 if [ -f "$REQ_MANIFEST" ]; then
-  # Count existing REQs for reporting
-  TOTAL=$(jq '[.requirements[]] | length' "$REQ_MANIFEST" 2>/dev/null || echo 0)
+  # Count existing and target REQs for reporting
+  TOTAL=$(jq '[.requirements[]?] | length' "$REQ_MANIFEST" 2>/dev/null || echo 0)
+  VM_COUNT=$(jq '[.requirements[]? | select(.origin == "vibe-master")] | length' "$REQ_MANIFEST" 2>/dev/null || echo 0)
 
-  # Remove all REQ-* spec files, preserving EXAMPLE-REQ-* templates
+  # Remove REQ-* spec files only for Vibe Master REQ IDs
+  VM_IDS=$(jq -r '.requirements[]? | select(.origin == "vibe-master") | .id' "$REQ_MANIFEST" 2>/dev/null || true)
   CLEANED=0
-  for f in "$PROJECT_ROOT"/docs/requirements/REQ-*.md; do
-    [ -f "$f" ] || continue
-    rm "$f"
-    CLEANED=$((CLEANED + 1))
-  done
+  if [ -n "$VM_IDS" ]; then
+    while IFS= read -r req_id; do
+      [ -n "$req_id" ] || continue
+      for f in "$PROJECT_ROOT"/docs/requirements/"$req_id"-*.md; do
+        [ -f "$f" ] || continue
+        rm "$f"
+        CLEANED=$((CLEANED + 1))
+      done
+    done << EOF
+$VM_IDS
+EOF
+  fi
 
-  echo "🧹 Cleared $CLEANED REQ spec file(s) (from $TOTAL total requirements)"
+  PRESERVED=$((TOTAL - VM_COUNT))
+  echo "🧹 Cleared $VM_COUNT Vibe Master requirement(s) and removed $CLEANED matching spec file(s)"
+  echo "📌 Preserved $PRESERVED project-owned requirement(s)"
 
-  # Empty the requirements array and set the new project name
+  if [ "$VM_COUNT" -eq 0 ]; then
+    echo "ℹ️  No Vibe Master requirements found to clear; project is already initialized."
+  fi
+
+  # Remove only Vibe Master template REQs and set the new project name
   jq_update_manifest_locked "$REQ_MANIFEST" \
     '.projectName = $name |
-     .requirements = []' \
+     .requirements = [.requirements[]? | select(.origin != "vibe-master")]' \
     --arg name "$PROJECT_NAME"
 else
   echo "📋 Initializing requirement manifest..."
@@ -81,7 +95,7 @@ JSON
   jq_update_manifest_locked "$REQ_MANIFEST" '.projectName = $name' --arg name "$PROJECT_NAME"
 fi
 
-# Reset worktree manifest — all REQs are cleared, so all worktree entries are stale
+# Reset worktree manifest so worktree state starts clean after init
 echo "📋 Resetting worktree manifest..."
 with_manifest_lock "$WORKTREE_MANIFEST" bash -c '
   manifest="$1"
