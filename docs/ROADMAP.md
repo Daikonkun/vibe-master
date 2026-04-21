@@ -22,6 +22,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776668079797649000: Review follow-up: include working tree evidence in work-on no-op guard
 * [DEPLOYED] REQ-1776671113723590863: Review follow-up: prevent /upgrade from overwriting manifest history
 * [DEPLOYED] REQ-1776672458915568759: Review follow-up: ensure /upgrade merges manifest metadata when only manifests differ
+* [PROPOSED] REQ-1776738115172246724: Review follow-up: define true canonical manifest root for /work-on
 
 ## Medium Priority
 * [DEPLOYED] REQ-1774628144: Review follow-up: align slash commands with actual skill invocations
@@ -52,7 +53,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants
 * [DEPLOYED] REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work
 * [DEPLOYED] REQ-1776657240260646946: Review follow-up: prevent fallback lock-file accumulation for temporary manifests
-* [CODE_REVIEW] REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against manifest context drift
+* [MERGED] REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against manifest context drift
 * [DEPLOYED] REQ-1776670068095886474: add a /upgrade slash command
 * [CANCELLED] REQ-1776677538888266188: Review follow-up: tighten lock-growth assertion for repeated lock-race runs
 

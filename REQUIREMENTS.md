@@ -49,17 +49,18 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1776655671293288695 | Review follow-up: block no-op work-on status advancement without scoped changes | DEPLOYED | HIGH | feature/REQ-1776655671293288695-review-follow-up-block-no-op-work-on-status-advancement-without-scoped-changes | 2026-04-20 | 2026-04-20 |
 | REQ-1776657240260646946 | Review follow-up: prevent fallback lock-file accumulation for temporary manifests | DEPLOYED | MEDIUM | feature/REQ-1776657240260646946-review-follow-up-prevent-fallback-lock-file-accumulation-for-temporary-manifests | 2026-04-20 | 2026-04-20 |
 | REQ-1776668079797649000 | Review follow-up: include working tree evidence in work-on no-op guard | DEPLOYED | HIGH | feature/REQ-1776668079797649000-review-follow-up-include-working-tree-evidence-in-work-on-no-op-guard | 2026-04-20 | 2026-04-20 |
-| REQ-1776668089944983961 | Review follow-up: harden work-on no-op guard against manifest context drift | CODE_REVIEW | MEDIUM | feature/REQ-1776668089944983961-review-follow-up-harden-work-on-no-op-guard-against-manifest-context-drift | 2026-04-20 | 2026-04-21 |
+| REQ-1776668089944983961 | Review follow-up: harden work-on no-op guard against manifest context drift | MERGED | MEDIUM | feature/REQ-1776668089944983961-review-follow-up-harden-work-on-no-op-guard-against-manifest-context-drift | 2026-04-20 | 2026-04-21 |
 | REQ-1776670068095886474 | add a /upgrade slash command | DEPLOYED | MEDIUM | feature/REQ-1776670068095886474-add-a-upgrade-slash-command | 2026-04-20 | 2026-04-20 |
 | REQ-1776671113723590863 | Review follow-up: prevent /upgrade from overwriting manifest history | DEPLOYED | HIGH | feature/REQ-1776671113723590863-review-follow-up-prevent-upgrade-from-overwriting-manifest-history | 2026-04-20 | 2026-04-20 |
 | REQ-1776672458915568759 | Review follow-up: ensure /upgrade merges manifest metadata when only manifests differ | DEPLOYED | HIGH | feature/REQ-1776672458915568759-review-follow-up-ensure-upgrade-merges-manifest-metadata-when-only-manifests-differ | 2026-04-20 | 2026-04-20 |
 | REQ-1776677538888266188 | Review follow-up: tighten lock-growth assertion for repeated lock-race runs | CANCELLED | MEDIUM | — | 2026-04-20 | 2026-04-20 |
+| REQ-1776738115172246724 | Review follow-up: define true canonical manifest root for /work-on | PROPOSED | HIGH | — | 2026-04-21 | 2026-04-21 |
 
 ## Status Breakdown
-- **Proposed**: 0
+- **Proposed**: 1
 - **In Progress**: 0
-- **Code Review**: 1
-- **Merged**: 0
+- **Code Review**: 0
+- **Merged**: 1
 - **Deployed**: 44
 - **Blocked**: 0
 - **Backlog**: 0
@@ -70,6 +71,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-21T02:19:07Z
+* Last updated: 2026-04-21T02:24:59Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

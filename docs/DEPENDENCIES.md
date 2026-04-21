@@ -106,3 +106,5 @@ REQ-1776672458915568759: Review follow-up: ensure /upgrade merges manifest metad
 
 REQ-1776677538888266188: Review follow-up: tighten lock-growth assertion for repeated lock-race runs (no dependencies)
 
+REQ-1776738115172246724: Review follow-up: define true canonical manifest root for /work-on (no dependencies)
+

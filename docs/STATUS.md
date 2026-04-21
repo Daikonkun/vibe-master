@@ -2,19 +2,21 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (0)
+## PROPOSED (1)
 
+* REQ-1776738115172246724: Review follow-up: define true canonical manifest root for /work-on (priority: HIGH)
+  - Worktree: none
 
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
+
+
+## MERGED (1)
 
 * REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against manifest context drift (priority: MEDIUM)
   - Worktree: feature/REQ-1776668089944983961-review-follow-up-harden-work-on-no-op-guard-against-manifest-context-drift
-
-## MERGED (0)
-
 
 ## DEPLOYED (44)
 
@@ -127,8 +129,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 
 ## Stats
-- Total Requirements: 50
-- Deployed: 44 (88%)
-- Merged (awaiting deploy): 0
+- Total Requirements: 51
+- Deployed: 44 (86%)
+- Merged (awaiting deploy): 1
 - In Progress: 0
 - Blocked: 0
