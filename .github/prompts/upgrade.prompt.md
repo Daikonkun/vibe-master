@@ -9,7 +9,7 @@ Upgrade Vibe Master safely without touching the currently edited project tree.
 
 Workflow:
 1. Parse optional arguments:
-   - `--template-repo <github-url>`: template source repo (defaults to `VIBE_MASTER_TEMPLATE_REPO` or `origin`)
+   - `--template-repo <github-url>`: template source repo (defaults to `VIBE_MASTER_TEMPLATE_REPO`, then GitHub `origin`, then built-in Vibe Master template fallback)
    - `--base-branch <branch>`: base branch for upgrade worktree (default: `main`)
    - `--apply`: apply template files after preview diff (requires explicit confirmation)
 2. Run `scripts/upgrade.sh --command-name upgrade` with parsed arguments.

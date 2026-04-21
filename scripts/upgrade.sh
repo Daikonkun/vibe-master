@@ -13,6 +13,7 @@ CHECK_ONLY="false"
 APPLY="false"
 ASSUME_YES="false"
 TEMPLATE_REPO="${VIBE_MASTER_TEMPLATE_REPO:-}"
+DEFAULT_TEMPLATE_REPO="${VIBE_MASTER_DEFAULT_TEMPLATE_REPO:-https://github.com/Daikonkun/vibe-master.git}"
 
 UPGRADE_STAGING=""
 TEMPLATE_DIR=""
@@ -34,7 +35,9 @@ Safely upgrade from the latest Vibe Master GitHub template in an isolated worktr
 
 Options:
   --template-repo <url>  GitHub URL for the template source repository.
-                         Default: $VIBE_MASTER_TEMPLATE_REPO or origin remote URL.
+                         Default resolution order: --template-repo, VIBE_MASTER_TEMPLATE_REPO,
+                         origin remote URL (GitHub), then VIBE_MASTER_DEFAULT_TEMPLATE_REPO
+                         (or built-in fallback: https://github.com/Daikonkun/vibe-master.git).
   --base-branch <name>   Base branch for upgrade worktree creation (default: main)
   --worktree-path <path> Upgrade worktree path (default: ../upgrade/vibe-master-latest)
   --branch-name <name>   Upgrade branch name (default: chore/vibe-master-upgrade)
@@ -122,8 +125,8 @@ resolve_template_repo() {
   fi
 
   if [ -z "$TEMPLATE_REPO" ]; then
-    echo "Error: No template repo configured. Provide --template-repo <https://github.com/...> or set VIBE_MASTER_TEMPLATE_REPO." >&2
-    return 1
+    TEMPLATE_REPO="$DEFAULT_TEMPLATE_REPO"
+    echo "ℹ️  No explicit template repo configured; using fallback: $TEMPLATE_REPO"
   fi
 
   if ! echo "$TEMPLATE_REPO" | grep -Eq 'github\.com'; then
