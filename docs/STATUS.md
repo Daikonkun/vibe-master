@@ -2,13 +2,13 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (1)
+## PROPOSED (0)
+
+
+## IN_PROGRESS (1)
 
 * REQ-1776738115172246724: Review follow-up: define true canonical manifest root for /work-on (priority: HIGH)
-  - Worktree: none
-
-## IN_PROGRESS (0)
-
+  - Worktree: feature/REQ-1776738115172246724-review-follow-up-define-true-canonical-manifest-root-for-work-on
 
 ## CODE_REVIEW (0)
 
@@ -132,5 +132,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 51
 - Deployed: 44 (86%)
 - Merged (awaiting deploy): 1
-- In Progress: 0
+- In Progress: 1
 - Blocked: 0

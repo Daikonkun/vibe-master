@@ -517,6 +517,17 @@
       "createdAt": "2026-04-21T02:15:00Z",
       "status": "MERGED",
       "mergedAt": "2026-04-21T02:24:59Z"
+    },
+    {
+      "id": "feature/REQ-1776738115172246724-review-follow-up-define-true-canonical-manifest-root-for-work-on",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1776738115172246724-review-follow-up-define-true-canonical-manifest-root-for-work-on",
+      "branch": "feature/REQ-1776738115172246724-review-follow-up-define-true-canonical-manifest-root-for-work-on",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1776738115172246724"
+      ],
+      "createdAt": "2026-04-21T02:25:04Z",
+      "status": "ACTIVE"
     }
   ]
 }
