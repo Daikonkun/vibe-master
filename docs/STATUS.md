@@ -11,14 +11,12 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (2)
+## MERGED (1)
 
-* REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against manifest context drift (priority: MEDIUM)
-  - Worktree: feature/REQ-1776668089944983961-review-follow-up-harden-work-on-no-op-guard-against-manifest-context-drift
 * REQ-1776738115172246724: Review follow-up: define true canonical manifest root for /work-on (priority: HIGH)
   - Worktree: feature/REQ-1776738115172246724-review-follow-up-define-true-canonical-manifest-root-for-work-on
 
-## DEPLOYED (44)
+## DEPLOYED (45)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -102,6 +100,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1776657240260646946-review-follow-up-prevent-fallback-lock-file-accumulation-for-temporary-manifests
 * REQ-1776668079797649000: Review follow-up: include working tree evidence in work-on no-op guard (priority: HIGH)
   - Worktree: feature/REQ-1776668079797649000-review-follow-up-include-working-tree-evidence-in-work-on-no-op-guard
+* REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against manifest context drift (priority: MEDIUM)
+  - Worktree: feature/REQ-1776668089944983961-review-follow-up-harden-work-on-no-op-guard-against-manifest-context-drift
 * REQ-1776670068095886474: add a /upgrade slash command (priority: MEDIUM)
   - Worktree: feature/REQ-1776670068095886474-add-a-upgrade-slash-command
 * REQ-1776671113723590863: Review follow-up: prevent /upgrade from overwriting manifest history (priority: HIGH)
@@ -130,7 +130,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 51
-- Deployed: 44 (86%)
-- Merged (awaiting deploy): 2
+- Deployed: 45 (88%)
+- Merged (awaiting deploy): 1
 - In Progress: 0
 - Blocked: 0
