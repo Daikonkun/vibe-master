@@ -612,12 +612,19 @@
       "id": "REQ-1776668089944983961",
       "name": "Review follow-up: harden work-on no-op guard against manifest context drift",
       "description": "Source: code-review of REQ-1776655671293288695. Severity: MEDIUM. Evidence: .github/prompts/work-on.prompt.md step 7 requires resolving active worktree path from .worktree-manifest.json, but linked feature worktrees can have stale local manifests with no self-entry, causing guard resolution failures in feature-worktree execution contexts. Required outcome: define canonical manifest lookup for /work-on and add a fallback resolver based on current repository path/branch when local worktree mapping is absent, with clear diagnostics.",
-      "status": "IN_PROGRESS",
+      "status": "CODE_REVIEW",
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-20T06:54:49Z",
-      "updatedAt": "2026-04-21T02:15:00Z",
-      "worktreeId": "feature/REQ-1776668089944983961-review-follow-up-harden-work-on-no-op-guard-against-manifest-context-drift"
+      "updatedAt": "2026-04-21T02:19:07Z",
+      "worktreeId": "feature/REQ-1776668089944983961-review-follow-up-harden-work-on-no-op-guard-against-manifest-context-drift",
+      "statusHistory": [
+        {
+          "from": "IN_PROGRESS",
+          "to": "CODE_REVIEW",
+          "changedAt": "2026-04-21T02:19:07Z"
+        }
+      ]
     },
     {
       "id": "REQ-1776670068095886474",
