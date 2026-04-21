@@ -28,6 +28,11 @@ assert_contains "git -C <worktree-path> diff --name-status <base-branch>...HEAD"
 assert_contains "git -C <worktree-path> status --porcelain --untracked-files=no" "tracked working-tree no-op evidence command"
 assert_contains "Treat evidence as present when either signal is non-empty." "dual-signal no-op evidence rule"
 assert_contains "No-op evidence is tracked-only: staged and unstaged tracked deltas count, while untracked files are excluded." "tracked-only evidence constraint"
+assert_contains "git rev-parse --show-toplevel" "canonical root resolver"
+assert_contains "<canonical-root>/.worktree-manifest.json" "canonical manifest lookup"
+assert_contains "git rev-parse --abbrev-ref HEAD" "fallback branch identity resolver"
+assert_contains "./scripts/start-work.sh <REQ-ID>" "actionable recovery command for missing mapping"
+assert_contains "./scripts/worktree-list.sh" "actionable recovery command for worktree inspection"
 
 if [ "$MISSING" -ne 0 ]; then
   echo "FAIL: work-on no-op guard contract is incomplete." >&2

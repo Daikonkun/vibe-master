@@ -26,7 +26,7 @@ Workflow:
    - CANCELLED → terminal
    If the current status is DEPLOYED or CANCELLED, report that the requirement is in a terminal state and stop.
    If the current status is MERGED **and** the requirement's `requiresDeployment` flag is `false` in `.requirement-manifest.json`, treat MERGED as a terminal state (no further transition) and stop.
-4. **Check worktree**: Read `.worktree-manifest.json` and verify the requirement has an active worktree.
+4. **Check worktree using canonical manifests**: Resolve the canonical tracker root first (`git rev-parse --show-toplevel`), then read `<canonical-root>/.worktree-manifest.json` and verify the requirement has an active worktree.
    - If the requirement is PROPOSED (or BACKLOG) and has no worktree, perform a race-safe bootstrap:
      - Re-read `.requirement-manifest.json` and `.worktree-manifest.json` immediately before invoking `/start-work`.
      - If a worktree now exists for the requirement, skip `/start-work` and continue from step 5.
@@ -40,7 +40,9 @@ Workflow:
    - After each step, check the Success Criteria — mark items done as they are satisfied.
    - Continue until all Success Criteria are met or the user intervenes.
 7. **Enforce no-op evidence guard before status advancement**:
-   - Resolve the requirement's active worktree from `.worktree-manifest.json` and read its `path` and `baseBranch` (default `main` if `baseBranch` is missing).
+   - Resolve the requirement's active worktree from `<canonical-root>/.worktree-manifest.json` and read its `path` and `baseBranch` (default `main` if `baseBranch` is missing).
+   - If canonical mapping is unavailable or stale, fall back by matching the current repository identity (`git rev-parse --show-toplevel`) and checked-out branch (`git rev-parse --abbrev-ref HEAD`) against canonical manifest entries.
+   - If both canonical and fallback resolution fail, stop with a clear diagnostic and include actionable recovery commands: `./scripts/start-work.sh <REQ-ID>` and `./scripts/worktree-list.sh`.
    - Collect requirement-scoped commit-diff evidence with `git -C <worktree-path> diff --name-status <base-branch>...HEAD`.
    - Collect requirement-scoped tracked working-tree/index evidence with `git -C <worktree-path> status --porcelain --untracked-files=no`.
    - Treat evidence as present when either signal is non-empty.
@@ -60,6 +62,7 @@ Constraints:
 - If the requirement does not exist in the manifest, report the error and stop.
 - If the requirement is in a terminal status (DEPLOYED, CANCELLED, or MERGED when `requiresDeployment=false`), explain that there is no next status and stop.
 - If there is no active worktree and the requirement is PROPOSED or BACKLOG, re-read manifests immediately before `/start-work`; if a worktree appears concurrently, skip `/start-work` and continue. For other statuses without a worktree, suggest `/start-work` and stop.
+- Before advancing status, resolve worktree context from canonical manifests first, then fall back to current repository path/branch identity when canonical mapping is missing or stale; if both fail, stop with actionable diagnostics.
 - Before advancing status, collect evidence from the active worktree using both `git -C <worktree-path> diff --name-status <base-branch>...HEAD` and `git -C <worktree-path> status --porcelain --untracked-files=no`; block no-op advancement only when both are empty.
 - No-op evidence is tracked-only: staged and unstaged tracked deltas count, while untracked files are excluded.
 - `--no-diff-reason` is only valid for no-diff transitions targeting `CODE_REVIEW`; the reason must be non-empty and must be persisted via `scripts/update-requirement-status.sh --reason`.
