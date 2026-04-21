@@ -1,7 +1,7 @@
 # Review follow-up: define true canonical manifest root for /work-on
 
 **ID**: REQ-1776738115172246724  
-**Status**: CODE_REVIEW  
+**Status**: MERGED  
 **Priority**: HIGH  
 **Created**: 2026-04-21T02:21:55Z  
 
@@ -47,5 +47,5 @@ Source: code-review of REQ-1776668089944983961. Severity: HIGH. Evidence: .githu
 
 * **Linked Worktree**: feature/REQ-1776738115172246724-review-follow-up-define-true-canonical-manifest-root-for-work-on
 * **Branch**: feature/REQ-1776738115172246724-review-follow-up-define-true-canonical-manifest-root-for-work-on
-* **Merged**: No
+* **Merged**: Yes
 * **Deployed**: No
