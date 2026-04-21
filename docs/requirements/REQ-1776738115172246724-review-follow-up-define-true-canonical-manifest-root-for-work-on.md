@@ -1,7 +1,7 @@
 # Review follow-up: define true canonical manifest root for /work-on
 
 **ID**: REQ-1776738115172246724  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-04-21T02:21:55Z  
 
@@ -11,13 +11,15 @@ Source: code-review of REQ-1776668089944983961. Severity: HIGH. Evidence: .githu
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [x] `/work-on` defines canonical manifest root independently of the current worktree using `git rev-parse --git-common-dir` with path normalization via `dirname`.
+- [x] Canonical worktree mapping and fallback checks reference `<canonical-root>/.worktree-manifest.json` as source-of-truth instead of assuming the current worktree root.
+- [x] Regression checks enforce the canonical-root resolver contract and actionable fallback diagnostics.
 
 ## Technical Notes
 
-(Add implementation notes here)
+- Worktree context caveat: `git rev-parse --show-toplevel` resolves to the current linked worktree root, which is insufficient as a canonical manifest root.
+- Canonical root derivation should use Git common metadata (`git rev-parse --git-common-dir`) and derive the enclosing repository root from that path.
+- Keep fallback matching behavior (`show-toplevel` + `abbrev-ref HEAD`) but apply it only against manifest data loaded from canonical root.
 
 
 ## Development Plan
