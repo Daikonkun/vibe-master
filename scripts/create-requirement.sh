@@ -185,6 +185,13 @@ $REQ_DESCRIPTION
 * **Deployed**: No
 EOF
 
+# Keep generated dashboards in sync so new REQs are immediately visible in docs/STATUS.md.
+if [ -x "$PROJECT_ROOT/scripts/regenerate-docs.sh" ]; then
+  "$PROJECT_ROOT/scripts/regenerate-docs.sh" >/dev/null
+else
+  echo "⚠️  Warning: scripts/regenerate-docs.sh not found or not executable; generated docs may be stale." >&2
+fi
+
 if [ "$NO_COMMIT" != "true" ]; then
   git -C "$PROJECT_ROOT" add \
     .requirement-manifest.json \

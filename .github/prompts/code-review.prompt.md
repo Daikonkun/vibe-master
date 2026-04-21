@@ -12,6 +12,7 @@ Workflow:
 2. Load and follow the `code-review` skill priorities and output format.
 3. Report evidence-backed findings ordered by severity.
 4. Create requirement threads for unresolved issues when needed.
+5. If any new requirement thread was created during this review, run [regenerate-docs.sh](../../scripts/regenerate-docs.sh) before finalizing your response so [docs/STATUS.md](../../docs/STATUS.md) and [REQUIREMENTS.md](../../REQUIREMENTS.md) stay in sync.
 
 Constraints:
 - Prioritize correctness, security, reliability, tests, and maintainability.
