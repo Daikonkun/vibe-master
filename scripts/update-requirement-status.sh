@@ -179,6 +179,8 @@ status_update_locked() {
   local req_worktree_id
   local wt_status
   local wt_links_requirement
+  local active_reverse_worktrees
+  local active_reverse_worktrees_flat
 
   current_status_locked="$(jq -r --arg reqId "$REQ_ID" '
     .requirements[] | select(.id == $reqId) | .status
@@ -201,6 +203,20 @@ status_update_locked() {
   fi
 
   if [ "$enforce_terminal_invariant" = "true" ]; then
+    active_reverse_worktrees="$(jq -r --arg reqId "$REQ_ID" '
+      .worktrees[]?
+      | select(.status == "ACTIVE")
+      | select(any(.requirementIds[]?; . == $reqId))
+      | .id
+    ' "$WORKTREE_MANIFEST")"
+
+    if [ -n "$active_reverse_worktrees" ]; then
+      active_reverse_worktrees_flat="$(printf '%s\n' "$active_reverse_worktrees" | tr '\n' ' ' | xargs)"
+      echo "Error: Cannot transition $REQ_ID to $NEW_STATUS while ACTIVE worktree link(s) exist: $active_reverse_worktrees_flat" >&2
+      echo "Resolve the worktree first (for example via scripts/worktree-merge.sh) or repair historical drift with ./scripts/reconcile-lifecycle-invariants.sh --apply." >&2
+      return 1
+    fi
+
     req_worktree_id="$(jq -r --arg reqId "$REQ_ID" '
       .requirements[] | select(.id == $reqId) | .worktreeId // empty
     ' "$REQ_MANIFEST")"

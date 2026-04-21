@@ -71,8 +71,11 @@ reconcile_lifecycle_locked() {
   local req_id
   local req_status
   local wt_id
+  local wt_id_exists
   local wt_status
   local wt_links_requirement
+  local active_reverse_worktrees
+  local active_wt_id
   local target_status
 
   local checked=0
@@ -84,59 +87,101 @@ reconcile_lifecycle_locked() {
     [ -z "$req_id" ] && continue
     checked=$((checked + 1))
 
-    wt_status="$(jq -r --arg wtId "$wt_id" '.worktrees[]? | select(.id == $wtId) | .status // empty' "$WORKTREE_MANIFEST" | head -1)"
-    if [ -z "$wt_status" ]; then
-      echo "WARN: $req_id ($req_status) references missing worktree entry: $wt_id" >&2
-      unresolved=$((unresolved + 1))
-      continue
-    fi
-
-    wt_links_requirement="$(jq -r --arg wtId "$wt_id" --arg reqId "$req_id" '.worktrees[]? | select(.id == $wtId) | any(.requirementIds[]?; . == $reqId)' "$WORKTREE_MANIFEST" | head -1)"
-    if [ "$wt_links_requirement" != "true" ]; then
-      echo "WARN: $req_id references $wt_id but worktree requirementIds does not include $req_id" >&2
-      unresolved=$((unresolved + 1))
-      continue
-    fi
-
-    if [ "$wt_status" != "ACTIVE" ]; then
-      continue
-    fi
-
-    actionable=$((actionable + 1))
     if [ "$req_status" = "CANCELLED" ]; then
       target_status="ABANDONED"
     else
       target_status="MERGED"
     fi
 
-    echo "DRIFT: $req_id is $req_status while linked worktree $wt_id is ACTIVE (target: $target_status)"
+    active_reverse_worktrees="$(jq -r --arg reqId "$req_id" '
+      .worktrees[]?
+      | select(.status == "ACTIVE")
+      | select(any(.requirementIds[]?; . == $reqId))
+      | .id
+    ' "$WORKTREE_MANIFEST")"
 
-    if [ "$apply_mode" = "true" ]; then
-      if [ "$target_status" = "MERGED" ]; then
-        _jq_update_manifest_locked_inner "$WORKTREE_MANIFEST" \
-          '.worktrees |= map(
-            if .id == $wtId
-            then .status = "MERGED" | .mergedAt = (.mergedAt // $ts)
-            else .
-            end
-          )' \
-          --arg wtId "$wt_id" \
-          --arg ts "$TIMESTAMP"
-      else
-        _jq_update_manifest_locked_inner "$WORKTREE_MANIFEST" \
-          '.worktrees |= map(
-            if .id == $wtId
-            then .status = "ABANDONED"
-            else .
-            end
-          )' \
-          --arg wtId "$wt_id"
+    if [ -n "$active_reverse_worktrees" ]; then
+      actionable=$((actionable + 1))
+      echo "DRIFT: $req_id is $req_status while ACTIVE worktree link(s) exist via requirementIds (target: $target_status)"
+
+      if [ "$apply_mode" = "true" ]; then
+        while IFS= read -r active_wt_id; do
+          [ -z "$active_wt_id" ] && continue
+
+          if [ "$target_status" = "MERGED" ]; then
+            _jq_update_manifest_locked_inner "$WORKTREE_MANIFEST" \
+              '.worktrees |= map(
+                if .id == $wtId and .status == "ACTIVE"
+                then .status = "MERGED" | .mergedAt = (.mergedAt // $ts)
+                else .
+                end
+              )' \
+              --arg wtId "$active_wt_id" \
+              --arg ts "$TIMESTAMP"
+          else
+            _jq_update_manifest_locked_inner "$WORKTREE_MANIFEST" \
+              '.worktrees |= map(
+                if .id == $wtId and .status == "ACTIVE"
+                then .status = "ABANDONED"
+                else .
+                end
+              )' \
+              --arg wtId "$active_wt_id"
+          fi
+        done <<< "$active_reverse_worktrees"
+
+        fixed=$((fixed + 1))
       fi
-      fixed=$((fixed + 1))
     fi
+
+    [ -z "$wt_id" ] && continue
+
+    wt_id_exists="$(jq -r --arg wtId "$wt_id" 'any(.worktrees[]?; .id == $wtId)' "$WORKTREE_MANIFEST")"
+    if [ "$wt_id_exists" != "true" ]; then
+      echo "WARN: $req_id ($req_status) references missing worktree entry: $wt_id" >&2
+      actionable=$((actionable + 1))
+      if [ "$apply_mode" = "true" ]; then
+        _jq_update_manifest_locked_inner "$REQ_MANIFEST" \
+          '.requirements |= map(
+            if .id == $reqId
+            then del(.worktreeId) | .updatedAt = $ts
+            else .
+            end
+          )' \
+          --arg reqId "$req_id" \
+          --arg ts "$TIMESTAMP"
+        fixed=$((fixed + 1))
+      else
+        unresolved=$((unresolved + 1))
+      fi
+      continue
+    fi
+
+    wt_status="$(jq -r --arg wtId "$wt_id" '.worktrees[]? | select(.id == $wtId) | .status // empty' "$WORKTREE_MANIFEST" | head -1)"
+    wt_links_requirement="$(jq -r --arg wtId "$wt_id" --arg reqId "$req_id" '.worktrees[]? | select(.id == $wtId) | any(.requirementIds[]?; . == $reqId)' "$WORKTREE_MANIFEST" | head -1)"
+    if [ "$wt_links_requirement" != "true" ]; then
+      echo "WARN: $req_id references $wt_id but worktree requirementIds does not include $req_id" >&2
+      actionable=$((actionable + 1))
+      if [ "$apply_mode" = "true" ]; then
+        _jq_update_manifest_locked_inner "$REQ_MANIFEST" \
+          '.requirements |= map(
+            if .id == $reqId
+            then del(.worktreeId) | .updatedAt = $ts
+            else .
+            end
+          )' \
+          --arg reqId "$req_id" \
+          --arg ts "$TIMESTAMP"
+        fixed=$((fixed + 1))
+      else
+        unresolved=$((unresolved + 1))
+      fi
+      continue
+    fi
+
   done < <(jq -r '.requirements[]
-    | select((.status == "MERGED" or .status == "DEPLOYED" or .status == "CANCELLED") and ((.worktreeId // "") != ""))
-    | [.id, .status, .worktreeId]
+    | select(.status == "MERGED" or .status == "DEPLOYED" or .status == "CANCELLED")
+    | [.id, .status, (.worktreeId // "")]
     | @tsv' "$REQ_MANIFEST")
 
   if [ "$checked" -eq 0 ]; then
