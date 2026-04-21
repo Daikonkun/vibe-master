@@ -13,12 +13,10 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (1)
+## MERGED (0)
 
-* REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants (priority: MEDIUM)
-  - Worktree: feature/REQ-1776415557577295081-review-follow-up-enforce-requirement-worktree-lifecycle-invariants
 
-## DEPLOYED (43)
+## DEPLOYED (44)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -90,6 +88,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1776415543221953328-review-follow-up-align-worktree-merge-prompt-with-strict-dirty-tree-behavior
 * REQ-1776415552106978163: Review follow-up: document work-on --auto for autonomous pipelines (priority: HIGH)
   - Worktree: feature/REQ-1776415552106978163-review-follow-up-document-work-on-auto-for-autonomous-pipelines
+* REQ-1776415557577295081: Review follow-up: enforce requirement-worktree lifecycle invariants (priority: MEDIUM)
+  - Worktree: feature/REQ-1776415557577295081-review-follow-up-enforce-requirement-worktree-lifecycle-invariants
 * REQ-1776418077426972512: Review follow-up: clean lock/timestamp artifacts after start-work (priority: MEDIUM)
   - Worktree: feature/REQ-1776418077426972512-review-follow-up-clean-lock-timestamp-artifacts-after-start-work
 * REQ-1776420349206613978: Review follow-up: preserve flock lock exclusivity while cleaning lock artifacts (priority: HIGH)
@@ -128,7 +128,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 50
-- Deployed: 43 (86%)
-- Merged (awaiting deploy): 1
+- Deployed: 44 (88%)
+- Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0

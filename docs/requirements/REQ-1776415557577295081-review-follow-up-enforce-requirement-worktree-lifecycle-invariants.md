@@ -1,7 +1,7 @@
 # Review follow-up: enforce requirement-worktree lifecycle invariants
 
 **ID**: REQ-1776415557577295081  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-04-17T08:45:57Z  
 
@@ -47,4 +47,4 @@ Source: code-review of delegated REQ flow. Severity: MEDIUM. Evidence: requireme
 * **Linked Worktree**: feature/REQ-1776415557577295081-review-follow-up-enforce-requirement-worktree-lifecycle-invariants
 * **Branch**: feature/REQ-1776415557577295081-review-follow-up-enforce-requirement-worktree-lifecycle-invariants
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes

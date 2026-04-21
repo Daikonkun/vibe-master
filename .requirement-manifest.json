@@ -493,19 +493,25 @@
       "id": "REQ-1776415557577295081",
       "name": "Review follow-up: enforce requirement-worktree lifecycle invariants",
       "description": "Source: code-review of delegated REQ flow. Severity: MEDIUM. Evidence: requirement REQ-1775718117 is DEPLOYED while its linked worktree entry remains ACTIVE, leaving lifecycle data inconsistent and cleanup ambiguous. Required outcome: add invariant checks that prevent terminal requirements from retaining ACTIVE worktrees, plus a repair path for existing inconsistent records.",
-      "status": "MERGED",
+      "status": "DEPLOYED",
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-17T08:45:57Z",
-      "updatedAt": "2026-04-21T02:13:34Z",
+      "updatedAt": "2026-04-21T02:14:22Z",
       "worktreeId": "feature/REQ-1776415557577295081-review-follow-up-enforce-requirement-worktree-lifecycle-invariants",
       "statusHistory": [
         {
           "from": "IN_PROGRESS",
           "to": "CODE_REVIEW",
           "changedAt": "2026-04-20T10:10:50Z"
+        },
+        {
+          "from": "MERGED",
+          "to": "DEPLOYED",
+          "changedAt": "2026-04-21T02:14:22Z"
         }
-      ]
+      ],
+      "deployedAt": "2026-04-21T02:14:22Z"
     },
     {
       "id": "REQ-1776418077426972512",
