@@ -10,13 +10,13 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
+
+
+## MERGED (1)
 
 * REQ-1776999531888370737: enlarge /worktree-merge scope (priority: MEDIUM)
   - Worktree: feature/REQ-1776999531888370737-enlarge-worktree-merge-scope
-
-## MERGED (0)
-
 
 ## DEPLOYED (46)
 
@@ -135,6 +135,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 53
 - Deployed: 46 (86%)
-- Merged (awaiting deploy): 0
+- Merged (awaiting deploy): 1
 - In Progress: 0
 - Blocked: 0
