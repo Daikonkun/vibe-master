@@ -1,7 +1,7 @@
 # Review follow-up: stop swallowing lifecycle commit failures that later block /worktree-merge
 
 **ID**: REQ-1777018133999709609  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-04-24T08:08:54Z  
 
@@ -24,14 +24,11 @@ Source: code-review. Severity: HIGH. Evidence: scripts/start-work.sh, scripts/up
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1777018133999709609-review-follow-up-stop-swallowing-lifecycle-commit-failures-that-later-block-worktree-merge.md`.
-   - **Summary**: Source: code-review. Severity: HIGH. Evidence: scripts/start-work.sh, scripts/up
-   - **Key criteria**: - [ ] `scripts/start-work.sh`, `scripts/update-requirement-status.sh`, and `scripts/worktree-merge.s
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - Decision (2026-04-24): **lifecycle scripts auto-commit is mandatory**.
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1777018133999709609` and verify success criteria are met.
+1. Inspect current lifecycle auto-commit paths in `scripts/start-work.sh`, `scripts/update-requirement-status.sh`, and `scripts/worktree-merge.sh`; identify all `git commit ... || true` suppressions and classify expected hard-fail vs no-op commit behavior.
+2. Update each lifecycle script to treat required lifecycle/doc commits as mandatory: remove failure suppression, surface clear diagnostics on commit failure, and keep existing no-op handling only where no staged lifecycle changes exist.
+3. Add or update shell checks around commit execution (exit-code propagation + operator guidance) so failed lifecycle commits return non-zero with remediation hints, especially for dirty index/worktree blockers.
+4. Validate behavior with targeted script-level checks: run `scripts/check-start-work-clean.sh`, `scripts/check-requirement-worktree-lifecycle.sh`, and `scripts/check-worktree-merge-req-fallback.sh` to ensure lifecycle transitions and merge preconditions remain correct.
+5. Regenerate and verify requirement docs/state with `scripts/regenerate-docs.sh` and `scripts/show-requirement.sh REQ-1777018133999709609`, confirming success criteria alignment before moving status to `CODE_REVIEW`.
 
 **Last updated**: 2026-04-24T08:31:16Z
 
