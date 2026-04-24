@@ -108,3 +108,5 @@ REQ-1776677538888266188: Review follow-up: tighten lock-growth assertion for rep
 
 REQ-1776738115172246724: Review follow-up: define true canonical manifest root for /work-on (no dependencies)
 
+REQ-1776999531888370737: enlarge /worktree-merge scope (no dependencies)
+
