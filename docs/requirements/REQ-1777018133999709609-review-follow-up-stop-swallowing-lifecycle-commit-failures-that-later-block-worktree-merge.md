@@ -1,7 +1,7 @@
 # Review follow-up: stop swallowing lifecycle commit failures that later block /worktree-merge
 
 **ID**: REQ-1777018133999709609  
-**Status**: PROPOSED  
+**Status**: IN_PROGRESS  
 **Priority**: HIGH  
 **Created**: 2026-04-24T08:08:54Z  
 
@@ -21,6 +21,20 @@ Source: code-review. Severity: HIGH. Evidence: scripts/start-work.sh, scripts/up
 - Remove `|| true` suppression around lifecycle commit steps and fail fast with explicit diagnostics.
 - Keep repository state predictable by preventing silent success when lifecycle metadata is uncommitted.
 
+
+## Development Plan
+
+1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1777018133999709609-review-follow-up-stop-swallowing-lifecycle-commit-failures-that-later-block-worktree-merge.md`.
+   - **Summary**: Source: code-review. Severity: HIGH. Evidence: scripts/start-work.sh, scripts/up
+   - **Key criteria**: - [ ] `scripts/start-work.sh`, `scripts/update-requirement-status.sh`, and `scripts/worktree-merge.s
+2. Analyse Technical Notes and identify implementation approach.
+   - **Notes**: - Decision (2026-04-24): **lifecycle scripts auto-commit is mandatory**.
+3. Implement changes in the files/scripts referenced by the requirement spec.
+4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
+5. Validate with `./scripts/show-requirement.sh REQ-1777018133999709609` and verify success criteria are met.
+
+**Last updated**: 2026-04-24T08:31:16Z
+
 ## Dependencies
 
 (List other requirement IDs if applicable, e.g., REQ-XXX, REQ-YYY)
@@ -31,7 +45,7 @@ Source: code-review. Severity: HIGH. Evidence: scripts/start-work.sh, scripts/up
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
+* **Linked Worktree**: feature/REQ-1777018133999709609-review-follow-up-stop-swallowing-lifecycle-commit-failures-that-later-block-worktree-merge
+* **Branch**: feature/REQ-1777018133999709609-review-follow-up-stop-swallowing-lifecycle-commit-failures-that-later-block-worktree-merge
 * **Merged**: No
 * **Deployed**: No

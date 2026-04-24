@@ -589,6 +589,17 @@
       "createdAt": "2026-04-24T08:13:14Z",
       "status": "MERGED",
       "mergedAt": "2026-04-24T08:28:28Z"
+    },
+    {
+      "id": "feature/REQ-1777018133999709609-review-follow-up-stop-swallowing-lifecycle-commit-failures-that-later-block-worktree-merge",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1777018133999709609-review-follow-up-stop-swallowing-lifecycle-commit-failures-that-later-block-worktree-merge",
+      "branch": "feature/REQ-1777018133999709609-review-follow-up-stop-swallowing-lifecycle-commit-failures-that-later-block-worktree-merge",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1777018133999709609"
+      ],
+      "createdAt": "2026-04-24T08:31:15Z",
+      "status": "ACTIVE"
     }
   ]
 }

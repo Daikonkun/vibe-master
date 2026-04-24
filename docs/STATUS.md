@@ -2,13 +2,13 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (1)
+## PROPOSED (0)
+
+
+## IN_PROGRESS (1)
 
 * REQ-1777018133999709609: Review follow-up: stop swallowing lifecycle commit failures that later block /worktree-merge (priority: HIGH)
-  - Worktree: none
-
-## IN_PROGRESS (0)
-
+  - Worktree: feature/REQ-1777018133999709609-review-follow-up-stop-swallowing-lifecycle-commit-failures-that-later-block-worktree-merge
 
 ## CODE_REVIEW (0)
 
@@ -144,5 +144,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 57
 - Deployed: 49 (85%)
 - Merged (awaiting deploy): 2
-- In Progress: 0
+- In Progress: 1
 - Blocked: 0
