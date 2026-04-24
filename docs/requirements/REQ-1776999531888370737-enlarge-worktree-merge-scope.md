@@ -1,7 +1,7 @@
 # enlarge /worktree-merge scope
 
 **ID**: REQ-1776999531888370737  
-**Status**: PROPOSED  
+**Status**: IN_PROGRESS  
 **Priority**: MEDIUM  
 **Created**: 2026-04-24T02:58:51Z  
 
@@ -25,6 +25,20 @@ also allow /worktree-merge to accept REQ number as the parameter. currently it a
 - Error handling should be explicit for: unknown REQ, REQ without mapped worktree, missing branch, and ambiguous/multiple mappings (if encountered).
 - Regression checks should cover both invocation modes and failures (REQ not found, REQ unmapped) to avoid breaking existing branch-first workflows.
 
+
+## Development Plan
+
+1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776999531888370737-enlarge-worktree-merge-scope.md`.
+   - **Summary**: also allow /worktree-merge to accept REQ number as the parameter. currently it a
+   - **Key criteria**: - [ ] `/worktree-merge REQ-1776999531888370737` resolves the mapped worktree branch for that require
+2. Analyse Technical Notes and identify implementation approach.
+   - **Notes**: - Primary touchpoints are `scripts/worktree-merge.sh` (argument parsing and resolution), `.github/pr
+3. Implement changes in the files/scripts referenced by the requirement spec.
+4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
+5. Validate with `./scripts/show-requirement.sh REQ-1776999531888370737` and verify success criteria are met.
+
+**Last updated**: 2026-04-24T03:00:51Z
+
 ## Dependencies
 
 None
@@ -35,7 +49,7 @@ None
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
+* **Linked Worktree**: feature/REQ-1776999531888370737-enlarge-worktree-merge-scope
+* **Branch**: feature/REQ-1776999531888370737-enlarge-worktree-merge-scope
 * **Merged**: No
 * **Deployed**: No
