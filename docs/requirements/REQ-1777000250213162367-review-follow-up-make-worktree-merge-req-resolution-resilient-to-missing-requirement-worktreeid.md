@@ -1,7 +1,7 @@
 # Review follow-up: make worktree-merge REQ resolution resilient to missing requirement.worktreeId
 
 **ID**: REQ-1777000250213162367  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: HIGH  
 **Created**: 2026-04-24T03:10:50Z  
 
@@ -48,4 +48,4 @@ Source: code-review of REQ-1776999531888370737. Severity: HIGH. Evidence: script
 * **Linked Worktree**: feature/REQ-1777000250213162367-review-follow-up-make-worktree-merge-req-resolution-resilient-to-missing-requirement-worktreeid
 * **Branch**: feature/REQ-1777000250213162367-review-follow-up-make-worktree-merge-req-resolution-resilient-to-missing-requirement-worktreeid
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes

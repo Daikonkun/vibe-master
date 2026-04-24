@@ -789,19 +789,25 @@
       "id": "REQ-1777000250213162367",
       "name": "Review follow-up: make worktree-merge REQ resolution resilient to missing requirement.worktreeId",
       "description": "Source: code-review of REQ-1776999531888370737. Severity: HIGH. Evidence: scripts/worktree-merge.sh now accepts REQ IDs but exits immediately when .requirement-manifest.json has no worktreeId for that REQ, before attempting resolution via .worktree-manifest.json requirementIds linkage. This can block REQ-ID merges when manifests drift or legacy records omit worktreeId. Required outcome: keep REQ-ID support but fall back to ACTIVE worktree lookup by requirementIds when worktreeId is missing/stale, and only fail after both lookup paths are exhausted with explicit diagnostics.",
-      "status": "MERGED",
+      "status": "DEPLOYED",
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-24T03:10:50Z",
-      "updatedAt": "2026-04-24T03:34:28Z",
+      "updatedAt": "2026-04-24T03:56:25Z",
       "worktreeId": "feature/REQ-1777000250213162367-review-follow-up-make-worktree-merge-req-resolution-resilient-to-missing-requirement-worktreeid",
       "statusHistory": [
         {
           "from": "IN_PROGRESS",
           "to": "CODE_REVIEW",
           "changedAt": "2026-04-24T03:23:23Z"
+        },
+        {
+          "from": "MERGED",
+          "to": "DEPLOYED",
+          "changedAt": "2026-04-24T03:56:25Z"
         }
-      ]
+      ],
+      "deployedAt": "2026-04-24T03:56:25Z"
     },
     {
       "id": "REQ-1777001176788056212",
