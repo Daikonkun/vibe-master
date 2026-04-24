@@ -801,11 +801,11 @@
       "id": "REQ-1777001176788056212",
       "name": "Review follow-up: fail REQ-ID merge on ambiguous active worktree mappings",
       "description": "Source: code-review of REQ-1777000250213162367. Severity: HIGH. Evidence: scripts/worktree-merge.sh resolves REQ-ID lookups with jq pipelines ending in head -1, so if manifest drift yields multiple ACTIVE worktrees linked to the same REQ (by stale worktreeId or duplicate requirementIds), the script silently picks one branch instead of failing. Required outcome: detect and reject ambiguous ACTIVE matches for REQ-ID resolution with explicit diagnostics listing conflicting worktree ids/branches, and add regression coverage for duplicate-match scenarios.",
-      "status": "CODE_REVIEW",
+      "status": "MERGED",
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-24T03:26:16Z",
-      "updatedAt": "2026-04-24T03:39:34Z",
+      "updatedAt": "2026-04-24T03:54:16Z",
       "worktreeId": "feature/REQ-1777001176788056212-review-follow-up-fail-req-id-merge-on-ambiguous-active-worktree-mappings",
       "statusHistory": [
         {

@@ -8,17 +8,17 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
 
-* REQ-1777001176788056212: Review follow-up: fail REQ-ID merge on ambiguous active worktree mappings (priority: HIGH)
-  - Worktree: feature/REQ-1777001176788056212-review-follow-up-fail-req-id-merge-on-ambiguous-active-worktree-mappings
 
-## MERGED (2)
+## MERGED (3)
 
 * REQ-1776999531888370737: enlarge /worktree-merge scope (priority: MEDIUM)
   - Worktree: feature/REQ-1776999531888370737-enlarge-worktree-merge-scope
 * REQ-1777000250213162367: Review follow-up: make worktree-merge REQ resolution resilient to missing requirement.worktreeId (priority: HIGH)
   - Worktree: feature/REQ-1777000250213162367-review-follow-up-make-worktree-merge-req-resolution-resilient-to-missing-requirement-worktreeid
+* REQ-1777001176788056212: Review follow-up: fail REQ-ID merge on ambiguous active worktree mappings (priority: HIGH)
+  - Worktree: feature/REQ-1777001176788056212-review-follow-up-fail-req-id-merge-on-ambiguous-active-worktree-mappings
 
 ## DEPLOYED (46)
 
@@ -137,6 +137,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 54
 - Deployed: 46 (85%)
-- Merged (awaiting deploy): 2
+- Merged (awaiting deploy): 3
 - In Progress: 0
 - Blocked: 0
