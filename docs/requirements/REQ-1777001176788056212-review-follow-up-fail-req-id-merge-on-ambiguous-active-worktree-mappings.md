@@ -1,7 +1,7 @@
 # Review follow-up: fail REQ-ID merge on ambiguous active worktree mappings
 
 **ID**: REQ-1777001176788056212  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: HIGH  
 **Created**: 2026-04-24T03:26:16Z  
 
@@ -48,4 +48,4 @@ Source: code-review of REQ-1777000250213162367. Severity: HIGH. Evidence: script
 * **Linked Worktree**: feature/REQ-1777001176788056212-review-follow-up-fail-req-id-merge-on-ambiguous-active-worktree-mappings
 * **Branch**: feature/REQ-1777001176788056212-review-follow-up-fail-req-id-merge-on-ambiguous-active-worktree-mappings
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes
