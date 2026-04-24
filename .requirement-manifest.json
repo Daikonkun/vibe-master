@@ -861,6 +861,16 @@
       "origin": "project",
       "createdAt": "2026-04-24T08:08:53Z",
       "updatedAt": "2026-04-24T08:08:53Z"
+    },
+    {
+      "id": "REQ-1777018133999709609",
+      "name": "Review follow-up: stop swallowing lifecycle commit failures that later block /worktree-merge",
+      "description": "Source: code-review. Severity: HIGH. Evidence: scripts/start-work.sh, scripts/update-requirement-status.sh, and scripts/worktree-merge.sh all ignore commit failures with '... || true' (around lines ~151, ~339, ~371), so status/docs changes can remain uncommitted and then trigger /worktree-merge dirty-tree refusal (line ~158). Required outcome: detect and surface commit failures explicitly (or provide deterministic fallback), and ensure successful lifecycle commands do not silently leave staged/unstaged manifest/doc changes that block merge.",
+      "status": "PROPOSED",
+      "priority": "HIGH",
+      "origin": "project",
+      "createdAt": "2026-04-24T08:08:54Z",
+      "updatedAt": "2026-04-24T08:08:54Z"
     }
   ],
   "requiresDeployment": true

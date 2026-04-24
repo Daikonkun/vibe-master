@@ -2,9 +2,11 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (1)
+## PROPOSED (2)
 
 * REQ-1777018133258390308: Review follow-up: make worktree-merge atomic across merge and cleanup failures (priority: HIGH)
+  - Worktree: none
+* REQ-1777018133999709609: Review follow-up: stop swallowing lifecycle commit failures that later block /worktree-merge (priority: HIGH)
   - Worktree: none
 
 ## IN_PROGRESS (0)
@@ -139,8 +141,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 
 ## Stats
-- Total Requirements: 56
-- Deployed: 49 (87%)
+- Total Requirements: 57
+- Deployed: 49 (85%)
 - Merged (awaiting deploy): 1
 - In Progress: 0
 - Blocked: 0

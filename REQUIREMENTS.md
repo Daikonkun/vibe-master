@@ -60,9 +60,10 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1777001176788056212 | Review follow-up: fail REQ-ID merge on ambiguous active worktree mappings | DEPLOYED | HIGH | feature/REQ-1777001176788056212-review-follow-up-fail-req-id-merge-on-ambiguous-active-worktree-mappings | 2026-04-24 | 2026-04-24 |
 | REQ-1777016870530993058 | command hint | MERGED | MEDIUM | feature/REQ-1777016870530993058-command-hint | 2026-04-24 | 2026-04-24 |
 | REQ-1777018133258390308 | Review follow-up: make worktree-merge atomic across merge and cleanup failures | PROPOSED | HIGH | — | 2026-04-24 | 2026-04-24 |
+| REQ-1777018133999709609 | Review follow-up: stop swallowing lifecycle commit failures that later block /worktree-merge | PROPOSED | HIGH | — | 2026-04-24 | 2026-04-24 |
 
 ## Status Breakdown
-- **Proposed**: 1
+- **Proposed**: 2
 - **In Progress**: 0
 - **Code Review**: 0
 - **Merged**: 1
@@ -76,6 +77,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-24T08:08:53Z
+* Last updated: 2026-04-24T08:08:54Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`
