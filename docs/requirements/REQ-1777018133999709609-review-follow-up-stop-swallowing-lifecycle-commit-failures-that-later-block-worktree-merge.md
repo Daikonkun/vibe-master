@@ -11,13 +11,15 @@ Source: code-review. Severity: HIGH. Evidence: scripts/start-work.sh, scripts/up
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [ ] `scripts/start-work.sh`, `scripts/update-requirement-status.sh`, and `scripts/worktree-merge.sh` no longer suppress lifecycle commit failures.
+- [ ] Lifecycle auto-commit is treated as mandatory: command exits non-zero when required lifecycle/doc commit cannot be created.
+- [ ] Error output includes actionable remediation so operators can resolve commit blockers and rerun safely.
 
 ## Technical Notes
 
-(Add implementation notes here)
+- Decision (2026-04-24): **lifecycle scripts auto-commit is mandatory**.
+- Remove `|| true` suppression around lifecycle commit steps and fail fast with explicit diagnostics.
+- Keep repository state predictable by preventing silent success when lifecycle metadata is uncommitted.
 
 ## Dependencies
 

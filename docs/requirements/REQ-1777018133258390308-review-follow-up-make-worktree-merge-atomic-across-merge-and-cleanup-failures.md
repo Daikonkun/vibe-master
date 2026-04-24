@@ -11,13 +11,15 @@ Source: code-review. Severity: HIGH. Evidence: scripts/worktree-merge.sh merges 
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [ ] `scripts/worktree-merge.sh` keeps the merge-first approach and performs merge into base before lifecycle cleanup.
+- [ ] If post-merge cleanup fails (e.g., worktree removal or branch deletion), the script still writes and commits manifest/doc reconciliation state in the same run.
+- [ ] Failure output includes clear recovery guidance without leaving requirement/worktree lifecycle state stale.
 
 ## Technical Notes
 
-(Add implementation notes here)
+- Decision (2026-04-24): adopt **merge-first with guaranteed post-merge reconciliation commit**.
+- Implement an explicit post-merge reconciliation path that is executed regardless of cleanup success.
+- Preserve strict error visibility, but prevent partial lifecycle updates after a successful merge.
 
 ## Dependencies
 
