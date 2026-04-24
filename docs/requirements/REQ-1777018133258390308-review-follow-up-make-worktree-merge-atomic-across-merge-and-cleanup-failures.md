@@ -1,7 +1,7 @@
 # Review follow-up: make worktree-merge atomic across merge and cleanup failures
 
 **ID**: REQ-1777018133258390308  
-**Status**: PROPOSED  
+**Status**: IN_PROGRESS  
 **Priority**: HIGH  
 **Created**: 2026-04-24T08:08:53Z  
 
@@ -21,6 +21,20 @@ Source: code-review. Severity: HIGH. Evidence: scripts/worktree-merge.sh merges 
 - Implement an explicit post-merge reconciliation path that is executed regardless of cleanup success.
 - Preserve strict error visibility, but prevent partial lifecycle updates after a successful merge.
 
+
+## Development Plan
+
+1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1777018133258390308-review-follow-up-make-worktree-merge-atomic-across-merge-and-cleanup-failures.md`.
+   - **Summary**: Source: code-review. Severity: HIGH. Evidence: scripts/worktree-merge.sh merges 
+   - **Key criteria**: - [ ] `scripts/worktree-merge.sh` keeps the merge-first approach and performs merge into base before
+2. Analyse Technical Notes and identify implementation approach.
+   - **Notes**: - Decision (2026-04-24): adopt **merge-first with guaranteed post-merge reconciliation commit**.
+3. Implement changes in the files/scripts referenced by the requirement spec.
+4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
+5. Validate with `./scripts/show-requirement.sh REQ-1777018133258390308` and verify success criteria are met.
+
+**Last updated**: 2026-04-24T08:13:15Z
+
 ## Dependencies
 
 (List other requirement IDs if applicable, e.g., REQ-XXX, REQ-YYY)
@@ -31,7 +45,7 @@ Source: code-review. Severity: HIGH. Evidence: scripts/worktree-merge.sh merges 
 
 ---
 
-* **Linked Worktree**: None yet
-* **Branch**: None yet
+* **Linked Worktree**: feature/REQ-1777018133258390308-review-follow-up-make-worktree-merge-atomic-across-merge-and-cleanup-failures
+* **Branch**: feature/REQ-1777018133258390308-review-follow-up-make-worktree-merge-atomic-across-merge-and-cleanup-failures
 * **Merged**: No
 * **Deployed**: No

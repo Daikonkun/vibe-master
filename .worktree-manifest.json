@@ -577,6 +577,17 @@
       "createdAt": "2026-04-24T07:49:41Z",
       "status": "MERGED",
       "mergedAt": "2026-04-24T08:01:43Z"
+    },
+    {
+      "id": "feature/REQ-1777018133258390308-review-follow-up-make-worktree-merge-atomic-across-merge-and-cleanup-failures",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1777018133258390308-review-follow-up-make-worktree-merge-atomic-across-merge-and-cleanup-failures",
+      "branch": "feature/REQ-1777018133258390308-review-follow-up-make-worktree-merge-atomic-across-merge-and-cleanup-failures",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1777018133258390308"
+      ],
+      "createdAt": "2026-04-24T08:13:14Z",
+      "status": "ACTIVE"
     }
   ]
 }
