@@ -116,3 +116,5 @@ REQ-1777001176788056212: Review follow-up: fail REQ-ID merge on ambiguous active
 
 REQ-1777016870530993058: command hint (no dependencies)
 
+REQ-1777018133258390308: Review follow-up: make worktree-merge atomic across merge and cleanup failures (no dependencies)
+
