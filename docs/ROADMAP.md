@@ -58,7 +58,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776668089944983961: Review follow-up: harden work-on no-op guard against manifest context drift
 * [DEPLOYED] REQ-1776670068095886474: add a /upgrade slash command
 * [CANCELLED] REQ-1776677538888266188: Review follow-up: tighten lock-growth assertion for repeated lock-race runs
-* [MERGED] REQ-1776999531888370737: enlarge /worktree-merge scope
+* [DEPLOYED] REQ-1776999531888370737: enlarge /worktree-merge scope
 
 ## Low Priority
 * [DEPLOYED] REQ-1774632175: Review follow-up: polish upgrade guide in README

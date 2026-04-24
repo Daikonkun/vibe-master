@@ -1,7 +1,7 @@
 # enlarge /worktree-merge scope
 
 **ID**: REQ-1776999531888370737  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-04-24T02:58:51Z  
 
@@ -48,4 +48,4 @@ None
 * **Linked Worktree**: feature/REQ-1776999531888370737-enlarge-worktree-merge-scope
 * **Branch**: feature/REQ-1776999531888370737-enlarge-worktree-merge-scope
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes

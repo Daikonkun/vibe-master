@@ -11,16 +11,14 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (3)
+## MERGED (2)
 
-* REQ-1776999531888370737: enlarge /worktree-merge scope (priority: MEDIUM)
-  - Worktree: feature/REQ-1776999531888370737-enlarge-worktree-merge-scope
 * REQ-1777000250213162367: Review follow-up: make worktree-merge REQ resolution resilient to missing requirement.worktreeId (priority: HIGH)
   - Worktree: feature/REQ-1777000250213162367-review-follow-up-make-worktree-merge-req-resolution-resilient-to-missing-requirement-worktreeid
 * REQ-1777001176788056212: Review follow-up: fail REQ-ID merge on ambiguous active worktree mappings (priority: HIGH)
   - Worktree: feature/REQ-1777001176788056212-review-follow-up-fail-req-id-merge-on-ambiguous-active-worktree-mappings
 
-## DEPLOYED (46)
+## DEPLOYED (47)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -114,6 +112,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1776672458915568759-review-follow-up-ensure-upgrade-merges-manifest-metadata-when-only-manifests-differ
 * REQ-1776738115172246724: Review follow-up: define true canonical manifest root for /work-on (priority: HIGH)
   - Worktree: feature/REQ-1776738115172246724-review-follow-up-define-true-canonical-manifest-root-for-work-on
+* REQ-1776999531888370737: enlarge /worktree-merge scope (priority: MEDIUM)
+  - Worktree: feature/REQ-1776999531888370737-enlarge-worktree-merge-scope
 
 ## BLOCKED (0)
 
@@ -136,7 +136,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 54
-- Deployed: 46 (85%)
-- Merged (awaiting deploy): 3
+- Deployed: 47 (87%)
+- Merged (awaiting deploy): 2
 - In Progress: 0
 - Blocked: 0
