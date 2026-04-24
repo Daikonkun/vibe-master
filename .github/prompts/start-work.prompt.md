@@ -15,7 +15,7 @@ Workflow:
 5. Keep the plan idempotent: if `## Development Plan` already exists, update that section instead of adding a duplicate header.
 6. Confirm the created worktree ID and filesystem path.
 7. Confirm requirement status was updated to `IN_PROGRESS`.
-8. Recommend the next action: open the worktree and begin coding from the first plan step.
+8. In the final response (on successful completion), include: `Next recommended command: /work-on <REQ-ID>`.
 
 Constraints:
 - Never create multiple worktrees for the same requirement unless explicitly requested.
