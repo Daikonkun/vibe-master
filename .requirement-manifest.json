@@ -765,12 +765,19 @@
       "name": "enlarge /worktree-merge scope",
       "description": "also allow /worktree-merge to accept REQ number as the parameter. currently it accepts branch by default",
       "notes": "Extend worktree-merge input parsing to accept a REQ ID and resolve its mapped branch while preserving existing branch-mode behavior.",
-      "status": "IN_PROGRESS",
+      "status": "CODE_REVIEW",
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-24T02:58:51Z",
-      "updatedAt": "2026-04-24T03:00:50Z",
-      "worktreeId": "feature/REQ-1776999531888370737-enlarge-worktree-merge-scope"
+      "updatedAt": "2026-04-24T03:07:22Z",
+      "worktreeId": "feature/REQ-1776999531888370737-enlarge-worktree-merge-scope",
+      "statusHistory": [
+        {
+          "from": "IN_PROGRESS",
+          "to": "CODE_REVIEW",
+          "changedAt": "2026-04-24T03:07:22Z"
+        }
+      ]
     }
   ],
   "requiresDeployment": true

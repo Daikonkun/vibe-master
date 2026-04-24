@@ -1,7 +1,7 @@
 # enlarge /worktree-merge scope
 
 **ID**: REQ-1776999531888370737  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-04-24T02:58:51Z  
 
@@ -28,14 +28,11 @@ also allow /worktree-merge to accept REQ number as the parameter. currently it a
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1776999531888370737-enlarge-worktree-merge-scope.md`.
-   - **Summary**: also allow /worktree-merge to accept REQ number as the parameter. currently it a
-   - **Key criteria**: - [ ] `/worktree-merge REQ-1776999531888370737` resolves the mapped worktree branch for that require
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - Primary touchpoints are `scripts/worktree-merge.sh` (argument parsing and resolution), `.github/pr
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1776999531888370737` and verify success criteria are met.
+1. Update `scripts/worktree-merge.sh` argument parsing to accept either `<branch>` or `REQ-<digits>` as the first parameter.
+2. In `scripts/worktree-merge.sh`, add REQ-ID resolution logic that maps requirement ID → `worktreeId`/branch via `.requirement-manifest.json` and `.worktree-manifest.json`, with explicit errors for unknown or unmapped REQs.
+3. Reuse the existing merge pipeline after branch resolution (clean-tree checks, lifecycle guards, and force behavior) so REQ-ID mode does not bypass current safety rules.
+4. Update `.github/prompts/worktree-merge.prompt.md` to document both invocation forms and expected failure diagnostics for invalid REQ input.
+5. Validate end-to-end by running `scripts/worktree-merge.sh` in both modes (branch and REQ ID) plus negative checks (nonexistent REQ and unmapped REQ), then run `./scripts/regenerate-docs.sh` if command/help text changes affect generated docs.
 
 **Last updated**: 2026-04-24T03:00:51Z
 
