@@ -74,19 +74,34 @@ if [[ "$TARGET_REF" =~ ^REQ-[0-9]+$ ]]; then
     .requirements[]? | select(.id == $reqId) | .worktreeId // empty
   ' "$REQ_MANIFEST")"
 
-  if [ -z "$REQUIREMENT_WORKTREE_ID" ]; then
-    echo "Error: Requirement has no mapped worktreeId: $TARGET_REF" >&2
-    exit 1
+  WORKTREE_ENTRY_FROM_REQ=""
+
+  if [ -n "$REQUIREMENT_WORKTREE_ID" ]; then
+    WORKTREE_ENTRY_FROM_REQ="$(jq -c --arg worktreeId "$REQUIREMENT_WORKTREE_ID" '
+      .worktrees[]?
+      | select(.status == "ACTIVE")
+      | select((.id == $worktreeId) or (.branch == $worktreeId))
+    ' "$WORKTREE_MANIFEST" | head -1)"
+
+    if [ -z "$WORKTREE_ENTRY_FROM_REQ" ]; then
+      echo "⚠️  Warning: Requirement $TARGET_REF references worktreeId $REQUIREMENT_WORKTREE_ID, but no ACTIVE entry matched. Falling back to requirement linkage lookup." >&2
+    fi
   fi
 
-  WORKTREE_ENTRY_FROM_REQ="$(jq -c --arg reqId "$TARGET_REF" --arg worktreeId "$REQUIREMENT_WORKTREE_ID" '
-    .worktrees[]?
-    | select(.status == "ACTIVE")
-    | select((.id == $worktreeId) or (.branch == $worktreeId) or ((.requirementIds // []) | index($reqId)))
-  ' "$WORKTREE_MANIFEST" | head -1)"
+  if [ -z "$WORKTREE_ENTRY_FROM_REQ" ]; then
+    WORKTREE_ENTRY_FROM_REQ="$(jq -c --arg reqId "$TARGET_REF" '
+      .worktrees[]?
+      | select(.status == "ACTIVE")
+      | select((.requirementIds // []) | index($reqId))
+    ' "$WORKTREE_MANIFEST" | head -1)"
+  fi
 
   if [ -z "$WORKTREE_ENTRY_FROM_REQ" ]; then
-    echo "Error: No ACTIVE worktree mapping found for requirement: $TARGET_REF" >&2
+    if [ -n "$REQUIREMENT_WORKTREE_ID" ]; then
+      echo "Error: No ACTIVE worktree mapping found for requirement: $TARGET_REF (checked worktreeId '$REQUIREMENT_WORKTREE_ID' and requirementIds linkage)" >&2
+    else
+      echo "Error: Requirement has no mapped worktreeId and no ACTIVE worktree mapping by requirementIds: $TARGET_REF" >&2
+    fi
     exit 1
   fi
 
