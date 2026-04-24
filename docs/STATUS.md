@@ -2,13 +2,13 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (1)
+## PROPOSED (0)
+
+
+## IN_PROGRESS (1)
 
 * REQ-1777001176788056212: Review follow-up: fail REQ-ID merge on ambiguous active worktree mappings (priority: HIGH)
-  - Worktree: none
-
-## IN_PROGRESS (0)
-
+  - Worktree: feature/REQ-1777001176788056212-review-follow-up-fail-req-id-merge-on-ambiguous-active-worktree-mappings
 
 ## CODE_REVIEW (0)
 
@@ -138,5 +138,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 54
 - Deployed: 46 (85%)
 - Merged (awaiting deploy): 2
-- In Progress: 0
+- In Progress: 1
 - Blocked: 0

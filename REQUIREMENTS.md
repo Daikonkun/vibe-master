@@ -57,11 +57,11 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1776738115172246724 | Review follow-up: define true canonical manifest root for /work-on | DEPLOYED | HIGH | feature/REQ-1776738115172246724-review-follow-up-define-true-canonical-manifest-root-for-work-on | 2026-04-21 | 2026-04-21 |
 | REQ-1776999531888370737 | enlarge /worktree-merge scope | MERGED | MEDIUM | feature/REQ-1776999531888370737-enlarge-worktree-merge-scope | 2026-04-24 | 2026-04-24 |
 | REQ-1777000250213162367 | Review follow-up: make worktree-merge REQ resolution resilient to missing requirement.worktreeId | MERGED | HIGH | feature/REQ-1777000250213162367-review-follow-up-make-worktree-merge-req-resolution-resilient-to-missing-requirement-worktreeid | 2026-04-24 | 2026-04-24 |
-| REQ-1777001176788056212 | Review follow-up: fail REQ-ID merge on ambiguous active worktree mappings | PROPOSED | HIGH | — | 2026-04-24 | 2026-04-24 |
+| REQ-1777001176788056212 | Review follow-up: fail REQ-ID merge on ambiguous active worktree mappings | IN_PROGRESS | HIGH | feature/REQ-1777001176788056212-review-follow-up-fail-req-id-merge-on-ambiguous-active-worktree-mappings | 2026-04-24 | 2026-04-24 |
 
 ## Status Breakdown
-- **Proposed**: 1
-- **In Progress**: 0
+- **Proposed**: 0
+- **In Progress**: 1
 - **Code Review**: 0
 - **Merged**: 2
 - **Deployed**: 46
@@ -74,6 +74,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-24T03:34:28Z
+* Last updated: 2026-04-24T03:35:15Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`
