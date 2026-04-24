@@ -1,7 +1,7 @@
 # Review follow-up: fail REQ-ID merge on ambiguous active worktree mappings
 
 **ID**: REQ-1777001176788056212  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-04-24T03:26:16Z  
 
@@ -22,14 +22,11 @@ Source: code-review of REQ-1777000250213162367. Severity: HIGH. Evidence: script
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1777001176788056212-review-follow-up-fail-req-id-merge-on-ambiguous-active-worktree-mappings.md`.
-   - **Summary**: Source: code-review of REQ-1777000250213162367. Severity: HIGH. Evidence: script
-   - **Key criteria**: - [ ] Criterion 1 - [ ] Criterion 2
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: (Add implementation notes here)
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1777001176788056212` and verify success criteria are met.
+1. Refactor REQ-ID lookup in `scripts/worktree-merge.sh` to collect all ACTIVE matches for both primary (`worktreeId`/branch/id) and fallback (`requirementIds`) resolution stages instead of piping directly to `head -1`.
+2. Add ambiguity detection in `scripts/worktree-merge.sh`: when more than one ACTIVE candidate matches, fail with explicit diagnostics listing candidate worktree ids and branches.
+3. Keep existing fallback behavior intact for single-match cases, including stale-`worktreeId` warning path and existing unknown-REQ/not-found error semantics.
+4. Add regression coverage in a new check script (or extend `scripts/check-worktree-merge-req-fallback.sh`) to simulate duplicate ACTIVE mappings and assert the command fails with ambiguity diagnostics.
+5. Validate by running worktree-merge regression scripts and targeted REQ-ID resolution checks, then regenerate docs only if generated artifacts are affected.
 
 **Last updated**: 2026-04-24T03:35:16Z
 
