@@ -838,19 +838,25 @@
       "name": "command hint",
       "description": "follow the '/start-work -> /work-on -> /code-review -> /worktree-merge' flow, at the end of the output of each command, recommend the user to run the next command in the flow",
       "notes": "Add success-only next-step command recommendations to start-work, work-on, code-review, and worktree-merge prompt outputs.",
-      "status": "MERGED",
+      "status": "DEPLOYED",
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-24T07:47:50Z",
-      "updatedAt": "2026-04-24T08:01:43Z",
+      "updatedAt": "2026-04-24T08:44:44Z",
       "worktreeId": "feature/REQ-1777016870530993058-command-hint",
       "statusHistory": [
         {
           "from": "IN_PROGRESS",
           "to": "CODE_REVIEW",
           "changedAt": "2026-04-24T07:55:49Z"
+        },
+        {
+          "from": "MERGED",
+          "to": "DEPLOYED",
+          "changedAt": "2026-04-24T08:44:44Z"
         }
-      ]
+      ],
+      "deployedAt": "2026-04-24T08:44:44Z"
     },
     {
       "id": "REQ-1777018133258390308",

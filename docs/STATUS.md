@@ -11,16 +11,14 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (3)
+## MERGED (2)
 
-* REQ-1777016870530993058: command hint (priority: MEDIUM)
-  - Worktree: feature/REQ-1777016870530993058-command-hint
 * REQ-1777018133258390308: Review follow-up: make worktree-merge atomic across merge and cleanup failures (priority: HIGH)
   - Worktree: feature/REQ-1777018133258390308-review-follow-up-make-worktree-merge-atomic-across-merge-and-cleanup-failures
 * REQ-1777018133999709609: Review follow-up: stop swallowing lifecycle commit failures that later block /worktree-merge (priority: HIGH)
   - Worktree: feature/REQ-1777018133999709609-review-follow-up-stop-swallowing-lifecycle-commit-failures-that-later-block-worktree-merge
 
-## DEPLOYED (49)
+## DEPLOYED (50)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -120,6 +118,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1777000250213162367-review-follow-up-make-worktree-merge-req-resolution-resilient-to-missing-requirement-worktreeid
 * REQ-1777001176788056212: Review follow-up: fail REQ-ID merge on ambiguous active worktree mappings (priority: HIGH)
   - Worktree: feature/REQ-1777001176788056212-review-follow-up-fail-req-id-merge-on-ambiguous-active-worktree-mappings
+* REQ-1777016870530993058: command hint (priority: MEDIUM)
+  - Worktree: feature/REQ-1777016870530993058-command-hint
 
 ## BLOCKED (0)
 
@@ -142,7 +142,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 57
-- Deployed: 49 (85%)
-- Merged (awaiting deploy): 3
+- Deployed: 50 (87%)
+- Merged (awaiting deploy): 2
 - In Progress: 0
 - Blocked: 0
