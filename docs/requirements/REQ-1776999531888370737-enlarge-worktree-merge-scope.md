@@ -11,11 +11,11 @@ also allow /worktree-merge to accept REQ number as the parameter. currently it a
 
 ## Success Criteria
 
-- [ ] `/worktree-merge REQ-1776999531888370737` resolves the mapped worktree branch for that requirement and merges it successfully when preconditions pass.
-- [ ] Existing branch-based invocation remains supported; `/worktree-merge feature/<branch-name>` behavior is unchanged.
-- [ ] If a provided REQ ID does not exist in `.requirement-manifest.json` or has no mapped worktree entry in `.worktree-manifest.json`, the command fails with a clear actionable error.
-- [ ] If the REQ maps to a non-mergeable state (for example no active feature branch found), the command exits non-zero and does not perform partial merge side effects.
-- [ ] Command docs/help text are updated so users can see both accepted parameter forms (REQ ID or branch).
+- [x] `/worktree-merge REQ-1776999531888370737` resolves the mapped worktree branch for that requirement and merges it successfully when preconditions pass.
+- [x] Existing branch-based invocation remains supported; `/worktree-merge feature/<branch-name>` behavior is unchanged.
+- [x] If a provided REQ ID does not exist in `.requirement-manifest.json` or has no mapped worktree entry in `.worktree-manifest.json`, the command fails with a clear actionable error.
+- [x] If the REQ maps to a non-mergeable state (for example no active feature branch found), the command exits non-zero and does not perform partial merge side effects.
+- [x] Command docs/help text are updated so users can see both accepted parameter forms (REQ ID or branch).
 
 ## Technical Notes
 
@@ -25,14 +25,13 @@ also allow /worktree-merge to accept REQ number as the parameter. currently it a
 - Error handling should be explicit for: unknown REQ, REQ without mapped worktree, missing branch, and ambiguous/multiple mappings (if encountered).
 - Regression checks should cover both invocation modes and failures (REQ not found, REQ unmapped) to avoid breaking existing branch-first workflows.
 
-
 ## Development Plan
 
-1. Update `scripts/worktree-merge.sh` argument parsing to accept either `<branch>` or `REQ-<digits>` as the first parameter.
-2. In `scripts/worktree-merge.sh`, add REQ-ID resolution logic that maps requirement ID → `worktreeId`/branch via `.requirement-manifest.json` and `.worktree-manifest.json`, with explicit errors for unknown or unmapped REQs.
-3. Reuse the existing merge pipeline after branch resolution (clean-tree checks, lifecycle guards, and force behavior) so REQ-ID mode does not bypass current safety rules.
-4. Update `.github/prompts/worktree-merge.prompt.md` to document both invocation forms and expected failure diagnostics for invalid REQ input.
-5. Validate end-to-end by running `scripts/worktree-merge.sh` in both modes (branch and REQ ID) plus negative checks (nonexistent REQ and unmapped REQ), then run `./scripts/regenerate-docs.sh` if command/help text changes affect generated docs.
+1. Update `scripts/worktree-merge.sh` argument parsing to accept either `<branch>` or `REQ-<digits>` as the first parameter. ✅
+2. Add REQ-ID resolution in `scripts/worktree-merge.sh` using `.requirement-manifest.json` and `.worktree-manifest.json`, with explicit errors for unknown/unmapped REQs. ✅
+3. Keep existing merge safety and lifecycle checks by resolving to `BRANCH` first, then reusing the existing merge flow unchanged. ✅
+4. Update `.github/prompts/worktree-merge.prompt.md` to document branch-or-REQ input and required diagnostics. ✅
+5. Validate non-destructive error paths (`unknown REQ`, `REQ without worktreeId`) and ensure branch-mode still routes through existing checks. ✅
 
 **Last updated**: 2026-04-24T03:00:51Z
 
