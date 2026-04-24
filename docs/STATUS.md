@@ -8,17 +8,17 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
 
-* REQ-1777018133999709609: Review follow-up: stop swallowing lifecycle commit failures that later block /worktree-merge (priority: HIGH)
-  - Worktree: feature/REQ-1777018133999709609-review-follow-up-stop-swallowing-lifecycle-commit-failures-that-later-block-worktree-merge
 
-## MERGED (2)
+## MERGED (3)
 
 * REQ-1777016870530993058: command hint (priority: MEDIUM)
   - Worktree: feature/REQ-1777016870530993058-command-hint
 * REQ-1777018133258390308: Review follow-up: make worktree-merge atomic across merge and cleanup failures (priority: HIGH)
   - Worktree: feature/REQ-1777018133258390308-review-follow-up-make-worktree-merge-atomic-across-merge-and-cleanup-failures
+* REQ-1777018133999709609: Review follow-up: stop swallowing lifecycle commit failures that later block /worktree-merge (priority: HIGH)
+  - Worktree: feature/REQ-1777018133999709609-review-follow-up-stop-swallowing-lifecycle-commit-failures-that-later-block-worktree-merge
 
 ## DEPLOYED (49)
 
@@ -143,6 +143,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 57
 - Deployed: 49 (85%)
-- Merged (awaiting deploy): 2
+- Merged (awaiting deploy): 3
 - In Progress: 0
 - Blocked: 0

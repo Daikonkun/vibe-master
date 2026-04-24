@@ -1,7 +1,7 @@
 # Review follow-up: stop swallowing lifecycle commit failures that later block /worktree-merge
 
 **ID**: REQ-1777018133999709609  
-**Status**: CODE_REVIEW  
+**Status**: MERGED  
 **Priority**: HIGH  
 **Created**: 2026-04-24T08:08:54Z  
 
@@ -44,5 +44,5 @@ Source: code-review. Severity: HIGH. Evidence: scripts/start-work.sh, scripts/up
 
 * **Linked Worktree**: feature/REQ-1777018133999709609-review-follow-up-stop-swallowing-lifecycle-commit-failures-that-later-block-worktree-merge
 * **Branch**: feature/REQ-1777018133999709609-review-follow-up-stop-swallowing-lifecycle-commit-failures-that-later-block-worktree-merge
-* **Merged**: No
+* **Merged**: Yes
 * **Deployed**: No
