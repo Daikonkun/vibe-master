@@ -565,6 +565,17 @@
       "createdAt": "2026-04-24T03:35:15Z",
       "status": "MERGED",
       "mergedAt": "2026-04-24T03:54:16Z"
+    },
+    {
+      "id": "feature/REQ-1777016870530993058-command-hint",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1777016870530993058-command-hint",
+      "branch": "feature/REQ-1777016870530993058-command-hint",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1777016870530993058"
+      ],
+      "createdAt": "2026-04-24T07:49:41Z",
+      "status": "ACTIVE"
     }
   ]
 }
