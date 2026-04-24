@@ -112,3 +112,5 @@ REQ-1776999531888370737: enlarge /worktree-merge scope (no dependencies)
 
 REQ-1777000250213162367: Review follow-up: make worktree-merge REQ resolution resilient to missing requirement.worktreeId (no dependencies)
 
+REQ-1777001176788056212: Review follow-up: fail REQ-ID merge on ambiguous active worktree mappings (no dependencies)
+
