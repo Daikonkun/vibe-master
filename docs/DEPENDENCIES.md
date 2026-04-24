@@ -114,3 +114,5 @@ REQ-1777000250213162367: Review follow-up: make worktree-merge REQ resolution re
 
 REQ-1777001176788056212: Review follow-up: fail REQ-ID merge on ambiguous active worktree mappings (no dependencies)
 
+REQ-1777016870530993058: command hint (no dependencies)
+

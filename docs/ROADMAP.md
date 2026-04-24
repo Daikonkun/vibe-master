@@ -59,6 +59,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776670068095886474: add a /upgrade slash command
 * [CANCELLED] REQ-1776677538888266188: Review follow-up: tighten lock-growth assertion for repeated lock-race runs
 * [DEPLOYED] REQ-1776999531888370737: enlarge /worktree-merge scope
+* [PROPOSED] REQ-1777016870530993058: command hint
 
 ## Low Priority
 * [DEPLOYED] REQ-1774632175: Review follow-up: polish upgrade guide in README

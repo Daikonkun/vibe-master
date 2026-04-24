@@ -832,6 +832,17 @@
         }
       ],
       "deployedAt": "2026-04-24T03:56:26Z"
+    },
+    {
+      "id": "REQ-1777016870530993058",
+      "name": "command hint",
+      "description": "follow the '/start-work -> /work-on -> /code-review -> /worktree-merge' flow, at the end of the output of each command, recommend the user to run the next command in the flow",
+      "notes": "Add success-only next-step command recommendations to start-work, work-on, code-review, and worktree-merge prompt outputs.",
+      "status": "PROPOSED",
+      "priority": "MEDIUM",
+      "origin": "project",
+      "createdAt": "2026-04-24T07:47:50Z",
+      "updatedAt": "2026-04-24T07:47:50Z"
     }
   ],
   "requiresDeployment": true
