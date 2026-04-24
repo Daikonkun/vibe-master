@@ -8,13 +8,13 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
+
+
+## MERGED (1)
 
 * REQ-1777016870530993058: command hint (priority: MEDIUM)
   - Worktree: feature/REQ-1777016870530993058-command-hint
-
-## MERGED (0)
-
 
 ## DEPLOYED (49)
 
@@ -139,6 +139,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 55
 - Deployed: 49 (89%)
-- Merged (awaiting deploy): 0
+- Merged (awaiting deploy): 1
 - In Progress: 0
 - Blocked: 0

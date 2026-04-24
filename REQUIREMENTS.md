@@ -58,13 +58,13 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1776999531888370737 | enlarge /worktree-merge scope | DEPLOYED | MEDIUM | feature/REQ-1776999531888370737-enlarge-worktree-merge-scope | 2026-04-24 | 2026-04-24 |
 | REQ-1777000250213162367 | Review follow-up: make worktree-merge REQ resolution resilient to missing requirement.worktreeId | DEPLOYED | HIGH | feature/REQ-1777000250213162367-review-follow-up-make-worktree-merge-req-resolution-resilient-to-missing-requirement-worktreeid | 2026-04-24 | 2026-04-24 |
 | REQ-1777001176788056212 | Review follow-up: fail REQ-ID merge on ambiguous active worktree mappings | DEPLOYED | HIGH | feature/REQ-1777001176788056212-review-follow-up-fail-req-id-merge-on-ambiguous-active-worktree-mappings | 2026-04-24 | 2026-04-24 |
-| REQ-1777016870530993058 | command hint | CODE_REVIEW | MEDIUM | feature/REQ-1777016870530993058-command-hint | 2026-04-24 | 2026-04-24 |
+| REQ-1777016870530993058 | command hint | MERGED | MEDIUM | feature/REQ-1777016870530993058-command-hint | 2026-04-24 | 2026-04-24 |
 
 ## Status Breakdown
 - **Proposed**: 0
 - **In Progress**: 0
-- **Code Review**: 1
-- **Merged**: 0
+- **Code Review**: 0
+- **Merged**: 1
 - **Deployed**: 49
 - **Blocked**: 0
 - **Backlog**: 0
@@ -75,6 +75,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-24T07:55:49Z
+* Last updated: 2026-04-24T08:01:43Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`
