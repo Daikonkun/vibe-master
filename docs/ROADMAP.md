@@ -23,7 +23,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776671113723590863: Review follow-up: prevent /upgrade from overwriting manifest history
 * [DEPLOYED] REQ-1776672458915568759: Review follow-up: ensure /upgrade merges manifest metadata when only manifests differ
 * [DEPLOYED] REQ-1776738115172246724: Review follow-up: define true canonical manifest root for /work-on
-* [IN_PROGRESS] REQ-1777000250213162367: Review follow-up: make worktree-merge REQ resolution resilient to missing requirement.worktreeId
+* [CODE_REVIEW] REQ-1777000250213162367: Review follow-up: make worktree-merge REQ resolution resilient to missing requirement.worktreeId
 
 ## Medium Priority
 * [DEPLOYED] REQ-1774628144: Review follow-up: align slash commands with actual skill invocations

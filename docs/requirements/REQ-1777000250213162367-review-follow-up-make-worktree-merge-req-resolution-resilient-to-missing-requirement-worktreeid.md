@@ -1,7 +1,7 @@
 # Review follow-up: make worktree-merge REQ resolution resilient to missing requirement.worktreeId
 
 **ID**: REQ-1777000250213162367  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-04-24T03:10:50Z  
 
@@ -22,14 +22,11 @@ Source: code-review of REQ-1776999531888370737. Severity: HIGH. Evidence: script
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1777000250213162367-review-follow-up-make-worktree-merge-req-resolution-resilient-to-missing-requirement-worktreeid.md`.
-   - **Summary**: Source: code-review of REQ-1776999531888370737. Severity: HIGH. Evidence: script
-   - **Key criteria**: - [ ] Criterion 1 - [ ] Criterion 2
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: (Add implementation notes here)
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1777000250213162367` and verify success criteria are met.
+1. Update `scripts/worktree-merge.sh` REQ-ID resolver so missing or stale `requirement.worktreeId` does not fail immediately.
+2. Implement a two-phase lookup in `scripts/worktree-merge.sh`: first try ACTIVE mapping by `worktreeId`/branch/id, then fallback to ACTIVE mapping by `requirementIds` containing the target REQ.
+3. Standardize diagnostics in `scripts/worktree-merge.sh` for each failure mode (`unknown REQ`, `no ACTIVE mapping after both lookups`, `resolved mapping missing branch`).
+4. Add or update regression coverage in `scripts/check-worktree-merge-unmapped-force.sh` (or adjacent worktree-merge checks) to include the missing-`worktreeId` fallback scenario.
+5. Validate behavior with direct script runs (`./scripts/worktree-merge.sh REQ-...`) for success and failure paths, then run `./scripts/regenerate-docs.sh` if generated docs are affected.
 
 **Last updated**: 2026-04-24T03:19:00Z
 
