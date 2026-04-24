@@ -77,11 +77,27 @@ if [[ "$TARGET_REF" =~ ^REQ-[0-9]+$ ]]; then
   WORKTREE_ENTRY_FROM_REQ=""
 
   if [ -n "$REQUIREMENT_WORKTREE_ID" ]; then
-    WORKTREE_ENTRY_FROM_REQ="$(jq -c --arg worktreeId "$REQUIREMENT_WORKTREE_ID" '
+    PRIMARY_MATCHES_RAW="$(jq -c --arg worktreeId "$REQUIREMENT_WORKTREE_ID" '
       .worktrees[]?
       | select(.status == "ACTIVE")
       | select((.id == $worktreeId) or (.branch == $worktreeId))
-    ' "$WORKTREE_MANIFEST" | head -1)"
+    ' "$WORKTREE_MANIFEST")"
+
+    PRIMARY_MATCH_COUNT="$(printf '%s\n' "$PRIMARY_MATCHES_RAW" | sed '/^$/d' | wc -l | tr -d ' ')"
+
+    if [ "$PRIMARY_MATCH_COUNT" -gt 1 ]; then
+      echo "Error: Ambiguous ACTIVE worktree mappings for requirement: $TARGET_REF (worktreeId '$REQUIREMENT_WORKTREE_ID')." >&2
+      echo "Conflicting candidates:" >&2
+      while IFS= read -r candidate; do
+        [ -z "$candidate" ] && continue
+        echo "  - id=$(echo "$candidate" | jq -r '.id // "(none)"'), branch=$(echo "$candidate" | jq -r '.branch // "(none)"')" >&2
+      done <<< "$PRIMARY_MATCHES_RAW"
+      exit 1
+    fi
+
+    if [ "$PRIMARY_MATCH_COUNT" -eq 1 ]; then
+      WORKTREE_ENTRY_FROM_REQ="$(printf '%s\n' "$PRIMARY_MATCHES_RAW" | sed -n '1p')"
+    fi
 
     if [ -z "$WORKTREE_ENTRY_FROM_REQ" ]; then
       echo "⚠️  Warning: Requirement $TARGET_REF references worktreeId $REQUIREMENT_WORKTREE_ID, but no ACTIVE entry matched. Falling back to requirement linkage lookup." >&2
@@ -89,11 +105,27 @@ if [[ "$TARGET_REF" =~ ^REQ-[0-9]+$ ]]; then
   fi
 
   if [ -z "$WORKTREE_ENTRY_FROM_REQ" ]; then
-    WORKTREE_ENTRY_FROM_REQ="$(jq -c --arg reqId "$TARGET_REF" '
+    FALLBACK_MATCHES_RAW="$(jq -c --arg reqId "$TARGET_REF" '
       .worktrees[]?
       | select(.status == "ACTIVE")
       | select((.requirementIds // []) | index($reqId))
-    ' "$WORKTREE_MANIFEST" | head -1)"
+    ' "$WORKTREE_MANIFEST")"
+
+    FALLBACK_MATCH_COUNT="$(printf '%s\n' "$FALLBACK_MATCHES_RAW" | sed '/^$/d' | wc -l | tr -d ' ')"
+
+    if [ "$FALLBACK_MATCH_COUNT" -gt 1 ]; then
+      echo "Error: Ambiguous ACTIVE worktree mappings for requirement: $TARGET_REF (requirementIds linkage)." >&2
+      echo "Conflicting candidates:" >&2
+      while IFS= read -r candidate; do
+        [ -z "$candidate" ] && continue
+        echo "  - id=$(echo "$candidate" | jq -r '.id // "(none)"'), branch=$(echo "$candidate" | jq -r '.branch // "(none)"')" >&2
+      done <<< "$FALLBACK_MATCHES_RAW"
+      exit 1
+    fi
+
+    if [ "$FALLBACK_MATCH_COUNT" -eq 1 ]; then
+      WORKTREE_ENTRY_FROM_REQ="$(printf '%s\n' "$FALLBACK_MATCHES_RAW" | sed -n '1p')"
+    fi
   fi
 
   if [ -z "$WORKTREE_ENTRY_FROM_REQ" ]; then
