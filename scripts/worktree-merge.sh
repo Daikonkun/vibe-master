@@ -14,6 +14,15 @@ source "$PROJECT_ROOT/scripts/_manifest-lock.sh"
 TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 UNMAPPED_FORCE_MODE=false
 WORKTREE_REMOVED=false
+CLEANUP_FAILURE=false
+declare -a CLEANUP_FAILURE_DETAILS=()
+
+record_cleanup_failure() {
+  local message="$1"
+  CLEANUP_FAILURE=true
+  CLEANUP_FAILURE_DETAILS+=("$message")
+  echo "⚠️  $message" >&2
+}
 
 usage() {
   cat << 'EOF'
@@ -231,8 +240,7 @@ if [ -n "$WORKTREE_PATH" ] && [ -d "$WORKTREE_PATH" ]; then
   elif [ "$UNMAPPED_FORCE_MODE" = true ]; then
     echo "⚠️  Could not remove worktree during forced unmapped merge: $WORKTREE_PATH" >&2
   else
-    echo "Error: Failed to remove worktree: $WORKTREE_PATH" >&2
-    exit 1
+    record_cleanup_failure "Failed to remove worktree: $WORKTREE_PATH"
   fi
 fi
 
@@ -240,8 +248,7 @@ if ! git -C "$PROJECT_ROOT" branch -d "$BRANCH"; then
   if [ "$UNMAPPED_FORCE_MODE" = true ]; then
     echo "⚠️  Could not delete branch during forced unmapped merge: $BRANCH" >&2
   else
-    echo "Error: Failed to delete merged branch: $BRANCH" >&2
-    exit 1
+    record_cleanup_failure "Failed to delete merged branch: $BRANCH"
   fi
 fi
 
@@ -368,7 +375,15 @@ if [ -n "$STATUS_AFTER_STAGE" ]; then
   fi
 fi
 
-git -C "$PROJECT_ROOT" commit -m "chore: update manifests and docs after merging $BRANCH" --no-verify 2>/dev/null || true
+if ! git -C "$PROJECT_ROOT" diff --cached --quiet; then
+  if ! git -C "$PROJECT_ROOT" commit -m "chore: update manifests and docs after merging $BRANCH" --no-verify; then
+    echo "Error: Failed to commit reconciliation changes after merging $BRANCH." >&2
+    echo "Run this to recover:" >&2
+    echo "  git -C \"$PROJECT_ROOT\" status --short" >&2
+    echo "  git -C \"$PROJECT_ROOT\" commit -m \"chore: update manifests and docs after merging $BRANCH\" --no-verify" >&2
+    exit 1
+  fi
+fi
 
 echo "✅ Merged $BRANCH"
 if [ "$WORKTREE_REMOVED" = true ]; then
@@ -385,4 +400,19 @@ if [ -n "$REQ_IDS" ]; then
 fi
 if [ "$UNMAPPED_FORCE_MODE" = true ]; then
   echo "⚠️  Completed forced unmapped merge. No requirement statuses were updated."
+fi
+
+if [ "$CLEANUP_FAILURE" = true ]; then
+  echo "⚠️  Merge completed and lifecycle manifests/docs were reconciled, but cleanup is incomplete." >&2
+  echo "Recovery guidance:" >&2
+  if [ -n "$WORKTREE_PATH" ]; then
+    echo "  git -C \"$PROJECT_ROOT\" worktree remove \"$WORKTREE_PATH\"" >&2
+  fi
+  echo "  git -C \"$PROJECT_ROOT\" branch -d \"$BRANCH\"" >&2
+  echo "  ./scripts/worktree-list.sh" >&2
+  echo "Cleanup failures:" >&2
+  for failure in "${CLEANUP_FAILURE_DETAILS[@]}"; do
+    echo "  - $failure" >&2
+  done
+  exit 1
 fi
