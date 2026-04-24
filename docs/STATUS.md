@@ -2,8 +2,10 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (0)
+## PROPOSED (1)
 
+* REQ-1777000250213162367: Review follow-up: make worktree-merge REQ resolution resilient to missing requirement.worktreeId (priority: HIGH)
+  - Worktree: none
 
 ## IN_PROGRESS (0)
 
@@ -131,8 +133,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 
 ## Stats
-- Total Requirements: 52
-- Deployed: 46 (88%)
+- Total Requirements: 53
+- Deployed: 46 (86%)
 - Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0

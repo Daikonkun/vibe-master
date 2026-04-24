@@ -110,3 +110,5 @@ REQ-1776738115172246724: Review follow-up: define true canonical manifest root f
 
 REQ-1776999531888370737: enlarge /worktree-merge scope (no dependencies)
 
+REQ-1777000250213162367: Review follow-up: make worktree-merge REQ resolution resilient to missing requirement.worktreeId (no dependencies)
+
