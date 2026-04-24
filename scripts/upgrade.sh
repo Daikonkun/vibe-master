@@ -139,7 +139,17 @@ resolve_template_repo() {
 
 is_registered_worktree() {
   local target_path="$1"
-  git -C "$PROJECT_ROOT" worktree list --porcelain | awk '/^worktree / {print substr($0, 10)}' | grep -Fxq "$target_path"
+  local normalized_target
+  normalized_target="$(cd "$target_path" 2>/dev/null && pwd -P)" || return 1
+
+  git -C "$PROJECT_ROOT" worktree list --porcelain \
+    | awk '/^worktree / {print substr($0, 10)}' \
+    | while IFS= read -r listed_path; do
+        [ -z "$listed_path" ] && continue
+        if [ "$(cd "$listed_path" 2>/dev/null && pwd -P)" = "$normalized_target" ]; then
+          return 0
+        fi
+      done
 }
 
 ensure_upgrade_worktree() {
@@ -170,6 +180,45 @@ ensure_upgrade_worktree() {
   fi
 
   echo "✅ Created isolated upgrade worktree: $WORKTREE_PATH"
+}
+
+sync_upgrade_worktree_with_project_root() {
+  local target_ref
+
+  if ! command -v rsync >/dev/null 2>&1; then
+    echo "Error: rsync is required to refresh the upgrade worktree." >&2
+    return 1
+  fi
+
+  if ! target_ref="$(git -C "$PROJECT_ROOT" rev-parse --verify "$BASE_BRANCH^{commit}" 2>/dev/null)"; then
+    echo "Error: Unable to resolve base branch commit for refresh: $BASE_BRANCH" >&2
+    return 1
+  fi
+
+  if is_registered_worktree "$WORKTREE_PATH"; then
+    if ! git -C "$PROJECT_ROOT" -C "$WORKTREE_PATH" diff --quiet --ignore-submodules HEAD --; then
+      echo "Error: Upgrade worktree has uncommitted changes. Commit, stash, or remove them before rerunning upgrade." >&2
+      return 1
+    fi
+
+    echo "🔄 Refreshing upgrade worktree from project root ($BASE_BRANCH @ ${target_ref:0:12})"
+    git -C "$WORKTREE_PATH" checkout -q "$BRANCH_NAME"
+    git -C "$WORKTREE_PATH" reset --hard "$target_ref" >/dev/null
+    git -C "$WORKTREE_PATH" clean -fdx >/dev/null
+  fi
+
+  rsync -a --delete \
+    --exclude '.git' \
+    --exclude '.upgrade-template' \
+    --exclude '.DS_Store' \
+    "$PROJECT_ROOT"/ "$WORKTREE_PATH"/
+
+  git -C "$WORKTREE_PATH" add -A
+  if git -C "$WORKTREE_PATH" diff --cached --quiet --ignore-submodules --; then
+    echo "✅ Upgrade worktree already matches the active project tree."
+  else
+    echo "✅ Refreshed upgrade worktree snapshot from active project tree."
+  fi
 }
 
 prepare_preview() {
@@ -452,6 +501,7 @@ fi
 
 resolve_template_repo
 ensure_upgrade_worktree
+sync_upgrade_worktree_with_project_root
 prepare_preview
 
 if [ "$APPLY" = "true" ]; then

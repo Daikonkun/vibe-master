@@ -181,6 +181,7 @@ assert_manifest_only_apply_path() {
     cat "$UPGRADE_OUTPUT" >&2
     exit 1
   fi
+
 }
 
 assert_history_preserved() {
