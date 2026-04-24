@@ -25,7 +25,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776738115172246724: Review follow-up: define true canonical manifest root for /work-on
 * [DEPLOYED] REQ-1777000250213162367: Review follow-up: make worktree-merge REQ resolution resilient to missing requirement.worktreeId
 * [DEPLOYED] REQ-1777001176788056212: Review follow-up: fail REQ-ID merge on ambiguous active worktree mappings
-* [IN_PROGRESS] REQ-1777018133258390308: Review follow-up: make worktree-merge atomic across merge and cleanup failures
+* [CODE_REVIEW] REQ-1777018133258390308: Review follow-up: make worktree-merge atomic across merge and cleanup failures
 * [PROPOSED] REQ-1777018133999709609: Review follow-up: stop swallowing lifecycle commit failures that later block /worktree-merge
 
 ## Medium Priority

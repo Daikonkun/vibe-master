@@ -1,7 +1,7 @@
 # Review follow-up: make worktree-merge atomic across merge and cleanup failures
 
 **ID**: REQ-1777018133258390308  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-04-24T08:08:53Z  
 
@@ -24,16 +24,13 @@ Source: code-review. Severity: HIGH. Evidence: scripts/worktree-merge.sh merges 
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1777018133258390308-review-follow-up-make-worktree-merge-atomic-across-merge-and-cleanup-failures.md`.
-   - **Summary**: Source: code-review. Severity: HIGH. Evidence: scripts/worktree-merge.sh merges 
-   - **Key criteria**: - [ ] `scripts/worktree-merge.sh` keeps the merge-first approach and performs merge into base before
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: - Decision (2026-04-24): adopt **merge-first with guaranteed post-merge reconciliation commit**.
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1777018133258390308` and verify success criteria are met.
+1. Inspect merge and cleanup flow in `scripts/worktree-merge.sh`, then identify all post-merge failure points (`git worktree remove`, branch deletion, and manifest/doc updates) that can leave lifecycle state stale.
+2. Implement a guaranteed post-merge reconciliation path in `scripts/worktree-merge.sh` so requirement/worktree manifests and generated docs are updated and committed even if cleanup operations fail.
+3. Ensure failure messaging in `scripts/worktree-merge.sh` includes explicit recovery instructions (exact follow-up command(s) and expected state) while still surfacing the original cleanup error.
+4. Regenerate project documentation with `./scripts/regenerate-docs.sh` and verify affected outputs in `docs/STATUS.md` and `REQUIREMENTS.md` remain consistent with manifest state.
+5. Validate end-to-end behavior with `./scripts/check-requirement-worktree-lifecycle.sh` and `./scripts/show-requirement.sh REQ-1777018133258390308`.
 
-**Last updated**: 2026-04-24T08:13:15Z
+**Last updated**: 2026-04-24T08:18:00Z
 
 ## Dependencies
 

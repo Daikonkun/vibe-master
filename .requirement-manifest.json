@@ -856,12 +856,19 @@
       "id": "REQ-1777018133258390308",
       "name": "Review follow-up: make worktree-merge atomic across merge and cleanup failures",
       "description": "Source: code-review. Severity: HIGH. Evidence: scripts/worktree-merge.sh merges into base before cleanup/manifest updates (merge at line ~226), then exits on cleanup failures such as worktree remove or branch delete errors (lines ~235-248), which can leave merge committed while requirement/worktree manifests and docs are not updated. Required outcome: make /worktree-merge transactional/fail-safe so post-merge cleanup failures cannot leave lifecycle manifests stale; either preflight cleanup blockers before merge, or persist/commit manifest status updates and clear recovery instructions before exiting.",
-      "status": "IN_PROGRESS",
+      "status": "CODE_REVIEW",
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-24T08:08:53Z",
-      "updatedAt": "2026-04-24T08:13:14Z",
-      "worktreeId": "feature/REQ-1777018133258390308-review-follow-up-make-worktree-merge-atomic-across-merge-and-cleanup-failures"
+      "updatedAt": "2026-04-24T08:18:37Z",
+      "worktreeId": "feature/REQ-1777018133258390308-review-follow-up-make-worktree-merge-atomic-across-merge-and-cleanup-failures",
+      "statusHistory": [
+        {
+          "from": "IN_PROGRESS",
+          "to": "CODE_REVIEW",
+          "changedAt": "2026-04-24T08:18:37Z"
+        }
+      ]
     },
     {
       "id": "REQ-1777018133999709609",
