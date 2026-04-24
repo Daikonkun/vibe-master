@@ -56,7 +56,7 @@ Workflow:
    - If a no-diff `CODE_REVIEW` override was used in step 7, pass `--reason "NO_DIFF_CODE_REVIEW_OVERRIDE: <reason>"` so the justification is persisted in requirement artifacts.
    - This step must execute as soon as the user confirms in step 8.
 10. **Regenerate docs**: Run `scripts/regenerate-docs.sh` to keep REQUIREMENTS.md, STATUS.md, ROADMAP.md, and DEPENDENCIES.md in sync.
-11. Summarize what was done and the new status.
+11. Summarize what was done and the new status. On successful completion, include: `Next recommended command: /code-review <REQ-ID>`.
 
 Constraints:
 - If the requirement does not exist in the manifest, report the error and stop.
@@ -73,6 +73,7 @@ Constraints:
 - Ask the user for confirmation exactly once before advancing status when auto mode is not active. After the user confirms, advance immediately without re-asking.
 - Surface any script failures exactly.
 - If the spec is too vague to determine completion, ask clarifying questions rather than guessing.
+- Emit the next-command recommendation only on successful completion paths; do not emit it on failures/stops.
 
 Autonomous execution contract (`--auto`): trusted orchestrator calls run in auto mode by default; `--no-auto` is the explicit opt-out for interactive confirmation. Auto mode may bypass only step 8 confirmation. All other workflow guarantees remain unchanged, including lifecycle enforcement, no-op evidence checks, and audited status transitions via `scripts/start-work.sh` and `scripts/update-requirement-status.sh`.
 
