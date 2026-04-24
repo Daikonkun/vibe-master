@@ -3,6 +3,7 @@
 
 set -euo pipefail
 
+TARGET_REF=""
 BRANCH=""
 BASE_BRANCH="main"
 FORCE="false"
@@ -16,7 +17,7 @@ WORKTREE_REMOVED=false
 
 usage() {
   cat << 'EOF'
-Usage: ./scripts/worktree-merge.sh <branch> [base-branch] [--force]
+Usage: ./scripts/worktree-merge.sh <branch|REQ-ID> [base-branch] [--force]
 
 Flags:
   --force   Override lifecycle/mapping safeguards (unmapped branch or non-CODE_REVIEW requirements)
@@ -33,7 +34,7 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
   exit 0
 fi
 
-BRANCH="$1"
+TARGET_REF="$1"
 shift
 
 if [ "$#" -gt 0 ] && [[ "$1" != --* ]]; then
@@ -58,9 +59,46 @@ for arg in "$@"; do
   esac
 done
 
-if [ -z "$BRANCH" ]; then
+if [ -z "$TARGET_REF" ]; then
   usage >&2
   exit 1
+fi
+
+if [[ "$TARGET_REF" =~ ^REQ-[0-9]+$ ]]; then
+  if ! jq -e --arg reqId "$TARGET_REF" '.requirements[]? | select(.id == $reqId)' "$REQ_MANIFEST" >/dev/null; then
+    echo "Error: Requirement not found in manifest: $TARGET_REF" >&2
+    exit 1
+  fi
+
+  REQUIREMENT_WORKTREE_ID="$(jq -r --arg reqId "$TARGET_REF" '
+    .requirements[]? | select(.id == $reqId) | .worktreeId // empty
+  ' "$REQ_MANIFEST")"
+
+  if [ -z "$REQUIREMENT_WORKTREE_ID" ]; then
+    echo "Error: Requirement has no mapped worktreeId: $TARGET_REF" >&2
+    exit 1
+  fi
+
+  WORKTREE_ENTRY_FROM_REQ="$(jq -c --arg reqId "$TARGET_REF" --arg worktreeId "$REQUIREMENT_WORKTREE_ID" '
+    .worktrees[]?
+    | select(.status == "ACTIVE")
+    | select((.id == $worktreeId) or (.branch == $worktreeId) or ((.requirementIds // []) | index($reqId)))
+  ' "$WORKTREE_MANIFEST" | head -1)"
+
+  if [ -z "$WORKTREE_ENTRY_FROM_REQ" ]; then
+    echo "Error: No ACTIVE worktree mapping found for requirement: $TARGET_REF" >&2
+    exit 1
+  fi
+
+  BRANCH="$(echo "$WORKTREE_ENTRY_FROM_REQ" | jq -r '.branch // .id // empty')"
+  if [ -z "$BRANCH" ]; then
+    echo "Error: ACTIVE worktree mapping for $TARGET_REF does not provide a branch" >&2
+    exit 1
+  fi
+
+  echo "Resolved $TARGET_REF to branch: $BRANCH"
+else
+  BRANCH="$TARGET_REF"
 fi
 
 if [ ! -f "$REQ_MANIFEST" ] || [ ! -f "$WORKTREE_MANIFEST" ]; then
