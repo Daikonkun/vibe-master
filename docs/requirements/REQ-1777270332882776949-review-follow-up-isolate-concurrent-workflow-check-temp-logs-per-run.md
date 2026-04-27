@@ -22,14 +22,11 @@ Source: code-review. Severity: HIGH. Evidence: scripts/check-concurrent-workflow
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1777270332882776949-review-follow-up-isolate-concurrent-workflow-check-temp-logs-per-run.md`.
-   - **Summary**: Source: code-review. Severity: HIGH. Evidence: scripts/check-concurrent-workflow
-   - **Key criteria**: - [ ] Criterion 1 - [ ] Criterion 2
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: (Add implementation notes here)
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1777270332882776949` and verify success criteria are met.
+1. Refactor `scripts/check-concurrent-workflows.sh` to allocate all diagnostic logs under its per-run temp workspace (the directory created via `mktemp -d`) instead of fixed `/tmp/start-*.log`, `/tmp/status-*.log`, and `/tmp/merge-*.log` names.
+2. Update every writer and reader path in `scripts/check-concurrent-workflows.sh` so failure reporting consumes only run-local files while preserving deterministic error output ordering.
+3. Ensure cleanup in `scripts/check-concurrent-workflows.sh` removes the per-run log directory/files on both success and failure paths (including trap/exit handling), with no leftover temp artifacts.
+4. Execute `./scripts/check-concurrent-workflows.sh` repeatedly (including parallel invocations from separate terminals) to verify there is no cross-run log clobbering and failures remain attributable to the correct run.
+5. Run `./scripts/regenerate-docs.sh` and `./scripts/show-requirement.sh REQ-1777270332882776949` to persist docs/state updates and confirm the requirement remains `IN_PROGRESS` with the updated plan.
 
 **Last updated**: 2026-04-27T06:35:18Z
 

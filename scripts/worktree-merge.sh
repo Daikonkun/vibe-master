@@ -7,6 +7,7 @@ TARGET_REF=""
 BRANCH=""
 BASE_BRANCH="main"
 FORCE="false"
+AUTO_RESOLVE_CONFLICTS="false"
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
 WORKTREE_MANIFEST="$PROJECT_ROOT/.worktree-manifest.json"
@@ -24,6 +25,106 @@ record_cleanup_failure() {
   CLEANUP_FAILURE=true
   CLEANUP_FAILURE_DETAILS+=("$message")
   echo "⚠️  $message" >&2
+}
+
+is_tracked_requirement_spec_conflict() {
+  local candidate="$1"
+  local req_id
+  local req_spec
+
+  [ -z "$candidate" ] && return 1
+  [ -z "${REQ_IDS:-}" ] && return 1
+
+  while IFS= read -r req_id; do
+    [ -z "$req_id" ] && continue
+    req_spec=""
+    if [ -d "$PROJECT_ROOT/docs/requirements" ]; then
+      req_spec="$(find "$PROJECT_ROOT/docs/requirements" -maxdepth 1 -type f -name "${req_id}-*.md" | head -1)"
+    fi
+    if [ -n "$req_spec" ] && [ "${req_spec#$PROJECT_ROOT/}" = "$candidate" ]; then
+      return 0
+    fi
+  done <<< "$REQ_IDS"
+
+  return 1
+}
+
+is_auto_resolvable_conflict_file() {
+  local candidate="$1"
+
+  case "$candidate" in
+    .requirement-manifest.json|.worktree-manifest.json|REQUIREMENTS.md|docs/STATUS.md|docs/ROADMAP.md|docs/DEPENDENCIES.md)
+      return 0
+      ;;
+  esac
+
+  if is_tracked_requirement_spec_conflict "$candidate"; then
+    return 0
+  fi
+
+  return 1
+}
+
+resolve_conflict_file() {
+  local candidate="$1"
+
+  case "$candidate" in
+    .requirement-manifest.json|.worktree-manifest.json)
+      # Prefer branch content for manifest merges, then reconcile lifecycle below.
+      if ! git -C "$PROJECT_ROOT" checkout --theirs -- "$candidate"; then
+        git -C "$PROJECT_ROOT" checkout --ours -- "$candidate"
+      fi
+      ;;
+    REQUIREMENTS.md|docs/STATUS.md|docs/ROADMAP.md|docs/DEPENDENCIES.md)
+      # Generated outputs are regenerated after lifecycle updates.
+      git -C "$PROJECT_ROOT" checkout --ours -- "$candidate"
+      ;;
+    *)
+      if is_tracked_requirement_spec_conflict "$candidate"; then
+        # Prefer feature branch requirement narrative for the merged requirement scope.
+        if ! git -C "$PROJECT_ROOT" checkout --theirs -- "$candidate"; then
+          git -C "$PROJECT_ROOT" checkout --ours -- "$candidate"
+        fi
+      else
+        return 1
+      fi
+      ;;
+  esac
+
+  git -C "$PROJECT_ROOT" add -- "$candidate"
+}
+
+auto_resolve_conflicts() {
+  local unresolved
+  local candidate
+  local unsupported=()
+
+  unresolved="$(git -C "$PROJECT_ROOT" diff --name-only --diff-filter=U)"
+  if [ -z "$unresolved" ]; then
+    return 1
+  fi
+
+  while IFS= read -r candidate; do
+    [ -z "$candidate" ] && continue
+
+    if ! is_auto_resolvable_conflict_file "$candidate"; then
+      unsupported+=("$candidate")
+      continue
+    fi
+
+    if ! resolve_conflict_file "$candidate"; then
+      unsupported+=("$candidate")
+    fi
+  done <<< "$unresolved"
+
+  if [ "${#unsupported[@]}" -gt 0 ]; then
+    echo "Error: Auto-resolve could not safely handle these merge conflicts:" >&2
+    printf '  %s\n' "${unsupported[@]}" >&2
+    echo "Resolve them manually, then run: git commit" >&2
+    return 1
+  fi
+
+  return 0
 }
 
 auto_review_dirty_worktree() {
@@ -79,7 +180,8 @@ usage() {
 Usage: ./scripts/worktree-merge.sh <branch|REQ-ID> [base-branch] [--force]
 
 Flags:
-  --force   Override lifecycle/mapping safeguards (unmapped branch or non-CODE_REVIEW requirements)
+  --force                    Override lifecycle/mapping safeguards (unmapped branch or non-CODE_REVIEW requirements)
+  --auto-resolve-conflicts   Attempt safe conflict resolution for generated outputs/manifests and mapped requirement specs
 EOF
 }
 
@@ -105,6 +207,9 @@ for arg in "$@"; do
   case "$arg" in
     --force)
       FORCE="true"
+      ;;
+    --auto-resolve-conflicts)
+      AUTO_RESOLVE_CONFLICTS="true"
       ;;
     -h|--help)
       usage
@@ -290,7 +395,36 @@ fi
 echo "Merging $BRANCH into $BASE_BRANCH..."
 PRE_MERGE_HEAD="$(git -C "$PROJECT_ROOT" rev-parse HEAD)"
 git -C "$PROJECT_ROOT" checkout "$BASE_BRANCH"
+set +e
 git -C "$PROJECT_ROOT" merge --no-ff "$BRANCH" -m "Merge $BRANCH"
+MERGE_EXIT_CODE=$?
+set -e
+
+if [ "$MERGE_EXIT_CODE" -ne 0 ]; then
+  if [ "$AUTO_RESOLVE_CONFLICTS" != "true" ]; then
+    exit "$MERGE_EXIT_CODE"
+  fi
+
+  echo "⚠️  Merge reported conflicts. Attempting auto-resolution (--auto-resolve-conflicts)..." >&2
+  if ! auto_resolve_conflicts; then
+    exit 1
+  fi
+
+  if [ -n "$(git -C "$PROJECT_ROOT" diff --name-only --diff-filter=U)" ]; then
+    echo "Error: Unresolved merge conflicts remain after auto-resolution attempt." >&2
+    git -C "$PROJECT_ROOT" diff --name-only --diff-filter=U >&2
+    exit 1
+  fi
+
+  if ! git -C "$PROJECT_ROOT" commit -m "Merge $BRANCH"; then
+    echo "Error: Auto-resolved merge requires manual commit completion." >&2
+    echo "Run this to recover:" >&2
+    echo "  git -C \"$PROJECT_ROOT\" status --short" >&2
+    echo "  git -C \"$PROJECT_ROOT\" commit" >&2
+    exit 1
+  fi
+fi
+
 POST_MERGE_HEAD="$(git -C "$PROJECT_ROOT" rev-parse HEAD)"
 if [ "$PRE_MERGE_HEAD" != "$POST_MERGE_HEAD" ]; then
   MERGE_APPLIED=true

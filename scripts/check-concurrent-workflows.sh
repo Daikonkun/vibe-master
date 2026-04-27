@@ -6,6 +6,15 @@ set -euo pipefail
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 TMP_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/concurrent-workflows-check.XXXXXX")"
 CHECK_ROOT="$TMP_ROOT/check"
+LOG_ROOT="$TMP_ROOT/logs"
+START_RACE_LOG_1="$LOG_ROOT/start-race-1.log"
+START_RACE_LOG_2="$LOG_ROOT/start-race-2.log"
+START_A_LOG="$LOG_ROOT/start-a.log"
+START_B_LOG="$LOG_ROOT/start-b.log"
+STATUS_A_LOG="$LOG_ROOT/status-a.log"
+STATUS_B_LOG="$LOG_ROOT/status-b.log"
+MERGE_A_LOG="$LOG_ROOT/merge-a.log"
+MERGE_B_LOG="$LOG_ROOT/merge-b.log"
 
 cleanup() {
   if [ -d "$CHECK_ROOT/.git" ]; then
@@ -33,6 +42,7 @@ require_cmd jq
 require_cmd git
 
 mkdir -p "$CHECK_ROOT"
+mkdir -p "$LOG_ROOT"
 (
   cd "$PROJECT_ROOT"
   tar -cf - --exclude='.git' .
@@ -149,9 +159,9 @@ req_status() {
 
 # 1) Same-REQ race: exactly one concurrent start-work should succeed.
 set +e
-bash scripts/start-work.sh "$RACE_REQ" >/tmp/start-race-1.log 2>&1 &
+bash scripts/start-work.sh "$RACE_REQ" >"$START_RACE_LOG_1" 2>&1 &
 RACE_PID_1=$!
-bash scripts/start-work.sh "$RACE_REQ" >/tmp/start-race-2.log 2>&1 &
+bash scripts/start-work.sh "$RACE_REQ" >"$START_RACE_LOG_2" 2>&1 &
 RACE_PID_2=$!
 
 wait "$RACE_PID_1"
@@ -167,9 +177,9 @@ RACE_SUCCESS=0
 if [ "$RACE_SUCCESS" -ne 1 ]; then
   echo "FAIL: expected exactly one successful same-REQ start-work race for $RACE_REQ (statuses: $RACE_STATUS_1, $RACE_STATUS_2)." >&2
   echo "---- start-race-1.log ----" >&2
-  cat /tmp/start-race-1.log >&2 || true
+  cat "$START_RACE_LOG_1" >&2 || true
   echo "---- start-race-2.log ----" >&2
-  cat /tmp/start-race-2.log >&2 || true
+  cat "$START_RACE_LOG_2" >&2 || true
   exit 1
 fi
 
@@ -185,9 +195,9 @@ fi
 
 # 2) Cross-REQ concurrent start-work progression.
 set +e
-bash scripts/start-work.sh "$REQ_A" >/tmp/start-a.log 2>&1 &
+bash scripts/start-work.sh "$REQ_A" >"$START_A_LOG" 2>&1 &
 PID_A=$!
-bash scripts/start-work.sh "$REQ_B" >/tmp/start-b.log 2>&1 &
+bash scripts/start-work.sh "$REQ_B" >"$START_B_LOG" 2>&1 &
 PID_B=$!
 
 wait "$PID_A"
@@ -199,9 +209,9 @@ set -e
 if [ "$STATUS_A" -ne 0 ] || [ "$STATUS_B" -ne 0 ]; then
   echo "FAIL: expected concurrent cross-REQ start-work to succeed for $REQ_A and $REQ_B." >&2
   echo "---- start-a.log ----" >&2
-  cat /tmp/start-a.log >&2 || true
+  cat "$START_A_LOG" >&2 || true
   echo "---- start-b.log ----" >&2
-  cat /tmp/start-b.log >&2 || true
+  cat "$START_B_LOG" >&2 || true
   exit 1
 fi
 
@@ -248,9 +258,9 @@ git -C "$WT_PATH_B" add "$SPEC_B"
 git -C "$WT_PATH_B" commit -m "test: evidence for $REQ_B" >/dev/null
 
 set +e
-bash scripts/update-requirement-status.sh "$REQ_A" CODE_REVIEW >/tmp/status-a.log 2>&1 &
+bash scripts/update-requirement-status.sh "$REQ_A" CODE_REVIEW >"$STATUS_A_LOG" 2>&1 &
 STATUS_PID_A=$!
-bash scripts/update-requirement-status.sh "$REQ_B" CODE_REVIEW >/tmp/status-b.log 2>&1 &
+bash scripts/update-requirement-status.sh "$REQ_B" CODE_REVIEW >"$STATUS_B_LOG" 2>&1 &
 STATUS_PID_B=$!
 
 wait "$STATUS_PID_A"
@@ -262,9 +272,9 @@ set -e
 if [ "$SET_STATUS_A" -ne 0 ] || [ "$SET_STATUS_B" -ne 0 ]; then
   echo "FAIL: concurrent status advancement to CODE_REVIEW failed." >&2
   echo "---- status-a.log ----" >&2
-  cat /tmp/status-a.log >&2 || true
+  cat "$STATUS_A_LOG" >&2 || true
   echo "---- status-b.log ----" >&2
-  cat /tmp/status-b.log >&2 || true
+  cat "$STATUS_B_LOG" >&2 || true
   exit 1
 fi
 
@@ -281,15 +291,15 @@ if [ -n "$(git -C "$CHECK_ROOT" status --porcelain)" ]; then
 fi
 
 # 4) Execute worktree-merge for both requirements and verify lifecycle/doc consistency.
-if ! bash scripts/worktree-merge.sh "$REQ_A" >/tmp/merge-a.log 2>&1; then
+if ! bash scripts/worktree-merge.sh "$REQ_A" >"$MERGE_A_LOG" 2>&1; then
   echo "FAIL: worktree-merge failed for $REQ_A" >&2
-  cat /tmp/merge-a.log >&2 || true
+  cat "$MERGE_A_LOG" >&2 || true
   exit 1
 fi
 
-if ! bash scripts/worktree-merge.sh "$REQ_B" >/tmp/merge-b.log 2>&1; then
+if ! bash scripts/worktree-merge.sh "$REQ_B" >"$MERGE_B_LOG" 2>&1; then
   echo "FAIL: worktree-merge failed for $REQ_B" >&2
-  cat /tmp/merge-b.log >&2 || true
+  cat "$MERGE_B_LOG" >&2 || true
   exit 1
 fi
 
