@@ -62,9 +62,10 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1777018133258390308 | Review follow-up: make worktree-merge atomic across merge and cleanup failures | DEPLOYED | HIGH | feature/REQ-1777018133258390308-review-follow-up-make-worktree-merge-atomic-across-merge-and-cleanup-failures | 2026-04-24 | 2026-04-24 |
 | REQ-1777018133999709609 | Review follow-up: stop swallowing lifecycle commit failures that later block /worktree-merge | DEPLOYED | HIGH | feature/REQ-1777018133999709609-review-follow-up-stop-swallowing-lifecycle-commit-failures-that-later-block-worktree-merge | 2026-04-24 | 2026-04-24 |
 | REQ-1777257209745418656 | Harden start-work with dual-manifest atomic section | PROPOSED | HIGH | — | 2026-04-27 | 2026-04-27 |
+| REQ-1777257214829301915 | Serialize docs regeneration across concurrent workflows | PROPOSED | HIGH | — | 2026-04-27 | 2026-04-27 |
 
 ## Status Breakdown
-- **Proposed**: 1
+- **Proposed**: 2
 - **In Progress**: 0
 - **Code Review**: 0
 - **Merged**: 0
@@ -78,6 +79,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-27T02:33:29Z
+* Last updated: 2026-04-27T02:33:34Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

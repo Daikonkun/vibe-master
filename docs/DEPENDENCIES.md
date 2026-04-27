@@ -122,3 +122,5 @@ REQ-1777018133999709609: Review follow-up: stop swallowing lifecycle commit fail
 
 REQ-1777257209745418656: Harden start-work with dual-manifest atomic section (no dependencies)
 
+REQ-1777257214829301915: Serialize docs regeneration across concurrent workflows (no dependencies)
+
