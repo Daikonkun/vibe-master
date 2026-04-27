@@ -82,7 +82,8 @@ git -C "$REPO_DIR" checkout main >/dev/null
 
 git -C "$REPO_DIR" worktree add "$WORKTREE_PATH" "$BRANCH_NAME" >/dev/null
 
-# Keep tracked dirty file in the active worktree so merge aborts before destructive actions.
+# Keep tracked dirty file in the active worktree.
+# The merge script should now auto-review and commit tracked worktree changes before cleanup.
 echo "dirty" >> "$WORKTREE_PATH/README.md"
 
 set +e
@@ -90,8 +91,8 @@ OUTPUT="$(cd "$REPO_DIR" && ./scripts/worktree-merge.sh "$REQ_ID" 2>&1)"
 STATUS=$?
 set -e
 
-if [ "$STATUS" -eq 0 ]; then
-  echo "FAIL: expected non-zero status because tracked dirty file should block merge" >&2
+if [ "$STATUS" -ne 0 ]; then
+  echo "FAIL: expected merge to succeed with auto-review dirty-worktree handling" >&2
   echo "$OUTPUT" >&2
   exit 1
 fi
@@ -108,10 +109,20 @@ if ! echo "$OUTPUT" | grep -q "Resolved $REQ_ID to branch: $BRANCH_NAME"; then
   exit 1
 fi
 
-if ! echo "$OUTPUT" | grep -q "Failed to remove worktree"; then
-  echo "FAIL: expected downstream failure after successful branch resolution" >&2
+if ! echo "$OUTPUT" | grep -q "Auto-review decision: tracked changes found; auto-committing before cleanup"; then
+  echo "FAIL: expected auto-review commit decision message" >&2
   echo "$OUTPUT" >&2
   exit 1
 fi
 
-echo "PASS: REQ fallback resolves stale worktreeId via requirementIds and proceeds into downstream merge workflow."
+if ! jq -e --arg reqId "$REQ_ID" '.requirements[] | select(.id == $reqId and .status == "MERGED")' "$REPO_DIR/.requirement-manifest.json" >/dev/null; then
+  echo "FAIL: expected requirement status to update to MERGED after successful merge" >&2
+  exit 1
+fi
+
+if ! jq -e --arg branch "$BRANCH_NAME" '.worktrees[] | select((.branch == $branch or .id == $branch) and .status == "MERGED")' "$REPO_DIR/.worktree-manifest.json" >/dev/null; then
+  echo "FAIL: expected worktree status to update to MERGED after successful merge" >&2
+  exit 1
+fi
+
+echo "PASS: REQ fallback resolves stale worktreeId and auto-review handles dirty worktree before successful merge cleanup."

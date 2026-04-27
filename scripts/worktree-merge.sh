@@ -15,6 +15,8 @@ TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 UNMAPPED_FORCE_MODE=false
 WORKTREE_REMOVED=false
 CLEANUP_FAILURE=false
+PRE_MERGE_HEAD=""
+MERGE_APPLIED=false
 declare -a CLEANUP_FAILURE_DETAILS=()
 
 record_cleanup_failure() {
@@ -22,6 +24,54 @@ record_cleanup_failure() {
   CLEANUP_FAILURE=true
   CLEANUP_FAILURE_DETAILS+=("$message")
   echo "⚠️  $message" >&2
+}
+
+auto_review_dirty_worktree() {
+  local worktree_path="$1"
+  local branch="$2"
+  local wt_dirty
+  local wt_tracked
+  local wt_untracked
+
+  if [ -z "$worktree_path" ] || [ ! -d "$worktree_path" ]; then
+    return 0
+  fi
+
+  wt_dirty="$(git -C "$worktree_path" status --porcelain --untracked-files=all)"
+  if [ -z "$wt_dirty" ]; then
+    return 0
+  fi
+
+  wt_tracked="$(printf '%s\n' "$wt_dirty" | grep -Ev '^\?\?' || true)"
+  wt_untracked="$(printf '%s\n' "$wt_dirty" | grep -E '^\?\?' || true)"
+
+  echo "ℹ️  Auto-review: detected dirty worktree at $worktree_path"
+
+  if [ -n "$wt_tracked" ]; then
+    echo "ℹ️  Auto-review decision: tracked changes found; auto-committing before cleanup."
+    git -C "$worktree_path" add -A
+    if ! git -C "$worktree_path" diff --cached --quiet; then
+      if ! git -C "$worktree_path" commit -m "chore: auto-commit worktree changes before merge cleanup for $branch" --no-verify >/dev/null; then
+        echo "Error: Auto-review failed to commit dirty worktree changes at $worktree_path" >&2
+        return 1
+      fi
+    fi
+  elif [ -n "$wt_untracked" ]; then
+    echo "ℹ️  Auto-review decision: untracked-only changes found; stashing before cleanup."
+    if ! git -C "$worktree_path" stash push -u -m "auto-stash before worktree cleanup for $branch" >/dev/null; then
+      echo "Error: Auto-review failed to stash untracked worktree changes at $worktree_path" >&2
+      return 1
+    fi
+  fi
+
+  wt_dirty="$(git -C "$worktree_path" status --porcelain --untracked-files=all)"
+  if [ -n "$wt_dirty" ]; then
+    echo "Error: Worktree remains dirty after auto-review at $worktree_path" >&2
+    echo "$wt_dirty" | sed 's/^/  /' >&2
+    return 1
+  fi
+
+  return 0
 }
 
 usage() {
@@ -230,9 +280,21 @@ if [ -n "$REQ_IDS" ]; then
   done <<< "$REQ_IDS"
 fi
 
+if [ -n "$WORKTREE_PATH" ] && [ -d "$WORKTREE_PATH" ]; then
+  if ! auto_review_dirty_worktree "$WORKTREE_PATH" "$BRANCH"; then
+    echo "Error: Automatic dirty worktree review failed. Resolve manually, then retry." >&2
+    exit 1
+  fi
+fi
+
 echo "Merging $BRANCH into $BASE_BRANCH..."
+PRE_MERGE_HEAD="$(git -C "$PROJECT_ROOT" rev-parse HEAD)"
 git -C "$PROJECT_ROOT" checkout "$BASE_BRANCH"
 git -C "$PROJECT_ROOT" merge --no-ff "$BRANCH" -m "Merge $BRANCH"
+POST_MERGE_HEAD="$(git -C "$PROJECT_ROOT" rev-parse HEAD)"
+if [ "$PRE_MERGE_HEAD" != "$POST_MERGE_HEAD" ]; then
+  MERGE_APPLIED=true
+fi
 
 if [ -n "$WORKTREE_PATH" ] && [ -d "$WORKTREE_PATH" ]; then
   if git -C "$PROJECT_ROOT" worktree remove "$WORKTREE_PATH"; then
@@ -250,6 +312,29 @@ if ! git -C "$PROJECT_ROOT" branch -d "$BRANCH"; then
   else
     record_cleanup_failure "Failed to delete merged branch: $BRANCH"
   fi
+fi
+
+if [ "$CLEANUP_FAILURE" = true ]; then
+  if [ "$MERGE_APPLIED" = true ]; then
+    if git -C "$PROJECT_ROOT" reset --hard "$PRE_MERGE_HEAD" >/dev/null 2>&1; then
+      echo "↩️  Rolled back merge commit due to cleanup failure (all-or-nothing mode)." >&2
+    else
+      echo "⚠️  Failed to rollback merge commit automatically. Manual recovery may be required." >&2
+    fi
+  fi
+
+  echo "⚠️  Merge cleanup failed before lifecycle reconciliation. Requirement/worktree manifests were not updated." >&2
+  echo "Recovery guidance:" >&2
+  if [ -n "$WORKTREE_PATH" ]; then
+    echo "  git -C \"$PROJECT_ROOT\" worktree remove \"$WORKTREE_PATH\"" >&2
+  fi
+  echo "  git -C \"$PROJECT_ROOT\" branch -d \"$BRANCH\"" >&2
+  echo "  ./scripts/worktree-list.sh" >&2
+  echo "Cleanup failures:" >&2
+  for failure in "${CLEANUP_FAILURE_DETAILS[@]}"; do
+    echo "  - $failure" >&2
+  done
+  exit 1
 fi
 
 if [ -n "$WORKTREE_ENTRY" ]; then
@@ -331,7 +416,10 @@ add_stage_file "docs/DEPENDENCIES.md"
 if [ -n "$REQ_IDS" ]; then
   while IFS= read -r reqId; do
     [ -z "$reqId" ] && continue
-    req_spec="$(find "$PROJECT_ROOT/docs/requirements" -maxdepth 1 -type f -name "${reqId}-*.md" | head -1)"
+    req_spec=""
+    if [ -d "$PROJECT_ROOT/docs/requirements" ]; then
+      req_spec="$(find "$PROJECT_ROOT/docs/requirements" -maxdepth 1 -type f -name "${reqId}-*.md" | head -1)"
+    fi
     if [ -n "$req_spec" ]; then
       add_stage_file "${req_spec#$PROJECT_ROOT/}"
     fi
@@ -402,17 +490,3 @@ if [ "$UNMAPPED_FORCE_MODE" = true ]; then
   echo "⚠️  Completed forced unmapped merge. No requirement statuses were updated."
 fi
 
-if [ "$CLEANUP_FAILURE" = true ]; then
-  echo "⚠️  Merge completed and lifecycle manifests/docs were reconciled, but cleanup is incomplete." >&2
-  echo "Recovery guidance:" >&2
-  if [ -n "$WORKTREE_PATH" ]; then
-    echo "  git -C \"$PROJECT_ROOT\" worktree remove \"$WORKTREE_PATH\"" >&2
-  fi
-  echo "  git -C \"$PROJECT_ROOT\" branch -d \"$BRANCH\"" >&2
-  echo "  ./scripts/worktree-list.sh" >&2
-  echo "Cleanup failures:" >&2
-  for failure in "${CLEANUP_FAILURE_DETAILS[@]}"; do
-    echo "  - $failure" >&2
-  done
-  exit 1
-fi
