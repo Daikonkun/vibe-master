@@ -2,13 +2,13 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (1)
+## PROPOSED (0)
+
+
+## IN_PROGRESS (1)
 
 * REQ-1777274205120382721: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (restart) (priority: CRITICAL)
-  - Worktree: none
-
-## IN_PROGRESS (0)
-
+  - Worktree: feature/REQ-1777274205120382721-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review-restart
 
 ## CODE_REVIEW (0)
 
@@ -158,5 +158,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 64
 - Deployed: 53 (82%)
 - Merged (awaiting deploy): 4
-- In Progress: 0
+- In Progress: 1
 - Blocked: 0

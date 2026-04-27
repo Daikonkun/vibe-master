@@ -672,6 +672,17 @@
       ],
       "createdAt": "2026-04-27T06:52:42Z",
       "status": "ACTIVE"
+    },
+    {
+      "id": "feature/REQ-1777274205120382721-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review-restart",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1777274205120382721-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review-restart",
+      "branch": "feature/REQ-1777274205120382721-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review-restart",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1777274205120382721"
+      ],
+      "createdAt": "2026-04-27T07:18:27Z",
+      "status": "ACTIVE"
     }
   ]
 }
