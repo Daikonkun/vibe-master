@@ -134,3 +134,5 @@ REQ-1777270332882776949: Review follow-up: isolate concurrent-workflow check tem
 
 REQ-1777274205120382721: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (restart) (no dependencies)
 
+REQ-1777275195454105151: Review follow-up: exercise manifest lock fallback path in concurrency check (no dependencies)
+

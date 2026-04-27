@@ -2,8 +2,10 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (0)
+## PROPOSED (1)
 
+* REQ-1777275195454105151: Review follow-up: exercise manifest lock fallback path in concurrency check (priority: MEDIUM)
+  - Worktree: none
 
 ## IN_PROGRESS (0)
 
@@ -155,8 +157,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1777257357997508079-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review
 
 ## Stats
-- Total Requirements: 64
-- Deployed: 53 (82%)
+- Total Requirements: 65
+- Deployed: 53 (81%)
 - Merged (awaiting deploy): 5
 - In Progress: 0
 - Blocked: 0
