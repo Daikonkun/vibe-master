@@ -1,17 +1,14 @@
 #!/bin/bash
 # Generate all documentation from requirement and worktree manifests
 
-set -e
+set -euo pipefail
 
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
 WORKTREE_MANIFEST="$PROJECT_ROOT/.worktree-manifest.json"
+source "$PROJECT_ROOT/scripts/_manifest-lock.sh"
 
-if [ ! -f "$REQ_MANIFEST" ]; then
-  echo "❌ Error: .requirement-manifest.json not found"
-  exit 1
-fi
-
+regenerate_docs_locked() {
 LAST_UPDATED="$(jq -r '[.requirements[]?.updatedAt | select(type == "string" and length > 0)] | max // "1970-01-01T00:00:00Z"' "$REQ_MANIFEST")"
 
 mkdir -p "$PROJECT_ROOT/docs"
@@ -109,11 +106,11 @@ echo "📄 Generating REQUIREMENTS.md..."
   echo ""
   echo "| ID | Name | Status | Priority | Worktree | Created | Updated |"
   echo "|---|---|---|---|---|---|---|"
-  
-  jq -r '.requirements[] | 
+
+  jq -r '.requirements[] |
     "| \(.id) | \(.name) | \(.status) | \(.priority) | \(.worktreeId // "—") | \(.createdAt | split("T")[0]) | \(.updatedAt | split("T")[0]) |"' \
     "$REQ_MANIFEST"
-  
+
   echo ""
   echo "## Status Breakdown"
   echo "- **Proposed**: $(jq '[.requirements[] | select(.status == "PROPOSED")] | length' "$REQ_MANIFEST")"
@@ -142,17 +139,17 @@ echo "📊 Generating docs/STATUS.md..."
   echo ""
   echo "Kanban-style view of all requirements and their current state."
   echo ""
-  
+
   for STATUS in PROPOSED IN_PROGRESS CODE_REVIEW MERGED DEPLOYED BLOCKED BACKLOG CANCELLED; do
     COUNT=$(jq "[.requirements[] | select(.status == \"$STATUS\")] | length" "$REQ_MANIFEST")
     echo "## $STATUS ($COUNT)"
     echo ""
-    jq -r ".requirements[] | select(.status == \"$STATUS\") | 
-      \"* \(.id): \(.name) (priority: \(.priority))\n  - Worktree: \(.worktreeId // \"none\")\"" \
+    jq -r ".requirements[] | select(.status == \"$STATUS\") |
+      \"* \(.id): \(.name) (priority: \(.priority))\\n  - Worktree: \(.worktreeId // \"none\")\"" \
       "$REQ_MANIFEST"
     echo ""
   done
-  
+
   TOTAL=$(jq '.requirements | length' "$REQ_MANIFEST")
   REQUIRES_DEPLOYMENT=$(jq -r '.requiresDeployment // true' "$REQ_MANIFEST")
   DEPLOYED=$(jq '[.requirements[] | select(.status == "DEPLOYED")] | length' "$REQ_MANIFEST")
@@ -167,7 +164,7 @@ echo "📊 Generating docs/STATUS.md..."
   else
     PCT=$((COMPLETED * 100 / TOTAL))
   fi
-  
+
   echo "## Stats"
   echo "- Total Requirements: $TOTAL"
   if [ "$REQUIRES_DEPLOYMENT" = "false" ]; then
@@ -207,7 +204,7 @@ echo "🔗 Generating docs/DEPENDENCIES.md..."
   echo ""
   echo "Graph of requirement dependencies and relationships."
   echo ""
-  jq -r '.requirements[] | 
+  jq -r '.requirements[] |
     if .dependsOn and (.dependsOn | length) > 0 then
       "\(.id): \(.name)\n  └─ Depends on: \(.dependsOn | join(", "))\n"
     else
@@ -223,3 +220,11 @@ echo "  - REQUIREMENTS.md (summary table)"
 echo "  - docs/STATUS.md (kanban board)"
 echo "  - docs/ROADMAP.md (timeline)"
 echo "  - docs/DEPENDENCIES.md (dependency graph)"
+}
+
+if [ ! -f "$REQ_MANIFEST" ]; then
+  echo "❌ Error: .requirement-manifest.json not found"
+  exit 1
+fi
+
+with_manifest_locks "$REQ_MANIFEST" "$WORKTREE_MANIFEST" regenerate_docs_locked
