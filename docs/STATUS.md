@@ -9,13 +9,13 @@ Kanban-style view of all requirements and their current state.
 * REQ-1777257357997508079: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (priority: CRITICAL)
   - Worktree: none
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1777257214829301915: Serialize docs regeneration across concurrent workflows (priority: HIGH)
   - Worktree: feature/REQ-1777257214829301915-serialize-docs-regeneration-across-concurrent-workflows
-
-## CODE_REVIEW (0)
-
 
 ## MERGED (1)
 
@@ -154,5 +154,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 62
 - Deployed: 53 (85%)
 - Merged (awaiting deploy): 1
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0
