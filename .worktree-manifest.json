@@ -649,6 +649,17 @@
       "createdAt": "2026-04-27T03:56:58Z",
       "status": "MERGED",
       "mergedAt": "2026-04-27T06:20:19Z"
+    },
+    {
+      "id": "feature/REQ-1777270332882776949-review-follow-up-isolate-concurrent-workflow-check-temp-logs-per-run",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1777270332882776949-review-follow-up-isolate-concurrent-workflow-check-temp-logs-per-run",
+      "branch": "feature/REQ-1777270332882776949-review-follow-up-isolate-concurrent-workflow-check-temp-logs-per-run",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1777270332882776949"
+      ],
+      "createdAt": "2026-04-27T06:35:17Z",
+      "status": "ACTIVE"
     }
   ]
 }
