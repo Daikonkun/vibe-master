@@ -1,7 +1,7 @@
 # Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (restart)
 
 **ID**: REQ-1777274205120382721  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: CRITICAL  
 **Created**: 2026-04-27T07:16:45Z  
 
@@ -22,14 +22,11 @@ Restarted from REQ-1777257357997508079. Define and implement end-to-end concurre
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1777274205120382721-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review-restart.md`.
-   - **Summary**: Restarted from REQ-1777257357997508079. Define and implement end-to-end concurre
-   - **Key criteria**: - [ ] Criterion 1 - [ ] Criterion 2
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: (Add implementation notes here)
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1777274205120382721` and verify success criteria are met.
+1. Inventory current concurrency guards and race windows in `scripts/start-work.sh`, `scripts/work-on.sh`, `scripts/worktree-merge.sh`, and the `/code-review` prompt flow under `.github/prompts/`; capture findings in `## Technical Notes` for this spec.
+2. Implement missing serialization/locking and read-then-act protections in the affected scripts, reusing `scripts/_manifest-lock.sh` patterns where possible and keeping lifecycle updates atomic across `.requirement-manifest.json` and `.worktree-manifest.json`.
+3. Extend and/or add regression checks for parallel-session behavior in `scripts/check-concurrent-workflows.sh` and related race-focused checks (for example `scripts/check-start-work-clean.sh` and `scripts/check-worktree-merge-atomic-cleanup.sh`).
+4. Regenerate and validate requirement dashboards with `./scripts/regenerate-docs.sh`, then confirm lifecycle/worktree coherence with `./scripts/reconcile-lifecycle-invariants.sh`.
+5. Validate completion evidence with `./scripts/show-requirement.sh REQ-1777274205120382721` and targeted script runs, then update the Success Criteria checklist in this spec to reflect what is satisfied.
 
 **Last updated**: 2026-04-27T07:18:28Z
 
