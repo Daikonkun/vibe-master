@@ -66,11 +66,11 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1777257221458997051 | Add concurrency regression suite for parallel sessions | MERGED | HIGH | feature/REQ-1777257221458997051-add-concurrency-regression-suite-for-parallel-sessions | 2026-04-27 | 2026-04-27 |
 | REQ-1777257357997508079 | Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review | PROPOSED | CRITICAL | — | 2026-04-27 | 2026-04-27 |
 | REQ-1777258373137099177 | Review follow-up: make start-work race regression independent from candidate count | MERGED | HIGH | feature/REQ-1777258373137099177-review-follow-up-make-start-work-race-regression-independent-from-candidate-count | 2026-04-27 | 2026-04-27 |
-| REQ-1777270332882776949 | Review follow-up: isolate concurrent-workflow check temp logs per run | PROPOSED | HIGH | — | 2026-04-27 | 2026-04-27 |
+| REQ-1777270332882776949 | Review follow-up: isolate concurrent-workflow check temp logs per run | IN_PROGRESS | HIGH | feature/REQ-1777270332882776949-review-follow-up-isolate-concurrent-workflow-check-temp-logs-per-run | 2026-04-27 | 2026-04-27 |
 
 ## Status Breakdown
-- **Proposed**: 2
-- **In Progress**: 0
+- **Proposed**: 1
+- **In Progress**: 1
 - **Code Review**: 0
 - **Merged**: 3
 - **Deployed**: 53
@@ -83,6 +83,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-27T06:20:19Z
+* Last updated: 2026-04-27T06:35:17Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`
