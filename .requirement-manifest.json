@@ -910,19 +910,25 @@
       "id": "REQ-1777257209745418656",
       "name": "Harden start-work with dual-manifest atomic section",
       "description": "Refactor scripts/start-work.sh so requirement/worktree manifest validation and mutation run under one with_manifest_locks critical section. Prevent same-REQ concurrent bootstrap races, avoid partial writes between manifests, and add recovery-safe behavior when worktree create succeeds but manifest update fails.",
-      "status": "MERGED",
+      "status": "DEPLOYED",
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-27T02:33:29Z",
-      "updatedAt": "2026-04-27T02:54:19Z",
+      "updatedAt": "2026-04-27T03:10:30Z",
       "worktreeId": "feature/REQ-1777257209745418656-harden-start-work-with-dual-manifest-atomic-section",
       "statusHistory": [
         {
           "from": "IN_PROGRESS",
           "to": "CODE_REVIEW",
           "changedAt": "2026-04-27T02:50:51Z"
+        },
+        {
+          "from": "MERGED",
+          "to": "DEPLOYED",
+          "changedAt": "2026-04-27T03:10:30Z"
         }
-      ]
+      ],
+      "deployedAt": "2026-04-27T03:10:30Z"
     },
     {
       "id": "REQ-1777257214829301915",

@@ -1,7 +1,7 @@
 # Harden start-work with dual-manifest atomic section
 
 **ID**: REQ-1777257209745418656  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: HIGH  
 **Created**: 2026-04-27T02:33:29Z  
 
@@ -43,4 +43,4 @@ Refactor scripts/start-work.sh so requirement/worktree manifest validation and m
 * **Linked Worktree**: feature/REQ-1777257209745418656-harden-start-work-with-dual-manifest-atomic-section
 * **Branch**: feature/REQ-1777257209745418656-harden-start-work-with-dual-manifest-atomic-section
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes
