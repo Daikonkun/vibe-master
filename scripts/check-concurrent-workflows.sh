@@ -321,10 +321,12 @@ if [ "$(active_worktree_count_for_req "$REQ_A")" -ne 0 ] || [ "$(active_worktree
 fi
 
 # 5) Concurrent docs regeneration should serialize safely (code-review side effect proxy).
+# Force mkdir lock fallback so stale '*.lock.d' checks exercise the fallback path,
+# even on systems where flock is available.
 set +e
-bash scripts/regenerate-docs.sh >"$DOCS_REGEN_LOG_1" 2>&1 &
+MANIFEST_LOCK_FORCE_MKDIR=1 bash scripts/regenerate-docs.sh >"$DOCS_REGEN_LOG_1" 2>&1 &
 DOCS_PID_1=$!
-bash scripts/regenerate-docs.sh >"$DOCS_REGEN_LOG_2" 2>&1 &
+MANIFEST_LOCK_FORCE_MKDIR=1 bash scripts/regenerate-docs.sh >"$DOCS_REGEN_LOG_2" 2>&1 &
 DOCS_PID_2=$!
 
 wait "$DOCS_PID_1"

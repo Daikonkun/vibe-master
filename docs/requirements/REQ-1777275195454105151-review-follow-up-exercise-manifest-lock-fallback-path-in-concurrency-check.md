@@ -11,14 +11,13 @@ Source: code-review. Severity: MEDIUM. Evidence: scripts/check-concurrent-workfl
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [x] Concurrent docs-regeneration regression explicitly forces mkdir fallback mode with `MANIFEST_LOCK_FORCE_MKDIR=1`.
+- [x] Regression still validates that no stale `*.lock.d` directories remain after the concurrent run.
+- [x] Updated regression passes locally via `scripts/check-concurrent-workflows.sh`.
 
 ## Technical Notes
 
-(Add implementation notes here)
-
+Updated `scripts/check-concurrent-workflows.sh` to run the concurrent docs regeneration pair with `MANIFEST_LOCK_FORCE_MKDIR=1`, ensuring fallback lock cleanup assertions are exercised on environments where `flock` is available.
 
 ## Development Plan
 
@@ -28,7 +27,7 @@ Source: code-review. Severity: MEDIUM. Evidence: scripts/check-concurrent-workfl
 4. Run `./scripts/check-concurrent-workflows.sh` and verify the fallback-path assertion passes reliably on this environment.
 5. Run `./scripts/regenerate-docs.sh`, then validate requirement state and linkage with `./scripts/show-requirement.sh REQ-1777275195454105151`.
 
-**Last updated**: 2026-04-27T07:38:10Z
+**Last updated**: 2026-04-27T07:43:30Z
 
 ## Dependencies
 
