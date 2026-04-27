@@ -1,7 +1,7 @@
 # Serialize docs regeneration across concurrent workflows
 
 **ID**: REQ-1777257214829301915  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-04-27T02:33:34Z  
 
