@@ -637,6 +637,17 @@
       "createdAt": "2026-04-27T03:25:01Z",
       "status": "MERGED",
       "mergedAt": "2026-04-27T03:53:22Z"
+    },
+    {
+      "id": "feature/REQ-1777257221458997051-add-concurrency-regression-suite-for-parallel-sessions",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1777257221458997051-add-concurrency-regression-suite-for-parallel-sessions",
+      "branch": "feature/REQ-1777257221458997051-add-concurrency-regression-suite-for-parallel-sessions",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1777257221458997051"
+      ],
+      "createdAt": "2026-04-27T03:56:58Z",
+      "status": "ACTIVE"
     }
   ]
 }

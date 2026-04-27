@@ -2,15 +2,15 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (2)
+## PROPOSED (1)
 
-* REQ-1777257221458997051: Add concurrency regression suite for parallel sessions (priority: HIGH)
-  - Worktree: none
 * REQ-1777257357997508079: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (priority: CRITICAL)
   - Worktree: none
 
-## IN_PROGRESS (0)
+## IN_PROGRESS (1)
 
+* REQ-1777257221458997051: Add concurrency regression suite for parallel sessions (priority: HIGH)
+  - Worktree: feature/REQ-1777257221458997051-add-concurrency-regression-suite-for-parallel-sessions
 
 ## CODE_REVIEW (0)
 
@@ -154,5 +154,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 62
 - Deployed: 53 (85%)
 - Merged (awaiting deploy): 2
-- In Progress: 0
+- In Progress: 1
 - Blocked: 0
