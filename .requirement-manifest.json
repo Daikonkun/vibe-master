@@ -934,17 +934,26 @@
       "id": "REQ-1777257214829301915",
       "name": "Serialize docs regeneration across concurrent workflows",
       "description": "Add lock/serialization around scripts/regenerate-docs.sh and callers so concurrent sessions do not race-write REQUIREMENTS.md and docs/*.md. Ensure deterministic outputs and safe retries when two sessions run status/work-on/merge concurrently.",
-      "status": "CODE_REVIEW",
+      "status": "MERGED",
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-27T02:33:34Z",
-      "updatedAt": "2026-04-27T03:51:36Z",
-      "worktreeId": "feature/REQ-1777257214829301915-serialize-docs-regeneration-across-concurrent-workflows",
+      "updatedAt": "2026-04-27T03:45:51Z",
       "statusHistory": [
+        {
+          "from": "PROPOSED",
+          "to": "IN_PROGRESS",
+          "changedAt": "2026-04-27T03:36:15Z"
+        },
         {
           "from": "IN_PROGRESS",
           "to": "CODE_REVIEW",
-          "changedAt": "2026-04-27T03:51:36Z"
+          "changedAt": "2026-04-27T03:36:31Z"
+        },
+        {
+          "from": "CODE_REVIEW",
+          "to": "MERGED",
+          "changedAt": "2026-04-27T03:45:51Z"
         }
       ]
     },

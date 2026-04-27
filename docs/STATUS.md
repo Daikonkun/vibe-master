@@ -17,8 +17,10 @@ Kanban-style view of all requirements and their current state.
 * REQ-1777257214829301915: Serialize docs regeneration across concurrent workflows (priority: HIGH)
   - Worktree: feature/REQ-1777257214829301915-serialize-docs-regeneration-across-concurrent-workflows
 
-## MERGED (1)
+## MERGED (2)
 
+* REQ-1777257214829301915: Serialize docs regeneration across concurrent workflows (priority: HIGH)
+  - Worktree: none
 * REQ-1777258373137099177: Review follow-up: make start-work race regression independent from candidate count (priority: HIGH)
   - Worktree: feature/REQ-1777258373137099177-review-follow-up-make-start-work-race-regression-independent-from-candidate-count
 
@@ -153,6 +155,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 62
 - Deployed: 53 (85%)
-- Merged (awaiting deploy): 1
+- Merged (awaiting deploy): 2
 - In Progress: 0
 - Blocked: 0
