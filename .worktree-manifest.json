@@ -684,6 +684,17 @@
       "createdAt": "2026-04-27T07:18:27Z",
       "status": "MERGED",
       "mergedAt": "2026-04-27T07:29:27Z"
+    },
+    {
+      "id": "feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check",
+      "branch": "feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1777275195454105151"
+      ],
+      "createdAt": "2026-04-27T07:36:59Z",
+      "status": "ACTIVE"
     }
   ]
 }

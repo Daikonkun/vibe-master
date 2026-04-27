@@ -1053,11 +1053,12 @@
       "id": "REQ-1777275195454105151",
       "name": "Review follow-up: exercise manifest lock fallback path in concurrency check",
       "description": "Source: code-review. Severity: MEDIUM. Evidence: scripts/check-concurrent-workflows.sh lines 323-349 added concurrent docs regeneration and stale *.lock.d checks, but scripts/_manifest-lock.sh only uses the mkdir fallback when flock is unavailable or MANIFEST_LOCK_FORCE_MKDIR=1; on this environment command -v flock resolves /opt/homebrew/bin/flock, so the new fallback-artifact assertion does not exercise the fallback path it claims to protect. Required outcome: update the regression to force MANIFEST_LOCK_FORCE_MKDIR=1 for the docs-regeneration fallback-artifact scenario, or add an equivalent dedicated fallback-mode test that fails on stale *.lock.d artifacts.",
-      "status": "PROPOSED",
+      "status": "IN_PROGRESS",
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-27T07:33:15Z",
-      "updatedAt": "2026-04-27T07:33:15Z"
+      "updatedAt": "2026-04-27T07:36:59Z",
+      "worktreeId": "feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check"
     }
   ],
   "requiresDeployment": true

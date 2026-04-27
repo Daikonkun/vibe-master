@@ -2,13 +2,13 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (1)
+## PROPOSED (0)
+
+
+## IN_PROGRESS (1)
 
 * REQ-1777275195454105151: Review follow-up: exercise manifest lock fallback path in concurrency check (priority: MEDIUM)
-  - Worktree: none
-
-## IN_PROGRESS (0)
-
+  - Worktree: feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check
 
 ## CODE_REVIEW (0)
 
@@ -160,5 +160,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 65
 - Deployed: 53 (81%)
 - Merged (awaiting deploy): 5
-- In Progress: 0
+- In Progress: 1
 - Blocked: 0
