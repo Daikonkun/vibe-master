@@ -14,13 +14,13 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
+
+
+## MERGED (1)
 
 * REQ-1777258373137099177: Review follow-up: make start-work race regression independent from candidate count (priority: HIGH)
   - Worktree: feature/REQ-1777258373137099177-review-follow-up-make-start-work-race-regression-independent-from-candidate-count
-
-## MERGED (0)
-
 
 ## DEPLOYED (53)
 
@@ -153,6 +153,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 62
 - Deployed: 53 (85%)
-- Merged (awaiting deploy): 0
+- Merged (awaiting deploy): 1
 - In Progress: 0
 - Blocked: 0
