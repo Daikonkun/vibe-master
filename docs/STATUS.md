@@ -12,15 +12,15 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
 
-* REQ-1777257221458997051: Add concurrency regression suite for parallel sessions (priority: HIGH)
-  - Worktree: feature/REQ-1777257221458997051-add-concurrency-regression-suite-for-parallel-sessions
 
-## MERGED (2)
+## MERGED (3)
 
 * REQ-1777257214829301915: Serialize docs regeneration across concurrent workflows (priority: HIGH)
   - Worktree: none
+* REQ-1777257221458997051: Add concurrency regression suite for parallel sessions (priority: HIGH)
+  - Worktree: feature/REQ-1777257221458997051-add-concurrency-regression-suite-for-parallel-sessions
 * REQ-1777258373137099177: Review follow-up: make start-work race regression independent from candidate count (priority: HIGH)
   - Worktree: feature/REQ-1777258373137099177-review-follow-up-make-start-work-race-regression-independent-from-candidate-count
 
@@ -155,6 +155,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 63
 - Deployed: 53 (84%)
-- Merged (awaiting deploy): 2
+- Merged (awaiting deploy): 3
 - In Progress: 0
 - Blocked: 0
