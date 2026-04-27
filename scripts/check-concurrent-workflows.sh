@@ -15,6 +15,8 @@ STATUS_A_LOG="$LOG_ROOT/status-a.log"
 STATUS_B_LOG="$LOG_ROOT/status-b.log"
 MERGE_A_LOG="$LOG_ROOT/merge-a.log"
 MERGE_B_LOG="$LOG_ROOT/merge-b.log"
+DOCS_REGEN_LOG_1="$LOG_ROOT/docs-regen-1.log"
+DOCS_REGEN_LOG_2="$LOG_ROOT/docs-regen-2.log"
 
 cleanup() {
   if [ -d "$CHECK_ROOT/.git" ]; then
@@ -318,9 +320,39 @@ if [ "$(active_worktree_count_for_req "$REQ_A")" -ne 0 ] || [ "$(active_worktree
   exit 1
 fi
 
+# 5) Concurrent docs regeneration should serialize safely (code-review side effect proxy).
+set +e
+bash scripts/regenerate-docs.sh >"$DOCS_REGEN_LOG_1" 2>&1 &
+DOCS_PID_1=$!
+bash scripts/regenerate-docs.sh >"$DOCS_REGEN_LOG_2" 2>&1 &
+DOCS_PID_2=$!
+
+wait "$DOCS_PID_1"
+DOCS_STATUS_1=$?
+wait "$DOCS_PID_2"
+DOCS_STATUS_2=$?
+set -e
+
+if [ "$DOCS_STATUS_1" -ne 0 ] || [ "$DOCS_STATUS_2" -ne 0 ]; then
+  echo "FAIL: concurrent docs regeneration failed (statuses: $DOCS_STATUS_1, $DOCS_STATUS_2)." >&2
+  echo "---- docs-regen-1.log ----" >&2
+  cat "$DOCS_REGEN_LOG_1" >&2 || true
+  echo "---- docs-regen-2.log ----" >&2
+  cat "$DOCS_REGEN_LOG_2" >&2 || true
+  exit 1
+fi
+
+LOCK_ROOT="$(git rev-parse --git-common-dir)/.manifest-locks"
+if [ -d "$LOCK_ROOT" ] && find "$LOCK_ROOT" -type d -name '*.lock.d' -print -quit | grep -q .; then
+  echo "FAIL: stale manifest lock fallback directories remained after concurrent docs regeneration." >&2
+  find "$LOCK_ROOT" -type d -name '*.lock.d' >&2 || true
+  exit 1
+fi
+
+# Keep a final single-pass regeneration to match existing downstream expectations.
 bash scripts/regenerate-docs.sh >/dev/null
 
-# 5) Manifest and docs consistency checks.
+# 6) Manifest and docs consistency checks.
 jq -e '.requirements | type == "array"' .requirement-manifest.json >/dev/null
 jq -e '.worktrees | type == "array"' .worktree-manifest.json >/dev/null
 
