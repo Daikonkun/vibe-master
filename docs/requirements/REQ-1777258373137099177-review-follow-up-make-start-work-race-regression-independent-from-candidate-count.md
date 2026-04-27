@@ -1,7 +1,7 @@
 # Review follow-up: make start-work race regression independent from candidate count
 
 **ID**: REQ-1777258373137099177  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: HIGH  
 **Created**: 2026-04-27T02:52:53Z  
 
@@ -45,4 +45,4 @@ Source: code-review. Severity: HIGH. Evidence: scripts/check-start-work-clean.sh
 * **Linked Worktree**: feature/REQ-1777258373137099177-review-follow-up-make-start-work-race-regression-independent-from-candidate-count
 * **Branch**: feature/REQ-1777258373137099177-review-follow-up-make-start-work-race-regression-independent-from-candidate-count
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes

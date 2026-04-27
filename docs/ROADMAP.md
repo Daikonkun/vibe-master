@@ -32,7 +32,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1777257209745418656: Harden start-work with dual-manifest atomic section
 * [DEPLOYED] REQ-1777257214829301915: Serialize docs regeneration across concurrent workflows
 * [DEPLOYED] REQ-1777257221458997051: Add concurrency regression suite for parallel sessions
-* [MERGED] REQ-1777258373137099177: Review follow-up: make start-work race regression independent from candidate count
+* [DEPLOYED] REQ-1777258373137099177: Review follow-up: make start-work race regression independent from candidate count
 * [MERGED] REQ-1777270332882776949: Review follow-up: isolate concurrent-workflow check temp logs per run
 
 ## Medium Priority
