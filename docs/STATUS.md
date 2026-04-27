@@ -11,10 +11,8 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (5)
+## MERGED (4)
 
-* REQ-1777257221458997051: Add concurrency regression suite for parallel sessions (priority: HIGH)
-  - Worktree: feature/REQ-1777257221458997051-add-concurrency-regression-suite-for-parallel-sessions
 * REQ-1777258373137099177: Review follow-up: make start-work race regression independent from candidate count (priority: HIGH)
   - Worktree: feature/REQ-1777258373137099177-review-follow-up-make-start-work-race-regression-independent-from-candidate-count
 * REQ-1777270332882776949: Review follow-up: isolate concurrent-workflow check temp logs per run (priority: HIGH)
@@ -24,7 +22,7 @@ Kanban-style view of all requirements and their current state.
 * REQ-1777275195454105151: Review follow-up: exercise manifest lock fallback path in concurrency check (priority: MEDIUM)
   - Worktree: feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check
 
-## DEPLOYED (54)
+## DEPLOYED (55)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -134,6 +132,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1777257209745418656-harden-start-work-with-dual-manifest-atomic-section
 * REQ-1777257214829301915: Serialize docs regeneration across concurrent workflows (priority: HIGH)
   - Worktree: none
+* REQ-1777257221458997051: Add concurrency regression suite for parallel sessions (priority: HIGH)
+  - Worktree: feature/REQ-1777257221458997051-add-concurrency-regression-suite-for-parallel-sessions
 
 ## BLOCKED (0)
 
@@ -158,7 +158,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 65
-- Deployed: 54 (83%)
-- Merged (awaiting deploy): 5
+- Deployed: 55 (84%)
+- Merged (awaiting deploy): 4
 - In Progress: 0
 - Blocked: 0
