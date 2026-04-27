@@ -8,12 +8,10 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
 
-* REQ-1777274205120382721: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (restart) (priority: CRITICAL)
-  - Worktree: feature/REQ-1777274205120382721-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review-restart
 
-## MERGED (4)
+## MERGED (5)
 
 * REQ-1777257214829301915: Serialize docs regeneration across concurrent workflows (priority: HIGH)
   - Worktree: none
@@ -23,6 +21,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1777258373137099177-review-follow-up-make-start-work-race-regression-independent-from-candidate-count
 * REQ-1777270332882776949: Review follow-up: isolate concurrent-workflow check temp logs per run (priority: HIGH)
   - Worktree: feature/REQ-1777270332882776949-review-follow-up-isolate-concurrent-workflow-check-temp-logs-per-run
+* REQ-1777274205120382721: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (restart) (priority: CRITICAL)
+  - Worktree: feature/REQ-1777274205120382721-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review-restart
 
 ## DEPLOYED (53)
 
@@ -157,6 +157,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 64
 - Deployed: 53 (82%)
-- Merged (awaiting deploy): 4
+- Merged (awaiting deploy): 5
 - In Progress: 0
 - Blocked: 0

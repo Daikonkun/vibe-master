@@ -4,7 +4,7 @@ Timeline view of all requirements organized by status and priority.
 
 ## Critical Items
 * [CANCELLED] REQ-1777257357997508079: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review
-* [CODE_REVIEW] REQ-1777274205120382721: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (restart)
+* [MERGED] REQ-1777274205120382721: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (restart)
 
 ## High Priority
 * [DEPLOYED] REQ-1774639240: Add-requirement: populate spec sections after creation
