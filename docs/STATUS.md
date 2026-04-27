@@ -16,13 +16,13 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
+
+
+## MERGED (1)
 
 * REQ-1777257209745418656: Harden start-work with dual-manifest atomic section (priority: HIGH)
   - Worktree: feature/REQ-1777257209745418656-harden-start-work-with-dual-manifest-atomic-section
-
-## MERGED (0)
-
 
 ## DEPLOYED (52)
 
@@ -153,6 +153,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 62
 - Deployed: 52 (83%)
-- Merged (awaiting deploy): 0
+- Merged (awaiting deploy): 1
 - In Progress: 0
 - Blocked: 0
