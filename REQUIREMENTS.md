@@ -68,12 +68,12 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1777258373137099177 | Review follow-up: make start-work race regression independent from candidate count | MERGED | HIGH | feature/REQ-1777258373137099177-review-follow-up-make-start-work-race-regression-independent-from-candidate-count | 2026-04-27 | 2026-04-27 |
 | REQ-1777270332882776949 | Review follow-up: isolate concurrent-workflow check temp logs per run | MERGED | HIGH | feature/REQ-1777270332882776949-review-follow-up-isolate-concurrent-workflow-check-temp-logs-per-run | 2026-04-27 | 2026-04-27 |
 | REQ-1777274205120382721 | Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (restart) | MERGED | CRITICAL | feature/REQ-1777274205120382721-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review-restart | 2026-04-27 | 2026-04-27 |
-| REQ-1777275195454105151 | Review follow-up: exercise manifest lock fallback path in concurrency check | IN_PROGRESS | MEDIUM | feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check | 2026-04-27 | 2026-04-27 |
+| REQ-1777275195454105151 | Review follow-up: exercise manifest lock fallback path in concurrency check | CODE_REVIEW | MEDIUM | feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check | 2026-04-27 | 2026-04-27 |
 
 ## Status Breakdown
 - **Proposed**: 0
-- **In Progress**: 1
-- **Code Review**: 0
+- **In Progress**: 0
+- **Code Review**: 1
 - **Merged**: 5
 - **Deployed**: 53
 - **Blocked**: 0
@@ -85,6 +85,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-27T07:36:59Z
+* Last updated: 2026-04-27T07:42:26Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

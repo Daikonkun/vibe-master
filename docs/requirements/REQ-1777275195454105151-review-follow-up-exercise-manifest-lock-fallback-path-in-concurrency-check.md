@@ -1,7 +1,7 @@
 # Review follow-up: exercise manifest lock fallback path in concurrency check
 
 **ID**: REQ-1777275195454105151  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-04-27T07:33:15Z  
 
@@ -22,16 +22,13 @@ Source: code-review. Severity: MEDIUM. Evidence: scripts/check-concurrent-workfl
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check.md`.
-   - **Summary**: Source: code-review. Severity: MEDIUM. Evidence: scripts/check-concurrent-workfl
-   - **Key criteria**: - [ ] Criterion 1 - [ ] Criterion 2
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: (Add implementation notes here)
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1777275195454105151` and verify success criteria are met.
+1. Update the fallback-artifact regression in `scripts/check-concurrent-workflows.sh` so the targeted scenario explicitly runs with `MANIFEST_LOCK_FORCE_MKDIR=1`, ensuring the mkdir lock path is exercised even when `flock` exists.
+2. Confirm the test setup/cleanup in `scripts/check-concurrent-workflows.sh` still asserts no stale `*.lock.d` artifacts remain after concurrent docs regeneration.
+3. If helper behavior needs alignment, adjust `scripts/_manifest-lock.sh` only as required to preserve fallback behavior and cleanup guarantees under forced mkdir mode.
+4. Run `./scripts/check-concurrent-workflows.sh` and verify the fallback-path assertion passes reliably on this environment.
+5. Run `./scripts/regenerate-docs.sh`, then validate requirement state and linkage with `./scripts/show-requirement.sh REQ-1777275195454105151`.
 
-**Last updated**: 2026-04-27T07:37:00Z
+**Last updated**: 2026-04-27T07:38:10Z
 
 ## Dependencies
 
