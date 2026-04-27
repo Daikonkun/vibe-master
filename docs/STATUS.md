@@ -10,12 +10,10 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
 
-* REQ-1777270332882776949: Review follow-up: isolate concurrent-workflow check temp logs per run (priority: HIGH)
-  - Worktree: feature/REQ-1777270332882776949-review-follow-up-isolate-concurrent-workflow-check-temp-logs-per-run
 
-## MERGED (3)
+## MERGED (4)
 
 * REQ-1777257214829301915: Serialize docs regeneration across concurrent workflows (priority: HIGH)
   - Worktree: none
@@ -23,6 +21,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1777257221458997051-add-concurrency-regression-suite-for-parallel-sessions
 * REQ-1777258373137099177: Review follow-up: make start-work race regression independent from candidate count (priority: HIGH)
   - Worktree: feature/REQ-1777258373137099177-review-follow-up-make-start-work-race-regression-independent-from-candidate-count
+* REQ-1777270332882776949: Review follow-up: isolate concurrent-workflow check temp logs per run (priority: HIGH)
+  - Worktree: feature/REQ-1777270332882776949-review-follow-up-isolate-concurrent-workflow-check-temp-logs-per-run
 
 ## DEPLOYED (53)
 
@@ -155,6 +155,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 63
 - Deployed: 53 (84%)
-- Merged (awaiting deploy): 3
+- Merged (awaiting deploy): 4
 - In Progress: 0
 - Blocked: 0
