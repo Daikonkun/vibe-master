@@ -1,7 +1,7 @@
 # Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review
 
 **ID**: REQ-1777257357997508079  
-**Status**: IN_PROGRESS  
+**Status**: CANCELLED  
 **Priority**: CRITICAL  
 **Created**: 2026-04-27T02:35:58Z  
 

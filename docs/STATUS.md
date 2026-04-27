@@ -7,10 +7,8 @@ Kanban-style view of all requirements and their current state.
 * REQ-1777274205120382721: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (restart) (priority: CRITICAL)
   - Worktree: none
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
 
-* REQ-1777257357997508079: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (priority: CRITICAL)
-  - Worktree: feature/REQ-1777257357997508079-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review
 
 ## CODE_REVIEW (0)
 
@@ -141,7 +139,7 @@ Kanban-style view of all requirements and their current state.
 ## BACKLOG (0)
 
 
-## CANCELLED (5)
+## CANCELLED (6)
 
 * REQ-1774774129: Review follow-up: fix manifest inconsistencies and ghost command (priority: MEDIUM)
   - Worktree: none
@@ -153,10 +151,12 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 * REQ-1776677538888266188: Review follow-up: tighten lock-growth assertion for repeated lock-race runs (priority: MEDIUM)
   - Worktree: none
+* REQ-1777257357997508079: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (priority: CRITICAL)
+  - Worktree: feature/REQ-1777257357997508079-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review
 
 ## Stats
 - Total Requirements: 64
 - Deployed: 53 (82%)
 - Merged (awaiting deploy): 4
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0
