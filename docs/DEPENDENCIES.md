@@ -130,3 +130,5 @@ REQ-1777257357997508079: Umbrella: concurrent workflow safety across start-work/
 
 REQ-1777258373137099177: Review follow-up: make start-work race regression independent from candidate count (no dependencies)
 
+REQ-1777270332882776949: Review follow-up: isolate concurrent-workflow check temp logs per run (no dependencies)
+
