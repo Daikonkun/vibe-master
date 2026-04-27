@@ -1,7 +1,7 @@
 # Review follow-up: exercise manifest lock fallback path in concurrency check
 
 **ID**: REQ-1777275195454105151  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-04-27T07:33:15Z  
 
@@ -42,4 +42,4 @@ Updated `scripts/check-concurrent-workflows.sh` to run the concurrent docs regen
 * **Linked Worktree**: feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check
 * **Branch**: feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes

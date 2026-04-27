@@ -11,12 +11,10 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (1)
+## MERGED (0)
 
-* REQ-1777275195454105151: Review follow-up: exercise manifest lock fallback path in concurrency check (priority: MEDIUM)
-  - Worktree: feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check
 
-## DEPLOYED (58)
+## DEPLOYED (59)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -134,6 +132,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1777270332882776949-review-follow-up-isolate-concurrent-workflow-check-temp-logs-per-run
 * REQ-1777274205120382721: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (restart) (priority: CRITICAL)
   - Worktree: feature/REQ-1777274205120382721-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review-restart
+* REQ-1777275195454105151: Review follow-up: exercise manifest lock fallback path in concurrency check (priority: MEDIUM)
+  - Worktree: feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check
 
 ## BLOCKED (0)
 
@@ -158,7 +158,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 65
-- Deployed: 58 (89%)
-- Merged (awaiting deploy): 1
+- Deployed: 59 (90%)
+- Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0
