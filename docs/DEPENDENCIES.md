@@ -124,3 +124,5 @@ REQ-1777257209745418656: Harden start-work with dual-manifest atomic section (no
 
 REQ-1777257214829301915: Serialize docs regeneration across concurrent workflows (no dependencies)
 
+REQ-1777257221458997051: Add concurrency regression suite for parallel sessions (no dependencies)
+

@@ -2,11 +2,13 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (2)
+## PROPOSED (3)
 
 * REQ-1777257209745418656: Harden start-work with dual-manifest atomic section (priority: HIGH)
   - Worktree: none
 * REQ-1777257214829301915: Serialize docs regeneration across concurrent workflows (priority: HIGH)
+  - Worktree: none
+* REQ-1777257221458997051: Add concurrency regression suite for parallel sessions (priority: HIGH)
   - Worktree: none
 
 ## IN_PROGRESS (0)
@@ -145,8 +147,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 
 ## Stats
-- Total Requirements: 59
-- Deployed: 52 (88%)
+- Total Requirements: 60
+- Deployed: 52 (86%)
 - Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0

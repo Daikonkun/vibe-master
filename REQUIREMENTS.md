@@ -63,9 +63,10 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1777018133999709609 | Review follow-up: stop swallowing lifecycle commit failures that later block /worktree-merge | DEPLOYED | HIGH | feature/REQ-1777018133999709609-review-follow-up-stop-swallowing-lifecycle-commit-failures-that-later-block-worktree-merge | 2026-04-24 | 2026-04-24 |
 | REQ-1777257209745418656 | Harden start-work with dual-manifest atomic section | PROPOSED | HIGH | — | 2026-04-27 | 2026-04-27 |
 | REQ-1777257214829301915 | Serialize docs regeneration across concurrent workflows | PROPOSED | HIGH | — | 2026-04-27 | 2026-04-27 |
+| REQ-1777257221458997051 | Add concurrency regression suite for parallel sessions | PROPOSED | HIGH | — | 2026-04-27 | 2026-04-27 |
 
 ## Status Breakdown
-- **Proposed**: 2
+- **Proposed**: 3
 - **In Progress**: 0
 - **Code Review**: 0
 - **Merged**: 0
@@ -79,6 +80,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-27T02:33:34Z
+* Last updated: 2026-04-27T02:33:41Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

@@ -925,6 +925,16 @@
       "origin": "project",
       "createdAt": "2026-04-27T02:33:34Z",
       "updatedAt": "2026-04-27T02:33:34Z"
+    },
+    {
+      "id": "REQ-1777257221458997051",
+      "name": "Add concurrency regression suite for parallel sessions",
+      "description": "Introduce regression tests that simulate simultaneous /start-work, /work-on status advancement, and /worktree-merge execution across two REQs. Cover same-REQ race, cross-REQ parallel progression, and manifest/docs consistency under concurrent runs.",
+      "status": "PROPOSED",
+      "priority": "HIGH",
+      "origin": "project",
+      "createdAt": "2026-04-27T02:33:41Z",
+      "updatedAt": "2026-04-27T02:33:41Z"
     }
   ],
   "requiresDeployment": true
