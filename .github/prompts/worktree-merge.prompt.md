@@ -1,7 +1,7 @@
 ---
 name: "worktree-merge"
 description: "Merge a feature branch into base branch, clean up worktree, and update manifests. Use when: completing a requirement branch."
-argument-hint: "<branch|REQ-ID> [base-branch]"
+argument-hint: "<branch|REQ-ID> [base-branch] [--auto-resolve-conflicts]"
 agent: "Vibe Agent Orchestrator"
 ---
 
@@ -18,6 +18,7 @@ Workflow:
 Constraints:
 - This operation changes git history and manifests; do not run if arguments are missing.
 - Accept either a branch (e.g. `feature/REQ-...`) or requirement ID (e.g. `REQ-...`) as the first parameter.
+- Hint: if generated docs/manifests/spec conflicts are expected, users can pass `--auto-resolve-conflicts`.
 - If a requirement ID is provided but does not exist in `.requirement-manifest.json`, stop and surface the exact script error.
 - If a requirement ID exists but has no ACTIVE mapping in `.worktree-manifest.json`, stop and surface the exact script error.
 - The script enforces a strict clean working tree. If dirty, stop and report the exact script error; recommend `git status --short`, then commit/stash/discard local changes before retrying `/worktree-merge`.

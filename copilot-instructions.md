@@ -63,7 +63,7 @@ After any state change, regenerate:
 | `/worktree-create <req-id>` | Manually create a worktree for a requirement |
 | `/worktree-prune` | Remove orphaned worktrees |
 | `/worktree-status` | Show comprehensive worktree status dashboard |
-| `/worktree-merge <branch>` | Merge associated worktree and update docs (requires clean working tree) |
+| `/worktree-merge <branch|REQ-ID> [base-branch] [--auto-resolve-conflicts]` | Merge associated worktree and update docs (requires clean working tree; optional safe auto-resolution for generated docs/manifests/spec conflicts) |
 | `/dependency-graph` | Visualize requirement dependencies |
 | `/roadmap` | Show timeline view of all requirements |
 | `/bug-fix "issue summary" [scope]` | Run structured debugging workflow and root-cause analysis |

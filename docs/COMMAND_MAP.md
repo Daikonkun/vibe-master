@@ -27,6 +27,6 @@ Canonical source of truth for slash-command entrypoints.
 | `/work-on` | `.github/prompts/work-on.prompt.md` | none (prompt-driven) | Uses `scripts/start-work.sh`, `scripts/update-requirement-status.sh`, `scripts/regenerate-docs.sh`, `scripts/worktree-list.sh` inside workflow; **do not call a dedicated work-on shell wrapper** |
 | `/worktree-create` | `.github/prompts/worktree-create.prompt.md` | none (prompt-driven) | Workflow-oriented prompt |
 | `/worktree-list` | `.github/prompts/worktree-list.prompt.md` | `scripts/worktree-list.sh` |  |
-| `/worktree-merge` | `.github/prompts/worktree-merge.prompt.md` | `scripts/worktree-merge.sh` |  |
+| `/worktree-merge` | `.github/prompts/worktree-merge.prompt.md` | `scripts/worktree-merge.sh` | Supports optional `--auto-resolve-conflicts` |
 | `/worktree-prune` | `.github/prompts/worktree-prune.prompt.md` | none (prompt-driven) | Workflow-oriented prompt |
 | `/worktree-status` | `.github/prompts/worktree-status.prompt.md` | none (prompt-driven) | Workflow-oriented prompt |

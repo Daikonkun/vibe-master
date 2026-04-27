@@ -402,6 +402,7 @@ set -e
 
 if [ "$MERGE_EXIT_CODE" -ne 0 ]; then
   if [ "$AUTO_RESOLVE_CONFLICTS" != "true" ]; then
+    echo "Hint: retry with --auto-resolve-conflicts for safe auto-resolution of generated docs/manifests/spec merge conflicts." >&2
     exit "$MERGE_EXIT_CODE"
   fi
 
