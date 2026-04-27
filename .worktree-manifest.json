@@ -613,6 +613,17 @@
       "createdAt": "2026-04-27T02:38:25Z",
       "status": "MERGED",
       "mergedAt": "2026-04-27T02:54:19Z"
+    },
+    {
+      "id": "feature/REQ-1777258373137099177-review-follow-up-make-start-work-race-regression-independent-from-candidate-count",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1777258373137099177-review-follow-up-make-start-work-race-regression-independent-from-candidate-count",
+      "branch": "feature/REQ-1777258373137099177-review-follow-up-make-start-work-race-regression-independent-from-candidate-count",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1777258373137099177"
+      ],
+      "createdAt": "2026-04-27T03:12:10Z",
+      "status": "ACTIVE"
     }
   ]
 }
