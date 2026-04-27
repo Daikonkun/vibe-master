@@ -120,3 +120,5 @@ REQ-1777018133258390308: Review follow-up: make worktree-merge atomic across mer
 
 REQ-1777018133999709609: Review follow-up: stop swallowing lifecycle commit failures that later block /worktree-merge (no dependencies)
 
+REQ-1777257209745418656: Harden start-work with dual-manifest atomic section (no dependencies)
+

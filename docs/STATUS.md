@@ -2,8 +2,10 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (0)
+## PROPOSED (1)
 
+* REQ-1777257209745418656: Harden start-work with dual-manifest atomic section (priority: HIGH)
+  - Worktree: none
 
 ## IN_PROGRESS (0)
 
@@ -141,8 +143,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: none
 
 ## Stats
-- Total Requirements: 57
-- Deployed: 52 (91%)
+- Total Requirements: 58
+- Deployed: 52 (89%)
 - Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0
