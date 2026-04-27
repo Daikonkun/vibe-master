@@ -1,7 +1,7 @@
 # Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (restart)
 
 **ID**: REQ-1777274205120382721  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: CRITICAL  
 **Created**: 2026-04-27T07:16:45Z  
 
@@ -45,4 +45,4 @@ Restarted from REQ-1777257357997508079. Define and implement end-to-end concurre
 * **Linked Worktree**: feature/REQ-1777274205120382721-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review-restart
 * **Branch**: feature/REQ-1777274205120382721-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review-restart
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes
