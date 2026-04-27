@@ -28,7 +28,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1777001176788056212: Review follow-up: fail REQ-ID merge on ambiguous active worktree mappings
 * [DEPLOYED] REQ-1777018133258390308: Review follow-up: make worktree-merge atomic across merge and cleanup failures
 * [DEPLOYED] REQ-1777018133999709609: Review follow-up: stop swallowing lifecycle commit failures that later block /worktree-merge
-* [IN_PROGRESS] REQ-1777257209745418656: Harden start-work with dual-manifest atomic section
+* [CODE_REVIEW] REQ-1777257209745418656: Harden start-work with dual-manifest atomic section
 * [PROPOSED] REQ-1777257214829301915: Serialize docs regeneration across concurrent workflows
 * [PROPOSED] REQ-1777257221458997051: Add concurrency regression suite for parallel sessions
 

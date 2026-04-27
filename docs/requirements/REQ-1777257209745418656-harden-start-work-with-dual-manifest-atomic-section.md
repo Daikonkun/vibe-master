@@ -1,7 +1,7 @@
 # Harden start-work with dual-manifest atomic section
 
 **ID**: REQ-1777257209745418656  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-04-27T02:33:29Z  
 
@@ -22,16 +22,13 @@ Refactor scripts/start-work.sh so requirement/worktree manifest validation and m
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1777257209745418656-harden-start-work-with-dual-manifest-atomic-section.md`.
-   - **Summary**: Refactor scripts/start-work.sh so requirement/worktree manifest validation and m
-   - **Key criteria**: - [ ] Criterion 1 - [ ] Criterion 2
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: (Add implementation notes here)
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1777257209745418656` and verify success criteria are met.
+1. Inspect current `scripts/start-work.sh` flow and identify where requirement/worktree manifest reads, validation, and writes happen today.
+2. Refactor `scripts/start-work.sh` to execute requirement/worktree manifest validation + mutation inside one `with_manifest_locks` critical section, including failure handling when `git worktree add` succeeds but manifest update fails.
+3. Reuse and/or extend shared lock helpers in `scripts/_manifest-lock.sh` so lock acquisition and release remain atomic and portable for both manifests.
+4. Add/adjust regression coverage in `scripts/check-start-work-clean.sh` (and related lifecycle checks such as `scripts/check-requirement-worktree-lifecycle.sh` if needed) to assert no partial dual-manifest writes under concurrent starts.
+5. Verify end-to-end behavior by running `scripts/start-work.sh REQ-1777257209745418656` in a clean test scenario, then `./scripts/status.sh` and `./scripts/show-requirement.sh REQ-1777257209745418656` to confirm `IN_PROGRESS` state and consistent worktree mapping.
 
-**Last updated**: 2026-04-27T02:38:26Z
+**Last updated**: 2026-04-27T02:41:00Z
 
 ## Dependencies
 

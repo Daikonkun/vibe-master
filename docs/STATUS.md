@@ -11,13 +11,13 @@ Kanban-style view of all requirements and their current state.
 * REQ-1777257357997508079: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (priority: CRITICAL)
   - Worktree: none
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1777257209745418656: Harden start-work with dual-manifest atomic section (priority: HIGH)
   - Worktree: feature/REQ-1777257209745418656-harden-start-work-with-dual-manifest-atomic-section
-
-## CODE_REVIEW (0)
-
 
 ## MERGED (0)
 
@@ -152,5 +152,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 61
 - Deployed: 52 (85%)
 - Merged (awaiting deploy): 0
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0
