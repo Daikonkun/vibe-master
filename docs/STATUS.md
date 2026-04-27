@@ -12,10 +12,8 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
 
-* REQ-1777257214829301915: Serialize docs regeneration across concurrent workflows (priority: HIGH)
-  - Worktree: feature/REQ-1777257214829301915-serialize-docs-regeneration-across-concurrent-workflows
 
 ## MERGED (2)
 
