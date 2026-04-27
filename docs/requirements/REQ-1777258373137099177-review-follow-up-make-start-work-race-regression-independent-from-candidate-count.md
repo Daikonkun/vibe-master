@@ -11,13 +11,15 @@ Source: code-review. Severity: HIGH. Evidence: scripts/check-start-work-clean.sh
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [x] Race validation in `scripts/check-start-work-clean.sh` uses a dedicated requirement that is not consumed by the earlier success-path `start-work` invocation.
+- [x] Candidate-count handling is explicit: race check runs only when a third candidate exists, otherwise it is skipped with an informational message.
+- [x] Regression script still passes end-to-end (`bash scripts/check-start-work-clean.sh`) with lock-cleanup and idempotence checks intact.
 
 ## Technical Notes
 
-(Add implementation notes here)
+- Added `RACE_REQ` selection from `CANDIDATE_REQS[2]` when available.
+- Added conditional race block that launches two concurrent `start-work` attempts against `RACE_REQ` and asserts exactly one succeeds.
+- Added fallback behavior to skip race assertion when fewer than three eligible candidates are available, preventing false negatives caused by candidate reuse.
 
 
 ## Development Plan

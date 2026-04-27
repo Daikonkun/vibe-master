@@ -76,6 +76,11 @@ fi
 
 SUCCESS_REQ="${CANDIDATE_REQS[0]}"
 FAIL_REQ="${CANDIDATE_REQS[1]}"
+RACE_REQ=""
+
+if [ "${#CANDIDATE_REQS[@]}" -ge 3 ]; then
+  RACE_REQ="${CANDIDATE_REQS[2]}"
+fi
 
 # 1) No-op regenerate-docs should not change generated outputs after baseline generation.
 bash scripts/regenerate-docs.sh >/dev/null
@@ -93,7 +98,35 @@ fi
 bash scripts/start-work.sh "$SUCCESS_REQ" >/dev/null
 assert_no_lock_artifacts "$CHECK_ROOT"
 
-# 3) start-work failure after lock acquisition should still clean lock artifacts.
+# 3) Parallel start-work race check should use a requirement not consumed by prior steps.
+if [ -n "$RACE_REQ" ]; then
+  set +e
+  bash scripts/start-work.sh "$RACE_REQ" >/dev/null 2>&1 &
+  RACE_PID_1=$!
+  bash scripts/start-work.sh "$RACE_REQ" >/dev/null 2>&1 &
+  RACE_PID_2=$!
+
+  wait "$RACE_PID_1"
+  RACE_STATUS_1=$?
+  wait "$RACE_PID_2"
+  RACE_STATUS_2=$?
+  set -e
+
+  RACE_SUCCESS_COUNT=0
+  [ "$RACE_STATUS_1" -eq 0 ] && RACE_SUCCESS_COUNT=$((RACE_SUCCESS_COUNT + 1))
+  [ "$RACE_STATUS_2" -eq 0 ] && RACE_SUCCESS_COUNT=$((RACE_SUCCESS_COUNT + 1))
+
+  if [ "$RACE_SUCCESS_COUNT" -ne 1 ]; then
+    echo "FAIL: expected exactly one successful start-work in race check for $RACE_REQ (got statuses: $RACE_STATUS_1, $RACE_STATUS_2)." >&2
+    exit 1
+  fi
+
+  assert_no_lock_artifacts "$CHECK_ROOT"
+else
+  echo "INFO: skipping race check because fewer than three PROPOSED/BACKLOG requirements are available." >&2
+fi
+
+# 4) start-work failure after lock acquisition should still clean lock artifacts.
 cp .worktree-manifest.json .worktree-manifest.json.bak
 printf '{\n' > .worktree-manifest.json
 
@@ -117,7 +150,7 @@ fi
 
 assert_no_lock_artifacts "$CHECK_ROOT"
 
-# 4) Locks should be acquirable immediately after failed start-work without manual cleanup.
+# 5) Locks should be acquirable immediately after failed start-work without manual cleanup.
 source scripts/_manifest-lock.sh
 with_manifest_lock .requirement-manifest.json true
 with_manifest_lock .worktree-manifest.json true
