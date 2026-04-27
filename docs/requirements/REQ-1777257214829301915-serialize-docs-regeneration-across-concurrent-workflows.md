@@ -1,7 +1,7 @@
 # Serialize docs regeneration across concurrent workflows
 
 **ID**: REQ-1777257214829301915  
-**Status**: CODE_REVIEW  
+**Status**: MERGED  
 **Priority**: HIGH  
 **Created**: 2026-04-27T02:33:34Z  
 
@@ -41,5 +41,5 @@ Add lock/serialization around scripts/regenerate-docs.sh and callers so concurre
 
 * **Linked Worktree**: None yet
 * **Branch**: None yet
-* **Merged**: No
+* **Merged**: Yes
 * **Deployed**: No
