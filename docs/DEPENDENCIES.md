@@ -128,3 +128,5 @@ REQ-1777257221458997051: Add concurrency regression suite for parallel sessions 
 
 REQ-1777257357997508079: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (no dependencies)
 
+REQ-1777258373137099177: Review follow-up: make start-work race regression independent from candidate count (no dependencies)
+

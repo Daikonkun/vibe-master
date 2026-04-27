@@ -65,9 +65,10 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1777257214829301915 | Serialize docs regeneration across concurrent workflows | PROPOSED | HIGH | — | 2026-04-27 | 2026-04-27 |
 | REQ-1777257221458997051 | Add concurrency regression suite for parallel sessions | PROPOSED | HIGH | — | 2026-04-27 | 2026-04-27 |
 | REQ-1777257357997508079 | Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review | PROPOSED | CRITICAL | — | 2026-04-27 | 2026-04-27 |
+| REQ-1777258373137099177 | Review follow-up: make start-work race regression independent from candidate count | PROPOSED | HIGH | — | 2026-04-27 | 2026-04-27 |
 
 ## Status Breakdown
-- **Proposed**: 3
+- **Proposed**: 4
 - **In Progress**: 0
 - **Code Review**: 1
 - **Merged**: 0
@@ -81,6 +82,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-27T02:50:51Z
+* Last updated: 2026-04-27T02:52:53Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

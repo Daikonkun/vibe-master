@@ -953,6 +953,16 @@
       "origin": "project",
       "createdAt": "2026-04-27T02:35:58Z",
       "updatedAt": "2026-04-27T02:35:58Z"
+    },
+    {
+      "id": "REQ-1777258373137099177",
+      "name": "Review follow-up: make start-work race regression independent from candidate count",
+      "description": "Source: code-review. Severity: HIGH. Evidence: scripts/check-start-work-clean.sh defaults RACE_REQ to SUCCESS_REQ and executes a successful start-work before the race section, so repositories with only two PROPOSED/BACKLOG candidates can cause both race invocations to fail and produce a false negative. Required outcome: make the race test always use a fresh requirement not consumed by earlier steps, or explicitly require at least three candidates before running the race assertion.",
+      "status": "PROPOSED",
+      "priority": "HIGH",
+      "origin": "project",
+      "createdAt": "2026-04-27T02:52:53Z",
+      "updatedAt": "2026-04-27T02:52:53Z"
     }
   ],
   "requiresDeployment": true
