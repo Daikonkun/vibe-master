@@ -1,7 +1,7 @@
 # Review follow-up: make start-work race regression independent from candidate count
 
 **ID**: REQ-1777258373137099177  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-04-27T02:52:53Z  
 
@@ -22,14 +22,11 @@ Source: code-review. Severity: HIGH. Evidence: scripts/check-start-work-clean.sh
 
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1777258373137099177-review-follow-up-make-start-work-race-regression-independent-from-candidate-count.md`.
-   - **Summary**: Source: code-review. Severity: HIGH. Evidence: scripts/check-start-work-clean.sh
-   - **Key criteria**: - [ ] Criterion 1 - [ ] Criterion 2
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: (Add implementation notes here)
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1777258373137099177` and verify success criteria are met.
+1. Update candidate selection in `scripts/check-start-work-clean.sh` so the race/assertion path uses a dedicated requirement ID that is not consumed by the earlier success-path `start-work` invocation.
+2. Add/adjust guard logic in `scripts/check-start-work-clean.sh` to enforce the minimum candidate count needed by the revised flow (for example, fail fast when there are not enough PROPOSED/BACKLOG items for both success and race checks).
+3. Re-run the regression check with `bash scripts/check-start-work-clean.sh` and confirm the race section remains valid regardless of initial candidate ordering/count edge cases.
+4. Run `bash scripts/regenerate-docs.sh` to keep generated requirement/status documentation consistent after script changes.
+5. Verify requirement linkage and lifecycle state with `bash scripts/show-requirement.sh REQ-1777258373137099177`, ensuring the requirement remains actionable and aligned with this fix scope.
 
 **Last updated**: 2026-04-27T03:12:11Z
 

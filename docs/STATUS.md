@@ -11,13 +11,13 @@ Kanban-style view of all requirements and their current state.
 * REQ-1777257357997508079: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (priority: CRITICAL)
   - Worktree: none
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1777258373137099177: Review follow-up: make start-work race regression independent from candidate count (priority: HIGH)
   - Worktree: feature/REQ-1777258373137099177-review-follow-up-make-start-work-race-regression-independent-from-candidate-count
-
-## CODE_REVIEW (0)
-
 
 ## MERGED (0)
 
@@ -154,5 +154,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 62
 - Deployed: 53 (85%)
 - Merged (awaiting deploy): 0
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0
