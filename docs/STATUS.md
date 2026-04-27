@@ -7,13 +7,13 @@ Kanban-style view of all requirements and their current state.
 * REQ-1777257357997508079: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (priority: CRITICAL)
   - Worktree: none
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1777270332882776949: Review follow-up: isolate concurrent-workflow check temp logs per run (priority: HIGH)
   - Worktree: feature/REQ-1777270332882776949-review-follow-up-isolate-concurrent-workflow-check-temp-logs-per-run
-
-## CODE_REVIEW (0)
-
 
 ## MERGED (3)
 
@@ -156,5 +156,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 63
 - Deployed: 53 (84%)
 - Merged (awaiting deploy): 3
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0
