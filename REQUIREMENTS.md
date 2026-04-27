@@ -67,9 +67,10 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1777257357997508079 | Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review | IN_PROGRESS | CRITICAL | feature/REQ-1777257357997508079-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review | 2026-04-27 | 2026-04-27 |
 | REQ-1777258373137099177 | Review follow-up: make start-work race regression independent from candidate count | MERGED | HIGH | feature/REQ-1777258373137099177-review-follow-up-make-start-work-race-regression-independent-from-candidate-count | 2026-04-27 | 2026-04-27 |
 | REQ-1777270332882776949 | Review follow-up: isolate concurrent-workflow check temp logs per run | MERGED | HIGH | feature/REQ-1777270332882776949-review-follow-up-isolate-concurrent-workflow-check-temp-logs-per-run | 2026-04-27 | 2026-04-27 |
+| REQ-1777274205120382721 | Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (restart) | PROPOSED | CRITICAL | — | 2026-04-27 | 2026-04-27 |
 
 ## Status Breakdown
-- **Proposed**: 0
+- **Proposed**: 1
 - **In Progress**: 1
 - **Code Review**: 0
 - **Merged**: 4
@@ -83,6 +84,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-27T06:52:42Z
+* Last updated: 2026-04-27T07:16:45Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

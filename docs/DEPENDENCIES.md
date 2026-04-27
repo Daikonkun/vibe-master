@@ -132,3 +132,5 @@ REQ-1777258373137099177: Review follow-up: make start-work race regression indep
 
 REQ-1777270332882776949: Review follow-up: isolate concurrent-workflow check temp logs per run (no dependencies)
 
+REQ-1777274205120382721: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (restart) (no dependencies)
+
