@@ -601,6 +601,17 @@
       "createdAt": "2026-04-24T08:31:15Z",
       "status": "MERGED",
       "mergedAt": "2026-04-24T08:42:13Z"
+    },
+    {
+      "id": "feature/REQ-1777257209745418656-harden-start-work-with-dual-manifest-atomic-section",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1777257209745418656-harden-start-work-with-dual-manifest-atomic-section",
+      "branch": "feature/REQ-1777257209745418656-harden-start-work-with-dual-manifest-atomic-section",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1777257209745418656"
+      ],
+      "createdAt": "2026-04-27T02:38:25Z",
+      "status": "ACTIVE"
     }
   ]
 }
