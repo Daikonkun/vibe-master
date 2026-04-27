@@ -11,13 +11,17 @@ Source: code-review. Severity: HIGH. Evidence: scripts/check-concurrent-workflow
 
 ## Success Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+- [x] `scripts/check-concurrent-workflows.sh` no longer writes diagnostic logs to fixed `/tmp/*.log` paths.
+- [x] All diagnostic logs are created under the run-local `mktemp` workspace and read from those run-local paths for failure output.
+- [x] Regression validation passes without cross-run log clobbering (`bash scripts/check-concurrent-workflows.sh`).
 
 ## Technical Notes
 
-(Add implementation notes here)
+- Added run-local log plumbing in `scripts/check-concurrent-workflows.sh`:
+	- `LOG_ROOT="$TMP_ROOT/logs"`
+	- explicit per-check log paths (`START_RACE_LOG_1`, `START_RACE_LOG_2`, `START_A_LOG`, `START_B_LOG`, `STATUS_A_LOG`, `STATUS_B_LOG`, `MERGE_A_LOG`, `MERGE_B_LOG`)
+- Updated all command redirections and failure `cat` paths to use these run-local log variables.
+- Existing trap cleanup (`rm -rf "$TMP_ROOT"`) now removes the logs directory automatically on exit.
 
 ## Dependencies
 
