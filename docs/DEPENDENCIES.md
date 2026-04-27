@@ -126,3 +126,5 @@ REQ-1777257214829301915: Serialize docs regeneration across concurrent workflows
 
 REQ-1777257221458997051: Add concurrency regression suite for parallel sessions (no dependencies)
 
+REQ-1777257357997508079: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (no dependencies)
+
