@@ -625,6 +625,17 @@
       "createdAt": "2026-04-27T03:12:10Z",
       "status": "MERGED",
       "mergedAt": "2026-04-27T03:21:43Z"
+    },
+    {
+      "id": "feature/REQ-1777257214829301915-serialize-docs-regeneration-across-concurrent-workflows",
+      "path": "/Users/bluoaa/Desktop/Work/Vibe Coding Stuff/feature/REQ-1777257214829301915-serialize-docs-regeneration-across-concurrent-workflows",
+      "branch": "feature/REQ-1777257214829301915-serialize-docs-regeneration-across-concurrent-workflows",
+      "baseBranch": "main",
+      "requirementIds": [
+        "REQ-1777257214829301915"
+      ],
+      "createdAt": "2026-04-27T03:25:01Z",
+      "status": "ACTIVE"
     }
   ]
 }
