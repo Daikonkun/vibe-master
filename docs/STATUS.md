@@ -8,12 +8,10 @@ Kanban-style view of all requirements and their current state.
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
 
-* REQ-1777275195454105151: Review follow-up: exercise manifest lock fallback path in concurrency check (priority: MEDIUM)
-  - Worktree: feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check
 
-## MERGED (5)
+## MERGED (6)
 
 * REQ-1777257214829301915: Serialize docs regeneration across concurrent workflows (priority: HIGH)
   - Worktree: none
@@ -25,6 +23,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1777270332882776949-review-follow-up-isolate-concurrent-workflow-check-temp-logs-per-run
 * REQ-1777274205120382721: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (restart) (priority: CRITICAL)
   - Worktree: feature/REQ-1777274205120382721-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review-restart
+* REQ-1777275195454105151: Review follow-up: exercise manifest lock fallback path in concurrency check (priority: MEDIUM)
+  - Worktree: feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check
 
 ## DEPLOYED (53)
 
@@ -159,6 +159,6 @@ Kanban-style view of all requirements and their current state.
 ## Stats
 - Total Requirements: 65
 - Deployed: 53 (81%)
-- Merged (awaiting deploy): 5
+- Merged (awaiting deploy): 6
 - In Progress: 0
 - Blocked: 0
