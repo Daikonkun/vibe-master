@@ -1,7 +1,7 @@
 # Add concurrency regression suite for parallel sessions
 
 **ID**: REQ-1777257221458997051  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: HIGH  
 **Created**: 2026-04-27T02:33:41Z  
 
