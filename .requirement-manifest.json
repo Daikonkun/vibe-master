@@ -979,11 +979,12 @@
       "id": "REQ-1777257357997508079",
       "name": "Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review",
       "description": "Define and implement end-to-end concurrency safety for simultaneous sessions running /start-work, /work-on, /worktree-merge, and /code-review. Cover manifest transaction boundaries, read-then-act race windows, docs regeneration serialization, and regression tests. This umbrella coordinates REQ-1777257209745418656, REQ-1777257214829301915, and REQ-1777257221458997051 and extends scope to /code-review side effects under parallel execution.",
-      "status": "PROPOSED",
+      "status": "IN_PROGRESS",
       "priority": "CRITICAL",
       "origin": "project",
       "createdAt": "2026-04-27T02:35:58Z",
-      "updatedAt": "2026-04-27T02:35:58Z"
+      "updatedAt": "2026-04-27T06:52:42Z",
+      "worktreeId": "feature/REQ-1777257357997508079-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review"
     },
     {
       "id": "REQ-1777258373137099177",
