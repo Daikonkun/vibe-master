@@ -11,16 +11,14 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (3)
+## MERGED (2)
 
-* REQ-1777270332882776949: Review follow-up: isolate concurrent-workflow check temp logs per run (priority: HIGH)
-  - Worktree: feature/REQ-1777270332882776949-review-follow-up-isolate-concurrent-workflow-check-temp-logs-per-run
 * REQ-1777274205120382721: Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (restart) (priority: CRITICAL)
   - Worktree: feature/REQ-1777274205120382721-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review-restart
 * REQ-1777275195454105151: Review follow-up: exercise manifest lock fallback path in concurrency check (priority: MEDIUM)
   - Worktree: feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check
 
-## DEPLOYED (56)
+## DEPLOYED (57)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -134,6 +132,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1777257221458997051-add-concurrency-regression-suite-for-parallel-sessions
 * REQ-1777258373137099177: Review follow-up: make start-work race regression independent from candidate count (priority: HIGH)
   - Worktree: feature/REQ-1777258373137099177-review-follow-up-make-start-work-race-regression-independent-from-candidate-count
+* REQ-1777270332882776949: Review follow-up: isolate concurrent-workflow check temp logs per run (priority: HIGH)
+  - Worktree: feature/REQ-1777270332882776949-review-follow-up-isolate-concurrent-workflow-check-temp-logs-per-run
 
 ## BLOCKED (0)
 
@@ -158,7 +158,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 65
-- Deployed: 56 (86%)
-- Merged (awaiting deploy): 3
+- Deployed: 57 (87%)
+- Merged (awaiting deploy): 2
 - In Progress: 0
 - Blocked: 0

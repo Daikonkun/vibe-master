@@ -1035,19 +1035,25 @@
       "id": "REQ-1777270332882776949",
       "name": "Review follow-up: isolate concurrent-workflow check temp logs per run",
       "description": "Source: code-review. Severity: HIGH. Evidence: scripts/check-concurrent-workflows.sh writes diagnostics to fixed paths under /tmp (start-race-1.log, start-race-2.log, start-a.log, start-b.log, status-a.log, status-b.log, merge-a.log, merge-b.log). Parallel executions can overwrite each other's logs and misreport failures. Required outcome: Use per-run log paths rooted under the script's mktemp workspace and ensure cleanup removes them; keep failure output deterministic under concurrent invocations.",
-      "status": "MERGED",
+      "status": "DEPLOYED",
       "priority": "HIGH",
       "origin": "project",
       "createdAt": "2026-04-27T06:12:12Z",
-      "updatedAt": "2026-04-27T06:51:20Z",
+      "updatedAt": "2026-04-27T07:54:58Z",
       "worktreeId": "feature/REQ-1777270332882776949-review-follow-up-isolate-concurrent-workflow-check-temp-logs-per-run",
       "statusHistory": [
         {
           "from": "IN_PROGRESS",
           "to": "CODE_REVIEW",
           "changedAt": "2026-04-27T06:49:52Z"
+        },
+        {
+          "from": "MERGED",
+          "to": "DEPLOYED",
+          "changedAt": "2026-04-27T07:54:58Z"
         }
-      ]
+      ],
+      "deployedAt": "2026-04-27T07:54:58Z"
     },
     {
       "id": "REQ-1777274205120382721",
