@@ -11,6 +11,7 @@ Canonical source of truth for slash-command entrypoints.
 |---|---|---|---|
 | `/add-requirement` | `.github/prompts/add-requirement.prompt.md` | `scripts/create-requirement.sh` | Regenerates docs via `scripts/regenerate-docs.sh` |
 | `/bug-fix` | `.github/prompts/bug-fix.prompt.md` | none (prompt-driven) | Workflow-oriented prompt |
+| `/codex-resume` | `.github/prompts/codex-resume.prompt.md` | `scripts/codex-resume.sh` | Hydrates Codex session context and recommends next command |
 | `/code-review` | `.github/prompts/code-review.prompt.md` | none (prompt-driven) | May run `scripts/regenerate-docs.sh` |
 | `/dependency-graph` | `.github/prompts/dependency-graph.prompt.md` | `scripts/dependency-graph.sh` |  |
 | `/e2e-test` | `.github/prompts/e2e-test.prompt.md` | none (prompt-driven) | Workflow-oriented prompt |

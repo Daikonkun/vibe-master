@@ -9,7 +9,7 @@ Work on a requirement by implementing its spec until the next lifecycle status i
 
 Workflow:
 1. Parse required `REQ-ID`, optional `target-status`, optional `--auto` / `--no-auto`, and optional `--no-diff-reason "<reason>"` from arguments. Validate format (`REQ-<digits>`). If `target-status` is provided, validate it is a known status.
-   - Determine caller trust first (for example by verifying the prompt `agent:` is `Vibe Agent Orchestrator` or via an explicit caller identity check).
+   - Determine caller trust first (for example by verifying the prompt `agent:` is `Vibe Agent Orchestrator`, or by validating Codex caller metadata `VIBE_CALLER=codex` and `VIBE_AUTO_MODE=1`).
    - If both `--auto` and `--no-auto` are passed, report an argument conflict and stop.
    - Trusted orchestrator callers default to auto mode even when `--auto` is omitted; `--no-auto` explicitly opts back into interactive confirmation.
    - Untrusted callers must use interactive confirmation. If an untrusted caller passes `--auto`, report an authorization error and stop.
@@ -67,7 +67,7 @@ Constraints:
 - Before advancing status, collect evidence from the active worktree using both `git -C <worktree-path> diff --name-status <base-branch>...HEAD` and `git -C <worktree-path> status --porcelain --untracked-files=no`; block no-op advancement only when both are empty.
 - No-op evidence is tracked-only: staged and unstaged tracked deltas count, while untracked files are excluded.
 - `--no-diff-reason` is only valid for no-diff transitions targeting `CODE_REVIEW`; the reason must be non-empty and must be persisted via `scripts/update-requirement-status.sh --reason`.
-- Trusted orchestrator callers default to auto mode unless `--no-auto` is explicitly provided.
+- Trusted orchestrator callers default to auto mode unless `--no-auto` is explicitly provided. Codex resume flows are trusted when `VIBE_CALLER=codex` and `VIBE_AUTO_MODE=1` are both present.
 - `--auto` is only valid for trusted orchestrator callers. If caller trust cannot be established, treat `--auto` as invalid and stop.
 - In effective auto mode, skip only the interactive confirmation gate; do not skip status validation, lifecycle checks, worktree checks, implementation work, or success-criteria verification.
 - Ask the user for confirmation exactly once before advancing status when auto mode is not active. After the user confirms, advance immediately without re-asking.

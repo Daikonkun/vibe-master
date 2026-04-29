@@ -70,13 +70,14 @@ After any state change, regenerate:
 | `/roadmap` | Show timeline view of all requirements |
 | `/regen-docs` | Force regeneration of REQUIREMENTS and dashboard docs |
 | `/bug-fix "issue summary" [scope]` | Run structured debugging workflow and root-cause analysis |
+| `/codex-resume [req-id|--auto-detect]` | Hydrate Codex session context, detect resumable requirement/worktree, and recommend next command |
 | `/update-manual [scope]` | Generate and refresh user manual content |
 | `/code-review [scope]` | Review code and create REQ follow-up threads for unresolved findings |
 | `/work-on <req-id> [target-status] [--auto|--no-auto] [--no-diff-reason "reason"]` | Work on a requirement until it reaches its next lifecycle status; no-op transitions are blocked by default, and no-diff `CODE_REVIEW` advances require an explicit persisted reason |
 | `/e2e-test [scope]` | Run end-to-end testing with screenshot-based cross-border visual validation; propose new skill REQs when gaps are found |
 | `/init [project-name]` | Clear Vibe Master template REQs and initialize clean project manifests |
 
-Slash commands appear in Copilot Chat and Codex plugin chat only when they are backed by prompt files or valid skill definitions. `/add-requirement`, `/list-requirements`, `/update-requirement`, `/start-work`, `/show-requirement`, `/status`, `/worktree-list`, `/worktree-create`, `/worktree-prune`, `/worktree-status`, `/worktree-merge`, `/dependency-graph`, `/roadmap`, `/regen-docs`, `/bug-fix`, `/update-manual`, `/code-review`, `/work-on`, `/upgrade`, `/rollback`, `/e2e-test`, and `/init` are implemented by prompt files in `.github/prompts/`; skill files must keep lowercase hyphenated `name` values that match their folder names.
+Slash commands appear in Copilot Chat and Codex plugin chat only when they are backed by prompt files or valid skill definitions. `/add-requirement`, `/list-requirements`, `/update-requirement`, `/start-work`, `/show-requirement`, `/status`, `/worktree-list`, `/worktree-create`, `/worktree-prune`, `/worktree-status`, `/worktree-merge`, `/dependency-graph`, `/roadmap`, `/regen-docs`, `/bug-fix`, `/codex-resume`, `/update-manual`, `/code-review`, `/work-on`, `/upgrade`, `/rollback`, `/e2e-test`, and `/init` are implemented by prompt files in `.github/prompts/`; skill files must keep lowercase hyphenated `name` values that match their folder names.
 
 Note: Use `/worktree-merge <branch-name>` (not `/merge-requirement`) to complete a requirement.
 

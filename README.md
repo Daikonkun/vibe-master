@@ -201,6 +201,7 @@ rm -rf .upgrade-template
 │   ├── prompts/
 │   │   ├── add-requirement.prompt.md      # Slash command for requirement creation
 │   │   ├── bug-fix.prompt.md              # Wrapper prompt for debug workflow skill
+│   │   ├── codex-resume.prompt.md         # Slash command for Codex resume preflight
 │   │   ├── code-review.prompt.md          # Wrapper prompt for review skill
 │   │   ├── dependency-graph.prompt.md     # Slash command for dependency visualization
 │   │   ├── e2e-test.prompt.md             # Slash command for end-to-end testing
@@ -250,6 +251,7 @@ rm -rf .upgrade-template
   ├── check-upgrade-manifest-history.sh  # Regression: ensure upgrade apply preserves manifest history
     ├── check-docs-sync.sh                 # Guard: verify generated docs are synced with manifests
     ├── check-manifest-lock-race.sh        # Regression: concurrent manifest writers do not lose updates
+    ├── codex-resume.sh                    # CLI: detect resumable REQ/worktree context for Codex
     ├── create-requirement.sh               # CLI: create new requirement
     ├── dependency-graph.sh                 # CLI: regenerate + show dependency graph
     ├── generate-plan.sh                    # CLI: generate/update Development Plan in a spec
@@ -303,6 +305,22 @@ Displays:
 - Completion stats
 - Active worktrees
 - Blocked items
+
+### Resuming in Codex
+```
+/codex-resume --auto-detect
+```
+
+This:
+1. Detects canonical project/worktree context
+2. Validates requirement/worktree manifests
+3. Recommends the next lifecycle command (usually `/start-work <REQ-ID>` or `/work-on <REQ-ID>`)
+
+For full-auto Codex orchestration, set:
+```bash
+export VIBE_CALLER=codex
+export VIBE_AUTO_MODE=1
+```
 
 ### Completing Work
 ```
@@ -408,6 +426,7 @@ bash scripts/check-command-entrypoints.sh
 | Command | Purpose |
 |---------|---------|
 | `/add-requirement` | Submit new requirement |
+| `/codex-resume [req-id|--auto-detect]` | Hydrate Codex session context and recommend the next command |
 | `/update-requirement <req-id> <new-status> [--force] [--no-refresh]` | Update requirement lifecycle status with transition validation |
 | `/start-work <req-id>` | Begin work (create worktree + set IN_PROGRESS) |
 | `/upgrade [--template-repo <github-url>] [--base-branch <branch>] [--apply]` | Safely preview/apply Vibe Master template upgrades in an isolated worktree with preflight command-conflict checks |

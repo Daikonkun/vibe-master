@@ -10,6 +10,7 @@ REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
 WORKTREE_MANIFEST="$PROJECT_ROOT/.worktree-manifest.json"
 source "$PROJECT_ROOT/scripts/_manifest-lock.sh"
 TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+WORKTREE_ROOT_OVERRIDE="${VIBE_WORKTREE_ROOT:-}"
 
 if [ -z "$REQ_ID" ]; then
   echo "Usage: $0 REQ-<timestamp> [base-branch]" >&2
@@ -62,7 +63,45 @@ fi
 REQ_NAME="$(jq -r --arg reqId "$REQ_ID" '.requirements[] | select(.id == $reqId) | .name' "$REQ_MANIFEST")"
 SLUG="$(echo "$REQ_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//; s/-$//')"
 BRANCH_ID="feature/${REQ_ID}-${SLUG}"
-WORKTREE_PATH="$(dirname "$PROJECT_ROOT")/${BRANCH_ID}"
+
+resolve_worktree_path() {
+  local default_root configured_root candidate_root candidate_path
+
+  default_root="$(dirname "$PROJECT_ROOT")"
+
+  if [ -n "$WORKTREE_ROOT_OVERRIDE" ]; then
+    case "$WORKTREE_ROOT_OVERRIDE" in
+      /*) configured_root="$WORKTREE_ROOT_OVERRIDE" ;;
+      *) configured_root="$PROJECT_ROOT/$WORKTREE_ROOT_OVERRIDE" ;;
+    esac
+    candidate_root="$configured_root"
+  else
+    candidate_root="$default_root"
+  fi
+
+  candidate_path="$candidate_root/$BRANCH_ID"
+
+  # If no explicit override is provided and parent-based placement cannot be prepared,
+  # fall back to a local workspace path for sandboxed/constrained environments.
+  if [ -z "$WORKTREE_ROOT_OVERRIDE" ]; then
+    if ! mkdir -p "$(dirname "$candidate_path")" >/dev/null 2>&1; then
+      candidate_root="$PROJECT_ROOT/.worktrees"
+      candidate_path="$candidate_root/$BRANCH_ID"
+    fi
+  fi
+
+  if ! mkdir -p "$(dirname "$candidate_path")"; then
+    echo "Error: Unable to create worktree parent directory: $(dirname "$candidate_path")" >&2
+    if [ -z "$WORKTREE_ROOT_OVERRIDE" ]; then
+      echo "Hint: set VIBE_WORKTREE_ROOT to a writable path and retry." >&2
+    fi
+    exit 1
+  fi
+
+  printf '%s\n' "$candidate_path"
+}
+
+WORKTREE_PATH="$(resolve_worktree_path)"
 
 if ! git -C "$PROJECT_ROOT" rev-parse --verify "$BASE_BRANCH" >/dev/null 2>&1; then
   echo "Error: Base branch does not exist locally: $BASE_BRANCH" >&2
@@ -73,8 +112,6 @@ if [ -d "$WORKTREE_PATH" ]; then
   echo "Error: Worktree path already exists: $WORKTREE_PATH" >&2
   exit 1
 fi
-
-mkdir -p "$(dirname "$WORKTREE_PATH")"
 
 if git -C "$PROJECT_ROOT" show-ref --verify --quiet "refs/heads/$BRANCH_ID"; then
   git -C "$PROJECT_ROOT" worktree add "$WORKTREE_PATH" "$BRANCH_ID"

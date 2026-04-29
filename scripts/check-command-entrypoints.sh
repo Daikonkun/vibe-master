@@ -201,7 +201,7 @@ while IFS= read -r documented_command; do
   check_documented_command_has_entrypoint "$documented_command"
 done < "$documented_commands_file"
 
-for required_command in add-requirement status start-work work-on; do
+for required_command in add-requirement codex-resume status start-work work-on; do
   if [ ! -f ".github/prompts/${required_command}.prompt.md" ]; then
     echo "FAIL: missing required representative prompt file .github/prompts/${required_command}.prompt.md" >&2
     missing=1

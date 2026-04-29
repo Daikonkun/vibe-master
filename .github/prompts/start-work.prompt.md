@@ -19,6 +19,7 @@ Workflow:
 
 Constraints:
 - Never create multiple worktrees for the same requirement unless explicitly requested.
+- If sibling-directory worktree creation fails in constrained environments, retry with `VIBE_WORKTREE_ROOT=.worktrees` (or another writable path) while preserving branch naming and manifest linkage.
 - If the requirement already has an active worktree, report it and stop.
 - Surface script failures exactly.
 - If the requirement spec file cannot be found, report the missing spec and stop before claiming plan persistence.
