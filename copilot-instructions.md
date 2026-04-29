@@ -68,6 +68,7 @@ After any state change, regenerate:
 | `/worktree-merge <branch|REQ-ID> [base-branch] [--auto-resolve-conflicts]` | Merge associated worktree and update docs (requires clean working tree; optional safe auto-resolution for generated docs/manifests/spec conflicts) |
 | `/dependency-graph` | Visualize requirement dependencies |
 | `/roadmap` | Show timeline view of all requirements |
+| `/regen-docs` | Force regeneration of REQUIREMENTS and dashboard docs |
 | `/bug-fix "issue summary" [scope]` | Run structured debugging workflow and root-cause analysis |
 | `/update-manual [scope]` | Generate and refresh user manual content |
 | `/code-review [scope]` | Review code and create REQ follow-up threads for unresolved findings |

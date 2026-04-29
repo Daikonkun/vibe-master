@@ -24,9 +24,22 @@ done
 
 missing=0
 names_file="$(mktemp)"
+prompt_commands_file="$(mktemp)"
+command_map_commands_file="$(mktemp)"
+instructions_commands_file="$(mktemp)"
+documented_commands_file="$(mktemp)"
+skill_only_commands_file="$(mktemp)"
+
+SKILL_ONLY_COMMANDS=(
+)
 
 cleanup() {
   rm -f "$names_file"
+  rm -f "$prompt_commands_file"
+  rm -f "$command_map_commands_file"
+  rm -f "$instructions_commands_file"
+  rm -f "$documented_commands_file"
+  rm -f "$skill_only_commands_file"
 }
 trap cleanup EXIT
 
@@ -100,18 +113,49 @@ check_prompt_metadata() {
   printf '%s\n' "$value" >> "$names_file"
 }
 
-check_command_presence_in_docs() {
+collect_commands_from_doc_table() {
+  local source_file="$1"
+  local output_file="$2"
+
+  awk -F'`' '
+    /^\|[[:space:]]*`\/[^`]+`[[:space:]]*\|/ {
+      command_text = $2
+      sub(/^\/+/, "", command_text)
+      split(command_text, parts, /[[:space:]]+/)
+      if (parts[1] != "") {
+        print parts[1]
+      }
+    }
+  ' "$source_file" | sort -u > "$output_file"
+}
+
+check_prompt_documented_in_both_docs() {
   local cmd="$1"
 
-  if ! grep -q "/${cmd}" docs/COMMAND_MAP.md; then
+  if ! grep -Fxq "$cmd" "$command_map_commands_file"; then
     echo "FAIL: docs/COMMAND_MAP.md is missing command /${cmd}." >&2
     missing=1
   fi
 
-  if ! grep -q "/${cmd}" copilot-instructions.md; then
+  if ! grep -Fxq "$cmd" "$instructions_commands_file"; then
     echo "FAIL: copilot-instructions.md is missing command /${cmd}." >&2
     missing=1
   fi
+}
+
+check_documented_command_has_entrypoint() {
+  local cmd="$1"
+
+  if grep -Fxq "$cmd" "$prompt_commands_file"; then
+    return
+  fi
+
+  if grep -Fxq "$cmd" "$skill_only_commands_file"; then
+    return
+  fi
+
+  echo "FAIL: documented command /${cmd} has no prompt file and is not allowlisted as skill-only." >&2
+  missing=1
 }
 
 for file in "${FILES[@]}"; do
@@ -122,16 +166,6 @@ done
 for prompt in .github/prompts/*.prompt.md; do
   [ -f "$prompt" ] || continue
   check_prompt_metadata "$prompt"
-  check_command_presence_in_docs "$(basename "$prompt" .prompt.md)"
-done
-
-for required_command in add-requirement status start-work work-on; do
-  if [ ! -f ".github/prompts/${required_command}.prompt.md" ]; then
-    echo "FAIL: missing required representative prompt file .github/prompts/${required_command}.prompt.md" >&2
-    missing=1
-    continue
-  fi
-  check_command_presence_in_docs "$required_command"
 done
 
 duplicate_names="$(sort "$names_file" | uniq -d || true)"
@@ -140,6 +174,41 @@ if [ -n "$duplicate_names" ]; then
   echo "$duplicate_names" >&2
   missing=1
 fi
+
+sort -u "$names_file" > "$prompt_commands_file"
+
+collect_commands_from_doc_table "docs/COMMAND_MAP.md" "$command_map_commands_file"
+collect_commands_from_doc_table "copilot-instructions.md" "$instructions_commands_file"
+
+cat "$command_map_commands_file" "$instructions_commands_file" | sort -u > "$documented_commands_file"
+
+for skill_only_command in "${SKILL_ONLY_COMMANDS[@]-}"; do
+  [ -n "$skill_only_command" ] || continue
+  printf '%s\n' "$skill_only_command" >> "$skill_only_commands_file"
+done
+
+if [ -s "$skill_only_commands_file" ]; then
+  sort -u "$skill_only_commands_file" -o "$skill_only_commands_file"
+fi
+
+while IFS= read -r command_name; do
+  [ -n "$command_name" ] || continue
+  check_prompt_documented_in_both_docs "$command_name"
+done < "$prompt_commands_file"
+
+while IFS= read -r documented_command; do
+  [ -n "$documented_command" ] || continue
+  check_documented_command_has_entrypoint "$documented_command"
+done < "$documented_commands_file"
+
+for required_command in add-requirement status start-work work-on; do
+  if [ ! -f ".github/prompts/${required_command}.prompt.md" ]; then
+    echo "FAIL: missing required representative prompt file .github/prompts/${required_command}.prompt.md" >&2
+    missing=1
+    continue
+  fi
+  check_prompt_documented_in_both_docs "$required_command"
+done
 
 if [ "$missing" -ne 0 ]; then
   echo "" >&2
