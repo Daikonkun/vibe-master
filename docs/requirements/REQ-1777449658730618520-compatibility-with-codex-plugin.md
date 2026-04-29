@@ -1,7 +1,7 @@
 # compatibility with Codex plugin
 
 **ID**: REQ-1777449658730618520  
-**Status**: IN_PROGRESS  
+**Status**: CODE_REVIEW  
 **Priority**: MEDIUM  
 **Created**: 2026-04-29T08:00:58Z  
 

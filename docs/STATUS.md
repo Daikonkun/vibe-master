@@ -5,13 +5,13 @@ Kanban-style view of all requirements and their current state.
 ## PROPOSED (0)
 
 
-## IN_PROGRESS (1)
+## IN_PROGRESS (0)
+
+
+## CODE_REVIEW (1)
 
 * REQ-1777449658730618520: compatibility with Codex plugin (priority: MEDIUM)
   - Worktree: feature/REQ-1777449658730618520-compatibility-with-codex-plugin
-
-## CODE_REVIEW (0)
-
 
 ## MERGED (0)
 
@@ -162,5 +162,5 @@ Kanban-style view of all requirements and their current state.
 - Total Requirements: 66
 - Deployed: 59 (89%)
 - Merged (awaiting deploy): 0
-- In Progress: 1
+- In Progress: 0
 - Blocked: 0
