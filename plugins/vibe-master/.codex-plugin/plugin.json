@@ -6,6 +6,14 @@
     "name": "Vibe Master"
   },
   "license": "MIT",
+  "keywords": [
+    "vibe-master",
+    "requirements",
+    "worktrees",
+    "codex",
+    "workflow"
+  ],
+  "skills": "./skills/",
   "interface": {
     "displayName": "Vibe Master",
     "shortDescription": "Requirement and worktree orchestration commands for Codex",
@@ -22,6 +30,9 @@
       "Start work on a requirement",
       "Run Vibe Master code review"
     ],
+    "websiteURL": "https://github.com/bluoaa/vibe-master",
+    "privacyPolicyURL": "https://github.com/bluoaa/vibe-master",
+    "termsOfServiceURL": "https://github.com/bluoaa/vibe-master",
     "screenshots": [],
     "brandColor": "#0B7285"
   }
