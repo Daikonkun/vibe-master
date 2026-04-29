@@ -70,8 +70,7 @@ Timeline view of all requirements organized by status and priority.
 * [DEPLOYED] REQ-1776999531888370737: enlarge /worktree-merge scope
 * [DEPLOYED] REQ-1777016870530993058: command hint
 * [DEPLOYED] REQ-1777275195454105151: Review follow-up: exercise manifest lock fallback path in concurrency check
-* [CODE_REVIEW] REQ-1777449658730618520: compatibility with Codex plugin
-* [PROPOSED] REQ-1777450596380408287: Review follow-up: enforce docs-to-prompt parity in command guard
+* [MERGED] REQ-1777449658730618520: compatibility with Codex plugin
 
 ## Low Priority
 * [DEPLOYED] REQ-1774632175: Review follow-up: polish upgrade guide in README

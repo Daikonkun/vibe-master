@@ -138,5 +138,3 @@ REQ-1777275195454105151: Review follow-up: exercise manifest lock fallback path 
 
 REQ-1777449658730618520: compatibility with Codex plugin (no dependencies)
 
-REQ-1777450596380408287: Review follow-up: enforce docs-to-prompt parity in command guard (no dependencies)
-

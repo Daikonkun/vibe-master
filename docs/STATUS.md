@@ -2,21 +2,19 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (1)
+## PROPOSED (0)
 
-* REQ-1777450596380408287: Review follow-up: enforce docs-to-prompt parity in command guard (priority: MEDIUM)
-  - Worktree: none
 
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (1)
+## CODE_REVIEW (0)
+
+
+## MERGED (1)
 
 * REQ-1777449658730618520: compatibility with Codex plugin (priority: MEDIUM)
   - Worktree: feature/REQ-1777449658730618520-compatibility-with-codex-plugin
-
-## MERGED (0)
-
 
 ## DEPLOYED (59)
 
@@ -161,8 +159,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1777257357997508079-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review
 
 ## Stats
-- Total Requirements: 67
-- Deployed: 59 (88%)
-- Merged (awaiting deploy): 0
+- Total Requirements: 66
+- Deployed: 59 (89%)
+- Merged (awaiting deploy): 1
 - In Progress: 0
 - Blocked: 0

@@ -1108,11 +1108,11 @@
       "name": "compatibility with Codex plugin",
       "description": "I want to make the slash commands available in Codex plugin inside VS Code",
       "notes": "Align slash-command prompt entrypoints and command docs so Codex plugin resolves and executes the same workflows as Copilot Chat.",
-      "status": "CODE_REVIEW",
+      "status": "MERGED",
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-29T08:00:58Z",
-      "updatedAt": "2026-04-29T08:09:57Z",
+      "updatedAt": "2026-04-29T08:21:38Z",
       "worktreeId": "feature/REQ-1777449658730618520-compatibility-with-codex-plugin",
       "statusHistory": [
         {
