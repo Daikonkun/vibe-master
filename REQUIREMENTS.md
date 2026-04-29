@@ -70,9 +70,10 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1777274205120382721 | Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (restart) | DEPLOYED | CRITICAL | feature/REQ-1777274205120382721-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review-restart | 2026-04-27 | 2026-04-27 |
 | REQ-1777275195454105151 | Review follow-up: exercise manifest lock fallback path in concurrency check | DEPLOYED | MEDIUM | feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check | 2026-04-27 | 2026-04-27 |
 | REQ-1777449658730618520 | compatibility with Codex plugin | CODE_REVIEW | MEDIUM | feature/REQ-1777449658730618520-compatibility-with-codex-plugin | 2026-04-29 | 2026-04-29 |
+| REQ-1777450596380408287 | Review follow-up: enforce docs-to-prompt parity in command guard | PROPOSED | MEDIUM | — | 2026-04-29 | 2026-04-29 |
 
 ## Status Breakdown
-- **Proposed**: 0
+- **Proposed**: 1
 - **In Progress**: 0
 - **Code Review**: 1
 - **Merged**: 0
@@ -86,6 +87,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-29T08:11:06Z
+* Last updated: 2026-04-29T08:16:36Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

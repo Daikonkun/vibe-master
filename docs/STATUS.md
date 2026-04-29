@@ -2,8 +2,10 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (0)
+## PROPOSED (1)
 
+* REQ-1777450596380408287: Review follow-up: enforce docs-to-prompt parity in command guard (priority: MEDIUM)
+  - Worktree: none
 
 ## IN_PROGRESS (0)
 
@@ -159,8 +161,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1777257357997508079-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review
 
 ## Stats
-- Total Requirements: 66
-- Deployed: 59 (89%)
+- Total Requirements: 67
+- Deployed: 59 (88%)
 - Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0
