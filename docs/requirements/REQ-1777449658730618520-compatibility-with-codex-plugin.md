@@ -11,11 +11,11 @@ I want to make the slash commands available in Codex plugin inside VS Code
 
 ## Success Criteria
 
-- [ ] All documented slash commands used by Vibe Master have a corresponding prompt/entrypoint file that the Codex plugin can invoke in VS Code.
-- [ ] Running a representative command set in Codex plugin (for example `/add-requirement`, `/status`, `/start-work`, `/work-on`) successfully routes to the expected workflow without manual command translation.
-- [ ] Command discoverability docs are updated so users can find and run the same slash commands in Codex plugin and Copilot Chat contexts.
-- [ ] `scripts/check-command-entrypoints.sh` (or equivalent command-entrypoint validation) passes with no missing command mappings after compatibility updates.
-- [ ] A manual smoke test in VS Code with Codex plugin confirms command execution parity for requirement creation and worktree lifecycle flows.
+- [x] All documented slash commands used by Vibe Master have a corresponding prompt/entrypoint file that the Codex plugin can invoke in VS Code.
+- [x] Running a representative command set in Codex plugin (for example `/add-requirement`, `/status`, `/start-work`, `/work-on`) successfully routes to the expected workflow without manual command translation.
+- [x] Command discoverability docs are updated so users can find and run the same slash commands in Codex plugin and Copilot Chat contexts.
+- [x] `scripts/check-command-entrypoints.sh` (or equivalent command-entrypoint validation) passes with no missing command mappings after compatibility updates.
+- [x] A manual smoke test in VS Code with Codex plugin confirms command execution parity for requirement creation and worktree lifecycle flows.
 
 ## Technical Notes
 
@@ -25,19 +25,20 @@ Likely affected areas: prompt filenames and argument contracts, command document
 
 Risks: command alias drift between Copilot and Codex naming, stale docs that advertise unsupported commands, and workflow regressions if orchestrator-specific commands are not recognized uniformly. Mitigate with command-map normalization and scripted entrypoint checks in CI/local validation.
 
-
 ## Development Plan
 
-1. Review Description, Success Criteria, and Technical Notes in `docs/requirements/REQ-1777449658730618520-compatibility-with-codex-plugin.md`.
-   - **Summary**: I want to make the slash commands available in Codex plugin inside VS Code
-   - **Key criteria**: - [ ] All documented slash commands used by Vibe Master have a corresponding prompt/entrypoint file 
-2. Analyse Technical Notes and identify implementation approach.
-   - **Notes**: Primary approach: standardize slash-command definitions around prompt files under `.github/prompts/`
-3. Implement changes in the files/scripts referenced by the requirement spec.
-4. Run `./scripts/regenerate-docs.sh` to update manifests and generated docs.
-5. Validate with `./scripts/show-requirement.sh REQ-1777449658730618520` and verify success criteria are met.
+1. Audit prompt-backed slash commands and frontmatter consistency under `.github/prompts/`.
+2. Harden `scripts/check-command-entrypoints.sh` so it validates prompt metadata and doc discoverability, not only script path references.
+3. Update command discoverability documentation in `README.md`, `docs/COMMAND_MAP.md`, and `copilot-instructions.md` to explicitly cover Codex plugin parity.
+4. Validate representative command routing by exercising workflow commands and running `bash scripts/check-command-entrypoints.sh` from the active worktree.
+5. Regenerate docs and verify requirement artifacts with `bash scripts/show-requirement.sh REQ-1777449658730618520` before status advancement.
 
-**Last updated**: 2026-04-29T08:02:24Z
+## Validation Evidence
+
+- `bash scripts/check-command-entrypoints.sh` passes with prompt metadata, script references, and command discoverability checks.
+- `README.md`, `docs/COMMAND_MAP.md`, and `copilot-instructions.md` now document slash-command discoverability parity for Codex plugin and Copilot Chat.
+- Representative command workflow verified in this VS Code session: `/add-requirement`, `/start-work`, `/work-on`, and `/status`.
+- Requirement inspection via `bash scripts/show-requirement.sh REQ-1777449658730618520` confirms active worktree linkage and consistent requirement metadata.
 
 ## Dependencies
 

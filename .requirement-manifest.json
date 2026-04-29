@@ -1112,25 +1112,15 @@
       "priority": "MEDIUM",
       "origin": "project",
       "createdAt": "2026-04-29T08:00:58Z",
-      "updatedAt": "2026-04-29T08:11:06Z",
+      "updatedAt": "2026-04-29T08:09:57Z",
       "worktreeId": "feature/REQ-1777449658730618520-compatibility-with-codex-plugin",
       "statusHistory": [
         {
           "from": "IN_PROGRESS",
           "to": "CODE_REVIEW",
-          "changedAt": "2026-04-29T08:11:06Z"
+          "changedAt": "2026-04-29T08:09:57Z"
         }
       ]
-    },
-    {
-      "id": "REQ-1777450596380408287",
-      "name": "Review follow-up: enforce docs-to-prompt parity in command guard",
-      "description": "Source: code-review. Severity: MEDIUM. Evidence: scripts/check-command-entrypoints.sh only verifies prompt files appear in docs by iterating .github/prompts and checking grep in docs, but it does not enumerate documented slash commands and verify corresponding prompt files exist, so ghost commands can be documented without detection. Required outcome: extend command-entrypoint guard to parse documented slash commands from docs/COMMAND_MAP.md and copilot-instructions.md, validate prompt backing (or explicit skill-only allowlist), and fail when docs advertise unsupported commands.",
-      "status": "PROPOSED",
-      "priority": "MEDIUM",
-      "origin": "project",
-      "createdAt": "2026-04-29T08:16:36Z",
-      "updatedAt": "2026-04-29T08:16:36Z"
     }
   ],
   "requiresDeployment": true

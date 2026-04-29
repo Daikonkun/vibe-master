@@ -56,9 +56,11 @@ After any state change, regenerate:
 | `/add-requirement` | Submit new product requirement |
 | `/status` | View current project status |
 | `/start-work <req-id>` | Move requirement to IN_PROGRESS, create worktree |
+| `/upgrade [--template-repo <github-url>] [--base-branch <branch>] [--apply]` | Safely preview/apply Vibe Master template upgrades in an isolated worktree with preflight command-conflict checks |
 | `/update-requirement <req-id> <new-status> [--force] [--no-refresh]` | Update requirement status using validated lifecycle transitions |
 | `/show-requirement <req-id>` | Show detailed requirement info |
 | `/list-requirements [status]` | List all requirements, optionally filtered by status |
+| `/rollback <req-id> [base-branch]` | Roll back a merged/deployed requirement by reverting its merge commit |
 | `/worktree-list` | Show all active worktrees and their linked requirements |
 | `/worktree-create <req-id>` | Manually create a worktree for a requirement |
 | `/worktree-prune` | Remove orphaned worktrees |
@@ -73,7 +75,7 @@ After any state change, regenerate:
 | `/e2e-test [scope]` | Run end-to-end testing with screenshot-based cross-border visual validation; propose new skill REQs when gaps are found |
 | `/init [project-name]` | Clear Vibe Master template REQs and initialize clean project manifests |
 
-Slash commands appear in chat only when they are backed by prompt files or valid skill definitions. `/add-requirement`, `/list-requirements`, `/update-requirement`, `/start-work`, `/show-requirement`, `/status`, `/worktree-list`, `/worktree-create`, `/worktree-prune`, `/worktree-status`, `/worktree-merge`, `/dependency-graph`, `/roadmap`, `/regen-docs`, `/bug-fix`, `/update-manual`, `/code-review`, `/work-on`, `/e2e-test`, and `/init` are implemented by prompt files in `.github/prompts/`; skill files must keep lowercase hyphenated `name` values that match their folder names.
+Slash commands appear in Copilot Chat and Codex plugin chat only when they are backed by prompt files or valid skill definitions. `/add-requirement`, `/list-requirements`, `/update-requirement`, `/start-work`, `/show-requirement`, `/status`, `/worktree-list`, `/worktree-create`, `/worktree-prune`, `/worktree-status`, `/worktree-merge`, `/dependency-graph`, `/roadmap`, `/regen-docs`, `/bug-fix`, `/update-manual`, `/code-review`, `/work-on`, `/upgrade`, `/rollback`, `/e2e-test`, and `/init` are implemented by prompt files in `.github/prompts/`; skill files must keep lowercase hyphenated `name` values that match their folder names.
 
 Note: Use `/worktree-merge <branch-name>` (not `/merge-requirement`) to complete a requirement.
 

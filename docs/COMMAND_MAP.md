@@ -5,6 +5,7 @@ Canonical source of truth for slash-command entrypoints.
 - **Prompt-backed command**: implemented by `.github/prompts/<name>.prompt.md`.
 - **Script entrypoint**: a single `scripts/*.sh` file that is the command's primary shell entrypoint.
 - **`none (prompt-driven)`** means there is intentionally no dedicated `scripts/<name>.sh` wrapper.
+- This mapping is consumed for command discoverability parity across Copilot Chat and Codex plugin chat in VS Code.
 
 | Command | Prompt File | Script Entrypoint | Notes |
 |---|---|---|---|
