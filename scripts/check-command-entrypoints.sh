@@ -29,6 +29,7 @@ command_map_commands_file="$(mktemp)"
 instructions_commands_file="$(mktemp)"
 documented_commands_file="$(mktemp)"
 skill_only_commands_file="$(mktemp)"
+command_skill_map_file="$(mktemp)"
 
 SKILL_ONLY_COMMANDS=(
 )
@@ -40,6 +41,7 @@ cleanup() {
   rm -f "$instructions_commands_file"
   rm -f "$documented_commands_file"
   rm -f "$skill_only_commands_file"
+  rm -f "$command_skill_map_file"
 }
 trap cleanup EXIT
 
@@ -129,6 +131,30 @@ collect_commands_from_doc_table() {
   ' "$source_file" | sort -u > "$output_file"
 }
 
+collect_command_skill_map_from_command_map() {
+  local source_file="$1"
+  local output_file="$2"
+
+  awk -F'|' '
+    /^\|[[:space:]]*`\/[^`]+`[[:space:]]*\|/ {
+      command_text = $2
+      gsub(/`/, "", command_text)
+      gsub(/^[[:space:]]+|[[:space:]]+$/, "", command_text)
+      sub(/^\/+/, "", command_text)
+      split(command_text, cmd_parts, /[[:space:]]+/)
+      command_name = cmd_parts[1]
+
+      skill_text = $5
+      gsub(/`/, "", skill_text)
+      gsub(/^[[:space:]]+|[[:space:]]+$/, "", skill_text)
+
+      if (command_name != "") {
+        print command_name "|" skill_text
+      }
+    }
+  ' "$source_file" > "$output_file"
+}
+
 check_prompt_documented_in_both_docs() {
   local cmd="$1"
 
@@ -158,6 +184,35 @@ check_documented_command_has_entrypoint() {
   missing=1
 }
 
+check_mapped_skill_exists() {
+  local cmd="$1"
+  local skill="$2"
+  local skill_file skill_name
+
+  if [ -z "$skill" ] || [ "$skill" = "none" ]; then
+    return
+  fi
+
+  skill_file=".github/skills/${skill}/SKILL.md"
+  if [ ! -f "$skill_file" ]; then
+    echo "FAIL: docs/COMMAND_MAP.md maps /${cmd} to missing skill file: ${skill_file}" >&2
+    missing=1
+    return
+  fi
+
+  skill_name="$(extract_frontmatter_value "$skill_file" "name")"
+  if [ -z "$skill_name" ]; then
+    echo "FAIL: $skill_file has empty or unreadable frontmatter name." >&2
+    missing=1
+    return
+  fi
+
+  if [ "$skill_name" != "$skill" ]; then
+    echo "FAIL: $skill_file frontmatter name ('$skill_name') must match mapped skill directory ('$skill')." >&2
+    missing=1
+  fi
+}
+
 for file in "${FILES[@]}"; do
   [ -f "$file" ] || continue
   check_file_refs "$file"
@@ -179,6 +234,7 @@ sort -u "$names_file" > "$prompt_commands_file"
 
 collect_commands_from_doc_table "docs/COMMAND_MAP.md" "$command_map_commands_file"
 collect_commands_from_doc_table "copilot-instructions.md" "$instructions_commands_file"
+collect_command_skill_map_from_command_map "docs/COMMAND_MAP.md" "$command_skill_map_file"
 
 cat "$command_map_commands_file" "$instructions_commands_file" | sort -u > "$documented_commands_file"
 
@@ -201,7 +257,12 @@ while IFS= read -r documented_command; do
   check_documented_command_has_entrypoint "$documented_command"
 done < "$documented_commands_file"
 
-for required_command in add-requirement codex-resume status start-work work-on; do
+while IFS='|' read -r mapped_command mapped_skill; do
+  [ -n "$mapped_command" ] || continue
+  check_mapped_skill_exists "$mapped_command" "$mapped_skill"
+done < "$command_skill_map_file"
+
+for required_command in add-requirement codex-resume codex-work-on codex-code-review status start-work work-on; do
   if [ ! -f ".github/prompts/${required_command}.prompt.md" ]; then
     echo "FAIL: missing required representative prompt file .github/prompts/${required_command}.prompt.md" >&2
     missing=1

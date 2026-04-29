@@ -21,7 +21,10 @@ Workflow:
    - selected requirement (if any),
    - linked active worktree (if any),
    - next recommended slash command.
-5. If no requirement can be inferred, direct the user to run `/status` or `/list-requirements` and then `/codex-resume <REQ-ID>`.
+5. For Codex convenience, prefer wrapper recommendations when applicable:
+   - use `/codex-work-on <REQ-ID>` instead of `/work-on <REQ-ID>`.
+   - use `/codex-code-review [scope]` instead of `/code-review [scope]`.
+6. If no requirement can be inferred, direct the user to run `/status` or `/list-requirements` and then `/codex-resume <REQ-ID>`.
 
 Constraints:
 - Do not mutate manifests or requirement statuses in this command.
