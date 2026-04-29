@@ -144,7 +144,7 @@ bash scripts/check-upgrade-manifest-history.sh
 git status --short
 ```
 
-Then run these in Copilot Chat:
+Then run these in Copilot Chat or Codex plugin chat:
 ```
 /status
 /code-review README.md
@@ -160,7 +160,7 @@ rm -rf .upgrade-template
 | Path | Recommended Action | Why |
 |---|---|---|
 | `.github/agents/orchestrator.agent.md` | Replace, then re-apply local custom prompts | Agent mode and orchestration behavior changes most often here |
-| `.github/prompts/` | Replace prompt files from latest template, then keep local custom prompts with unique names | Slash commands appear in chat only when backed by prompt files |
+| `.github/prompts/` | Replace prompt files from latest template, then keep local custom prompts with unique names | Slash commands appear in Copilot Chat and Codex plugin chat only when backed by prompt files |
 | `.github/skills/` | Replace skill folders from latest template | Keeps slash-command workflows and guidance current |
 | `copilot-instructions.md` | Merge carefully (do not blindly replace) | Local policy/tool constraints are often customized |
 | `scripts/regenerate-docs.sh` | Replace with latest, then verify project-specific edits | Fixes to generation logic accumulate over time |
@@ -396,7 +396,14 @@ Graph showing which requirements depend on others
 
 ## 🛠 Key Slash Commands
 
+These commands are designed to work in both Copilot Chat and Codex plugin chat in VS Code. Keep prompt metadata (`name`, `description`, `agent`) aligned with prompt filenames so slash command routing remains discoverable across both clients.
+
 Slash commands only show up in chat when they are backed by a prompt file or by a valid skill definition. This template ships prompt files for every command listed below and loads workflow skills through valid lowercase-hyphenated skill names.
+
+Quick compatibility check:
+```bash
+bash scripts/check-command-entrypoints.sh
+```
 
 | Command | Purpose |
 |---------|---------|
