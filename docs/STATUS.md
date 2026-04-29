@@ -11,12 +11,10 @@ Kanban-style view of all requirements and their current state.
 ## CODE_REVIEW (0)
 
 
-## MERGED (1)
+## MERGED (0)
 
-* REQ-1777449658730618520: compatibility with Codex plugin (priority: MEDIUM)
-  - Worktree: feature/REQ-1777449658730618520-compatibility-with-codex-plugin
 
-## DEPLOYED (59)
+## DEPLOYED (60)
 
 * REQ-1774628144: Review follow-up: align slash commands with actual skill invocations (priority: MEDIUM)
   - Worktree: feature/REQ-1774628144-review-follow-up-align-slash-commands-with-actual-skill-invocations
@@ -136,6 +134,8 @@ Kanban-style view of all requirements and their current state.
   - Worktree: feature/REQ-1777274205120382721-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review-restart
 * REQ-1777275195454105151: Review follow-up: exercise manifest lock fallback path in concurrency check (priority: MEDIUM)
   - Worktree: feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check
+* REQ-1777449658730618520: compatibility with Codex plugin (priority: MEDIUM)
+  - Worktree: feature/REQ-1777449658730618520-compatibility-with-codex-plugin
 
 ## BLOCKED (0)
 
@@ -160,7 +160,7 @@ Kanban-style view of all requirements and their current state.
 
 ## Stats
 - Total Requirements: 66
-- Deployed: 59 (89%)
-- Merged (awaiting deploy): 1
+- Deployed: 60 (90%)
+- Merged (awaiting deploy): 0
 - In Progress: 0
 - Blocked: 0

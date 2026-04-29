@@ -1,7 +1,7 @@
 # compatibility with Codex plugin
 
 **ID**: REQ-1777449658730618520  
-**Status**: MERGED  
+**Status**: DEPLOYED  
 **Priority**: MEDIUM  
 **Created**: 2026-04-29T08:00:58Z  
 
@@ -53,4 +53,4 @@ None
 * **Linked Worktree**: feature/REQ-1777449658730618520-compatibility-with-codex-plugin
 * **Branch**: feature/REQ-1777449658730618520-compatibility-with-codex-plugin
 * **Merged**: Yes
-* **Deployed**: No
+* **Deployed**: Yes
