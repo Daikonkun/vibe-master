@@ -69,12 +69,12 @@ Auto-generated summary of all product requirements. For detailed specs, see indi
 | REQ-1777270332882776949 | Review follow-up: isolate concurrent-workflow check temp logs per run | DEPLOYED | HIGH | feature/REQ-1777270332882776949-review-follow-up-isolate-concurrent-workflow-check-temp-logs-per-run | 2026-04-27 | 2026-04-27 |
 | REQ-1777274205120382721 | Umbrella: concurrent workflow safety across start-work/work-on/worktree-merge/code-review (restart) | DEPLOYED | CRITICAL | feature/REQ-1777274205120382721-umbrella-concurrent-workflow-safety-across-start-work-work-on-worktree-merge-code-review-restart | 2026-04-27 | 2026-04-27 |
 | REQ-1777275195454105151 | Review follow-up: exercise manifest lock fallback path in concurrency check | DEPLOYED | MEDIUM | feature/REQ-1777275195454105151-review-follow-up-exercise-manifest-lock-fallback-path-in-concurrency-check | 2026-04-27 | 2026-04-27 |
-| REQ-1777449658730618520 | compatibility with Codex plugin | PROPOSED | MEDIUM | — | 2026-04-29 | 2026-04-29 |
+| REQ-1777449658730618520 | compatibility with Codex plugin | CODE_REVIEW | MEDIUM | feature/REQ-1777449658730618520-compatibility-with-codex-plugin | 2026-04-29 | 2026-04-29 |
 
 ## Status Breakdown
-- **Proposed**: 1
+- **Proposed**: 0
 - **In Progress**: 0
-- **Code Review**: 0
+- **Code Review**: 1
 - **Merged**: 0
 - **Deployed**: 59
 - **Blocked**: 0
@@ -86,6 +86,6 @@ Use `/add-requirement "Feature name" "Description"` to submit requirements.
 
 ---
 
-* Last updated: 2026-04-29T08:00:58Z
+* Last updated: 2026-04-29T08:09:57Z
 * Structured data: See `.requirement-manifest.json`
 * Worktree mapping: See `.worktree-manifest.json`

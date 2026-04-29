@@ -2,16 +2,16 @@
 
 Kanban-style view of all requirements and their current state.
 
-## PROPOSED (1)
+## PROPOSED (0)
 
-* REQ-1777449658730618520: compatibility with Codex plugin (priority: MEDIUM)
-  - Worktree: none
 
 ## IN_PROGRESS (0)
 
 
-## CODE_REVIEW (0)
+## CODE_REVIEW (1)
 
+* REQ-1777449658730618520: compatibility with Codex plugin (priority: MEDIUM)
+  - Worktree: feature/REQ-1777449658730618520-compatibility-with-codex-plugin
 
 ## MERGED (0)
 
