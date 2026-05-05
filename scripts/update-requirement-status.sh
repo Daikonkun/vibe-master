@@ -9,10 +9,13 @@ FORCE="false"
 REFRESH_DOCS="true"
 REASON=""
 
-PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "$SCRIPT_DIR/_project-root.sh"
+PROJECT_ROOT="$(vibe_resolve_project_root)"
 REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
 WORKTREE_MANIFEST="$PROJECT_ROOT/.worktree-manifest.json"
 source "$PROJECT_ROOT/scripts/_manifest-lock.sh"
+GIT_OPERATION_LOCK="$PROJECT_ROOT/.vibe-git-operation.lock"
 TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
 usage() {
@@ -318,25 +321,46 @@ if [ "$FORCE" != "true" ] && is_terminal_status "$NEW_STATUS"; then
   fi
 fi
 
-if [ "$ENFORCE_TERMINAL_INVARIANT" = "true" ]; then
-  with_manifest_locks "$REQ_MANIFEST" "$WORKTREE_MANIFEST" status_update_locked "true"
-else
-  with_manifest_lock "$REQ_MANIFEST" status_update_locked "false"
-fi
+status_update_workflow_locked() {
+  if [ "$ENFORCE_TERMINAL_INVARIANT" = "true" ]; then
+    if ! with_manifest_locks "$REQ_MANIFEST" "$WORKTREE_MANIFEST" status_update_locked "true"; then
+      return 1
+    fi
+  else
+    if ! with_manifest_lock "$REQ_MANIFEST" status_update_locked "false"; then
+      return 1
+    fi
+  fi
 
-if [ "$REFRESH_DOCS" = "true" ]; then
-  "$PROJECT_ROOT/scripts/regenerate-docs.sh" >/dev/null
-fi
+  if [ "$REFRESH_DOCS" = "true" ]; then
+    if ! "$PROJECT_ROOT/scripts/regenerate-docs.sh" >/dev/null; then
+      return 1
+    fi
+  fi
 
-git -C "$PROJECT_ROOT" add \
-  .requirement-manifest.json \
-  REQUIREMENTS.md \
-  docs/STATUS.md \
-  docs/ROADMAP.md \
-  docs/DEPENDENCIES.md \
-  docs/requirements/ 2>/dev/null || true
+  if ! git -C "$PROJECT_ROOT" add \
+    .requirement-manifest.json \
+    REQUIREMENTS.md \
+    docs/STATUS.md \
+    docs/ROADMAP.md \
+    docs/DEPENDENCIES.md \
+    docs/requirements/; then
+    echo "Error: Failed to stage status update artifacts." >&2
+    return 1
+  fi
 
-git -C "$PROJECT_ROOT" commit -m "chore: update $REQ_ID status to $NEW_STATUS" --no-verify 2>/dev/null || true
+  if git -C "$PROJECT_ROOT" diff --cached --quiet; then
+    echo "Error: No status update artifacts were staged after updating $REQ_ID to $NEW_STATUS." >&2
+    return 1
+  fi
+
+  if ! git -C "$PROJECT_ROOT" commit -m "chore: update $REQ_ID status to $NEW_STATUS" --no-verify; then
+    echo "Error: Failed to commit status update artifacts for $REQ_ID." >&2
+    return 1
+  fi
+}
+
+with_manifest_lock "$GIT_OPERATION_LOCK" status_update_workflow_locked
 
 echo "✅ Updated $REQ_ID"
 echo "   $CURRENT_STATUS -> $NEW_STATUS"

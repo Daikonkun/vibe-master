@@ -3,7 +3,9 @@
 
 set -euo pipefail
 
-PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "$SCRIPT_DIR/_project-root.sh"
+PROJECT_ROOT="$(vibe_resolve_project_root)"
 TMP_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/concurrent-workflows-check.XXXXXX")"
 CHECK_ROOT="$TMP_ROOT/check"
 LOG_ROOT="$TMP_ROOT/logs"

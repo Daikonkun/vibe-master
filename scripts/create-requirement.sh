@@ -47,7 +47,9 @@ REQ_NAME="${ARGS[0]}"
 REQ_DESCRIPTION="${ARGS[1]}"
 REQ_PRIORITY="${ARGS[2]:-MEDIUM}"
 
-PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "$SCRIPT_DIR/_project-root.sh"
+PROJECT_ROOT="$(vibe_resolve_project_root)"
 REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
 source "$PROJECT_ROOT/scripts/_manifest-lock.sh"
 

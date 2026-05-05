@@ -3,7 +3,9 @@
 
 set -euo pipefail
 
-PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "$SCRIPT_DIR/_project-root.sh"
+PROJECT_ROOT="$(vibe_resolve_project_root)"
 TMP_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/start-work-clean-check.XXXXXX")"
 CHECK_ROOT="$TMP_ROOT/check"
 
@@ -69,18 +71,83 @@ done < <(
     | .id' .requirement-manifest.json
 )
 
-if [ "${#CANDIDATE_REQS[@]}" -lt 2 ]; then
-  echo "FAIL: expected at least two PROPOSED/BACKLOG requirements without worktrees for regression check." >&2
+if [ "${#CANDIDATE_REQS[@]}" -lt 3 ]; then
+  for idx in 1 2 3; do
+    req_id="REQ-177888888800$idx"
+    if jq -e --arg reqId "$req_id" '.requirements[]? | select(.id == $reqId)' .requirement-manifest.json >/dev/null; then
+      continue
+    fi
+
+    tmp_file="$(mktemp .requirement-manifest.json.XXXXXX)"
+    jq --arg reqId "$req_id" --arg name "start-work clean fixture $idx" '
+      .requirements += [{
+        "id": $reqId,
+        "name": $name,
+        "description": "Fixture requirement for start-work regression checks.",
+        "status": "PROPOSED",
+        "priority": "MEDIUM",
+        "createdAt": "2026-01-01T00:00:00Z",
+        "updatedAt": "2026-01-01T00:00:00Z"
+      }]
+    ' .requirement-manifest.json > "$tmp_file"
+    mv "$tmp_file" .requirement-manifest.json
+
+    cat > "docs/requirements/${req_id}-start-work-clean-fixture-${idx}.md" << EOF
+# start-work clean fixture $idx
+
+**ID**: $req_id
+**Status**: PROPOSED
+**Priority**: MEDIUM
+**Created**: 2026-01-01T00:00:00Z
+
+## Description
+
+Fixture requirement for start-work regression checks.
+
+## Success Criteria
+
+- [ ] start-work can consume this fixture.
+
+## Technical Notes
+
+Regression fixture.
+
+## Dependencies
+
+None
+
+## Worktree
+
+None
+
+---
+
+* **Linked Worktree**: None yet
+* **Branch**: None yet
+* **Merged**: No
+* **Deployed**: No
+EOF
+  done
+
+  CANDIDATE_REQS=()
+  while IFS= read -r req_id; do
+    [ -z "$req_id" ] && continue
+    CANDIDATE_REQS+=("$req_id")
+  done < <(
+    jq -r '.requirements[]
+      | select((.status == "PROPOSED" or .status == "BACKLOG") and ((.worktreeId // "") == ""))
+      | .id' .requirement-manifest.json
+  )
+fi
+
+if [ "${#CANDIDATE_REQS[@]}" -lt 3 ]; then
+  echo "FAIL: expected at least three PROPOSED/BACKLOG requirements without worktrees for regression check." >&2
   exit 1
 fi
 
 SUCCESS_REQ="${CANDIDATE_REQS[0]}"
 FAIL_REQ="${CANDIDATE_REQS[1]}"
-RACE_REQ=""
-
-if [ "${#CANDIDATE_REQS[@]}" -ge 3 ]; then
-  RACE_REQ="${CANDIDATE_REQS[2]}"
-fi
+RACE_REQ="${CANDIDATE_REQS[2]}"
 
 # 1) No-op regenerate-docs should not change generated outputs after baseline generation.
 bash scripts/regenerate-docs.sh >/dev/null
@@ -99,32 +166,28 @@ bash scripts/start-work.sh "$SUCCESS_REQ" >/dev/null
 assert_no_lock_artifacts "$CHECK_ROOT"
 
 # 3) Parallel start-work race check should use a requirement not consumed by prior steps.
-if [ -n "$RACE_REQ" ]; then
-  set +e
-  bash scripts/start-work.sh "$RACE_REQ" >/dev/null 2>&1 &
-  RACE_PID_1=$!
-  bash scripts/start-work.sh "$RACE_REQ" >/dev/null 2>&1 &
-  RACE_PID_2=$!
+set +e
+bash scripts/start-work.sh "$RACE_REQ" >/dev/null 2>&1 &
+RACE_PID_1=$!
+bash scripts/start-work.sh "$RACE_REQ" >/dev/null 2>&1 &
+RACE_PID_2=$!
 
-  wait "$RACE_PID_1"
-  RACE_STATUS_1=$?
-  wait "$RACE_PID_2"
-  RACE_STATUS_2=$?
-  set -e
+wait "$RACE_PID_1"
+RACE_STATUS_1=$?
+wait "$RACE_PID_2"
+RACE_STATUS_2=$?
+set -e
 
-  RACE_SUCCESS_COUNT=0
-  [ "$RACE_STATUS_1" -eq 0 ] && RACE_SUCCESS_COUNT=$((RACE_SUCCESS_COUNT + 1))
-  [ "$RACE_STATUS_2" -eq 0 ] && RACE_SUCCESS_COUNT=$((RACE_SUCCESS_COUNT + 1))
+RACE_SUCCESS_COUNT=0
+[ "$RACE_STATUS_1" -eq 0 ] && RACE_SUCCESS_COUNT=$((RACE_SUCCESS_COUNT + 1))
+[ "$RACE_STATUS_2" -eq 0 ] && RACE_SUCCESS_COUNT=$((RACE_SUCCESS_COUNT + 1))
 
-  if [ "$RACE_SUCCESS_COUNT" -ne 1 ]; then
-    echo "FAIL: expected exactly one successful start-work in race check for $RACE_REQ (got statuses: $RACE_STATUS_1, $RACE_STATUS_2)." >&2
-    exit 1
-  fi
-
-  assert_no_lock_artifacts "$CHECK_ROOT"
-else
-  echo "INFO: skipping race check because fewer than three PROPOSED/BACKLOG requirements are available." >&2
+if [ "$RACE_SUCCESS_COUNT" -ne 1 ]; then
+  echo "FAIL: expected exactly one successful start-work in race check for $RACE_REQ (got statuses: $RACE_STATUS_1, $RACE_STATUS_2)." >&2
+  exit 1
 fi
+
+assert_no_lock_artifacts "$CHECK_ROOT"
 
 # 4) start-work failure after lock acquisition should still clean lock artifacts.
 cp .worktree-manifest.json .worktree-manifest.json.bak

@@ -7,7 +7,9 @@
 
 set -euo pipefail
 
-PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "$SCRIPT_DIR/_project-root.sh"
+PROJECT_ROOT="$(vibe_resolve_project_root)"
 CONFIG_FILE="${PROJECT_ROOT}/.vibe-config.local.json"
 if [ ! -f "$CONFIG_FILE" ]; then
   CONFIG_FILE="${PROJECT_ROOT}/.vibe-config.json"

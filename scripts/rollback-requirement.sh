@@ -12,7 +12,9 @@ done
 
 REQ_ID="${1:-}"
 BASE_BRANCH="${2:-main}"
-PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "$SCRIPT_DIR/_project-root.sh"
+PROJECT_ROOT="$(vibe_resolve_project_root)"
 REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
 WORKTREE_MANIFEST="$PROJECT_ROOT/.worktree-manifest.json"
 source "$PROJECT_ROOT/scripts/_manifest-lock.sh"

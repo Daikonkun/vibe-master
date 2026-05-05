@@ -6,7 +6,9 @@ set -euo pipefail
 
 REQ_ID="${1:-}"
 SPEC_FILE="${2:-}"
-PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "$SCRIPT_DIR/_project-root.sh"
+PROJECT_ROOT="$(vibe_resolve_project_root)"
 
 if [ -z "$REQ_ID" ]; then
   echo "Usage: $0 REQ-<timestamp> [spec-file]" >&2

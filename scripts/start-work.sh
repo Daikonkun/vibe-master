@@ -5,10 +5,13 @@ set -euo pipefail
 
 REQ_ID="${1:-}"
 BASE_BRANCH="${2:-main}"
-PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "$SCRIPT_DIR/_project-root.sh"
+PROJECT_ROOT="$(vibe_resolve_project_root)"
 REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
 WORKTREE_MANIFEST="$PROJECT_ROOT/.worktree-manifest.json"
 source "$PROJECT_ROOT/scripts/_manifest-lock.sh"
+GIT_OPERATION_LOCK="$PROJECT_ROOT/.vibe-git-operation.lock"
 TIMESTAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 WORKTREE_ROOT_OVERRIDE="${VIBE_WORKTREE_ROOT:-}"
 
@@ -30,20 +33,6 @@ fi
 if ! jq -e --arg reqId "$REQ_ID" '.requirements[] | select(.id == $reqId)' "$REQ_MANIFEST" >/dev/null; then
   echo "Error: Requirement not found: $REQ_ID" >&2
   exit 1
-fi
-
-ACTIVE_WORKTREE="$(jq -r --arg reqId "$REQ_ID" '
-  .requirements[] | select(.id == $reqId) | .worktreeId // empty
-' "$REQ_MANIFEST")"
-
-if [ -n "$ACTIVE_WORKTREE" ]; then
-  WT_STATUS="$(jq -r --arg wtId "$ACTIVE_WORKTREE" '
-    .worktrees[]? | select(.id == $wtId) | .status
-  ' "$WORKTREE_MANIFEST" 2>/dev/null | head -1)"
-  if [ "$WT_STATUS" = "ACTIVE" ]; then
-    echo "Error: Requirement $REQ_ID already has an active worktree: $ACTIVE_WORKTREE" >&2
-    exit 1
-  fi
 fi
 
 CURRENT_STATUS="$(jq -r --arg reqId "$REQ_ID" '
@@ -108,15 +97,21 @@ if ! git -C "$PROJECT_ROOT" rev-parse --verify "$BASE_BRANCH" >/dev/null 2>&1; t
   exit 1
 fi
 
+CURRENT_BRANCH="$(git -C "$PROJECT_ROOT" rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
+if [ "$CURRENT_BRANCH" != "$BASE_BRANCH" ]; then
+  echo "Error: Canonical project root must be on $BASE_BRANCH before starting work (current: ${CURRENT_BRANCH:-UNKNOWN})." >&2
+  exit 1
+fi
+
 if [ -d "$WORKTREE_PATH" ]; then
   echo "Error: Worktree path already exists: $WORKTREE_PATH" >&2
   exit 1
 fi
 
 if git -C "$PROJECT_ROOT" show-ref --verify --quiet "refs/heads/$BRANCH_ID"; then
-  git -C "$PROJECT_ROOT" worktree add "$WORKTREE_PATH" "$BRANCH_ID"
-else
-  git -C "$PROJECT_ROOT" worktree add -b "$BRANCH_ID" "$WORKTREE_PATH" "$BASE_BRANCH"
+  echo "Error: Feature branch already exists: $BRANCH_ID" >&2
+  echo "Resolve the existing branch before starting this requirement to avoid stale tracker state." >&2
+  exit 1
 fi
 
 if [ ! -f "$WORKTREE_MANIFEST" ]; then
@@ -136,56 +131,160 @@ JSON
   ' _ "$WORKTREE_MANIFEST"
 fi
 
-# Validate updatedAt >= createdAt
-CREATED_AT="$(jq -r --arg reqId "$REQ_ID" '.requirements[] | select(.id == $reqId) | .createdAt' "$REQ_MANIFEST")"
-if [ -n "$CREATED_AT" ] && [ "$CREATED_AT" != "null" ] && [[ "$TIMESTAMP" < "$CREATED_AT" ]]; then
-  echo "Error: updatedAt ($TIMESTAMP) would be before createdAt ($CREATED_AT)" >&2
-  exit 1
-fi
+preflight_worktree_target() {
+  if [ -d "$WORKTREE_PATH" ]; then
+    echo "Error: Worktree path already exists: $WORKTREE_PATH" >&2
+    return 1
+  fi
 
-jq_update_manifest_locked "$REQ_MANIFEST" \
-  '.requirements |= map(
-     if .id == $reqId
-     then .status = "IN_PROGRESS" | .worktreeId = $branch | .updatedAt = $ts
-     else .
-     end
-   )' \
-  --arg reqId "$REQ_ID" \
-  --arg branch "$BRANCH_ID" \
-  --arg ts "$TIMESTAMP"
+  if git -C "$PROJECT_ROOT" show-ref --verify --quiet "refs/heads/$BRANCH_ID"; then
+    echo "Error: Feature branch already exists: $BRANCH_ID" >&2
+    echo "Resolve the existing branch before starting this requirement to avoid stale tracker state." >&2
+    return 1
+  fi
+}
 
-jq_update_manifest_locked "$WORKTREE_MANIFEST" \
-  '.worktrees += [{
-     "id": $id,
-     "path": $path,
-     "branch": $branch,
-     "baseBranch": $base,
-     "requirementIds": [$reqId],
-     "createdAt": $ts,
-     "status": "ACTIVE"
-   }]' \
-  --arg id "$BRANCH_ID" \
-  --arg path "$WORKTREE_PATH" \
-  --arg branch "$BRANCH_ID" \
-  --arg base "$BASE_BRANCH" \
-  --arg reqId "$REQ_ID" \
-  --arg ts "$TIMESTAMP"
+start_work_manifest_update_locked() {
+  local current_status_locked
+  local active_worktree
+  local wt_status
+  local manifest_collision
+  local created_at
 
-"$PROJECT_ROOT/scripts/regenerate-docs.sh" >/dev/null
+  if ! jq -e . "$REQ_MANIFEST" >/dev/null; then
+    echo "Error: Invalid JSON in $REQ_MANIFEST" >&2
+    return 1
+  fi
 
-# Generate/update Development Plan for idempotent execution context (REQ-1774681642)
-"$PROJECT_ROOT/scripts/generate-plan.sh" "$REQ_ID" || echo "Warning: Plan generation failed (non-fatal)"
+  if ! jq -e . "$WORKTREE_MANIFEST" >/dev/null; then
+    echo "Error: Invalid JSON in $WORKTREE_MANIFEST" >&2
+    return 1
+  fi
 
-git -C "$PROJECT_ROOT" add \
-  .requirement-manifest.json \
-  .worktree-manifest.json \
-  REQUIREMENTS.md \
-  docs/STATUS.md \
-  docs/ROADMAP.md \
-  docs/DEPENDENCIES.md \
-  docs/requirements/ 2>/dev/null || true
+  current_status_locked="$(jq -r --arg reqId "$REQ_ID" '
+    .requirements[] | select(.id == $reqId) | .status // empty
+  ' "$REQ_MANIFEST")"
 
-git -C "$PROJECT_ROOT" commit -m "chore: start work on $REQ_ID" --no-verify 2>/dev/null || true
+  if [ -z "$current_status_locked" ]; then
+    echo "Error: Requirement not found: $REQ_ID" >&2
+    return 1
+  fi
+
+  if [ "$current_status_locked" != "PROPOSED" ] && [ "$current_status_locked" != "BACKLOG" ]; then
+    echo "Error: Requirement $REQ_ID is $current_status_locked. start-work is only allowed from PROPOSED or BACKLOG." >&2
+    return 1
+  fi
+
+  active_worktree="$(jq -r --arg reqId "$REQ_ID" '
+    .requirements[] | select(.id == $reqId) | .worktreeId // empty
+  ' "$REQ_MANIFEST")"
+
+  if [ -n "$active_worktree" ]; then
+    wt_status="$(jq -r --arg wtId "$active_worktree" '
+      .worktrees[]? | select(.id == $wtId) | .status // empty
+    ' "$WORKTREE_MANIFEST" | head -1)"
+    if [ "$wt_status" = "ACTIVE" ]; then
+      echo "Error: Requirement $REQ_ID already has an active worktree: $active_worktree" >&2
+      return 1
+    fi
+  fi
+
+  manifest_collision="$(jq -r --arg id "$BRANCH_ID" --arg path "$WORKTREE_PATH" '
+    .worktrees[]?
+    | select(.status == "ACTIVE")
+    | select(.id == $id or .branch == $id or .path == $path)
+    | .id
+  ' "$WORKTREE_MANIFEST" | head -1)"
+  if [ -n "$manifest_collision" ]; then
+    echo "Error: Active worktree manifest entry already exists for $BRANCH_ID or $WORKTREE_PATH: $manifest_collision" >&2
+    return 1
+  fi
+
+  created_at="$(jq -r --arg reqId "$REQ_ID" '.requirements[] | select(.id == $reqId) | .createdAt' "$REQ_MANIFEST")"
+  if [ -n "$created_at" ] && [ "$created_at" != "null" ] && [[ "$TIMESTAMP" < "$created_at" ]]; then
+    echo "Error: updatedAt ($TIMESTAMP) would be before createdAt ($created_at)" >&2
+    return 1
+  fi
+
+  if ! _jq_update_manifest_locked_inner "$REQ_MANIFEST" \
+    '.requirements |= map(
+       if .id == $reqId
+       then .status = "IN_PROGRESS" | .worktreeId = $branch | .updatedAt = $ts
+       else .
+       end
+     )' \
+    --arg reqId "$REQ_ID" \
+    --arg branch "$BRANCH_ID" \
+    --arg ts "$TIMESTAMP"; then
+    return 1
+  fi
+
+  if ! _jq_update_manifest_locked_inner "$WORKTREE_MANIFEST" \
+    '.worktrees += [{
+       "id": $id,
+       "path": $path,
+       "branch": $branch,
+       "baseBranch": $base,
+       "requirementIds": [$reqId],
+       "createdAt": $ts,
+       "status": "ACTIVE"
+     }]' \
+    --arg id "$BRANCH_ID" \
+    --arg path "$WORKTREE_PATH" \
+    --arg branch "$BRANCH_ID" \
+    --arg base "$BASE_BRANCH" \
+    --arg reqId "$REQ_ID" \
+    --arg ts "$TIMESTAMP"; then
+    return 1
+  fi
+}
+
+start_work_workflow_locked() {
+  if ! preflight_worktree_target; then
+    return 1
+  fi
+
+  if ! with_manifest_locks "$REQ_MANIFEST" "$WORKTREE_MANIFEST" start_work_manifest_update_locked; then
+    return 1
+  fi
+
+  if ! "$PROJECT_ROOT/scripts/regenerate-docs.sh" >/dev/null; then
+    return 1
+  fi
+
+  # Generate/update Development Plan for idempotent execution context (REQ-1774681642)
+  "$PROJECT_ROOT/scripts/generate-plan.sh" "$REQ_ID" || echo "Warning: Plan generation failed (non-fatal)"
+
+  if ! git -C "$PROJECT_ROOT" add \
+    .requirement-manifest.json \
+    .worktree-manifest.json \
+    REQUIREMENTS.md \
+    docs/STATUS.md \
+    docs/ROADMAP.md \
+    docs/DEPENDENCIES.md \
+    docs/requirements/; then
+    echo "Error: Failed to stage start-work tracker changes." >&2
+    return 1
+  fi
+
+  if git -C "$PROJECT_ROOT" diff --cached --quiet; then
+    echo "Error: No start-work tracker changes were staged." >&2
+    return 1
+  fi
+
+  if ! git -C "$PROJECT_ROOT" commit -m "chore: start work on $REQ_ID" --no-verify; then
+    echo "Error: Failed to commit start-work tracker changes." >&2
+    return 1
+  fi
+
+  if ! git -C "$PROJECT_ROOT" worktree add -b "$BRANCH_ID" "$WORKTREE_PATH" "$BASE_BRANCH"; then
+    echo "Error: Failed to create worktree after tracker state was committed." >&2
+    echo "Recovery: inspect $REQ_MANIFEST and $WORKTREE_MANIFEST, then retry after resolving branch/path state." >&2
+    return 1
+  fi
+}
+
+with_manifest_lock "$GIT_OPERATION_LOCK" start_work_workflow_locked
 
 echo "✅ Work started for $REQ_ID"
 echo "Worktree ID: $BRANCH_ID"

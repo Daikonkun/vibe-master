@@ -4,7 +4,9 @@
 set -euo pipefail
 
 REQ_ID="${1:-}"
-PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "$SCRIPT_DIR/_project-root.sh"
+PROJECT_ROOT="$(vibe_resolve_project_root)"
 REQ_MANIFEST="$PROJECT_ROOT/.requirement-manifest.json"
 
 if [ -z "$REQ_ID" ]; then

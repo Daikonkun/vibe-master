@@ -3,7 +3,9 @@
 
 set -euo pipefail
 
-PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "$SCRIPT_DIR/_project-root.sh"
+PROJECT_ROOT="$(vibe_resolve_project_root)"
 SCRIPT_UNDER_TEST="$PROJECT_ROOT/scripts/worktree-merge.sh"
 TMP_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/wt-merge-unmapped-regression.XXXXXX")"
 REPO_DIR="$TMP_ROOT/repo"
@@ -21,6 +23,7 @@ trap cleanup EXIT
 mkdir -p "$REPO_DIR/scripts"
 
 cp "$SCRIPT_UNDER_TEST" "$REPO_DIR/scripts/worktree-merge.sh"
+cp "$PROJECT_ROOT/scripts/_project-root.sh" "$REPO_DIR/scripts/_project-root.sh"
 cp "$PROJECT_ROOT/scripts/_manifest-lock.sh" "$REPO_DIR/scripts/_manifest-lock.sh"
 
 cat > "$REPO_DIR/scripts/regenerate-docs.sh" << 'EOF'
